@@ -24,16 +24,14 @@ module.exports = {
         const spNew = TimSpNew.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP !== "Avatar" ));
 
         const TimSpNoiBat = await SanPham.find({ SpMoi_SpNoiBat: "Nổi Bật" }).populate("IdLoaiSP");
-        const spNoiBat = TimSpNoiBat.filter(product => product.IdLoaiSP && product.IdLoaiSP.TenLoaiSP !== "Avatar");
-
-        console.log("spNew: ", spNew);
+        const spNoiBat = TimSpNoiBat.filter(product => product.IdLoaiSP && product.IdLoaiSP.TenLoaiSP !== "Avatar");        
 
 
         res.render("home.ejs", {
             hoten, logIn,
             rootPath: '/', 
             formatCurrency, getRelativeImagePath,
-            spNew, spNoiBat
+            spNew, spNoiBat,            
         })
     },
 

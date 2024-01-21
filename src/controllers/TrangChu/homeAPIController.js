@@ -1,6 +1,6 @@
 require('rootpath')();
 const SanPham = require("../../models/SanPham")
-const {uploadSingleFile} = require("../../services/fileService")
+const {uploadSingleFile, uploadMultipleFiles} = require("../../services/fileService")
 
 module.exports = {
 
@@ -10,13 +10,19 @@ module.exports = {
         let {TenSP, IdLoaiSP, GiaBan, GiaCu, MoTa, New_Hot, Size, SoLuongTon, SoLuongBan, Image, SpMoi_SpNoiBat} = req.body
 
         let imageUrl = ""
+        let imageUrl1 = ""
+        let imageUrl2 = ""
         // kiem tra xem da co file hay chua
         if (!req.files || Object.keys(req.files).length === 0) {
             // khong lam gi
         }
         else {
             let kq = await uploadSingleFile(req.files.Image)
+            let kq1 = await uploadSingleFile(req.files.Image1)
+            let kq2 = await uploadSingleFile(req.files.Image2)
             imageUrl = kq.path
+            imageUrl1 = kq1.path
+            imageUrl2 = kq2.path
             console.log(">>> check kq: ", kq.path);
         }
 
@@ -31,6 +37,8 @@ module.exports = {
             SoLuongTon: SoLuongTon, 
             SoLuongBan: SoLuongBan,
             Image: imageUrl,
+            Image1: imageUrl1,
+            Image2: imageUrl2,
             SpMoi_SpNoiBat: SpMoi_SpNoiBat
         })
         

@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // khai bao route
 app.use('/', homeRoutes);
-// app.use('/api/v1/', homeAPIRoutes);
+app.use('/api/v1/', homeAPIRoutes);
 
 
 //test connection

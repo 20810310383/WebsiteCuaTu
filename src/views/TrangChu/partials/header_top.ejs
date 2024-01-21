@@ -21,13 +21,32 @@
          </div>
          <div class="col-lg-6 col-md-6">
              <div class="header_links">
-                 <ul>
-                     <li><a href="contact.html" title="Contact">Contact</a></li>
-                     <li><a href="wishlist.html" title="wishlist">My wishlist</a></li>
-                     <li><a href="my-account.html" title="My account">My account</a></li>
-                     <li><a href="cart.html" title="My cart">My cart</a></li>
-                     <li><a href="/login-tk-kh" title="Login">Login</a></li>
-                 </ul>
+                 <% if (logIn) { %>                                                  
+                <ul>
+                    <li>
+                        <span style="font-size: 18px; display: inline-block; position: relative; top: 5px; color: blue;">Xin Chào: </span> &ensp;
+                        <a style="
+                            font-size: 18px; 
+                            color: rgb(15, 121, 47); 
+                            font-weight: 100; 
+                            display: inline; 
+                            position: relative; 
+                            top: 5px;                            
+                            " href="#"> <%= hoten %></a>  &ensp;
+                    </li>
+                    <li>
+                        <a style="font-size: 18px; font-weight: bold; color: rgb(0, 0, 0); position: relative; top: 2px;" href="/dang-xuat-tkkh">Đăng Xuất</a>  
+                    </li>              
+                </ul>
+                <% } else { %>                    
+                <ul>
+                    <li><a style="font-size: 18px;" href="#" title="Contact">Contact</a></li>
+                    <li><a style="font-size: 18px;" href="#" title="wishlist">My wishlist</a></li>
+                    <li><a style="font-size: 18px;" href="#" title="My account">My account</a></li>
+                    <li><a style="font-size: 18px;" href="#" title="My cart">My cart</a></li>
+                    <li><a style="font-size: 18px;" href="/login-tk-kh" title="Login">Login</a></li>
+                </ul>
+                <% } %>   
              </div>   
          </div>
     </div> 

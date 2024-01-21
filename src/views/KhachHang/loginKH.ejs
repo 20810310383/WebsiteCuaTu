@@ -16,6 +16,11 @@
         <link rel="stylesheet" href="assets\css\style.css">
         <link rel="stylesheet" href="assets\css\responsive.css">
         <script src="assets\js\vendor\modernizr-2.8.3.min.js"></script>
+
+        <!-- Ví dụ với thư viện sweetalert2 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     </head>
     <body>
             <!-- Add your site or application content here -->
@@ -66,14 +71,14 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="account_form">
                                                 <h2>login</h2>
-                                                <form action="#">
+                                                <form action="/dang-nhap-tkkh" method="post" id="login-form">
                                                     <p>   
-                                                        <label>Username or email <span style="color: red;">*</span></label>
-                                                        <input type="text">
+                                                        <label for="username_email">Username or email <span style="color: red;">*</span></label>
+                                                        <input required id="username_email" type="email" name="username_email">
                                                      </p>
                                                      <p>   
-                                                        <label>Passwords <span style="color: red;">*</span></label>
-                                                        <input type="password">
+                                                        <label for="passLogin">Passwords <span style="color: red;">*</span></label>
+                                                        <input required id="passLogin" type="password" name="passLogin">
                                                      </p>   
                                                     <div class="login_submit">
                                                         <button type="submit">login</button>
@@ -83,9 +88,10 @@
                                                         </label>
                                                         <a href="#">Lost your password?</a>
                                                     </div>
+                                                    <span id="statusMessageLogin" style="color: blue; font-size: 18px; position: relative; top: 5px;"></span>
 
                                                 </form>
-                                             </div>    
+                                             </div>     
                                         </div>
                                         <!--login area start-->
 
@@ -93,23 +99,29 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="account_form register">
                                                 <h2>Register</h2>
-                                                <form action="#">
+                                                <form action="/dang-ky-tkkh" method="post" id="register-form">
                                                     <p>   
-                                                        <label>Email address  <span style="color: red;">*</span></label>
-                                                        <input type="text">
+                                                        <label for="emaildk">Email address  <span style="color: red;">*</span></label>
+                                                        <input required id="emaildk" type="email" name="emaildk">
                                                      </p>
                                                      <p>   
-                                                        <label>Passwords <span style="color: red;">*</span></label>
-                                                        <input type="password">
+                                                        <label for="name">Name  <span style="color: red;">*</span></label>
+                                                        <input required id="name" type="text" name="name">
+                                                     </p>
+                                                     <p>   
+                                                        <label for="passdk">Passwords <span style="color: red;">*</span></label>
+                                                        <input required id="passdk" type="password" name="passdk">
                                                      </p>
                                                     <div class="login_submit">
-                                                        <button type="submit">Register</button>
+                                                        <button type="submit" style="border: none;">Register</button>                                                      
+                                                        <span id="statusMessage" style="color: blue; font-size: 18px;"></span>
                                                     </div>
                                                 </form>
                                             </div>    
-                                        </div>
-                                        <!--register area end-->
-                                    </div>
+                                        </div>                                       
+                                        <!--register area end-->                                       
+                                        
+                            </div>
                         </div>
                         <!-- customer login end -->
 
@@ -135,5 +147,7 @@
         <script src="assets\js\ajax-mail.js"></script>
         <script src="assets\js\plugins.js"></script>
         <script src="assets\js\main.js"></script>
+
+        <script src="assets\js\dangnhap_dangky_tkkh.js"></script>
     </body>
 </html>

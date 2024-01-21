@@ -5,8 +5,6 @@ const TaiKhoan_KH_Schema = new mongoose.Schema({
     TenDangNhap: { type: String, minLength: 5, maxLength: 100, required: true, unique: true },
     MatKhau: { type: String, required: true },
     HoTen: { type: String, required: true },
-    DiaChi: { type: String, require: true },
-    SDT: { type: String },
     NgayTao: { type: Date, default: Date.now(), immutable: true },
     // MaKH: { type: mongoose.SchemaTypes.ObjectId, ref: "KhachHang" },
     // "XacThuc": { type: Boolean, default: false }

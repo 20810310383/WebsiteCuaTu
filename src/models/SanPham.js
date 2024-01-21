@@ -8,12 +8,15 @@ const SanPham_Schema = new mongoose.Schema(
         GiaCu: { type: Number },
         MoTa: { type: String, default: "Not thing" },
         New_Hot: { type: String },
+        SpMoi_SpNoiBat: { 
+            type: String, 
+            enum: ["Mới", "Nổi Bật"],             
+        },
         Size: { 
             type: String, 
-            enum: ["S", "M", "L", "XL", "XXL"], 
-            default: "S" 
+            // enum: ["S", "M", "L", "XL", "XXL"], 
         },
-        MauSac: { type: String, default: "Đen" },
+        MauSac: { type: String },
         SoLuongTon: { type: Number, required: false  },
         SoLuongBan: { type: Number, required: false },
         SoLuotDanhGia: { type: Number, required: false, default: "1000" },

@@ -2,6 +2,7 @@ const express = require('express');
 const { getHomeHienThi2, getHomeHienThi1 } = require("../controllers/TrangChu/homeController");
 const { getFormLoginKH, dangKyTKKH, dangNhapTKKH, dangXuatTKKH } = require('../controllers/Login/loginKHController');
 const { chiTietSPHomeHienThi1, chiTietSPHomeHienThi1_ChiTiet, chiTietSPHomeHienThi2_ChiTiet } = require('../controllers/CTSanPham/detailtSP');
+const { getHomeListShop, getHomeListShop_PhanTrang } = require('../controllers/ShopList/listShop');
 
 
 const router = express.Router();
@@ -23,9 +24,26 @@ router.get("/dang-xuat-tkkh", dangXuatTKKH)
 
 
 // Chi Tiet San Pham
-// router.get("/detailt-sp", chiTietSPHomeHienThi1)
+router.post("/detailt-sp", chiTietSPHomeHienThi1)
 router.get("/detailt-sp-ht1", chiTietSPHomeHienThi1_ChiTiet)
 router.get("/detailt-sp-ht2", chiTietSPHomeHienThi2_ChiTiet)
+
+
+// list shop
+// SHOP Nuoc Hoa
+router.get("/shop-list-ht1", getHomeListShop)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/shop-list-ht1", getHomeListShop_PhanTrang)
+
+
+// SHOP Ban GAME
+
+
+
+
+
+
+
 
 
 

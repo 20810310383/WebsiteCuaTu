@@ -10,7 +10,7 @@
             <div class="col-lg-3">
                 <div class="single_product">
                     <div class="product_thumb">
-                       <a href="single-product.html"><img src="images/upload/<%= getRelativeImagePath(spNew.Image) %>" alt=""></a> 
+                       <a href="/detailt-sp-ht1?idDetailtSP=<%= spNew._id %>"><img src="images/upload/<%= getRelativeImagePath(spNew.Image) %>" alt=""></a> 
                        <% if (spNew.New_Hot === "New") { %>
                         <div class="img_icone">
                             <img src="assets\img\cart\span-new.png" alt="">
@@ -22,16 +22,21 @@
                         <% } %> 
                        <div class="product_action">
                            <a href="#"> <i class="fa fa-shopping-cart"></i> Add to cart</a>
+                           <!-- <a href="#"> <i class="fa fa-eye"></i> &ensp; View Detail</a> -->
                        </div>
                     </div>
                     <div class="product_content">
                         <span class="product_price" style="color: red;"><%= formatCurrency(spNew.GiaBan) %></span>
-                        <h3 class="product_title"><a href="/detailt-sp-ht1?idDetailtSP=<%= spNew._id %>"><%= spNew.TenSP %></a></h3>
+                        <h3 class="product_title"><a style="font-size: 18px ;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" href="/detailt-sp-ht1?idDetailtSP=<%= spNew._id %>"><%= spNew.TenSP %></a></h3>
                     </div>
                     <div class="product_info">
                         <ul>
                             <li><a href="#" title=" Add to Wishlist ">Add to Wishlist</a></li>
-                            <li><a href="#" data-product-id="<%= spNew._id %>" data-toggle="modal" data-target="#modal_box" title="Quick view" >View Detail</a></li>                          
+                            <li><a id="viewDetailt" href="#" data-product-id="" data-toggle="modal" data-target="#modal_box" title="Quick view" >View Detail</a></li>                          
+                            <!-- <form action="/detailt-sp" method="post">
+                                <input type="hidden" name="idDetailtSPP" value="">
+                                <li><button  class="viewDetaill" id="viewDetailt" data-product-id="" data-toggle="modal" data-target="#modal_box" title="Quick view" >View Detail</button></li>
+                            </form>                             -->
                         </ul>
                     </div>
                 </div>
@@ -44,27 +49,5 @@
     </div>       
 </div> 
 
-<script>
-    $(document).ready(function () {
-        // Handle click event for "View Detail" links
-        $('a[data-toggle="modal"]').on('click', function () {
-            const productId = $(this).data('product-id');
-            
-            // Make an AJAX request to fetch product details
-            $.ajax({
-                url: `/detailt-sp?idDetailtSP=${productId}`,
-                method: 'GET',
-                success: function (data) {
-                    // Update modal content with fetched product details
-                    $('#productName').text(data.name);
-                    $('#newPrice').text(data.newPrice);
-                    $('#oldPrice').text(data.oldPrice);
-                    // Add other details as needed
-                },
-                error: function () {
-                    console.error('Error fetching product details');
-                }
-            });
-        });
-    });
-</script>
+
+

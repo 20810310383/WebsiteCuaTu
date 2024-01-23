@@ -6,15 +6,17 @@ module.exports = {
     chiTietSPHomeHienThi1: async (req, res) => {
 
         try {
-            const productId = req.query.idDetailtSP;
+            const productId = req.body.idDetailtSPP;
+            console.log("productId: ",productId);
             const productDetails = await SanPham.findById(productId).populate("IdLoaiSP");
             res.json({
-                name: productDetails.TenSP,
-                Image: productDetails.Image,
-                newPrice: productDetails.GiaBan,
-                oldPrice: productDetails.GiaCu,
-                description: productDetails.MoTa,
-                sizeOptions: ["S", "M", "L", "XL", "XXL"],  // Example, replace with actual size options
+                productDetails
+                // name: productDetails.TenSP,
+                // Image: productDetails.Image,
+                // newPrice: productDetails.GiaBan,
+                // oldPrice: productDetails.GiaCu,
+                // description: productDetails.MoTa,
+                // sizeOptions: ["S", "M", "L", "XL", "XXL"],  // Example, replace with actual size options
                 // Add other details as needed
             });
         } catch (error) {

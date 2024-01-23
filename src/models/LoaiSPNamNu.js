@@ -11,6 +11,6 @@ const LoaiSPNamNu_Schema = new mongoose.Schema(
 // Override all methods
 LoaiSPNamNu_Schema.plugin(mongoose_delete, { overrideMethods: 'all' });
 
-const LoaiSP = mongoose.model('LoaiSPNamNu', LoaiSPNamNu_Schema);
+const LoaiSPNamNu = mongoose.model('LoaiSPNamNu', LoaiSPNamNu_Schema);
 
-module.exports = LoaiSP;
+module.exports = LoaiSPNamNu;

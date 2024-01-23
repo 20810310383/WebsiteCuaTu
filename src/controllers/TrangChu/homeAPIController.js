@@ -7,7 +7,7 @@ module.exports = {
     // tao 1 san pham va upload file anh vao db
     postCreateSP: async (req, res) => {
 
-        let {TenSP, IdLoaiSP, GiaBan, GiaCu, MoTa, New_Hot, Size, SoLuongTon, SoLuongBan, Image, SpMoi_SpNoiBat} = req.body
+        let {TenSP, IdLoaiSP, GiaBan, GiaCu, MoTa, New_Hot, Size, SoLuongTon, SoLuongBan, Image, SpMoi_SpNoiBat, IdNam_Nu} = req.body
 
         let imageUrl = ""
         let imageUrl1 = ""
@@ -39,7 +39,8 @@ module.exports = {
             Image: imageUrl,
             Image1: imageUrl1,
             Image2: imageUrl2,
-            SpMoi_SpNoiBat: SpMoi_SpNoiBat
+            SpMoi_SpNoiBat: SpMoi_SpNoiBat,
+            IdNam_Nu: IdNam_Nu
         })
         
         return res.status(200).json({

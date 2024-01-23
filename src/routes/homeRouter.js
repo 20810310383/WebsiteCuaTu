@@ -3,6 +3,7 @@ const { getHomeHienThi2, getHomeHienThi1 } = require("../controllers/TrangChu/ho
 const { getFormLoginKH, dangKyTKKH, dangNhapTKKH, dangXuatTKKH } = require('../controllers/Login/loginKHController');
 const { chiTietSPHomeHienThi1, chiTietSPHomeHienThi1_ChiTiet, chiTietSPHomeHienThi2_ChiTiet } = require('../controllers/CTSanPham/detailtSP');
 const { getHomeListShop, getHomeListShop_PhanTrang } = require('../controllers/ShopList/listShop');
+const { getHomeListShopGame, getHomeListShopGame_PhanTrang } = require('../controllers/ShopList/listShopGame');
 
 
 const router = express.Router();
@@ -37,7 +38,9 @@ router.get("/shop-list-ht1", getHomeListShop_PhanTrang)
 
 
 // SHOP Ban GAME
-
+router.get("/shop-list-ht2", getHomeListShopGame)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/shop-list-ht2", getHomeListShopGame_PhanTrang)
 
 
 

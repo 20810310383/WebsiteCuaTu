@@ -1,19 +1,20 @@
 const SanPham = require("../../models/SanPham")
 const LoaiSP = require("../../models/LoaiSP")
 const LoaiSPNamNu = require("../../models/LoaiSPNamNu")
+
 require('rootpath')();
 
 
 
 module.exports = {
-    getHomeListShop_PhanTrang: (req, res) => { 
+    getHomeListShopGame_PhanTrang: (req, res) => { 
         if (req.query.page) {
-            return res.redirect(`/shop-list-ht1?page=${req.query.page}`)
+            return res.redirect(`/shop-list-ht2?page=${req.query.page}`)
         }
-        res.redirect(`/shop-list-ht1`)
+        res.redirect(`/shop-list-ht2`)
     },
 
-    getHomeListShop: async (req, res) => {
+    getHomeListShopGame: async (req, res) => {
         let hoten = req.session.hoten
         let logIn = req.session.loggedIn
 
@@ -30,7 +31,7 @@ module.exports = {
         } 
 
         let page = 1
-        const limit = 6
+        const limit = 8
         
         if(req.query.page){
             page = req.query.page
@@ -42,7 +43,7 @@ module.exports = {
         const all = await SanPham.find().populate('IdLoaiSP').exec();
 
         // Lọc kết quả bằng cách sử dụng filter
-        const filteredResults = all.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP !== "Avatar"));
+        const filteredResults = all.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP === "Avatar"));
 
         // Áp dụng skip và limit sau khi đã lọc
         const startIndex = skip;
@@ -56,7 +57,7 @@ module.exports = {
         console.log("Tổng Products: ", totalProducts);
         console.log("numPage", numPage);
 
-        res.render("TrangChu/layouts/ShopList/listShopNuocHoa.ejs", {
+        res.render("TrangChu/layouts/ShopList/listShopGame.ejs", {
             hoten, logIn,
             rootPath: '/', 
             formatCurrency, getRelativeImagePath,

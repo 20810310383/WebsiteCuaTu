@@ -1,0 +1,362 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Shop Nước Hoa Khắc Tú</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="assets\img\logo-KTT1.ico">
+		
+		<!-- all css here -->
+       <link rel="stylesheet" href="assets\css\bootstrap.min.css">
+        <link rel="stylesheet" href="assets\css\plugin.css">
+        <link rel="stylesheet" href="assets\css\bundle.css">
+        <link rel="stylesheet" href="assets\css\style.css">
+        <link rel="stylesheet" href="assets\css\responsive.css">
+        <script src="assets\js\vendor\modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+            <!-- Add your site or application content here -->
+            
+            <!--pos page start-->
+            <div class="pos_page">
+                <div class="container">
+                   <!--pos page inner-->
+                    <div class="pos_page_inner">  
+                       <!--header area -->
+                       <div class="header_area">
+                        <!--header top-->                                 
+                         <%- include('../../partials/header_top.ejs') %>                         
+                         <!--header top end-->
+
+                         <!--header middel--> 
+                         <div class="header_middel">
+                            <div class="row align-items-center">
+                               <!--logo start-->
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="logo">
+                                        <a href="/"><img src="assets\img\logo\logo-KT.png" alt=""></a>
+                                    </div>
+                                </div>
+                                <!--logo end-->
+                                <div class="col-lg-9 col-md-9">
+                                    <div class="header_right_info">
+                                        <div class="search_bar">
+                                            <form action="/search-nuoc-hoa" method="get">
+                                                <input placeholder="Tìm Kiếm Nước Hoa ..." type="text" name="search_nuochoa" value="<%= searchSPSession %>">
+                                                <button type="submit"><i class="fa fa-search"></i></button>
+                                            </form>
+                                        </div>
+                                        <div class="shopping_cart">
+                                            <a href="#"><i class="fa fa-shopping-cart"></i> 2Items - $209.44 <i class="fa fa-angle-down"></i></a>
+                        
+                                            <!--mini cart-->
+                                            <div class="mini_cart">
+                                                <div class="cart_item">
+                                                   <div class="cart_img">
+                                                       <a href="#"><img src="assets\img\cart\cart.jpg" alt=""></a>
+                                                   </div>
+                                                    <div class="cart_info">
+                                                        <a href="#">lorem ipsum dolor</a>
+                                                        <span class="cart_price">$115.00</span>
+                                                        <span class="quantity">Qty: 1</span>
+                                                    </div>
+                                                    <div class="cart_remove">
+                                                        <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="cart_item">
+                                                   <div class="cart_img">
+                                                       <a href="#"><img src="assets\img\cart\cart2.jpg" alt=""></a>
+                                                   </div>
+                                                    <div class="cart_info">
+                                                        <a href="#">Quisque ornare dui</a>
+                                                        <span class="cart_price">$105.00</span>
+                                                        <span class="quantity">Qty: 1</span>
+                                                    </div>
+                                                    <div class="cart_remove">
+                                                        <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="shipping_price">
+                                                    <span> Shipping </span>
+                                                    <span>  $7.00  </span>
+                                                </div>
+                                                <div class="total_price">
+                                                    <span> total </span>
+                                                    <span class="prices">  $227.00  </span>
+                                                </div>
+                                                <div class="cart_button">
+                                                    <a href="checkout.html"> Check out</a>
+                                                </div>
+                                            </div>
+                                            <!--mini cart end-->
+                                        </div>
+                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                         <!--header middel end-->      
+                     
+                         <!--header bottom--> 
+                         <%- include('../../partials/header_bottom.ejs') %>
+                         <!--header bottom end-->    
+                        </div>
+                        <!--header end -->
+                        <!--breadcrumbs area start-->
+                        <div class="breadcrumbs_area">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="breadcrumb_content">
+                                        <ul>
+                                            <li><a href="/">home</a></li>
+                                            <li><i class="fa fa-angle-right"></i></li>
+                                            <li>shop Nước Hoa</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--breadcrumbs area end-->
+
+                        <!--pos home section-->
+                        <div class=" pos_home_section">
+                            <div class="row">
+                                    <div class="col-lg-9 col-md-12">
+                                        <!--banner slider start-->
+                                        <div class="banner_slider mb-35">
+                                            <img src="assets\img\slider\nuochoa3.jpg" alt="">
+                                        </div> 
+                                        <!--banner slider start-->
+
+                                        <!--shop toolbar start-->
+                                        <div class="shop_toolbar mb-35">
+                                            <div class="list_button">
+                                                <ul class="nav" role="tablist">
+                                                    <li>
+                                                        <a class="active" data-toggle="tab" href="#large" role="tab" aria-controls="large" aria-selected="true"><i class="fa fa-th-large"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a  data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false"><i class="fa fa-th-list"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <!-- <div class="page_amount">
+                                                <p>Showing 1–9 of 21 results</p>
+                                            </div> -->
+                                            <div class="select_option">
+                                                <form action="#">
+                                                    <label>Chọn Loại Sản Phẩm</label>
+                                                    <select name="orderby" id="short">
+                                                        <option selected="" value="1">____  Chọn đi nàng  ____</option>
+                                                        <option value="1">Nước Hoa Nam</option>
+                                                        <option value="1">Nước Hoa Nữ</option>                                                        
+                                                    </select>
+                                                    <!-- <button style="border: none; background-color: white; cursor: pointer;position: relative; top: 2px; float: right;" type="submit">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="15" width="15" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>                                                    
+                                                    </button> -->
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!--shop toolbar end-->
+                                        
+                                        <!--shop tab product-->
+                                        <div class="shop_tab_product">   
+                                            <div class="tab-content" id="myTabContent">
+                                                <%- include('../../layouts/ShopList/viewPartials_NuocHoa/shop_trai.ejs') %>
+
+                                                <%- include('../../layouts/ShopList/viewPartials_NuocHoa/shop_phai.ejs') %>                                                                                                
+                                            </div>
+                                        </div>    
+                                        <!--shop tab product end-->
+
+                                        <!--pagination style start phan trang 123--> 
+                                        <%- include('../../layouts/SearchSP/search_phan_trang_pagination_nuochoa.ejs') %>       
+                                        <!--pagination style phan trang 123 end--> 
+                                    </div>
+
+                                    <!-- thanh ben phai -->
+                                    <div class="col-lg-3 col-md-12">
+                                       <!--layere categorie"-->
+                                          <div class="sidebar_widget shop_c">
+                                                <div class="categorie__titile">
+                                                    <h4>Categories</h4>
+                                                </div>
+                                                <div class="layere_categorie">
+                                                    <ul>
+                                                        <li>
+                                                            <input id="acces" type="checkbox">
+                                                            <label for="acces">Accessories<span>(1)</span></label>
+                                                        </li>
+                                                        <li>
+                                                            <input id="dress" type="checkbox">
+                                                            <label for="dress">Dresses <span>(2)</span></label>
+                                                        </li>
+                                                        <li>
+                                                            <input id="tops" type="checkbox">
+                                                            <label for="tops">Tops<span>(3)</span></label>
+                                                        </li>
+                                                        <li>
+                                                            <input id="bag" type="checkbox">
+                                                            <label for="bag">HandBags<span>(4)</span></label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        <!--layere categorie end-->
+
+                                        <!--color area start-->  
+                                        <div class="sidebar_widget color">
+                                            <h2>Color</h2>
+                                             <div class="widget_color">
+                                                <ul>
+
+                                                    <li><a href="#">Black <span>(10)</span></a></li>
+
+                                                    <li><a href="#">Orange <span>(12)</span></a></li>
+
+                                                    <li> <a href="#">Blue <span>(14)</span></a></li>
+
+                                                    <li><a href="#">Yellow <span>(15)</span></a></li>
+
+                                                    <li><a href="#">pink <span>(16)</span></a></li>
+
+                                                    <li><a href="#">green <span>(11)</span></a></li>
+
+                                                </ul>
+                                            </div>
+                                        </div>                 
+                                        <!--color area end--> 
+
+                                        <!--price slider start-->                                     
+                                        <div class="sidebar_widget price">
+                                            <h2>Price</h2>
+                                            <div class="ca_search_filters">
+
+                                                <input type="text" name="text" id="amount">  
+                                                <div id="slider-range"></div> 
+                                            </div>
+                                        </div>                                                       
+                                        <!--price slider end-->
+                                        
+
+                                        <!--popular tags area-->
+                                        <div class="sidebar_widget tags  mb-30">
+                                            <div class="block_title">
+                                                <h3>popular tags</h3>
+                                            </div>
+                                            <div class="block_tags">
+                                                <a href="#">ipod</a>
+                                                <a href="#">sam sung</a>
+                                                <a href="#">apple</a>
+                                                <a href="#">iphone 5s</a>
+                                                <a href="#">superdrive</a>
+                                                <a href="#">shuffle</a>
+                                                <a href="#">nano</a>
+                                                <a href="#">iphone 4s</a>
+                                                <a href="#">canon</a>
+                                            </div>
+                                        </div>
+                                        <!--popular tags end-->
+
+                                        <!--newsletter block start-->
+                                        <div class="sidebar_widget newsletter mb-30">
+                                            <div class="block_title">
+                                                <h3>newsletter</h3>
+                                            </div> 
+                                            <form action="#">
+                                                <p>Sign up for your newsletter</p>
+                                                <input placeholder="Your email address" type="text">
+                                                <button type="submit">Subscribe</button>
+                                            </form>   
+                                        </div>
+                                        <!--newsletter block end--> 
+
+                                        <!--special product start-->
+                                        <div class="sidebar_widget special">
+                                            <div class="block_title">
+                                                <h3>Special Products</h3>
+                                            </div>
+                                            <div class="special_product_inner mb-20">
+                                                <div class="special_p_thumb">
+                                                    <a href="#"><img src="assets\img\cart\cart3.jpg" alt=""></a>
+                                                </div>
+                                                <div class="small_p_desc">
+                                                    <div class="product_ratting">
+                                                       <ul>
+                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                       </ul>
+                                                   </div>
+                                                    <h3><a href="#">Lorem ipsum dolor</a></h3>
+                                                    <div class="special_product_proce">
+                                                        <span class="old_price">$124.58</span>
+                                                        <span class="new_price">$118.35</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="special_product_inner">
+                                                <div class="special_p_thumb">
+                                                    <a href="#"><img src="assets\img\cart\cart18.jpg" alt=""></a>
+                                                </div>
+                                                <div class="small_p_desc">
+                                                    <div class="product_ratting">
+                                                       <ul>
+                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                       </ul>
+                                                   </div>
+                                                    <h3><a href="#">Printed Summer</a></h3>
+                                                    <div class="special_product_proce">
+                                                        <span class="old_price">$124.58</span>
+                                                        <span class="new_price">$118.35</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--special product end-->
+
+
+                                    </div>
+                                    <!-- thanh ben phai end -->
+                                </div>  
+                        </div>
+                        <!--pos home section end-->
+                    </div>
+                    <!--pos page inner end-->
+                </div>        
+            </div>
+            <!--pos page end-->
+            
+            <!--footer area start-->
+           <%- include('../../partials/footer.ejs') %>
+            <!--footer area end-->
+            
+            
+             <!-- modal area start --> 
+             <%- include('../../partials/HienThiSanPham/viewDetailt_Kieu1.ejs') %>
+           
+            
+          <!-- modal area end --> 
+            
+      
+		
+		<!-- all js here -->
+        <script src="assets\js\vendor\jquery-1.12.0.min.js"></script>
+        <script src="assets\js\popper.js"></script>
+        <script src="assets\js\bootstrap.min.js"></script>
+        <script src="assets\js\ajax-mail.js"></script>
+        <script src="assets\js\plugins.js"></script>
+        <script src="assets\js\main.js"></script>
+        <script src="assets\js\hamDinhDangTien_VaLinkAnh.js"></script>
+    </body>
+</html>

@@ -4,6 +4,8 @@ const { getFormLoginKH, dangKyTKKH, dangNhapTKKH, dangXuatTKKH } = require('../c
 const { chiTietSPHomeHienThi1, chiTietSPHomeHienThi1_ChiTiet, chiTietSPHomeHienThi2_ChiTiet } = require('../controllers/CTSanPham/detailtSP');
 const { getHomeListShop, getHomeListShop_PhanTrang } = require('../controllers/ShopList/listShop');
 const { getHomeListShopGame, getHomeListShopGame_PhanTrang } = require('../controllers/ShopList/listShopGame');
+const { searchNH_PhanTrang, searchNH } = require('../controllers/SearchSP/searchNHController');
+const { searchGame, searchGame_PhanTrang } = require('../controllers/SearchSP/searchGameController');
 
 
 const router = express.Router();
@@ -35,13 +37,20 @@ router.get("/detailt-sp-ht2", chiTietSPHomeHienThi2_ChiTiet)
 router.get("/shop-list-ht1", getHomeListShop)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 router.get("/shop-list-ht1", getHomeListShop_PhanTrang)
+// Search SanPham
+router.get("/search-nuoc-hoa", searchNH)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/search-nuoc-hoa", searchNH_PhanTrang)
 
 
 // SHOP Ban GAME
 router.get("/shop-list-ht2", getHomeListShopGame)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 router.get("/shop-list-ht2", getHomeListShopGame_PhanTrang)
-
+// Search SanPham
+router.get("/search-game", searchGame)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/search-game", searchGame_PhanTrang)
 
 
 

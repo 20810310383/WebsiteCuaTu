@@ -6,6 +6,8 @@ const { getHomeListShop, getHomeListShop_PhanTrang } = require('../controllers/S
 const { getHomeListShopGame, getHomeListShopGame_PhanTrang } = require('../controllers/ShopList/listShopGame');
 const { searchNH_PhanTrang, searchNH } = require('../controllers/SearchSP/searchNHController');
 const { searchGame, searchGame_PhanTrang } = require('../controllers/SearchSP/searchGameController');
+const { getHomeListShopPhanLoaiNam, getHomeListShopPhanLoaiNam_PhanTrang, getHomeListShopPhanLoaiNu, getHomeListShopPhanLoaiNu_PhanTrang } = require('../controllers/PhanLoaiSP/phanLoaiNuocHoaController');
+const { getHomeListShopGamePhanLoaiNam_PhanTrang, getHomeListShopGamePhanLoaiNam, getHomeListShopGamePhanLoaiNu_PhanTrang, getHomeListShopGamePhanLoaiNu } = require('../controllers/PhanLoaiSP/phanLoaiGameController');
 
 
 const router = express.Router();
@@ -53,10 +55,27 @@ router.get("/search-game", searchGame)
 router.get("/search-game", searchGame_PhanTrang)
 
 
+// Phan Loai San Pham 
+// SHOP Nuoc Hoa
+// phan loai nam
+router.get("/shop-list-phan-loai-nuoc-hoa-nam", getHomeListShopPhanLoaiNam)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/shop-list-phan-loai-nuoc-hoa-nam", getHomeListShopPhanLoaiNam_PhanTrang)
+// phan loai nu
+router.get("/shop-list-phan-loai-nuoc-hoa-nu", getHomeListShopPhanLoaiNu)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/shop-list-phan-loai-nuoc-hoa-nu", getHomeListShopPhanLoaiNu_PhanTrang)
 
 
-
-
+// SHOP GAME
+// phan loai nam
+router.get("/shop-list-phan-loai-game-nam", getHomeListShopGamePhanLoaiNam)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/shop-list-phan-loai-game-nam", getHomeListShopGamePhanLoaiNam_PhanTrang)
+// phan loai nu
+router.get("/shop-list-phan-loai-game-nu", getHomeListShopGamePhanLoaiNu)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/shop-list-phan-loai-game-nu", getHomeListShopGamePhanLoaiNu_PhanTrang)
 
 
 module.exports = router;

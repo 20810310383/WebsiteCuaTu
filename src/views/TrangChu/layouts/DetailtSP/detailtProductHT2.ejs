@@ -149,53 +149,76 @@
                                             <div class="product_desc">
                                                 <p><%= productDetails.MoTa %></p>                                            
                                             </div>
-
-                                            <div class="content_price mb-15">
-                                                <span style="color: red;"><%= formatCurrency(productDetails.GiaBan) %></span>
-                                                <span class="old-price" style="font-style: italic;"><%= formatCurrency(productDetails.GiaCu) %></span>
-                                            </div>
-                                            <div class="box_quantity mb-20">
-                                                <form action="#">
+                                            <form id="form-addtocart" action="/addtocart?productId=<%= productDetails._id %>" method="POST">
+                                                <div class="content_price mb-15">
+                                                    <span style="color: red;"><%= formatCurrency(productDetails.GiaBan) %></span>
+                                                    <span class="old-price" style="font-style: italic;"><%= formatCurrency(productDetails.GiaCu) %></span>
+                                                </div>
+                                                <div class="box_quantity mb-20">
+                                                   
                                                     <label>Số Lượng Mua</label>
                                                     <input min="0" max="100" value="1" type="number" name="quantity">
-                                                </form> 
-                                                <button type="submit"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                                <a href="#" title="add to wishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>    
-                                            </div>
-                                            <!-- <div class="product_d_size mb-20">
-                                                <label for="group_1">size</label>
-                                                <select name="size" id="group_1">
-                                                    <option value="1">S</option>
-                                                    <option value="2">M</option>
-                                                    <option value="3">L</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="sidebar_widget color">
-                                                <h2>Choose Color</h2>
-                                                 <div class="widget_color">
-                                                    <ul>
-                                                        <li><a href="#"></a></li>
-                                                        <li><a href="#"></a></li>
-                                                        <li> <a href="#"></a></li>
-                                                        <li><a href="#"></a></li>
-                                                    </ul>
+                                                    
+                                                    <button type="submit"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                                    <a href="#" title="add to wishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>    
                                                 </div>
-                                            </div>                  -->
+                                                <!-- <div class="product_d_size mb-20">
+                                                    <label for="group_1">size</label>
+                                                    <select name="size" id="group_1">
+                                                        <option value="1">S</option>
+                                                        <option value="2">M</option>
+                                                        <option value="3">L</option>
+                                                    </select>
+                                                </div>
 
-                                            <div class="product_stock mb-20">
-                                                <span> Trong kho còn: <%= productDetails.SoLuongTon  %> </span>
-                                            </div>
-                                            <div class="wishlist-share">
-                                                <h4>Share on:</h4>
-                                                <ul>
-                                                    <li><a href="#"><i class="fa fa-rss"></i></a></li>           
-                                                    <li><a href="#"><i class="fa fa-vimeo"></i></a></li>           
-                                                    <li><a href="#"><i class="fa fa-tumblr"></i></a></li>           
-                                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>        
-                                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>        
-                                                </ul>      
-                                            </div>
+                                                <div class="sidebar_widget color">
+                                                    <h2>Choose Color</h2>
+                                                    <div class="widget_color">
+                                                        <ul>
+                                                            <li><a href="#"></a></li>
+                                                            <li><a href="#"></a></li>
+                                                            <li> <a href="#"></a></li>
+                                                            <li><a href="#"></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>                  -->
+
+                                                <div class="product_stock mb-20">
+                                                    <span> Trong kho còn: <%= productDetails.SoLuongTon  %> </span>
+                                                </div>
+                                                <div class="wishlist-share">
+                                                    <h4>Share on:</h4>
+                                                    <ul>
+                                                        <li><a href="#"><i class="fa fa-rss"></i></a></li>           
+                                                        <li><a href="#"><i class="fa fa-vimeo"></i></a></li>           
+                                                        <li><a href="#"><i class="fa fa-tumblr"></i></a></li>           
+                                                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>        
+                                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>        
+                                                    </ul>      
+                                                </div>
+
+                                                <% if (logIn) { %> 
+                                                    <div id="custom-alert" class="custom-alert hidden">
+                                                        <p id="alert-message"></p>
+                                                    </div>   
+                                                    <% } else { %>
+                                                    <div 
+                                                        style="background-color: rgb(249 232 232); 
+                                                                border: 1px solid #ff0000;
+                                                                margin: 0 auto;
+                                                                border-radius: 5px;
+                                                                font-weight: bold;
+                                                                  display: none;
+                                                                text-align: center;
+                                                                padding: 10px 5px 0 5px;                                                                                                                                                                                                 
+                                                        " 
+                                                        id="custom-alert" 
+                                                        class="custom-alert hidden"
+                                                    >
+                                                        <p style="color: red; font-size: 20px;">Vui lòng Login trước khi thêm sản phẩm vào giỏ hàng</p>
+                                                    </div> 
+                                                    <% } %> 
+                                            </form>
 
                                         </div>
                                     </div>
@@ -479,5 +502,69 @@
         <script src="assets\js\plugins.js"></script>
         <script src="assets\js\main.js"></script>
         <script src="assets\js\hamDinhDangTien_VaLinkAnh.js"></script>
+
+        <!-- Thong Bao Add To Cart -->
+        <script>
+            $(document).ready(function() {
+                // Bắt sự kiện khi form được submit
+                $('#form-addtocart').submit(function(event) {
+                    event.preventDefault(); // Ngăn chặn hành động mặc định của form
+                    
+                    // Lấy dữ liệu form
+                    const formData = $(this).serialize();
+                    // Gửi yêu cầu thêm sản phẩm vào giỏ hàng
+                    addToCart(formData);
+                });
+            });
+
+
+            // Hàm gửi yêu cầu thêm sản phẩm vào giỏ hàng và cập nhật thông tin giỏ hàng
+            function addToCart(formData) {
+                $.ajax({
+                    url: '/addtocart?productId=<%= productDetails._id %>',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        // Thêm thành công, cập nhật thông tin giỏ hàng
+                        // updateCartInfo();
+
+                        // Hiển thị thông báo khi thành công
+                        // alert('Đã thêm sản phẩm vào giỏ hàng thành công!');
+                        showCustomAlert('Đã thêm sản phẩm vào giỏ hàng thành công!');
+
+                        // Chuyển hướng trang sau khi thêm vào giỏ hàng thành công
+                        // window.location.href = '/detail-cart';
+                    },
+                    error: function(error) {
+                        console.error('Lỗi khi thêm vào giỏ hàng:', error);
+                    }
+                });
+            }
+
+            // Hàm hiển thị thông báo tùy chỉnh
+            function showCustomAlert(message) {
+                const alertElement = document.getElementById('custom-alert');
+                const messageElement = document.getElementById('alert-message');
+
+                // Hiển thị thông báo và đặt nội dung
+                alertElement.style.display = 'block';
+                messageElement.innerText = message;
+
+                // Ẩn thông báo sau một khoảng thời gian (ví dụ: 5 giây)
+                setTimeout(() => {
+                    hideCustomAlert();
+                    // window.location.href = '/detail-cart';
+                }, 1000);
+            }
+
+            // Hàm ẩn thông báo tùy chỉnh
+            function hideCustomAlert() {
+                const alertElement = document.getElementById('custom-alert');
+
+                // Ẩn thông báo
+                alertElement.style.display = 'none';
+            }
+        </script>
+
     </body>
 </html>

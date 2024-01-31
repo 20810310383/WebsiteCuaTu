@@ -8,33 +8,38 @@
         <div class="product_active owl-carousel">
                 <% spNoiBat.forEach(function(spNoiBat) { %>
             <div class="col-lg-3">
-                <div class="single_product">
-                    <div class="product_thumb">
-                       <a href="/detailt-sp-ht1?idDetailtSP=<%= spNoiBat._id %>"><img height="336.50px" src="images/upload/<%= getRelativeImagePath(spNoiBat.Image) %>" alt=""></a> 
-                       <% if (spNoiBat.New_Hot === "New") { %>
-                        <div class="img_icone">
-                            <img src="assets\img\cart\span-new.png" alt="">
+                <form id="form-addtocart" action="/addtocart?productId=<%= spNoiBat._id %>" method="POST">
+                    <div class="single_product">
+                        <div class="product_thumb">
+                        <a href="/detailt-sp-ht1?idDetailtSP=<%= spNoiBat._id %>"><img height="336.50px" src="images/upload/<%= getRelativeImagePath(spNoiBat.Image) %>" alt=""></a> 
+                        <% if (spNoiBat.New_Hot === "New") { %>
+                            <div class="img_icone">
+                                <img src="assets\img\cart\span-new.png" alt="">
+                            </div>
+                            <% } else { %> 
+                            <div class="hot_img">
+                                <img src="assets\img\cart\span-hot.png" alt="">
+                            </div>
+                            <% } %>
+                        <div class="product_action">
+                                <button type="submit" style="cursor: pointer;" class="btn-addtocart">
+                                    <i class="fa fa-shopping-cart"></i> Add to cart
+                                </button>
+                                <input value="1" type="hidden" name="quantity">
                         </div>
-                        <% } else { %> 
-                        <div class="hot_img">
-                            <img src="assets\img\cart\span-hot.png" alt="">
                         </div>
-                        <% } %>
-                       <div class="product_action">
-                           <a href="#"> <i class="fa fa-shopping-cart"></i> Add to cart</a>
-                       </div>
+                        <div class="product_content">
+                            <span class="product_price" style="color: red;"><%= formatCurrency(spNoiBat.GiaBan) %></span>
+                            <h3 class="product_title"><a style="font-size: 18px ;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" href="/detailt-sp-ht1?idDetailtSP=<%= spNoiBat._id %>"><%= spNoiBat.TenSP %></a></h3>
+                        </div>
+                        <div class="product_info">
+                            <ul>
+                                <li><a href="#" title=" Add to Wishlist ">Add to Wishlist</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Quick view">View Detail</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="product_content">
-                        <span class="product_price" style="color: red;"><%= formatCurrency(spNoiBat.GiaBan) %></span>
-                        <h3 class="product_title"><a style="font-size: 18px ;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" href="/detailt-sp-ht1?idDetailtSP=<%= spNoiBat._id %>"><%= spNoiBat.TenSP %></a></h3>
-                    </div>
-                    <div class="product_info">
-                        <ul>
-                            <li><a href="#" title=" Add to Wishlist ">Add to Wishlist</a></li>
-                            <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Quick view">View Detail</a></li>
-                        </ul>
-                    </div>
-                </div>
+                </form>
             </div>
                 <% }); %> 
             </div> 

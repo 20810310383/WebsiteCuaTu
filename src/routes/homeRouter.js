@@ -8,6 +8,7 @@ const { searchNH_PhanTrang, searchNH } = require('../controllers/SearchSP/search
 const { searchGame, searchGame_PhanTrang } = require('../controllers/SearchSP/searchGameController');
 const { getHomeListShopPhanLoaiNam, getHomeListShopPhanLoaiNam_PhanTrang, getHomeListShopPhanLoaiNu, getHomeListShopPhanLoaiNu_PhanTrang } = require('../controllers/PhanLoaiSP/phanLoaiNuocHoaController');
 const { getHomeListShopGamePhanLoaiNam_PhanTrang, getHomeListShopGamePhanLoaiNam, getHomeListShopGamePhanLoaiNu_PhanTrang, getHomeListShopGamePhanLoaiNu } = require('../controllers/PhanLoaiSP/phanLoaiGameController');
+const { addToCart } = require('../controllers/Cart/addToCartController');
 
 
 const router = express.Router();
@@ -77,5 +78,9 @@ router.get("/shop-list-phan-loai-game-nu", getHomeListShopGamePhanLoaiNu)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 router.get("/shop-list-phan-loai-game-nu", getHomeListShopGamePhanLoaiNu_PhanTrang)
 
+
+// Cart Products
+// Add to Cart
+router.post("/addtocart", addToCart)
 
 module.exports = router;

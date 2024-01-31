@@ -525,7 +525,7 @@
 	left: 100px;
 }
 .banner_slider {
-	margin-bottom: 65px;
+	margin-bottom: 13px;
 }
 
 .banner_slider.slider_two {
@@ -800,6 +800,16 @@
 	padding: 7px 0;
 	text-transform: capitalize;
 	font-size: 13px;
+}
+.product_action .btn-addtocart {
+	display: block;
+	background: #018576;
+	color: #fff;
+	padding: 7px 0;
+	text-transform: capitalize;
+	font-size: 13px;
+	border: none;
+	width: 100%;
 }
 .product_action a:hover{
     background: #009483;
@@ -1517,7 +1527,7 @@
 	border-top: 1px solid #dbdbdb;
 	border-bottom: 1px solid #dbdbdb;
 	font-size: 16px;
-	line-height: ;
+	/* line-height: ; */
 }
 .list_title {
 	margin-bottom: 5px;
@@ -3827,6 +3837,27 @@
 /*modal css end*/
 
 
+  /* CSS cho phần tử thông báo */
+  .custom-alert {
+	padding: 10px;
+	font-size: 20px;
+	margin: 0 auto; /* Để căn giữa theo chiều ngang */
+	border: 1px solid #4CAF50;
+	border-radius: 5px;
+	background-color: #dff0d8;
+	color: green;
+	font-weight: bold;
+	display: none;
+	width: 100%; /* Đặt chiều rộng phù hợp */
+	text-align: center; /* Để căn giữa theo chiều ngang */
+  }
+  .hidden {
+    display: none;
+}
 
+  /* CSS cho nội dung thông báo */
+  #alert-message {
+	margin: 0; /* Để loại bỏ margin mặc định */
+  }
 
 

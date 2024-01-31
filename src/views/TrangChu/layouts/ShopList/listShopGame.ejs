@@ -66,7 +66,29 @@
                                     </div> 
                                     <!--banner slider start-->
                                 </div>
-                            </div>       
+                            </div>    
+                            <% if (logIn) { %>                 
+                  
+                                <% } else { %>
+                                <div 
+                                    style="background-color: rgb(249 232 232); 
+                                            border: 1px solid #ff0000;
+                                            margin: 0 auto;
+                                            border-radius: 5px;
+                                            font-weight: bold;
+                                            /* display: none; */
+                                            text-align: center;
+                                            padding: 10px 5px 0 5px;                                                                    
+                                            justify-content: center;                                                                   
+                                    "                     
+                                >
+                                <marquee onmouseover="this.stop()" onmouseout="this.start()" scrollamount="7">
+                                    <p style="color: red; font-size: 20px;">Vui lòng Login trước khi thêm sản phẩm vào giỏ hàng</p>
+                                </marquee>
+                                    
+                                </div> 
+                                <% } %>
+                            </br>   
                             <div class="row">
                                 <div class="col-12">
                                     <!--shop toolbar start-->

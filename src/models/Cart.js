@@ -15,13 +15,14 @@ const CartSchema = new Schema({
             },
             qty: {
                 type: Number,
-                required: true
+                required: true,
+                // default: 1
             }
         }],
-        totalPrice: {
-            type: Number,
-            default: 0  // Set a default value
-        },
+        // totalPrice: {
+        //     type: Number,
+        //     default: 0  // Set a default value
+        // },
         totalQuaty: {
             type: Number,
             default: 0  // Set a default value
@@ -36,30 +37,6 @@ const CartSchema = new Schema({
     
 });
 
-// tự động cập nhật lại khi thay đổi
-CartSchema.methods.calculateTotals = function () {
-    const cart = this.cart;
-  
-    // Tính toán tổng giá và tổng số lượng từ mảng items
-    const { totalPrice, totalQuaty } = cart.items.reduce(
-      (acc, item) => {
-        acc.totalPrice += item.productId.GiaBan * item.qty;
-        acc.totalQuaty += item.qty;
-        return acc;
-      },
-      { totalPrice: 0, totalQuaty: 0 }
-    );
-  
-    // Cập nhật giá trị mới
-    cart.totalPrice = totalPrice;
-    cart.totalQuaty = totalQuaty;
-};
-  
-// Middleware để tự động gọi phương thức calculateTotals trước khi lưu dữ liệu
-CartSchema.pre('save', function (next) {
-    this.calculateTotals();
-    next();
-});
   
 // CartSchema.plugin(mongoose_delete, { overrideMethods: 'all' });
 

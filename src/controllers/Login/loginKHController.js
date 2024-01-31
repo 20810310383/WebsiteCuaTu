@@ -1,4 +1,5 @@
 const TaiKhoan_KH = require("../../models/TaiKhoan_KH")
+const Cart = require("../../models/Cart")
 
 module.exports = {
 
@@ -59,6 +60,26 @@ module.exports = {
             req.session.hoten = user.HoTen
             req.session.userId = user._id
             req.user = { _id: user._id };
+
+            if (user) {
+                // Nếu đã đăng nhập, kiểm tra xem có giỏ hàng trong database không
+                let cart = await Cart.findOne({ 'MaTKKH': user._id });
+
+                if (!cart) {
+                    cart = new Cart({
+                        cart: {
+                            items: [],
+                            totalPrice: 0,
+                            totalQuaty: 0,
+                        },
+                        MaTKKH: user._id,
+                    });
+                    await cart.save();
+                }
+
+                // Đặt thông tin giỏ hàng trong phiên
+                req.session.cartId = cart._id;
+            }
 
             console.log("req.session.hoten: ", req.session.hoten);
 

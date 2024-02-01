@@ -1,0 +1,76 @@
+<% if (logIn) { %>  
+<div class="shopping_cart">
+    <a href="#"><i class="fa fa-shopping-cart"></i> 
+        <span id="totalQuantity">0</span> Sản phẩm - 
+        <span id="totalPrice">0 đ</span> 
+        <i class="fa fa-angle-down"></i>
+    </a>
+
+    <!--mini cart-->
+    <div class="mini_cart">
+        <div class="cart_item">
+           <div class="cart_img">
+               <a href="#"><img src="assets\img\cart\cart.jpg" alt=""></a>
+           </div>
+            <div class="cart_info">
+                <a href="#">lorem ipsum dolor</a>
+                <span class="cart_price">$115.00</span>
+                <span class="quantity">Qty: 1</span>
+            </div>
+            <div class="cart_remove">
+                <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+            </div>
+        </div>
+        <div class="cart_item">
+           <div class="cart_img">
+               <a href="#"><img src="assets\img\cart\cart2.jpg" alt=""></a>
+           </div>
+            <div class="cart_info">
+                <a href="#">Quisque ornare dui</a>
+                <span class="cart_price">$105.00</span>
+                <span class="quantity">Qty: 1</span>
+            </div>
+            <div class="cart_remove">
+                <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+            </div>
+        </div>
+        <div class="shipping_price" >
+            <span> Phí Ship </span>
+            <span id="shipping_price">  $0.00  </span>
+        </div>
+        <div class="total_price">
+            <span> Tổng Tiền </span>
+            <span class="prices" id="cartTotalPrice">  $0.00  </span>
+        </div>
+        <div class="cart_button">
+            <a href="checkout.html"> Check out</a>
+        </div>
+    </div>
+    <!--mini cart end-->
+</div>
+<% } else { %>
+    <div class="shopping_cart">
+        <a href="#"><i class="fa fa-shopping-cart"></i> 
+            <span >0</span> Sản phẩm - 
+            <span >0 đ</span> 
+            <i class="fa fa-angle-down"></i>
+        </a>
+    
+        <!--mini cart-->
+        <div class="mini_cart">
+
+            <div class="cart_item">
+               Giỏ hàng rỗng
+            </div>
+            
+            <div class="cart_button">
+                <a href="##" style="pointer-events: none; cursor: pointer;"> Check out</a>
+            </div>
+        </div>
+        <!--mini cart end-->
+    </div>
+<% } %>  
+
+
+<!-- Thêm mã JavaScript để cập nhật thông tin giỏ hàng -->
+<script src="assets\js\handleGet_Info_Cart.js"></script>

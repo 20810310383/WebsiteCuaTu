@@ -9,6 +9,7 @@ const { searchGame, searchGame_PhanTrang } = require('../controllers/SearchSP/se
 const { getHomeListShopPhanLoaiNam, getHomeListShopPhanLoaiNam_PhanTrang, getHomeListShopPhanLoaiNu, getHomeListShopPhanLoaiNu_PhanTrang } = require('../controllers/PhanLoaiSP/phanLoaiNuocHoaController');
 const { getHomeListShopGamePhanLoaiNam_PhanTrang, getHomeListShopGamePhanLoaiNam, getHomeListShopGamePhanLoaiNu_PhanTrang, getHomeListShopGamePhanLoaiNu } = require('../controllers/PhanLoaiSP/phanLoaiGameController');
 const { addToCart } = require('../controllers/Cart/addToCartController');
+const { getCartInfo } = require('../controllers/Cart/getCartInfoController');
 
 
 const router = express.Router();
@@ -82,5 +83,7 @@ router.get("/shop-list-phan-loai-game-nu", getHomeListShopGamePhanLoaiNu_PhanTra
 // Cart Products
 // Add to Cart
 router.post("/addtocart", addToCart)
+// get info cart
+router.get("/get-info-cart", getCartInfo)
 
 module.exports = router;

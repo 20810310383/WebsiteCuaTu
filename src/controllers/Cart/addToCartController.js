@@ -96,10 +96,10 @@ module.exports = {
     
             // await cart.save();
 
-            return res.status(200).json({ message: 'Đã thêm sản phẩm vào giỏ hàng' });
+            return res.status(200).json({ success: true, message: 'Đã thêm sản phẩm vào giỏ hàng' });
         } catch (error) {
             console.error(error);
-            return res.status(500).json({ message: 'Lỗi server' });
+            return res.status(500).json({ success: false, message: 'Lỗi server' });
         }
     },  
 }

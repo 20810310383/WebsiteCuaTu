@@ -36,7 +36,7 @@
         <div class="single_p_active owl-carousel">
             <% spNew.forEach(function(spNew) { %>
             <div class="col-lg-3">
-                <form id="form-addtocart" action="/addtocart?productId=<%= spNew._id %>" method="POST">
+                <form id="form-addtocart-new" action="/addtocart?productId=<%= spNew._id %>" method="POST">
                     <div class="single_product">
                         <div class="product_thumb">
                         <a href="/detailt-sp-ht2?idDetailtSP_ht2=<%= spNew._id %>"><img height="334px" src="images/upload/<%= getRelativeImagePath(spNew.Image) %>" alt=""></a> 
@@ -55,7 +55,7 @@
                             <button type="submit" style="cursor: pointer;" class="btn-addtocart">
                                 <i class="fa fa-shopping-cart"></i> Add to cart
                             </button>
-                            <input value="1" type="hidden" name="quantity">
+                            <input value="1" type="hidden" name="quantity" data-product-id="<%= spNew._id %>">
                         </div>
                         </div>
                         <div class="product_content">

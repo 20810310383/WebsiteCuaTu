@@ -28,11 +28,11 @@
     <div class="row">
         <% if (spNew && spNew.length > 0) { %>
         <div class="product_active owl-carousel">
-                <% spNew.forEach(function(spNew) { %>
+                <% spNew.forEach(function(spNew, index) { %>
             <div class="col-lg-3">
                 
                     <div class="single_product">
-                        <form id="form-addtocart-new1" action="/addtocart?productId=<%= spNew._id %>" method="POST">
+                        <form id="form-addtocart-new" action="/addtocart?productId=<%= spNew._id %>" method="POST">
                             <div class="product_thumb">
                             <a href="/detailt-sp-ht1?idDetailtSP=<%= spNew._id %>"><img height="336.50px" src="images/upload/<%= getRelativeImagePath(spNew.Image) %>" alt=""></a> 
                             <% if (spNew.New_Hot === "New") { %>
@@ -52,7 +52,7 @@
                                     </button>
                                     
                                     <!-- <a href="#"> <i class="fa fa-eye"></i> &ensp; View Detail</a> -->
-                                    <input value="1" type="hidden" name="quantity">
+                                    <input value="1" type="hidden" name="quantity" data-product-id="<%= spNew._id %>">
                                 </div>
                             </div>
                             <div class="product_content">
@@ -78,9 +78,10 @@
             </div> 
             <% } else { %> 
                 <p>Admin chưa update sản phẩm</p>
-            <% } %>
-
-            
+            <% } %>            
     </div>       
 </div> 
+
+
+
 

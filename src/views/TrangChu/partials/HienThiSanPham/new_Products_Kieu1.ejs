@@ -59,19 +59,17 @@
                                 <span class="product_price" style="color: red;"><%= formatCurrency(spNew.GiaBan) %></span>
                                 <h3 class="product_title"><a style="font-size: 18px ;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" href="/detailt-sp-ht1?idDetailtSP=<%= spNew._id %>"><%= spNew.TenSP %></a></h3>
                             </div>
+                        </form>
                             <div class="product_info">
                                 <ul>
                                     <li><a href="#" title=" Add to Wishlist ">Add to Wishlist</a></li>
-                                    <li><a id="viewDetailt" href="#" data-product-id="" data-toggle="modal" data-target="#modal_box" title="Quick view" >View Detail</a></li>                          
+                                    <li><a id="viewDetailt" href="#"  data-toggle="modal" data-target="#modal_box" title="Quick view" >View Detail</a></li>                                                                                
                                     <!-- <form action="/detailt-sp" method="post">
-                                        <input type="hidden" name="idDetailtSPP" value="">
-                                        <li><button  class="viewDetaill" id="viewDetailt" data-product-id="" data-toggle="modal" data-target="#modal_box" title="Quick view" >View Detail</button></li>
-                                    </form>                             -->
+                                        <input type="hidden" id="idDetailtSPP" name="idDetailtSPP" value="<%= spNew._id %>">
+                                        <li><button type="submit"  class="viewDetaill" id="viewDetailt" data-product-id="" data-toggle="modal" data-target="#modal_box" title="Quick view" >View Detail</button></li>
+                                    </form> -->
                                 </ul>
-                            </div>
-                              
-                        </form>
-                        
+                            </div>                                                                              
                     </div>
             </div>
                 <% }); %> 
@@ -81,7 +79,5 @@
             <% } %>            
     </div>       
 </div> 
-
-
 
 

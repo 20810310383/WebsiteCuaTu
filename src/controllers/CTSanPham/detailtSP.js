@@ -9,6 +9,7 @@ module.exports = {
             const productId = req.body.idDetailtSPP;
             console.log("productId: ",productId);
             const productDetails = await SanPham.findById(productId).populate("IdLoaiSP");
+            console.log("productDetails: ",productDetails);
             res.json({
                 productDetails
                 // name: productDetails.TenSP,

@@ -16,10 +16,11 @@ document.addEventListener('DOMContentLoaded', function () {
         } catch (error) {
             console.error('Lỗi khi cập nhật thông tin giỏ hàng:', error);
         }
-    }
+    }   
 
     // Hàm định dạng tiền tệ (có thể thay đổi theo định dạng tiền của bạn)
     function formatCurrency(amount) {
         return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     }
+    
 });

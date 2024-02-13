@@ -10,6 +10,8 @@ const { getHomeListShopPhanLoaiNam, getHomeListShopPhanLoaiNam_PhanTrang, getHom
 const { getHomeListShopGamePhanLoaiNam_PhanTrang, getHomeListShopGamePhanLoaiNam, getHomeListShopGamePhanLoaiNu_PhanTrang, getHomeListShopGamePhanLoaiNu } = require('../controllers/PhanLoaiSP/phanLoaiGameController');
 const { addToCart } = require('../controllers/Cart/addToCartController');
 const { getCartInfo } = require('../controllers/Cart/getCartInfoController');
+const {getChiTietCart, getChiTietCart_XemCT} = require('../controllers/Cart/getChiTietCart');
+const { removeACTCart } = require('../controllers/Cart/remove_Mot_SPCart');
 
 
 const router = express.Router();
@@ -85,5 +87,12 @@ router.get("/shop-list-phan-loai-game-nu", getHomeListShopGamePhanLoaiNu_PhanTra
 router.post("/addtocart", addToCart)
 // get info cart
 router.get("/get-info-cart", getCartInfo)
+// get chi tiet cart tại trang
+router.get("/get-chi-tiet-cart", getChiTietCart)
+// get trang xem chi tiết giỏ hàng
+router.get("/detailt-cart-trang-moi", getChiTietCart_XemCT)
+// xóa 1 sản phẩm trong cart
+router.post("/remove-mot-sp", removeACTCart)
+
 
 module.exports = router;

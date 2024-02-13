@@ -3860,4 +3860,35 @@
 	margin: 0; /* Để loại bỏ margin mặc định */
   }
 
+/* thanh cuộn cho chi tiết cart */
+/* CSS để tạo thanh cuộn cho mini_cart */
+.mini_cart {
+    max-height: 400px; /* Định chiều cao tối đa của mini_cart */
+    overflow-y: auto; /* Hiển thị thanh cuộn chỉ khi cần thiết */
+}
+
+.cart_item {
+    /* Định dạng của mỗi sản phẩm trong giỏ hàng */
+    /* Bạn có thể thay đổi các thuộc tính này tùy thuộc vào yêu cầu của bạn */
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* CSS cho thanh cuộn */
+/* Đảm bảo rằng thanh cuộn chỉ hiển thị khi nội dung vượt quá kích thước của phần tử cha */
+/* Điều này ngăn không gian trống được tạo ra khi thanh cuộn không cần thiết */
+.mini_cart::-webkit-scrollbar {
+    width: 8px; /* Độ rộng của thanh cuộn */
+}
+
+.mini_cart::-webkit-scrollbar-thumb {
+    background-color: #888; /* Màu của thanh cuộn */
+    border-radius: 4px; /* Đường viền cong của thanh cuộn */
+}
+
+.mini_cart::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Màu của vùng nền của thanh cuộn */
+}
 

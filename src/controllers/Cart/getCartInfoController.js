@@ -32,7 +32,7 @@ module.exports = {
     
             // Kiểm tra điều kiện và thiết lập giá trị của PhiShip
             let phiShip = cart.cart.PhiShip;
-            if (totalPrice > 1000000) {
+            if (totalPrice >= 1000000) {
                 phiShip = 0;
             }
 

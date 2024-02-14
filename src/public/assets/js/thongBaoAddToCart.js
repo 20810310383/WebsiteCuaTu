@@ -26,7 +26,7 @@ function addToCart(formData) {
             showCustomAlert('Đã thêm sản phẩm vào giỏ hàng thành công!');
 
             // Chuyển hướng trang sau khi thêm vào giỏ hàng thành công
-            // window.location.href = '/detail-cart';
+            // window.location.href = '/detailt-cart-trang-moi';
         },
         error: function(error) {
             console.error('Lỗi khi thêm vào giỏ hàng:', error);
@@ -46,7 +46,7 @@ function showCustomAlert(message) {
     // Ẩn thông báo sau một khoảng thời gian (ví dụ: 5 giây)
     setTimeout(() => {
         hideCustomAlert();
-        // window.location.href = '/detail-cart';
+        // window.location.href = '/detailt-cart-trang-moi';
     }, 1000);
 }
 

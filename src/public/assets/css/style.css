@@ -3892,3 +3892,11 @@
     background-color: #f1f1f1; /* Màu của vùng nền của thanh cuộn */
 }
 
+/* css thanh cuộn dọc trong trang chi tiết cart */
+.scroll-wrapper {
+    max-height: 300px; /* Đặt chiều cao tối đa của phần tử chứa nội dung */
+    overflow-y: auto; /* Kích hoạt thanh cuộn dọc */
+}
+
+
+

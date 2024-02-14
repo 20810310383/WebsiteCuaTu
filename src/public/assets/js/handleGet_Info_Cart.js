@@ -9,9 +9,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Cập nhật tổng số lượng và tổng tiền trên giao diện
             document.getElementById('totalQuantity').innerText = data.totalQuaty;
-            document.getElementById('totalPrice').innerText = formatCurrency(data.totalPrice);
-            document.getElementById('cartTotalPrice').innerText = formatCurrency(data.totalPrice);
-            document.getElementById('shipping_price').innerText = formatCurrency(data.phiShip);
+
+            if(data.totalQuaty == 0) {
+                document.getElementById('totalPrice').innerText = '0đ';
+            } else {
+                document.getElementById('totalPrice').innerText = formatCurrency(data.totalPrice);
+            }            
+
+            if(data.totalQuaty == 0) {
+                document.getElementById('cartTotalPrice').innerText = '0đ';
+            } else {
+                document.getElementById('cartTotalPrice').innerText = formatCurrency(data.totalPrice);
+            }
+
+            if(data.phiShip === 0) {
+                document.getElementById('shipping_price').innerText = 'Free Ship';
+            } else {
+                document.getElementById('shipping_price').innerText = formatCurrency(data.phiShip);
+            }
 
         } catch (error) {
             console.error('Lỗi khi cập nhật thông tin giỏ hàng:', error);

@@ -61,6 +61,7 @@
 
                          <!--shopping cart area start -->
                          <div class="shopping_cart_area">
+                            <% if (productDetailsArray.length > 0) { %>
                             <form action="#"> 
                                     <div class="row">
                                         <div class="col-12">
@@ -69,58 +70,45 @@
                                                     <table>
                                                 <thead>
                                                     <tr>
-                                                        <th class="product_remove">Options</th>
-                                                        <th class="product_thumb">Image</th>
-                                                        <th class="product_name">Product</th>
-                                                        <th class="product-price">Price</th>
-                                                        <th class="product_quantity">Quantity</th>
-                                                        <th class="product_total">Total</th>
+                                                        <!-- <th>STT</th> -->
+                                                        <th class="product_remove" style="font-family: Arial, Helvetica, sans-serif;">Chức Năng</th>
+                                                        <th class="product_thumb" style="font-family: Arial, Helvetica, sans-serif;">Hình Ảnh</th>
+                                                        <th class="product_name" style="font-family: Arial, Helvetica, sans-serif;">Sản Phẩm</th>
+                                                        <th class="product-price" style="font-family: Arial, Helvetica, sans-serif;">Giá Bán</th>
+                                                        <th class="product_quantity" style="font-family: Arial, Helvetica, sans-serif;">Số Lượng</th>
+                                                        <th class="product_total" style="font-family: Arial, Helvetica, sans-serif;">Tổng Tiền</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody > 
+                                                    <% productDetailsArray.forEach(function(spDetailCart, index) { %>
                                                     <tr>
+                                                        <!-- <td>
+                                                            <%= index + 1 %>
+                                                        </td> -->
                                                        <td class="product_remove">
                                                             <a href="#"><i title="Xóa sản phẩm này" class="fa fa-trash-o"></i></a>
                                                             &emsp;
                                                             <a href="#"><i title="Edit số lượng sản phẩm này"  class="fa fa-pencil"></i></a>
                                                         </td>
-                                                        <td class="product_thumb"><a href="#"><img src="assets\img\cart\cart17.jpg" alt=""></a></td>
-                                                        <td class="product_name"><a href="#">Handbag fringilla</a></td>
-                                                        <td class="product-price">£65.00</td>
-                                                        <td class="product_quantity"><input min="0" max="100" value="1" type="number"></td>
-                                                        <td class="product_total">£130.00</td>
 
-
+                                                        <% if (spDetailCart.productDetails.IdLoaiSP.TenLoaiSP == "Avatar") { %>
+                                                            <td class="product_thumb"><a href="/detailt-sp-ht2?idDetailtSP_ht2=<%= spDetailCart.productDetails._id %>"><img src="images/upload/<%= getRelativeImagePath(spDetailCart.productDetails.Image) %>" alt=""></a></td>
+                                                        <% } else { %>
+                                                            <td class="product_thumb"><a href="/detailt-sp-ht1?idDetailtSP=<%= spDetailCart.productDetails._id %>"><img src="images/upload/<%= getRelativeImagePath(spDetailCart.productDetails.Image) %>" alt=""></a></td>
+                                                        <% } %>                                                        
+                                                        
+                                                        <td class="product_name" ><a style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;"><%= spDetailCart.productDetails.TenSP %></a></td>
+                                                        <td class="product-price"><%= formatCurrency(spDetailCart.productDetails.GiaBan) %></td>
+                                                        <td class="product_quantity"><input style="font-size: 20px;" min="1" max="1000" value="<%= spDetailCart.qty %>" type="number" disabled ></td>
+                                                        <td class="product_total"><%= formatCurrency(spDetailCart.productDetails.GiaBan * spDetailCart.qty ) %></td>
                                                     </tr>
-
-                                                    <tr>
-                                                       <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                                        <td class="product_thumb"><a href="#"><img src="assets\img\cart\cart18.jpg" alt=""></a></td>
-                                                        <td class="product_name"><a href="#">Handbags justo</a></td>
-                                                        <td class="product-price">£90.00</td>
-                                                        <td class="product_quantity"><input min="0" max="100" value="1" type="number"></td>
-                                                        <td class="product_total">£180.00</td>
-
-
-                                                    </tr>
-                                                    <tr>
-                                                       <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                                        <td class="product_thumb"><a href="#"><img src="assets\img\cart\cart19.jpg" alt=""></a></td>
-                                                        <td class="product_name"><a href="#">Handbag elit</a></td>
-                                                        <td class="product-price">£80.00</td>
-                                                        <td class="product_quantity"><input min="0" max="100" value="1" type="number"></td>
-                                                        <td class="product_total">£160.00</td>
-
-
-                                                    </tr>
-
+                                                    <% }); %> 
                                                 </tbody>
                                             </table>   
                                                 </div>  
-                                                <div class="cart_submit">                                                    
-                                                    <button  onclick="history.go(-1);">Back</button>
-
-                                                </div>      
+                                                <div class="checkout_btn cart_submit">
+                                                    <a href="#" onclick="history.go(-1);" style="font-family: Arial, Helvetica, sans-serif; ">Back</a>
+                                                </div>  
                                             </div>
                                          </div>
                                      </div>
@@ -139,24 +127,35 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="coupon_code">
-                                                    <h3>Cart Totals</h3>
+                                                    <h3 style="font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Tổng Số Giỏ Hàng</h3>
                                                     <div class="coupon_inner">
                                                        <div class="cart_subtotal">
-                                                           <p>Subtotal</p>
-                                                           <p class="cart_amount">£215.00</p>
+                                                           <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Tổng giá <%= cartItemss.totalQuaty !== 0 ? cartItemss.totalQuaty : 0 %> sản phẩm</p>
+                                                           <p class="cart_amount" style="color: navy;"><%= formatCurrency(totalCartPrice) %></p>
                                                        </div>
                                                        <div class="cart_subtotal ">
-                                                           <p>Shipping</p>
-                                                           <p class="cart_amount"><span>Flat Rate:</span> £255.00</p>
+                                                           <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Phí giao hàng</p>
+                                                           <% if (totalCartPrice >= 1000000) { %>
+                                                            <!-- <p class="cart_amount" style="color: red; text-decoration-line: line-through; font-style: italic;"> 30.000 đ</p> -->
+                                                            <a href="#" style="pointer-events: none; cursor: pointer; font-size: 16px;">Miễn Phí Vận Chuyển</a>
+                                                            <% } else { %>
+                                                                <p class="cart_amount" style="color: red;"> <%= formatCurrency(detailCart.cart.PhiShip) %></p>
+                                                            <% } %>                                                           
                                                        </div>
-                                                       <a href="#">Calculate shipping</a>
+                                                       
 
                                                        <div class="cart_subtotal">
-                                                           <p>Total</p>
-                                                           <p class="cart_amount">£215.00</p>
+                                                           <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Số tiền cần thanh toán</p>
+
+                                                           <% if (totalCartPrice >= 1000000) { %>
+                                                            <p class="cart_amount" style="color: red; font-weight: bold;"><%= formatCurrency(totalCartPrice - detailCart.cart.GiamGia ) %></p>
+                                                            <% } else { %>
+                                                            <p class="cart_amount" style="color: red; font-weight: bold;"><%= formatCurrency(detailCart.cart.PhiShip + totalCartPrice - detailCart.cart.GiamGia ) %></p>
+                                                            <% } %>
+
                                                        </div>
                                                        <div class="checkout_btn">
-                                                           <a href="#">Proceed to Checkout</a>
+                                                           <a href="#" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Tiến hành kiểm tra và đặt hàng</a>
                                                        </div>
                                                     </div>
                                                 </div>
@@ -164,7 +163,26 @@
                                         </div>
                                     </div>
                                     <!--coupon code area end-->
-                                </form> 
+                            </form> 
+                            <% } else { %>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="coupon_code">
+                                        <h3 style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; ">Tổng Số Giỏ Hàng</h3>
+                                        <div class="coupon_inner">
+                                           <div class="cart_subtotal">
+                                               <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px;color: red;">GIỎ HÀNG TRỐNG</p>
+                                           </div>
+                                           <div class="cart_subtotal">
+                                               <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Số tiền cần thanh toán</p>
+                                               <p class="cart_amount" style="color: red; font-weight: bold;">0đ</p>
+                                           </div>
+                                           <div class="checkout_btn">
+                                               <a href="#" onclick="history.go(-1);" style="font-family: Arial, Helvetica, sans-serif; ">Trở lại trang trước</a>
+                                           </div>
+                                        </div>
+                                    </div>
+                                </div>                            
+                            <% } %>
                          </div>
                          <!--shopping cart area end -->
 

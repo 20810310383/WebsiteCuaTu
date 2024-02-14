@@ -25,11 +25,11 @@
                             icon: 'success',
                             title: 'Thành công!',
                             text: 'Sản phẩm đã được thêm vào giỏ hàng.',
-                            confirmButtonText: 'Mua Tiếp Thôi'
+                            confirmButtonText: 'Đi tới giỏ hàng'
                         })
                         .then(() => {
                             // Redirect to the specified URL after clicking "OK"
-                            window.location.href = '/';
+                            window.location.href = '/detailt-cart-trang-moi';
                         });
                     } else {
                         // Show error alert

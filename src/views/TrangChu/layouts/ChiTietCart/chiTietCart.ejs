@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>SHOP KHẮC TÚ -- Chi Tiết SP</title>
+        <title>SHOP KHẮC TÚ -- Chi Tiết Giỏ Hàng</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="assets\css\style.css">
         <link rel="stylesheet" href="assets\css\responsive.css">
         <script src="assets\js\vendor\modernizr-2.8.3.min.js"></script>
+
+
     </head>
     <body>
             <!-- Add your site or application content here -->
@@ -61,8 +63,7 @@
 
                          <!--shopping cart area start -->
                          <div class="shopping_cart_area">
-                            <% if (productDetailsArray.length > 0) { %>
-                            <form action="#"> 
+                            <% if (productDetailsArray.length > 0) { %>                            
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="table_desc">
@@ -86,8 +87,14 @@
                                                             <%= index + 1 %>
                                                         </td> -->
                                                        <td class="product_remove">
-                                                            <a href="#"><i title="Xóa sản phẩm này" class="fa fa-trash-o"></i></a>
-                                                            &emsp;
+                                                        <form action="/remove-mot-sp" method="post" >
+                                                            <input type="hidden" name="idARemove" value="<%= spDetailCart._id %>">
+                                                            <button style="border: none;background-color: white;" type="submit">
+                                                                <i id="dltSP" title="Xóa sản phẩm này" class="fa fa-trash-o"></i>
+                                                            </button>
+                                                        </form>
+                                                            <!-- <a href="#"><i title="Xóa sản phẩm này" class="fa fa-trash-o"></i></a> -->
+                                                            <br>
                                                             <a href="#"><i title="Edit số lượng sản phẩm này"  class="fa fa-pencil"></i></a>
                                                         </td>
 
@@ -162,22 +169,21 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--coupon code area end-->
-                            </form> 
+                                    <!--coupon code area end-->                           
                             <% } else { %>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="coupon_code">
                                         <h3 style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; ">Tổng Số Giỏ Hàng</h3>
                                         <div class="coupon_inner">
                                            <div class="cart_subtotal">
-                                               <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px;color: red;">GIỎ HÀNG TRỐNG</p>
+                                               <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px;color: red;">GIỎ HÀNG TRỐNG, ĐI MUA HÀNG THÔI CẬU</p>
                                            </div>
                                            <div class="cart_subtotal">
                                                <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Số tiền cần thanh toán</p>
                                                <p class="cart_amount" style="color: red; font-weight: bold;">0đ</p>
                                            </div>
                                            <div class="checkout_btn">
-                                               <a href="#" onclick="history.go(-1);" style="font-family: Arial, Helvetica, sans-serif; ">Trở lại trang trước</a>
+                                               <a href="/"  style="font-family: Arial, Helvetica, sans-serif; ">Trở lại trang trước</a>
                                            </div>
                                         </div>
                                     </div>

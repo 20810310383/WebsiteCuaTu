@@ -3898,5 +3898,13 @@
     overflow-y: auto; /* Kích hoạt thanh cuộn dọc */
 }
 
-
-
+#dltSP {
+	font-size: 20px;
+	font-weight: bold;
+	color: #00bba6;
+	cursor: pointer;
+}
+#dltSP:hover {
+	color: red;
+	cursor: pointer;
+}

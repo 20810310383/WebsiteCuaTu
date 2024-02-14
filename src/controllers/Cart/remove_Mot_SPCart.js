@@ -21,7 +21,6 @@ module.exports = {
     
             // Kiểm tra xem sản phẩm đã được tìm thấy và xóa chưa
             if (removedProduct && removedProduct.cart && removedProduct.cart.items) {
-                let totalPrice = 0;
                 let totalQuaty = 0;
                 // Tính tổng giá và tổng số lượng cập nhật dựa trên các mặt hàng còn lại
                 for (const item of removedProduct.cart.items) {
@@ -29,11 +28,8 @@ module.exports = {
                         let productDetails = await SanPham.findById(item.productId).exec();
                         if (productDetails) {
                             const giaBan = Number(productDetails.GiaBan);
-                            // console.log("giaBan --->>>>", giaBan);
-                            const itemTotal = item.qty * (isNaN(giaBan) ? 0 : giaBan);
-                            // console.log("itemTotal --->>>>", itemTotal);
+                            // console.log("giaBan --->>>>", giaBan);                            
     
-                            totalPrice += itemTotal;
                             totalQuaty += item.qty;
                         }
                     } catch (error) {
@@ -44,11 +40,10 @@ module.exports = {
                 // Cập nhật tổng giá và tổng số lượng trong Giỏ hàng
                 await Cart.findByIdAndUpdate(
                     {_id: removedProduct._id},
-                    { $set: { 'cart.totalPrice': totalPrice, 'cart.totalQuaty': totalQuaty } }
-                    // {totalPrice: totalPrice, totalQuaty: totalQuaty}
+                    { $set: {'cart.totalQuaty': totalQuaty } }
                 );
     
-                res.redirect('/detail-cart');
+                res.redirect('/detailt-cart-trang-moi');
             } else {
                 res.status(404).send("Không tìm thấy sản phẩm để xóa.");
             }

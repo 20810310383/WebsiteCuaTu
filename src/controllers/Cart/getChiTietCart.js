@@ -20,11 +20,11 @@ module.exports = {
     
             const cartItems = detailCart.cart.items;
             const productDetailsArray = await Promise.all(cartItems.map(async item => {
-                console.log(`item._id cần xóa: ${item._id}`); // xem id can xoa
+                // console.log(`item._id cần xóa: ${item._id}`); // xem id can xoa
     
                 try {
                     const productDetails = await SanPham.findById(item.productId).populate('IdLoaiSP').exec();
-                    console.log("productDetails: ",productDetails);
+                    // console.log("productDetails: ",productDetails);
     
                     if (productDetails) {
                         const { TenSP, GiaBan } = productDetails;
@@ -94,7 +94,7 @@ module.exports = {
             
             for (const item of cartItems) {
 
-                console.log(`item._id cần xóa: ${item._id}`);   // xem id can xoa
+                // console.log(`item._id cần xóa: ${item._id}`);   // xem id can xoa
 
                 try {
                     const productDetails = await SanPham.findById(item.productId).populate('IdLoaiSP').exec();

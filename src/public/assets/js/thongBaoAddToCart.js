@@ -46,7 +46,8 @@ function showCustomAlert(message) {
     // Ẩn thông báo sau một khoảng thời gian (ví dụ: 5 giây)
     setTimeout(() => {
         hideCustomAlert();
-        // window.location.href = '/detailt-cart-trang-moi';
+        window.location.href = '/detailt-cart-trang-moi';
+        
     }, 1000);
 }
 

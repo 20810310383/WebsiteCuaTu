@@ -51,7 +51,7 @@ module.exports = {
             res.json({
                 success: true,
                 productDetails: productDetailsArray.filter(Boolean),
-                cartItemss: { items: cartItems, totalPrice: totalCartPrice }
+                cartItemss: { items: cartItems, totalCartPrice: totalCartPrice }
             });
         } catch (error) {
             console.error("Lỗi khi truy xuất giỏ hàng:", error);
@@ -88,6 +88,18 @@ module.exports = {
             const productDetails = await SanPham.findById(item.productId).exec();
             totalCartPrice += productDetails.GiaBan * item.qty;
         }
+
+        let giam_Gia = 0
+        if(totalCartPrice <= 500000) {
+            giam_Gia = totalCartPrice * 0.02 // giam 2% tong so tien
+        } else if (500000 < totalCartPrice && totalCartPrice <= 1000000) {
+            giam_Gia = totalCartPrice * 0.03 // giam 3% tong so tien
+        } else if (1000000 < totalCartPrice && totalCartPrice <= 10000000) {
+            giam_Gia = totalCartPrice * 0.05 // giam 5% tong so tien
+        } else {
+            giam_Gia = totalCartPrice * 0.1 // giam 10% tong so tien
+        }
+        console.log("giamgia chi tiet: ", giam_Gia);
 
         if (detailCart) {
             const cartItems = detailCart.cart.items;
@@ -128,7 +140,8 @@ module.exports = {
             hoten, logIn,
             productDetailsArray,
             cartItemss, detailCart,
-            totalCartPrice // Truyền tổng giá của tất cả sản phẩm xuống EJS
+            totalCartPrice, // Truyền tổng giá của tất cả sản phẩm xuống EJS
+            giam_Gia
         })
     }
 }

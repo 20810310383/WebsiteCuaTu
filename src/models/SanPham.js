@@ -6,6 +6,7 @@ const SanPham_Schema = new mongoose.Schema(
         TenSP: { type: String, required: false },
         GiaBan: { type: Number, required: false },
         GiaCu: { type: Number },
+        GiamGiaSP: { type: Number },
         MoTa: { type: String, default: "Not thing" },
         New_Hot: { type: String },
         SpMoi_SpNoiBat: { 

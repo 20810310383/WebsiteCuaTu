@@ -25,11 +25,14 @@
                             icon: 'success',
                             title: 'Thành công!',
                             text: 'Sản phẩm đã được thêm vào giỏ hàng.',
-                            confirmButtonText: 'Đi tới giỏ hàng'
+                            confirmButtonText: 'Mua Tiếp'
                         })
                         .then(() => {
                             // Redirect to the specified URL after clicking "OK"
-                            window.location.href = '/detailt-cart-trang-moi';
+                            // window.location.href = '/';
+                            // window.history.back(); // Quay lại trang trước đó
+                            window.location.reload(); // Tải lại trang hiện tại
+
                         });
                     } else {
                         // Show error alert

@@ -19,14 +19,17 @@ document.addEventListener('DOMContentLoaded', function () {
             if(data.totalQuaty == 0) {
                 document.getElementById('cartTotalPrice').innerText = '0đ';
             } else {
-                document.getElementById('cartTotalPrice').innerText = formatCurrency(data.totalPrice);
+                document.getElementById('cartTotalPrice').innerText = formatCurrency(data.totalPrice + data.phiShip - data.giamGia);
             }
 
             if(data.phiShip === 0) {
-                document.getElementById('shipping_price').innerText = 'Free Ship';
+                document.getElementById('shipping_price').innerText = 'Miễn Phí Giao Hàng';
             } else {
                 document.getElementById('shipping_price').innerText = formatCurrency(data.phiShip);
             }
+
+            document.getElementById('giamgia_price').innerText = '-' + formatCurrency(data.giamGia);
+            document.getElementById('giamgia_price_txt').innerText = 'Giảm Giá ' + Math.floor((data.giamGia / data.totalPrice) * 100) + '%';
 
         } catch (error) {
             console.error('Lỗi khi cập nhật thông tin giỏ hàng:', error);

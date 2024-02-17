@@ -1,0 +1,282 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SHOP KHẮC TÚ -- Điền Thông Tin Đặt Hàng</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="assets\img\logo-KTT1.ico">
+		
+		<!-- all css here -->
+       <link rel="stylesheet" href="assets\css\bootstrap.min.css">
+        <link rel="stylesheet" href="assets\css\plugin.css">
+        <link rel="stylesheet" href="assets\css\bundle.css">
+        <link rel="stylesheet" href="assets\css\style.css">
+        <link rel="stylesheet" href="assets\css\responsive.css">
+        <script src="assets\js\vendor\modernizr-2.8.3.min.js"></script>
+
+    </head>
+    <body>
+            <!-- Add your site or application content here -->
+            
+            <!--pos page start-->
+            <div class="pos_page">
+                <div class="container">
+                    <!--pos page inner-->
+                    <div class="pos_page_inner">  
+
+                       <!--header area -->
+                       <div class="header_area">
+                        <!--header top-->                                 
+                         <%- include('../../partials/header_top.ejs') %>
+                         <!--header top end-->
+
+                         <!--header middel--> 
+                         <%- include('../../partials/header_middel.ejs') %>
+                         <!--header middel end-->      
+                     
+                         <!--header bottom--> 
+                         <%- include('../../partials/header_bottom.ejs') %>
+                         <!--header bottom end-->    
+                        </div>
+                        <!--header end -->
+                        
+                         <!--breadcrumbs area start-->
+                        <div class="breadcrumbs_area">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="breadcrumb_content">
+                                        <ul>
+                                            <li><a href="/">home</a></li>
+                                            <li><i class="fa fa-angle-right"></i></li>
+                                            <li>Kiểm tra thông tin đặt hàng</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--breadcrumbs area end-->
+
+
+                         <!--checkout start -->                        
+                        <!--Checkout page section-->
+                        <div class="Checkout_section">
+                            
+                            <div class="checkout_form">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <form action="#">
+                                                <h3 style="font-family: Arial, Helvetica, sans-serif;">Thông tin đặt hàng</h3>
+                                                <div class="row">
+                                                    <!-- <div class="col-12 mb-30">
+                                                        <label style="font-size: 19px;">Mã Đơn Hàng</label>
+                                                        <input type="text" readonly value="#abc123" style="border: none; font-size: 20px; color: green; font-style: italic;">     
+                                                    </div>      -->
+                                                    <div class="col-lg-6 mb-30">
+                                                        <label for="firstname">Họ <span>*</span></label>
+                                                        <input name="Ho" id="firstname" placeholder="Nhập họ của bạn..." type="text" required>    
+                                                    </div>
+                                                    <div class="col-lg-6 mb-30">
+                                                        <label for="lastname">Tên <span>*</span></label>
+                                                        <input name="Ten" id="lastname" placeholder="Nhập tên của bạn..." type="text" required> 
+                                                    </div>                                                                                                   
+                                                                                                 
+                                                    <div class="col-12 mb-30">
+                                                        <label for="city">Tỉnh / Thành Phố <span>*</span></label>
+                                                        <!-- <input id="tp" type="text" required>     -->
+                                                        <select name="ThanhPho" class="form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm">
+                                                            <option value="" selected>Chọn tỉnh thành</option>  
+                                                        </select> 
+                                                    </div> 
+                                                     <div class="col-12 mb-30">
+                                                        <label for="district">Quận / Huyện <span>*</span></label>
+                                                        <!-- <input id="quanhuyen" type="text" required>     -->
+                                                        <select name="QuanHuyen" class="form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm">
+                                                            <option value="" selected>Chọn quận huyện</option>
+                                                        </select>
+                                                    </div> 
+                                                    <div class="col-12 mb-30">
+                                                        <label for="ward"> Phường / Xã <span>*</span></label>
+                                                        <!-- <input id="xa" type="text" required>     -->
+                                                        <select name="PhuongXa" class="form-select form-select-sm" id="ward" aria-label=".form-select-sm">
+                                                            <option value="" selected>Chọn phường xã</option>
+                                                        </select>
+                                                    </div> 
+                                                    <div class="col-12 mb-30">
+                                                        <label for="dcct">Địa chỉ chi tiết  <span>*</span></label>
+                                                        <input name="DiaChiChiTiet" id="dcct" placeholder="Nhập Địa chỉ chi tiết..." type="text" required>     
+                                                    </div>
+                                                    <div class="col-lg-6 mb-30">
+                                                        <label for="sdt">Phone<span>*</span></label>
+                                                        <input name="SoDienThoai" id="sdt" type="phone" placeholder="Nhập Số điện thoại của bạn..." required> 
+
+                                                    </div> 
+                                                     <div class="col-lg-6 mb-30">
+                                                        <label for="mail"> Email Address   <span>*</span></label>
+                                                          <input name="Email" id="mail" type="email" placeholder="Nhập Email của bạn..." required> 
+
+                                                    </div> 
+                                                    
+                                               
+                                                    <div class="col-12">
+                                                        <div class="order-notes">
+                                                             <label for="order_note">Order Notes</label>
+                                                            <textarea name="Note" style="height: 100px;" id="order_note" placeholder="..."></textarea>
+                                                        </div>    
+                                                    </div> 
+                                                    
+                                                    <!-- <div class="col-12">
+                                                        <div class="order-notes" >
+                                                            <img  src="assets/img/cart/hinhthuctt.jpg" alt="">                                                            
+                                                        </div>    
+                                                    </div>  -->
+                                                    <div class="col-12">
+                                                        <div style="display: block;" id="collapsedefult" class="collapse one" data-parent="#accordion">
+                                                            <div class="card-body1" style="text-align: center;">
+                                                                <p style="font-size: 18px;line-height: 30px;">                                                                 
+                                                                    Cú pháp chuyển khoản: <span style="color: red; font-size: 18px;">ShopKT_MaDonHang_TenKhachHang_SoDienThoai </span>
+                                                                    <br> Ví Dụ:&emsp;  <span style="color: rgb(55, 0, 255); font-size: 18px;">ShopKT 36B63DAF05 KhacTu 0972138493 </span>                                                                   
+                                                                    <div style="display: flex; text-align: center;">
+                                                                        <img style="width: 250px;" src="assets\img\visha\atm.jpg" alt=""> <br>
+                                                                        <img style="width: 300px;margin-left: 15px;" src="assets\img\visha\momo.jpg" alt=""> <br>
+                                                                    </div>
+                                                                    <p style="font-size: 18px;margin: 20px 0">
+                                                                        Bấm vào đây để 
+                                                                        <a target="_blank" style="text-decoration-line: underline; color: blue;" href="https://www.facebook.com/messages/t/dokhactudz">Xác nhận đơn hàng</a>
+                                                                        sau khi chuyển khoản thành công
+                                                                    </p>
+                                                                </p> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </form>    
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <form action="#">    
+                                                <h3 style="font-family: Arial, Helvetica, sans-serif;">
+                                                    Thông tin đơn hàng      
+                                                    &emsp;                                         
+                                                    &emsp;                                         
+                                                    #<%= rutGonMa("65ce2752a27c3f36b63daf05") %>
+                                                </h3> 
+                                                <!-- <script>
+                                                    // Để lấy 10 kí tự cuối của chuỗi 
+                                                    const hexString = "65ce2752a27c3f36b63daf05";
+                                                    const shortenedHex = hexString.substring(hexString.length - 10);
+                                                    console.log(shortenedHex);
+                                                </script> -->
+                                                <div class="order_table table-responsive mb-30">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Product</th>
+                                                                <th>Total</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td> Handbag  fringilla <strong> × 2</strong></td>
+                                                                <td> $165.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>  Handbag  justo	 <strong> × 2</strong></td>
+                                                                <td> $50.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>  Handbag elit	<strong> × 2</strong></td>
+                                                                <td> $50.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td> Handbag Rutrum	 <strong> × 1</strong></td>
+                                                                <td> $50.00</td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th>Cart Subtotal</th>
+                                                                <td>$215.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Shipping</th>
+                                                                <td><strong>$5.00</strong></td>
+                                                            </tr>
+                                                            <tr class="order_total">
+                                                                <th>Order Total</th>
+                                                                <td><strong>$220.00</strong></td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>     
+                                                </div>
+                                                <div class="payment_method">
+                                                    
+                                                   <div class="panel-default">
+                                                        <input required id="payment" name="check_method" type="radio">
+                                                        <label style="font-size: 18px;" for="payment"  aria-controls="method">Thanh toán khi nhận hàng</label>
+                                                        
+                                                    </div> 
+                                                   <div class="panel-default">
+                                                        <input required id="payment_defult" name="check_method" type="radio" data-toggle="collapse" data-target="#collapsedefultt">
+                                                        <label style="font-size: 18px;" for="payment_defult" data-toggle="collapse" data-target="#collapsedefultt" aria-controls="collapsedefultt">Momo/Atm <img src="assets\img\visha\papyel.png" alt=""></label>
+                                                        <div class="col-12">
+                                                            <div class="order-notes" >
+                                                                <img style="width: 500px;" src="assets/img/cart/hinhthuctt.jpg" alt="">                                                            
+                                                            </div>    
+                                                        </div> 
+                                                        
+                                                    </div>                                                    
+                                                                                                        
+                                                    <div class="order_button" style="text-align: center;">
+                                                        <button style="font-family: Arial, Helvetica, sans-serif;" type="submit">Tiến hành đặt hàng</button> 
+                                                    </div>    
+                                                </div> 
+                                            </form>         
+                                        </div>
+                                    </div> 
+                                </div>        
+                        </div>
+                        <!--Checkout page section end-->
+                         <!--checkout end -->
+
+                        
+                    </div>
+                    <!--pos page inner end-->
+                </div>
+            </div>
+            <!--pos page end-->
+            
+            <!--footer area start-->
+            <%- include('../../partials/footer.ejs') %>            
+            <!--footer area end-->
+		<!-- all js here -->
+        <!-- <script src="assets\js\vendor\jquery-1.12.0.min.js"></script> -->
+        <script src="assets\js\popper.js"></script>
+        <script src="assets\js\bootstrap.min.js"></script>
+        <script src="assets\js\ajax-mail.js"></script>
+        <script src="assets\js\plugins.js"></script>
+        <script src="assets\js\main.js"></script>
+        <script src="assets\js\hamDinhDangTien_VaLinkAnh.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+        <script src="assets\js\selector_address.js"></script>
+         
+        <!-- <script>
+            $(document).ready(function() {
+                $('input[name="check_method"]').change(function() {
+                    var collapsedefult = $('#collapsedefult');
+
+                    if (this.value === 'payment') {
+                        collapsedefult.hide(); // Ẩn phần Momo/ATM
+                    } else if (this.value === 'payment_defult') {
+                        collapsedefult.show(); // Hiển thị phần Momo/ATM
+                    }
+                });
+            });
+        </script> -->
+        
+        
+    </body>
+</html>

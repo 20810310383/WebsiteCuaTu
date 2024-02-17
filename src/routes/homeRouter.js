@@ -2,16 +2,17 @@ const express = require('express');
 const { getHomeHienThi2, getHomeHienThi1 } = require("../controllers/TrangChu/homeController");
 const { getFormLoginKH, dangKyTKKH, dangNhapTKKH, dangXuatTKKH } = require('../controllers/Login/loginKHController');
 const { chiTietSPHomeHienThi1, chiTietSPHomeHienThi1_ChiTiet, chiTietSPHomeHienThi2_ChiTiet } = require('../controllers/CTSanPham/detailtSP');
-const { getHomeListShop, getHomeListShop_PhanTrang } = require('../controllers/ShopList/listShop');
-const { getHomeListShopGame, getHomeListShopGame_PhanTrang } = require('../controllers/ShopList/listShopGame');
+const { getHomeListShop, getHomeListShop_PhanTrang } = require('../controllers/ShopList/listShopController');
+const { getHomeListShopGame, getHomeListShopGame_PhanTrang } = require('../controllers/ShopList/listShopGameController');
 const { searchNH_PhanTrang, searchNH } = require('../controllers/SearchSP/searchNHController');
 const { searchGame, searchGame_PhanTrang } = require('../controllers/SearchSP/searchGameController');
 const { getHomeListShopPhanLoaiNam, getHomeListShopPhanLoaiNam_PhanTrang, getHomeListShopPhanLoaiNu, getHomeListShopPhanLoaiNu_PhanTrang } = require('../controllers/PhanLoaiSP/phanLoaiNuocHoaController');
 const { getHomeListShopGamePhanLoaiNam_PhanTrang, getHomeListShopGamePhanLoaiNam, getHomeListShopGamePhanLoaiNu_PhanTrang, getHomeListShopGamePhanLoaiNu } = require('../controllers/PhanLoaiSP/phanLoaiGameController');
 const { addToCart } = require('../controllers/Cart/addToCartController');
 const { getCartInfo } = require('../controllers/Cart/getCartInfoController');
-const {getChiTietCart, getChiTietCart_XemCT} = require('../controllers/Cart/getChiTietCart');
-const { removeACTCart } = require('../controllers/Cart/remove_Mot_SPCart');
+const {getChiTietCart, getChiTietCart_XemCT} = require('../controllers/Cart/getChiTietCartController');
+const { removeACTCart } = require('../controllers/Cart/remove_Mot_SPCartController');
+const { getCheckOut } = require('../controllers/Cart/datHangController');
 
 
 const router = express.Router();
@@ -93,6 +94,7 @@ router.get("/get-chi-tiet-cart", getChiTietCart)
 router.get("/detailt-cart-trang-moi", getChiTietCart_XemCT)
 // xóa 1 sản phẩm trong cart
 router.post("/remove-mot-sp", removeACTCart)
-
+// trang dien thong tin dat hang va check don hang
+router.get("/checkout", getCheckOut)
 
 module.exports = router;

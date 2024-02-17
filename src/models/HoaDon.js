@@ -3,16 +3,19 @@ const mongoose_delete = require('mongoose-delete');
 
 const HoaDon_Schema = new mongoose.Schema({
     MaKH: { type: mongoose.SchemaTypes.ObjectId, ref: "KhachHang" },
-    HoTen: { type: String },
-    QuocGia: { type: String },
+    Ho: { type: String },
+    Ten: { type: String },
     ThanhPho: { type: String },
-    DiaChi_ChiTiet: { type: String },
+    QuanHuyen: { type: String },
+    PhuongXa: { type: String },
+    DiaChiChiTiet: { type: String },
     SoDienThoai: { type: String },
     Email: { type: String },
+    Note: { type: String },
     PhiSanPham: { type: Number, default: 0 },
-    PhiShip: { type: Number, default: 30000 },
+    // PhiShip: { type: Number, default: 30000 },
     TongTien: { type: Number, default: 0 },
-    GiamGia: { type: Number, default: 0 },
+    // GiamGia: { type: Number, default: 0 },
     TongSLDat: { type: Number, default: 0 },
     TinhTrangDonHang: { 
       type: String, 
@@ -37,14 +40,16 @@ const HoaDon_Schema = new mongoose.Schema({
             required: true
           }
       }],
-      totalPrice: {
-        type: Number,
-        default: 0  // Set a default value
-      },
+      // totalPrice: {
+      //   type: Number,
+      //   default: 0  // Set a default value
+      // },
       totalQuaty: {
           type: Number,
           default: 0  // Set a default value
       },
+      PhiShip: { type: Number, default: 59000 },
+      GiamGia: { type: Number, default: 0 },
     },
 });
 

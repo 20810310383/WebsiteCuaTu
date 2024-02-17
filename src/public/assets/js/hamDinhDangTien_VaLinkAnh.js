@@ -9,3 +9,9 @@ function getRelativeImagePath(absolutePath) {
 function formatCurrency(amount) {
 return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
 }       
+
+// rút gọn mã HD
+function rutGonMa(hexString ) {
+    const shortenedHex = hexString.substring(hexString.length - 10);
+    return shortenedHex;
+}

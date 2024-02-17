@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const response = await fetch('/get-chi-tiet-cart'); // Gửi yêu cầu GET đến '/get-chi-tiet-cart'
             const data = await response.json(); // Chuyển đổi phản hồi thành JSON
+            console.log("data => ", data);
 
             // Lặp qua từng sản phẩm trong giỏ hàng và hiển thị chúng
             const cartItemsContainer = document.querySelector('.mini_cart');

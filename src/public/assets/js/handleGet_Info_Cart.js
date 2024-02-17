@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const response = await fetch('/get-info-cart');
             const data = await response.json();
+            console.log("data => ", data);
 
             // Cập nhật tổng số lượng và tổng tiền trên giao diện
             document.getElementById('totalQuantity').innerText = data.totalQuaty;

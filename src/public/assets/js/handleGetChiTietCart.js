@@ -49,9 +49,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 const quantity = document.createElement('span');
                 quantity.classList.add('quantity');
                 quantity.textContent = 'Số lượng đặt: ' + product.qty;
+
+                const size = document.createElement('span');
+                size.classList.add('quantity');
+                size.textContent = 'Size: ' + product.size;
+
                 cartInfo.appendChild(productLink);
                 cartInfo.appendChild(cartPrice);
                 cartInfo.appendChild(quantity);
+                cartInfo.appendChild(size);
 
                 // Tạo phần tử cho nút xóa sản phẩm
                 // const cartRemove = document.createElement('div');

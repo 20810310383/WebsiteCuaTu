@@ -33,6 +33,7 @@ module.exports = {
                         return {
                             productDetails,
                             qty: item.qty,
+                            size: item.size,
                             totalPriceForItem,
                             _id: item._id
                         };
@@ -114,12 +115,13 @@ module.exports = {
                     if (productDetails) {
                         const tensp = productDetails.TenSP;
                         const qty = item.qty;
+                        const size = item.size;
                         const giaBan = productDetails.GiaBan;
 
                         // Đẩy chi tiết sản phẩm vào mảng
                         productDetailsArray.push({
                             productDetails, 
-                            qty,
+                            qty, size,
                             _id: item._id
                         });
                     } else {

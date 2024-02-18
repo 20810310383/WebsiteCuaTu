@@ -10,6 +10,7 @@ module.exports = {
         try {
 
             const productId = req.query.productId;
+            const size = req.body.size;
             const qtyy = parseInt(req.body.quantity);
             const qty = !isNaN(qtyy) && qtyy > 0 ? qtyy : 1;
     
@@ -33,7 +34,7 @@ module.exports = {
                     cart = new Cart({
                         cart: {
                             items: [],
-                            totalPrice: 0,
+                            // totalPrice: 0,
                             totalQuaty: 0,
                         },
                         MaTKKH: customerAccountId,
@@ -51,7 +52,7 @@ module.exports = {
                     cart = new Cart({
                         cart: {
                             items: [],
-                            totalPrice: 0,
+                            // totalPrice: 0,
                             totalQuaty: 0,
                         },
                         MaTKKH: null,
@@ -60,8 +61,18 @@ module.exports = {
 
             }
 
-            // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
-            const existingItem = cart.cart.items.find((item) => item.productId.equals(productId));
+            // // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+            // const existingItem = cart.cart.items.find((item) => item.productId.equals(productId));
+
+            
+            // Kiểm tra xem sản phẩm đã có trong giỏ hàng với kích thước đã cho chưa
+            let existingItem;
+            for (const item of cart.cart.items) {
+                if (item.productId.equals(productId) && item.size === size) {
+                    existingItem = item;
+                    break;
+                }
+            }
     
             if (existingItem) {
                 // Nếu đã có sản phẩm trong giỏ hàng, cập nhật số lượng
@@ -71,6 +82,7 @@ module.exports = {
                 cart.cart.items.push({
                     productId: product._id,
                     qty: qty,
+                    size: size
                 });
             }
     

@@ -25,10 +25,10 @@ module.exports = {
             let totalQuaty = 0;
             let totalPrice = 0;
     
-            for (const item of cart.cart.items) {
+            for (const item of cart.cart.items) {                
                 totalQuaty += item.qty;
                 totalPrice += item.qty * item.productId.GiaBan; 
-            }
+            }            
     
             // Kiểm tra điều kiện và thiết lập giá trị của PhiShip
             let phiShip = cart.cart.PhiShip;
@@ -52,7 +52,7 @@ module.exports = {
                 totalQuaty: totalQuaty,
                 totalPrice: totalPrice ,
                 phiShip: phiShip,
-                giamGia: giamGia
+                giamGia: giamGia,                
             };
     
             return res.status(200).json(cartInfo);

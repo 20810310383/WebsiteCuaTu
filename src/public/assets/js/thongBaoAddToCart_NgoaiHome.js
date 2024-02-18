@@ -11,6 +11,7 @@
                     method: "POST",
                     body: new URLSearchParams({
                         quantity: 1,
+                        size: "S"
                     }),
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",

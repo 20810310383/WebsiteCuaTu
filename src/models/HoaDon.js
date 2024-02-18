@@ -38,7 +38,11 @@ const HoaDon_Schema = new mongoose.Schema({
           qty: {
             type: Number,
             required: true
-          }
+          },
+          size: {
+            type: String,               
+            // default: "M"
+        }
       }],
       // totalPrice: {
       //   type: Number,

@@ -15,7 +15,8 @@ const SanPham_Schema = new mongoose.Schema(
         },
         Size: { 
             type: String, 
-            // enum: ["S", "M", "L", "XL", "XXL"], 
+            enum: ["S", "M", "L", "XL", "XXL"], 
+            default: "S" 
         },
         MauSac: { type: String },
         SoLuongTon: { type: Number, required: false, default: "1"  },

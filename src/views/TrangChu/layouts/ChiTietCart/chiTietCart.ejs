@@ -91,12 +91,12 @@
                                                         <form action="/remove-mot-sp" method="post" >
                                                             <input type="hidden" name="idARemove" value="<%= spDetailCart._id %>">
                                                             <button style="border: none;background-color: white;" type="submit">
-                                                                <i id="dltSP" title="Xóa sản phẩm này" class="fa fa-trash-o"></i>
+                                                                <i style="font-size: 24px;" id="dltSP" title="Xóa sản phẩm này" class="fa fa-trash-o"></i>
                                                             </button>
                                                         </form>
                                                             <!-- <a href="#"><i title="Xóa sản phẩm này" class="fa fa-trash-o"></i></a> -->
                                                             <br>
-                                                            <a href="#"><i title="Edit số lượng sản phẩm này"  class="fa fa-pencil"></i></a>
+                                                            <a href="/get-edit-sp-cart?getIdEditSPCart=<%= spDetailCart._id %>"><i style="font-size: 24px;" title="Edit số lượng và size của sản phẩm này"  class="fa fa-pencil"></i></a>
                                                         </td>
 
                                                         <% if (spDetailCart.productDetails.IdLoaiSP.TenLoaiSP == "Avatar") { %>

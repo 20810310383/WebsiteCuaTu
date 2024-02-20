@@ -13,6 +13,7 @@ const { getCartInfo } = require('../controllers/Cart/getCartInfoController');
 const {getChiTietCart, getChiTietCart_XemCT} = require('../controllers/Cart/getChiTietCartController');
 const { removeACTCart } = require('../controllers/Cart/remove_Mot_SPCartController');
 const { getCheckOut } = require('../controllers/Cart/datHangController');
+const { getEditAProductCart, updateAProductCart } = require('../controllers/Cart/edit_Mot_SPCartController');
 
 
 const router = express.Router();
@@ -96,5 +97,9 @@ router.get("/detailt-cart-trang-moi", getChiTietCart_XemCT)
 router.post("/remove-mot-sp", removeACTCart)
 // trang dien thong tin dat hang va check don hang
 router.get("/checkout", getCheckOut)
+// get Edit A Product Cart
+router.get("/get-edit-sp-cart", getEditAProductCart)
+// xử lý nút update 
+router.post("/update-sp-cart", updateAProductCart)
 
 module.exports = router;

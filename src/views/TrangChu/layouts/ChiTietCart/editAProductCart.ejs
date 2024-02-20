@@ -1,0 +1,157 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SHOP KHẮC TÚ -- Chỉnh sửa Size và Số lượng đặt</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="assets\img\logo-KTT1.ico">
+		
+		<!-- all css here -->
+       <link rel="stylesheet" href="assets\css\bootstrap.min.css">
+        <link rel="stylesheet" href="assets\css\plugin.css">
+        <link rel="stylesheet" href="assets\css\bundle.css">
+        <link rel="stylesheet" href="assets\css\style.css">
+        <link rel="stylesheet" href="assets\css\responsive.css">
+        <script src="assets\js\vendor\modernizr-2.8.3.min.js"></script>
+
+        <style>
+            #group_2 {
+                width: auto; /* Đặt chiều rộng tự động để các tùy chọn có thể hiển thị trên một hàng */
+                display: flex; /* Sử dụng flexbox để xếp các tùy chọn theo hàng ngang */
+                flex-wrap: wrap; /* Cho phép các tùy chọn chồng lên nhau khi không còn đủ không gian */
+            }
+            #group_2 option {
+                width: auto; /* Đặt chiều rộng tự động cho mỗi tùy chọn */
+                margin: 0 5px; /* Khoảng cách giữa các tùy chọn */
+                padding: 5px; /* Để tùy chọn trông đẹp hơn */
+                background-color: #f0f0f0; /* Màu nền cho các tùy chọn */
+                border: none; /* Loại bỏ đường viền */
+            }
+        </style>
+    </head>
+    <body>
+            <!-- Add your site or application content here -->
+            
+            <!--pos page start-->
+            <div class="pos_page">
+                <div class="container">
+                    <!--pos page inner-->
+                    <div class="pos_page_inner">  
+
+                       <!--header area -->
+                       <div class="header_area">
+                        <!--header top-->                                 
+                         <%- include('../../partials/header_top.ejs') %>
+                         <!--header top end-->
+
+                         <!--header middel--> 
+                         <%- include('../../partials/header_middel.ejs') %>
+                         <!--header middel end-->      
+                     
+                         <!--header bottom--> 
+                         <%- include('../../partials/header_bottom.ejs') %>
+                         <!--header bottom end-->    
+                        </div>
+                        <!--header end -->
+                        
+                         <!--breadcrumbs area start-->
+                        <div class="breadcrumbs_area">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="breadcrumb_content">
+                                        <ul>
+                                            <li><a href="/">home</a></li>
+                                            <li><i class="fa fa-angle-right"></i></li>
+                                            <li style="font-family: Arial, Helvetica, sans-serif;">Chỉnh sửa Size và Số lượng đặt </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--breadcrumbs area end-->
+
+
+                         <!--Chỉnh sửa Size và Số lượng đặt start -->
+                         <div class="shopping_cart_area" style="padding: 35px 100px 0;">
+                            <div class="row">                                
+                                    <div class="table_desc" >
+                                        <div class="cart_page table-responsive" >
+                                            <table >
+                                                <thead>
+                                                    <tr>
+                                                        <th style="font-family: Arial, Helvetica, sans-serif;">Options</th>
+                                                        <th style="font-family: Arial, Helvetica, sans-serif; width: 200px;">Hình Ảnh</th>
+                                                        <th class="product_name" style="font-family: Arial, Helvetica, sans-serif;">Sản Phẩm</th>
+                                                        <th class="product-price" style="font-family: Arial, Helvetica, sans-serif;">Giá Bán</th>
+                                                        <th style="font-family: Arial, Helvetica, sans-serif; width: 100px;">Size</th>
+                                                        <th style="font-family: Arial, Helvetica, sans-serif; width: 120px;">Số Lượng</th>
+                                                    </tr>
+                                                </thead> 
+                                                <tbody > 
+                                                    <form method="post" action="/update-sp-cart">
+                                                        <tr>
+                                                            <td class="product_total">                                                                
+                                                                <button type="submit" class="btn btn-primary" style="cursor: pointer;font-size: 18px;">Update</button>                                                                    
+                                                                <br> <br>        
+                                                                <input type="hidden" name="idupdateCart" value="<%= spEdit._id %>">                                          
+                                                                <a href="#" style="cursor: pointer;font-size: 18px;" class="btn btn-success" onclick="history.go(-1);" >Back</a>
+                                                            </td>
+                                                            <td class="product_thumb">
+                                                                <a href="#">
+                                                                    <img src="images/upload/<%= getRelativeImagePath(spEdit.productId.Image) %>" alt="">
+                                                                </a>
+                                                            </td>
+                                                            <td class="product_name" ><a style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;"><%= spEdit.productId.TenSP %></a></td>
+                                                            <td class="product-price"><%= formatCurrency(spEdit.productId.GiaBan) %></td>
+                                                            <td class="product_name" >     
+                                                                <select name="size" id="group_2" style="width: 150px;">
+                                                                    <option style="font-weight: bold; color: navy;" value="<%= spEdit.size %>"><%= spEdit.size %></option>
+                                                                    <option value=""></option>
+                                                                    <option value="S">S</option>
+                                                                    <option value="M">M</option>
+                                                                    <option value="L">L</option>
+                                                                    <option value="XL">XL</option>
+                                                                    <option value="XXL">XXL</option>
+                                                                    <option value="XXXL">XXXL</option>
+                                                                </select>                                                                                                         
+                                                                                                                      
+                                                            </td>
+                                                            <td class="product_total">
+                                                                <input type="number" name="quantity" min="1" max="1000" value="<%= spEdit.qty %>" style="text-align: center; font-size: 18px;">
+                                                            </td>
+                                                            
+                                                        </tr>    
+                                                    </form>                          
+                                                </tbody>
+                                            </table>  
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                         <!--Chỉnh sửa Size và Số lượng đặt end -->
+
+                        
+                    </div>
+                    <!--pos page inner end-->
+                </div>
+            </div>
+            <!--pos page end-->
+            
+            <!--footer area start-->
+            <%- include('../../partials/footer.ejs') %>            
+            <!--footer area end-->
+		<!-- all js here -->
+        <script src="assets\js\vendor\jquery-1.12.0.min.js"></script>
+        <script src="assets\js\popper.js"></script>
+        <script src="assets\js\bootstrap.min.js"></script>
+        <script src="assets\js\ajax-mail.js"></script>
+        <script src="assets\js\plugins.js"></script>
+        <script src="assets\js\main.js"></script>
+        <script src="assets\js\hamDinhDangTien_VaLinkAnh.js"></script>
+
+        
+    </body>
+</html>

@@ -147,6 +147,7 @@ module.exports = {
                             <p>Số tiền cần thanh toán: <span style="color: red;">${CanThanhToan}</span></p>
                             <p>Số Điện Thoại Của Bạn ${Ho} ${Ten}: ${SoDienThoai}</p>
                             <p>Địa chỉ nhận hàng: <span style="color: navy; font-style: italic;">${DiaChiChiTiet}</span></p>                            
+                            <p>Link Website của tôi: <a href="https://webshop-dokhactu.onrender.com">WebShop Khắc Tú</a></p>
                         `
                 };
               

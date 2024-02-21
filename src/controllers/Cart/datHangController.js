@@ -1,6 +1,9 @@
-const SanPham = require("../../models/SanPham")
-const Cart = require("../../models/Cart")
+const SanPham = require("../../models/SanPham");
+const Cart = require("../../models/Cart");
+const HoaDon = require("../../models/HoaDon");
 const LoaiSP = require("../../models/LoaiSP");
+const nodemailer = require('nodemailer');
+require('dotenv').config();
 require('rootpath')();
 
 // --------------------------------------
@@ -102,6 +105,135 @@ module.exports = {
 
     // xu ly nut dat hang
     datHang: async (req, res) => {
+        try {
+            let Ho = req.body.Ho
+            let Ten = req.body.Ten
+            let ThanhPho = req.body.ThanhPho
+            let QuanHuyen = req.body.QuanHuyen
+            let PhuongXa = req.body.PhuongXa
+            let DiaChiChiTiet = req.body.DiaChiChiTiet
+            let SoDienThoai = req.body.SoDienThoai
+            let Email = req.body.Email
+            let Note = req.body.Note
 
+            let Soluongdat = req.body.soluongdat
+            let PhiShip = req.body.PhiShip
+            let CanThanhToan = req.body.CanThanhToan
+            let GiamGia = req.body.GiamGia
+            let SoTienGiamGia = req.body.SoTienGiamGia
+
+            console.log(" soluongdat: ", Soluongdat, "\n PhiShip: ", PhiShip, "\n CanThanhToan: ",CanThanhToan);
+
+            //---- GỬI XÁC NHẬN ĐƠN HÀNG VỀ EMAIL
+            const transporter = nodemailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                  user: process.env.EMAIL_USER,
+                  pass: process.env.EMAIL_PASS
+                }
+            });
+              
+            const sendOrderConfirmationEmail = async (toEmail) => {
+                const mailOptions = {
+                    from: 'Khắc Tú',
+                    to: toEmail,
+                    subject: 'Xác nhận đơn hàng của bạn.',
+                    html: `
+                            <p style="color: navy; font-size: 20px;">Cảm ơn bạn <span style="color: black; font-weight: bold; font-style: italic;">${Ho} ${Ten} </span>đã đặt hàng!!</p>
+                            <p style="color: green; font-style: italic;">Đơn hàng của bạn đã được xác nhận.</p>
+                            <p>Tổng số lượng đặt: <span style="color: blue;">${Soluongdat}</span> sản phẩm</p>
+                            <p>Phí giao hàng: <span style="color: red;">${PhiShip}</span></p>
+                            <p>Bạn được giảm  ${GiamGia}% cụ thể là: <span style="color: red;">-${SoTienGiamGia}</span></p>
+                            <p>Số tiền cần thanh toán: <span style="color: red;">${CanThanhToan}</span></p>
+                            <p>Số Điện Thoại Của Bạn ${Ho} ${Ten}: ${SoDienThoai}</p>
+                            <p>Địa chỉ nhận hàng: <span style="color: navy; font-style: italic;">${DiaChiChiTiet}</span></p>                            
+                        `
+                };
+              
+                return new Promise((resolve, reject) => {
+                    transporter.sendMail(mailOptions, (error, info) => {
+                        if (error) {
+                            reject(error);
+                        } else {
+                            console.log('Email sent: ' + info.response);
+                            resolve();
+                        }
+                    });
+                });
+            };
+            //-------------
+            // Chuyển đổi từ chuỗi sang số
+            const giaTriSo_PhiShip = parseInt(PhiShip.replace(/[^0-9]/g, ''));     
+            const giaTriSo_SoTienGiamGia = parseInt(SoTienGiamGia.replace(/[^0-9]/g, ''));
+            const giaTriSo_CanThanhToan = parseInt(CanThanhToan.replace(/[^0-9]/g, ''));
+    
+            const customerAccountId = req.session.userId;
+            console.log(">>> check id customerAccountId checkout: ", customerAccountId);
+
+            // --------------------------------------
+            // tìm cái giỏ hàng từ thằng customerAccountId trước
+            let idcanxoa = await Cart.findOne({MaTKKH: customerAccountId})    
+            let cartId = idcanxoa._id
+            // rồi tiếp theo tìm theo _id của cái giỏ hàng đó để thêm vào hóa đơn
+            let giohang = await Cart.findById(cartId).populate('cart.items.productId')
+            console.log(">>> check giohang:",giohang);
+
+            // chọc tới items để lấy ra tất cả sp trong giỏ hàng để chút nữa map ra thêm vào hóa đđn
+            const cartItems = giohang.cart.items
+
+            let datHang = await HoaDon.create({
+                Ho: Ho,
+                Ten: Ten,
+                ThanhPho: ThanhPho,
+                QuanHuyen: QuanHuyen,
+                PhuongXa: PhuongXa,
+                DiaChiChiTiet: DiaChiChiTiet,
+                SoDienThoai: SoDienThoai,
+                Email: Email,
+                Note: Note,
+                PhiShip: giaTriSo_PhiShip,   
+                CanThanhToan: giaTriSo_CanThanhToan,
+                GiamGia: GiamGia,
+                SoTienGiamGia: giaTriSo_SoTienGiamGia,
+                TongSLDat: Soluongdat,
+                MaKH: customerAccountId,
+                cart: {
+                    items: cartItems.map(item => ({
+                        productId: item.productId._id,
+                        qty: item.qty,
+                        size: item.size
+                    })),                    
+                }
+            }) 
+            
+            if(datHang){
+                // Gửi email thông báo đặt hàng thành công
+                await sendOrderConfirmationEmail(Email);
+
+                // khi login thì sẽ có giỏ hàng khi add, khi dat hang thanh cong, sẽ xóa luôn trong db đi
+                await Cart.deleteOne({_id: cartId});
+                
+                // Nếu có giỏ hàng, xóa giỏ hàng
+                req.session.cartId = null;
+
+                let cart = new Cart({
+                    cart: {
+                        items: [],                        
+                    },
+                    MaTKKH: customerAccountId,
+                });
+                await cart.save()
+
+
+                res.status(201).json({ success: true, message: 'Bạn Đã Đặt Hàng Thành Công' });
+            }else {
+                console.log("dat hang that bai");
+                res.status(500).json({ success: false, message: 'Đặt Hàng thất bại' });
+            }
+
+        } catch(error) {
+            console.error("Lỗi Rồi Cụ:", error);
+            res.status(500).json({ success: false, message: 'Đặt Hàng thất bại' });
+        }
     }
 }

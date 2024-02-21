@@ -12,7 +12,7 @@ const { addToCart } = require('../controllers/Cart/addToCartController');
 const { getCartInfo } = require('../controllers/Cart/getCartInfoController');
 const {getChiTietCart, getChiTietCart_XemCT} = require('../controllers/Cart/getChiTietCartController');
 const { removeACTCart } = require('../controllers/Cart/remove_Mot_SPCartController');
-const { getCheckOut } = require('../controllers/Cart/datHangController');
+const { getCheckOut, datHang } = require('../controllers/Cart/datHangController');
 const { getEditAProductCart, updateAProductCart } = require('../controllers/Cart/edit_Mot_SPCartController');
 
 
@@ -101,5 +101,7 @@ router.get("/checkout", getCheckOut)
 router.get("/get-edit-sp-cart", getEditAProductCart)
 // xử lý nút update 
 router.post("/update-sp-cart", updateAProductCart)
+// xử lý nút bấm đặt hàng
+router.post("/dat-hang", datHang)
 
 module.exports = router;

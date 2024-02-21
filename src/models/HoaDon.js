@@ -12,10 +12,10 @@ const HoaDon_Schema = new mongoose.Schema({
     SoDienThoai: { type: String },
     Email: { type: String },
     Note: { type: String },
-    PhiSanPham: { type: Number, default: 0 },
-    // PhiShip: { type: Number, default: 30000 },
-    TongTien: { type: Number, default: 0 },
-    // GiamGia: { type: Number, default: 0 },
+    PhiShip: { type: Number },
+    CanThanhToan: { type: Number, default: 0 },
+    GiamGia: { type: Number},
+    SoTienGiamGia: { type: Number},
     TongSLDat: { type: Number, default: 0 },
     TinhTrangDonHang: { 
       type: String, 
@@ -39,21 +39,8 @@ const HoaDon_Schema = new mongoose.Schema({
             type: Number,
             required: true
           },
-          size: {
-            type: String,               
-            // default: "M"
-        }
+          size: { type: String}
       }],
-      // totalPrice: {
-      //   type: Number,
-      //   default: 0  // Set a default value
-      // },
-      totalQuaty: {
-          type: Number,
-          default: 0  // Set a default value
-      },
-      PhiShip: { type: Number, default: 59000 },
-      GiamGia: { type: Number, default: 0 },
     },
 });
 

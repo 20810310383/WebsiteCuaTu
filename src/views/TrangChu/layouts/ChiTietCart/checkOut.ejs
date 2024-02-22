@@ -203,6 +203,7 @@
                                                     <div class="cart_subtotal">
                                                         <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Tổng giá <%= cartItemss.totalQuaty !== 0 ? cartItemss.totalQuaty : 0 %> sản phẩm</p>
                                                         <p class="cart_amount" style="color: navy;"><%= formatCurrency(totalCartPrice) %></p>
+                                                        <input type="hidden" name="TongGia" value="<%= formatCurrency(totalCartPrice) %>">
                                                     </div>
                                                     <!-- Math.floor((data.giamGia / data.totalPrice) * 100) -->
                                                         <div class="cart_subtotal"> 

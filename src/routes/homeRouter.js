@@ -14,6 +14,7 @@ const {getChiTietCart, getChiTietCart_XemCT} = require('../controllers/Cart/getC
 const { removeACTCart } = require('../controllers/Cart/remove_Mot_SPCartController');
 const { getCheckOut, datHang } = require('../controllers/Cart/datHangController');
 const { getEditAProductCart, updateAProductCart } = require('../controllers/Cart/edit_Mot_SPCartController');
+const { home_LichSuMuaHang } = require('../controllers/LichSuMuaHang/home_LichSuMuaHangController');
 
 
 const router = express.Router();
@@ -103,5 +104,9 @@ router.get("/get-edit-sp-cart", getEditAProductCart)
 router.post("/update-sp-cart", updateAProductCart)
 // xử lý nút bấm đặt hàng
 router.post("/dat-hang", datHang)
+
+
+// Lịch sử mua hàng
+router.get("/lsu-mua-hang", home_LichSuMuaHang)
 
 module.exports = router;

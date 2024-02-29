@@ -6,7 +6,7 @@ require('rootpath')();
 module.exports = {
     searchGame_PhanTrang: async (req, res) => {
         if (req.query.page) {
-            return res.redirect(`/search-game?page=${req.query.page}`)
+            return res.redirect(`/search-game?search_game=${req.session.tenSPSearch}&page=${req.query.page}`)
         }
         res.redirect(`/search-game`)
     },
@@ -14,6 +14,7 @@ module.exports = {
     searchGame: async (req, res) => {
         let hoten = req.session.hoten
         let logIn = req.session.loggedIn
+        let active = 'shoplist'
 
         // Hàm để định dạng số tiền thành chuỗi có ký tự VND
         function formatCurrency(amount) {
@@ -56,7 +57,7 @@ module.exports = {
         const numPage = Math.ceil(totalProducts / limit);
 
         res.render("TrangChu/layouts/SearchSP/searchShopGame.ejs", {
-            hoten, logIn,
+            hoten, logIn,active,
             formatCurrency, getRelativeImagePath, rootPath: '/', 
             soTrang: numPage, 
             curPage: page, 

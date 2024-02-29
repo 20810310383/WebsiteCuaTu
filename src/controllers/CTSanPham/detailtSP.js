@@ -31,6 +31,7 @@ module.exports = {
         try {
             let hoten = req.session.hoten
             let logIn = req.session.loggedIn
+            let active =''
 
             // Hàm để định dạng số tiền thành chuỗi có ký tự VND
             function formatCurrency(amount) {
@@ -57,7 +58,7 @@ module.exports = {
                 rootPath: '/', 
                 formatCurrency, getRelativeImagePath,
                 spNoiBat,   
-                productDetails
+                productDetails, active
             })
         } catch (error) {
             console.error('Error fetching product details:', error);
@@ -70,6 +71,7 @@ module.exports = {
         try {
             let hoten = req.session.hoten
             let logIn = req.session.loggedIn
+            let active =''
 
             // Hàm để định dạng số tiền thành chuỗi có ký tự VND
             function formatCurrency(amount) {
@@ -95,7 +97,7 @@ module.exports = {
                 rootPath: '/', 
                 formatCurrency, getRelativeImagePath,
                 spNew,
-                productDetails
+                productDetails, active
             })
         } catch (error) {
             console.error('Error fetching product details:', error);

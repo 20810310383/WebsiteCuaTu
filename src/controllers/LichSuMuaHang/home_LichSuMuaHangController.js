@@ -12,6 +12,7 @@ module.exports = {
     home_LichSuMuaHang: async (req, res) => {
         let hoten = req.session.hoten
         let logIn = req.session.loggedIn
+        let active =''
 
         // Hàm để định dạng số tiền thành chuỗi có ký tự VND
         function formatCurrency(amount) {
@@ -36,7 +37,7 @@ module.exports = {
             rootPath: '/' , 
             getRelativeImagePath, rutGonMa,
             hoten, logIn, 
-
+            active
         })
     }
 }

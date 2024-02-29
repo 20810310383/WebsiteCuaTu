@@ -15,6 +15,11 @@ const { removeACTCart } = require('../controllers/Cart/remove_Mot_SPCartControll
 const { getCheckOut, datHang } = require('../controllers/Cart/datHangController');
 const { getEditAProductCart, updateAProductCart } = require('../controllers/Cart/edit_Mot_SPCartController');
 const { home_LichSuMuaHang } = require('../controllers/LichSuMuaHang/home_LichSuMuaHangController');
+const { getLoginAdmin, dangNhapAdmin } = require('../controllers/Login/loginAdminController');
+const { getHomePageAdmin } = require('../controllers/AdminQL/HomeAdmin/homeAdminController');
+const { getHomeQLKH, getHomePhanTrang_TKKH } = require('../controllers/AdminQL/QuanLyTK/quanLyTKKHController');
+const { getHomePhanTrang_SearchTKKH, getSearchTKKH } = require('../controllers/AdminQL/QuanLyTK/searchTKKHController');
+const { deleteTKKH } = require('../controllers/AdminQL/QuanLyTK/deleteTKKHController');
 
 
 const router = express.Router();
@@ -108,5 +113,29 @@ router.post("/dat-hang", datHang)
 
 // Lịch sử mua hàng
 router.get("/lsu-mua-hang", home_LichSuMuaHang)
+
+
+//---------------------------------------------------------------------------
+// về phần admin
+// get login admin
+router.get("/login-admin", getLoginAdmin)
+// btn đăng nhập
+router.post("/login-admin", dangNhapAdmin)
+// get gome page admin
+router.get("/home-page-admin", getHomePageAdmin)
+// get home quản lý tài khoản khách hàng
+router.get("/page-qly-tkkh", getHomeQLKH)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/page-qly-tkkh", getHomePhanTrang_TKKH)
+
+// get home tìm kiếm tài khoản khách hàng
+router.get("/page-search-tkkh", getSearchTKKH)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/page-search-tkkh", getHomePhanTrang_SearchTKKH)
+// xóa tài khoản khách hàng
+router.delete("/xoatkkh/:idxoa", deleteTKKH)
+
+
+
 
 module.exports = router;

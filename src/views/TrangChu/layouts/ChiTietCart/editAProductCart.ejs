@@ -108,16 +108,14 @@
                                                             <td class="product-price"><%= formatCurrency(spEdit.productId.GiaBan) %></td>
                                                             <td class="product_name" >     
                                                                 <select name="size" id="group_2" style="width: 150px;">
-                                                                    <option style="font-weight: bold; color: navy;" value="<%= spEdit.size %>"><%= spEdit.size %></option>
-                                                                    <option value=""></option>
+                                                                    <option style="font-weight: bold; color: navy;" selected value="<%= spEdit.size %>"><%= spEdit.size %></option>
                                                                     <option value="S">S</option>
                                                                     <option value="M">M</option>
                                                                     <option value="L">L</option>
                                                                     <option value="XL">XL</option>
                                                                     <option value="XXL">XXL</option>
                                                                     <option value="XXXL">XXXL</option>
-                                                                </select>                                                                                                         
-                                                                                                                      
+                                                                </select>                                                                                                                                                                                                                                                          
                                                             </td>
                                                             <td class="product_total">
                                                                 <input type="number" name="quantity" min="1" max="1000" value="<%= spEdit.qty %>" style="text-align: center; font-size: 18px;">

@@ -6,8 +6,9 @@ module.exports = {
     getFormLoginKH: async (req, res) => {
         let hoten = req.session.hoten
         let logIn = req.session.loggedIn
+        let active =''
         res.render("KhachHang/loginKH.ejs", {
-            hoten, logIn
+            hoten, logIn, active
         })
     },
     
@@ -92,7 +93,7 @@ module.exports = {
     },
 
     dangXuatTKKH: async (req, res) => {
-        if (req.session.hoten) {
+        if (req.session.taikhoan) {
             if (req.session.cartId) {
                 // Nếu có giỏ hàng, xóa giỏ hàng
                 req.session.cartId = null;

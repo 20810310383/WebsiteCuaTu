@@ -17,6 +17,7 @@ module.exports = {
     getHomeListShopGame: async (req, res) => {
         let hoten = req.session.hoten
         let logIn = req.session.loggedIn
+        let active = 'shoplist'
 
         // Hàm để định dạng số tiền thành chuỗi có ký tự VND
         function formatCurrency(amount) {
@@ -58,12 +59,13 @@ module.exports = {
         console.log("numPage", numPage);
 
         res.render("TrangChu/layouts/ShopList/listShopGame.ejs", {
-            hoten, logIn,
+            hoten, logIn, active,
             rootPath: '/', 
             formatCurrency, getRelativeImagePath,
             soTrang: numPage, 
             curPage: page, 
-            all: slicedResults
+            all: slicedResults,
+            
         })
     },
 

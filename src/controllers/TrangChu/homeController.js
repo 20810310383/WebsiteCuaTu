@@ -6,6 +6,7 @@ module.exports = {
     getHomeHienThi1: async (req, res) => {
         let hoten = req.session.hoten
         let logIn = req.session.loggedIn
+        let active = 'home'
 
         // Hàm để định dạng số tiền thành chuỗi có ký tự VND
         function formatCurrency(amount) {
@@ -28,16 +29,28 @@ module.exports = {
 
 
         res.render("home.ejs", {
-            hoten, logIn,
+            hoten, logIn, active,
             rootPath: '/', 
             formatCurrency, getRelativeImagePath,
-            spNew, spNoiBat,            
+            spNew, spNoiBat,      
+            
         })
+
+        // res.json({
+        //     messageCode: "Success",
+        //     hoten,
+        //     logIn,
+        //     formatCurrency, getRelativeImagePath,
+        //     rootPath: '/',
+        //     spNew,
+        //     spNoiBat
+        // });
     },
 
     getHomeHienThi2: async (req, res) => {
         let hoten = req.session.hoten
         let logIn = req.session.loggedIn
+        let active = 'home'
 
         // Hàm để định dạng số tiền thành chuỗi có ký tự VND
         function formatCurrency(amount) {
@@ -61,10 +74,11 @@ module.exports = {
         console.log("spNew: ", spNew);
 
         res.render("home2.ejs", {
-            hoten, logIn, 
+            hoten, logIn,  active,
             rootPath: '/', 
             formatCurrency, getRelativeImagePath,
-            spNew, spNoiBat
+            spNew, spNoiBat,
+            
         })
     },
 

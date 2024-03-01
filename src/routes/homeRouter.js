@@ -20,6 +20,7 @@ const { getHomePageAdmin } = require('../controllers/AdminQL/HomeAdmin/homeAdmin
 const { getHomeQLKH, getHomePhanTrang_TKKH } = require('../controllers/AdminQL/QuanLyTK/quanLyTKKHController');
 const { getHomePhanTrang_SearchTKKH, getSearchTKKH } = require('../controllers/AdminQL/QuanLyTK/searchTKKHController');
 const { deleteTKKH } = require('../controllers/AdminQL/QuanLyTK/deleteTKKHController');
+const { getEditTKKH, editTKKH } = require('../controllers/AdminQL/QuanLyTK/editTKKHController');
 
 
 const router = express.Router();
@@ -128,12 +129,17 @@ router.get("/page-qly-tkkh", getHomeQLKH)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 router.get("/page-qly-tkkh", getHomePhanTrang_TKKH)
 
+
 // get home tìm kiếm tài khoản khách hàng
 router.get("/page-search-tkkh", getSearchTKKH)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 router.get("/page-search-tkkh", getHomePhanTrang_SearchTKKH)
 // xóa tài khoản khách hàng
 router.delete("/xoatkkh/:idxoa", deleteTKKH)
+// get trang nhập liệu edit
+router.get("/get-page-edit", getEditTKKH)
+// xử lý nút save tài khoản khách hàng
+router.put("/update-tk-kh/:idDeEdit", editTKKH)
 
 
 

@@ -99,88 +99,51 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Quản lý tài khoản Khách Hàng</h1>                        
+                        <h1 class="h3 mb-0 text-gray-800">Chỉnh Sửa Họ Tên Hoặc Mật Khẩu Của Email: <span style="color: red;"><%= tkEdit.TenDangNhap %></span></h1>                        
                     </div>                
 
                     <!-- Content Row -->
                     <div class="row">
-                        <table class="table table-hover">
-                            <thead>                                
-                            <tr style="background-color: #DC143C; color: white; font-size: 18px; ">
-                                <th style="width: 150px;text-align: center; vertical-align: middle; width: 200px;">Tên Đăng Nhập</th>
-                                <th style="text-align: center; vertical-align: middle;">Mật Khẩu</th>
-                                <th style="text-align: center; vertical-align: middle;">Họ Tên</th>
-                                <th style="text-align: center; vertical-align: middle;">Ngày Tạo</th>
-                                <th style="text-align: center; vertical-align: middle;">Chức Năng</th>
-                            </tr>
-                            </thead>
-                            <tbody>                            
-                                <!-- Hiển thị all sản phẩm  -->                                                                                                                                                
-                                    <% QLtaikhoan_kh.forEach(function(QLtaikhoan_kh, index) { %>
-                                        <tr style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;">                                                                                                                               
-                                            <td><%= QLtaikhoan_kh.TenDangNhap %></td>
-                                            <td>
-                                                <!-- Hiển thị mật khẩu -->
-                                                <span id="password<%= index %>">********</span>
-                                                    
-                                                <!-- Icon ẩn/hiện mật khẩu -->
-                                                <i id="togglePasswordIcon<%= index %>" class="fas fa-eye" onclick="togglePassword('<%= index %>', '<%= QLtaikhoan_kh.MatKhau %>')"></i>
-                                            </td>
-                                                                                        
-                                            <td><%= QLtaikhoan_kh.HoTen %></td>
-                                            <td><%= QLtaikhoan_kh.NgayTao %></td>                                                                                                                                                                                                                                                                               
-                                            <td style="text-align: center; vertical-align: middle;">
-                                                <a 
-                                                    class="btn btn-success button-SUA-XOA" 
-                                                    href="/get-page-edit?idEdit=<%= QLtaikhoan_kh._id %>">Edit</a>   
-                                                        
-                                                <a                                                
-                                                    id="deleteButton_<%= index %>" 
-                                                    class="btn btn-danger" 
-                                                    onclick="deleteUser('<%= QLtaikhoan_kh._id %>')"
-                                                >Delete</a>                                                
-                                            </td>                                  
-                                        </tr>                                        
-                                    <% }); %>  
-                                <!-- Hiển thị all sản phẩm - end -->   
-                            </tbody>
-                        </table>                       
+                        <div class="container">
+                            <form >
+                                <div class="mb-3">
+                                    <input type="hidden" name="idDeEdit" value="<%= tkEdit._id %>"> 
+                                  <label for="TenDangNhap" class="form-label">Email đăng nhập</label>
+                                  <input value="<%= tkEdit.TenDangNhap %>" type="email" readonly class="form-control" name="TenDangNhap" id="TenDangNhap" aria-describedby="emailHelp" required>
+                                  <div id="email-error" class="form-text text-danger"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="HoTen" class="form-label">Họ tên</label>
+                                    <input value="<%= tkEdit.HoTen %>" type="text" class="form-control" name="HoTen" id="HoTen" aria-describedby="emailHelp" required>
+                                    <div id="name-error" class="form-text text-danger"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="MatKhau" class="form-label">Mật khẩu</label>
+                                    <input value="<%= tkEdit.MatKhau %>" type="password" class="form-control" name="MatKhau" id="MatKhau" required>  
+                                    <br>                                  
+                                    <a id="togglePassword" style="cursor: pointer;"> <i class="fas fa-eye" style="color: blue; margin-left: 20px; cursor: pointer;"></i>&nbsp;Hiển thị mật khẩu</a>
+                                    <div id="password-error" class="form-text text-danger"></div>
+                                </div>
+                                
+                                <a                                      
+                                    onclick="history.go(-1);"
+                                    class="btn btn-dark" >Trở Về </a>
+                                
+                                <a                                                
+                                    class="btn btn-primary" 
+                                    onclick="updateUser('<%= tkEdit._id %>')"
+                                >Save</a>   
+                                <!-- <button type="submit" class="btn btn-primary">Save</button> -->
+                            </form>    
+                        </div>
+                                         
                     </div>
 
                 </div>
                 <!-- /.container-fluid -->
-
-                <!-- đoạn này phân trang -->
-                <div class="pagination-container">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                        <% 
-                          const pre = curPage <= 1 ? curPage : curPage - 1; 
-                          const next = curPage >= soTrang ? curPage : parseInt(curPage) + 1            
-                        %>
-                            <li class="page-item">
-                                <a class="page-link" style=" font-weight: bolder;" href="/page-qly-tkkh?page=<%=pre%>">
-                                    &lt;
-                                </a>
-                            </li>
-                        <% for(var i=1; i <=soTrang; i++) { 
-                            var active="" ; 
-                            if(i == curPage) active="active" ; %>
-                            <li class="page-item <%=active%>">
-                                <a class="page-link" style="font-size: 18px; font-weight: bolder;"  href="/page-qly-tkkh?page=<%=i%>">
-                                    <%=i%>                          
-                                </a>
-                            </li>                
-                        <% } %>                                                      
-                            <li class="page-item">
-                                <a class="page-link" style=" font-weight: bolder;" href="/page-qly-tkkh?page=<%=next%>">
-                                    &gt;
-                                </a>
-                            </li>                     
-                        </ul>
-                    </nav>
-                </div> 
-                <!-- đoạn này phân trang - end -->
+                
             </div>
             <!-- End of Main Content -->
 
@@ -243,9 +206,55 @@
     <script src="AdminQL/HomeAdminQL/js/demo/chart-area-demo.js"></script>
     <script src="AdminQL/HomeAdminQL/js/demo/chart-pie-demo.js"></script>
 
-    <script src="AdminQL/HomeAdminQL/js/togglePassword.js"></script>
-    <script src="AdminQL/HomeAdminQL/js/xuLyNutXoaTKKH.js"></script>
+    <script src="AdminQL/HomeAdminQL/js/togglePassword.js"></script>    
+    <script src="AdminQL/HomeAdminQL/js/xuLyNutSaveTKKH.js"></script>
 
+    <!-- validate email, password -->
+    <script>
+        function validateForm() {
+            var username = document.getElementById('TenDangNhap').value;
+            var password = document.getElementById('MatKhau').value;
+            var isValid = true;
+
+            // Kiểm tra email: 2-7 kí tự, có thể là chữ cái thường hoặc chữ cái in hoa.
+            var emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+            if (!usernameRegex.test(username)) {
+                document.getElementById('email-error').innerHTML = 'Email không hợp lệ, Yêu cầu 2-7 kí tự, có thể là chữ cái thường hoặc chữ cái in hoa';
+                isValid = false;
+            } else {
+                document.getElementById('email-error').innerHTML = '';
+            }
+
+            // Kiểm tra mật khẩu: Tối thiểu tám ký tự, ít nhất một chữ cái và một số:
+            var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                document.getElementById('password-error').innerHTML = 'Password không hợp lệ. Tối thiểu tám ký tự, ít nhất một chữ cái và một số\n ';
+                isValid = false;
+            } else {
+                document.getElementById('password-error').innerHTML = '';
+            }
+
+            return isValid;
+        }
+    </script>
+
+    <!-- xử lý mắt hiển thị/ẩn mật khẩu -->
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            var passwordField = document.getElementById('MatKhau');
+            var passwordIcon = document.getElementById('togglePassword').querySelector('i');
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                passwordIcon.classList.remove('fa-eye');
+                passwordIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                passwordIcon.classList.remove('fa-eye-slash');
+                passwordIcon.classList.add('fa-eye');
+            }
+        });
+    </script>
     
 </body>
 

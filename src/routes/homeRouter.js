@@ -21,6 +21,11 @@ const { getHomeQLKH, getHomePhanTrang_TKKH } = require('../controllers/AdminQL/Q
 const { getHomePhanTrang_SearchTKKH, getSearchTKKH } = require('../controllers/AdminQL/QuanLyTK/searchTKKHController');
 const { deleteTKKH } = require('../controllers/AdminQL/QuanLyTK/deleteTKKHController');
 const { getEditTKKH, editTKKH } = require('../controllers/AdminQL/QuanLyTK/editTKKHController');
+const { getHomeQLAdmin, getHomePhanTrang_TKAdmin } = require('../controllers/AdminQL/QuanLyTKAdmin/quanLyTKAdminController');
+const { getEditTKAdmin, editTKAdmin } = require('../controllers/AdminQL/QuanLyTKAdmin/editTKAdminController');
+const { deleteTKAdmin } = require('../controllers/AdminQL/QuanLyTKAdmin/deleteTKAdminController');
+const { getCreateTKAdmin, createTKAdmin } = require('../controllers/AdminQL/QuanLyTKAdmin/createTKAdminController');
+const { getHomePhanTrang_SearchTKAdmin, getSearchTKAdmin } = require('../controllers/AdminQL/QuanLyTKAdmin/searchTKAdminController');
 
 
 const router = express.Router();
@@ -124,12 +129,12 @@ router.get("/login-admin", getLoginAdmin)
 router.post("/login-admin", dangNhapAdmin)
 // get gome page admin
 router.get("/home-page-admin", getHomePageAdmin)
+
+
 // get home quản lý tài khoản khách hàng
 router.get("/page-qly-tkkh", getHomeQLKH)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 router.get("/page-qly-tkkh", getHomePhanTrang_TKKH)
-
-
 // get home tìm kiếm tài khoản khách hàng
 router.get("/page-search-tkkh", getSearchTKKH)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
@@ -140,6 +145,29 @@ router.delete("/xoatkkh/:idxoa", deleteTKKH)
 router.get("/get-page-edit", getEditTKKH)
 // xử lý nút save tài khoản khách hàng
 router.put("/update-tk-kh/:idDeEdit", editTKKH)
+
+
+// get home quản lý tài khoản admin
+router.get("/page-qly-tkadmin", getHomeQLAdmin)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/page-qly-tkadmin", getHomePhanTrang_TKAdmin)
+// get trang nhập liệu edit
+router.get("/get-page-tk-admin-edit", getEditTKAdmin)
+// xử lý nút save tài khoản admin
+router.put("/update-tk-admin/:idDeEdit", editTKAdmin)
+// xóa tài khoản admin
+router.delete("/xoatkAdmin/:idxoa", deleteTKAdmin)
+// get trang nhập liệu create
+router.get("/create-admin", getCreateTKAdmin)
+// xử lý nút create tài khoản admin
+router.post("/create-tk-admin", createTKAdmin)
+// get home tìm kiếm tài khoản admin
+router.get("/page-search-tkadmin", getSearchTKAdmin)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/page-search-tkadmin", getHomePhanTrang_SearchTKAdmin)
+
+
+
 
 
 

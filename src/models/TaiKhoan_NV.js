@@ -11,4 +11,6 @@ const TaiKhoan_NV_Schema = new mongoose.Schema({
   "MaNV": { type: mongoose.SchemaTypes.ObjectId, ref: "NhanVien" },
 });
 
+TaiKhoan_NV_Schema.plugin(mongoose_delete, { TaiKhoan_NV_Schema: 'all' });
+
 module.exports = mongoose.model("TaiKhoan_NV", TaiKhoan_NV_Schema);

@@ -26,6 +26,8 @@ const { getEditTKAdmin, editTKAdmin } = require('../controllers/AdminQL/QuanLyTK
 const { deleteTKAdmin } = require('../controllers/AdminQL/QuanLyTKAdmin/deleteTKAdminController');
 const { getCreateTKAdmin, createTKAdmin } = require('../controllers/AdminQL/QuanLyTKAdmin/createTKAdminController');
 const { getHomePhanTrang_SearchTKAdmin, getSearchTKAdmin } = require('../controllers/AdminQL/QuanLyTKAdmin/searchTKAdminController');
+const { getHomeNuocHoa, getHomeNuocHoaPhanTrang } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/homeQLNuocHoa');
+const { getCreateNuocHoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/createSPNuocHoa');
 
 
 const router = express.Router();
@@ -165,6 +167,17 @@ router.post("/create-tk-admin", createTKAdmin)
 router.get("/page-search-tkadmin", getSearchTKAdmin)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 router.get("/page-search-tkadmin", getHomePhanTrang_SearchTKAdmin)
+
+
+// get home quản lý sản phẩm là nước hoa
+router.get("/page-qly-nuoc-hoa", getHomeNuocHoa)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/page-qly-nuoc-hoa", getHomeNuocHoaPhanTrang)
+// get trang nhập liệu create
+router.get("/create-sp-nuochoa", getCreateNuocHoa)
+
+
+
 
 
 

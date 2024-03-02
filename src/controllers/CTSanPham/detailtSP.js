@@ -1,6 +1,7 @@
 const SanPham = require("../../models/SanPham")
 const LoaiSP = require("../../models/LoaiSP");
 require('rootpath')();
+const cheerio = require('cheerio');
 
 module.exports = {
     chiTietSPHomeHienThi1: async (req, res) => {
@@ -45,6 +46,12 @@ module.exports = {
                 return relativePath;
             }
 
+            // Đoạn mã JavaScript để chuyển đổi HTML thành văn bản
+            function convertHtml(html) {
+                const $ = cheerio.load(html);
+                return $('body').text();
+            }
+
             // Hiển thị 1: select tất cả sp KHÔNG PHẢI LÀ Avatar
             const TimSpNoiBat = await SanPham.find({ SpMoi_SpNoiBat: "Nổi Bật" }).populate("IdLoaiSP");
             const spNoiBat = TimSpNoiBat.filter(product => product.IdLoaiSP && product.IdLoaiSP.TenLoaiSP !== "Avatar");       
@@ -56,7 +63,7 @@ module.exports = {
             res.render("TrangChu/layouts/DetailtSP/detailtProductHT1.ejs", {
                 hoten, logIn,
                 rootPath: '/', 
-                formatCurrency, getRelativeImagePath,
+                formatCurrency, getRelativeImagePath, convertHtml,
                 spNoiBat,   
                 productDetails, active
             })
@@ -85,6 +92,12 @@ module.exports = {
                 return relativePath;
             }
 
+            // Đoạn mã JavaScript để chuyển đổi HTML thành văn bản
+            function convertHtml(html) {
+                const $ = cheerio.load(html);
+                return $('body').text();
+            }
+
             // Hiển thị 1: select tất cả sp KHÔNG PHẢI LÀ Avatar
             const TimSpNew = await SanPham.find({ SpMoi_SpNoiBat: "Mới" }).populate("IdLoaiSP");
             const spNew = TimSpNew.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP === "Avatar" ));           
@@ -95,7 +108,7 @@ module.exports = {
             res.render("TrangChu/layouts/DetailtSP/detailtProductHT2.ejs", {
                 hoten, logIn,
                 rootPath: '/', 
-                formatCurrency, getRelativeImagePath,
+                formatCurrency, getRelativeImagePath, convertHtml,
                 spNew,
                 productDetails, active
             })

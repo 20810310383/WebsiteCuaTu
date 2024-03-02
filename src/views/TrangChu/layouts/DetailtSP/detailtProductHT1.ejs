@@ -301,7 +301,7 @@
                                                     </ul>
                                                 </div>
                                                 <div class="product_desc">
-                                                    <p><%= productDetails.MoTa %></p>
+                                                    <p><%= convertHtml(productDetails.MoTa) %></p>
                                                 </div>
                                                 <form id="form-addtocart" action="/addtocart?productId=<%= productDetails._id %>" method="POST">
                                                     <div class="content_price mb-15">

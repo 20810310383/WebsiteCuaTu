@@ -15,3 +15,9 @@ function rutGonMa(hexString ) {
     const shortenedHex = hexString.substring(hexString.length - 10);
     return shortenedHex;
 }
+
+// Đoạn mã JavaScript để chuyển đổi HTML thành văn bản
+function convertHtml(html) {
+    const $ = cheerio.load(html);
+    return $('body').text();
+}

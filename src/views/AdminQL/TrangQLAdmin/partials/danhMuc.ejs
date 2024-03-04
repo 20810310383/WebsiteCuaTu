@@ -27,24 +27,6 @@
         Danh mục quản lý
     </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item <%= activee === 'danhmucquanly' ? 'active' : '' %>">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Danh mục quản lý</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">--- ĐƠN HÀNG ---</h6>
-                <a class="collapse-item" href="cards.html">Quản lý đơn hàng</a>
-                <h6 class="collapse-header">--- TÀI KHOẢN ---</h6>
-                <a class="collapse-item" href="/page-qly-tkkh">Quản lý khách hàng</a>
-                <a class="collapse-item" href="/page-qly-tkadmin">Quản lý account admin</a>
-            </div>
-        </div>        
-    </li>
-
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item <%= activee === 'active_sanpham' ? 'active' : '' %>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -55,12 +37,45 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Các sản phẩm</h6>
+                <h6 class="collapse-header">Các loại sản phẩm</h6>
                 <a class="collapse-item" href="/page-qly-nuoc-hoa">Quản lý nước hoa</a>
-                <a class="collapse-item" href="utilities-color.html">Quản lý account Game</a>
+                <a class="collapse-item" href="/page-qly-game">Quản lý account Game</a>
             </div>
         </div>
     </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item <%= activee === 'danhmucquanly' ? 'active' : '' %>">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Tài khoản</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">                
+                <h6 class="collapse-header">--- TÀI KHOẢN ---</h6>
+                <a class="collapse-item" href="/page-qly-tkkh">Quản lý khách hàng</a>
+                <a class="collapse-item" href="/page-qly-tkadmin">Quản lý account admin</a>
+            </div>
+        </div>        
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item <%= activee === 'donhang' ? 'active' : '' %>">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo1"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Đơn hàng</span>
+        </a>
+        <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">--- ĐƠN HÀNG ---</h6>
+                <a class="collapse-item" href="cards.html">Quản lý đơn hàng</a>                
+            </div>
+        </div>        
+    </li>
+
+    
 
     <!-- Divider -->
     <hr class="sidebar-divider">

@@ -11,7 +11,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets\img\logo-KTT1.ico">
 
-    <title>Chỉnh sửa sản phẩm nước hoa</title>
+    <title>Chỉnh sửa acc Game</title>
 
     <!-- Custom fonts for this template-->
     <link href="AdminQL/HomeAdminQL/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -59,9 +59,9 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form action="/search-qly-nuoc-hoa" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" id="search-ben-admin">
+                    <form action="/search-qly-game" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" id="search-ben-admin">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm nước hoa đi sếp..." name="search_ben_admin"
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm acc game đi sếp..." name="search_ben_admin"
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
@@ -82,12 +82,12 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Chỉnh sửa sản phẩm nước hoa <span style="color: red;"><%= sanPhamEdit.TenSP %></span></h1>                                               
+                        <h1 class="h3 mb-0 text-gray-800">Chỉnh sửa acc Game <span style="color: red;"><%= sanPhamEdit.TenSP %></span></h1>                                               
                     </div>                                         
 
                     <!-- Content Row -->
                     <div class="container-fluid py-3">   
-                        <form method="POST" action="/save-sp-nuochoa/<%= sanPhamEdit._id %>" enctype="multipart/form-data" id="edit-form">
+                        <form method="POST" action="/save-sp-game/<%= sanPhamEdit._id %>" enctype="multipart/form-data" id="edit-form">
                             <!-- sử dụng hidden để gửi phương thức PUT, hiểu là làm giả method PUT -->
                             <input type="hidden" name="_method" value="PUT" />  
                             <div class="p-5 bg-white rounded shadow mb-5">
@@ -255,7 +255,7 @@
     <script src="AdminQL/HomeAdminQL/js/demo/chart-pie-demo.js"></script>
 
     <script src="assets\js\hamDinhDangTien_VaLinkAnh.js"></script>
-    <script src="AdminQL/HomeAdminQL/js/xuLyNutSaveSP.js"></script> 
+    <script src="AdminQL/HomeAdminQL/js/xuLyNutSaveSPGame.js"></script> 
     <script src="AdminQL/HomeAdminQL/js/xuLyAnHienInput_Img.js"></script> 
 
 

@@ -31,10 +31,14 @@ const { getCreateNuocHoa, createNuocHoa } = require('../controllers/AdminQL/Quan
 const { getEditNuocHoa, handleEditNuocHoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/editSPNuocHoa');
 const { deleteSP } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/deleteSPNuocHoa');
 const { getHomeSearchNuocHoa, getHomeSearchNuocHoaPhanTrang } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/searchSPNuocHoa');
+const { getHomeGame, getHomeGamePhanTrang } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/homeQLGame');
+const { getCreateGame, createGame } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/createSPGame');
+const { getEditGame, handleEditGame } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/editSPGame');
+const { getHomeSearchGamePhanTrang, getHomeSearchGame } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/searchSPGame');
 
 
 const router = express.Router();
-//  -------------------------------------------
+//  ********************************************************
 
 // TRANG CHU
 router.get("/", getHomeHienThi1)
@@ -126,8 +130,9 @@ router.post("/dat-hang", datHang)
 router.get("/lsu-mua-hang", home_LichSuMuaHang)
 
 
-//---------------------------------------------------------------------------
-// về phần admin
+//**********************************************************************
+
+// VỀ PHẦN ADMIN QUẢN LÝ 
 // get login admin
 router.get("/login-admin", getLoginAdmin)
 // btn đăng nhập
@@ -184,7 +189,7 @@ router.post("/create-sp-nuochoa", createNuocHoa)
 router.get("/edit-sp-nuochoa", getEditNuocHoa)
 // xử lý nút save sản phẩm nước hoa
 router.put("/save-sp-nuochoa/:idEdit", handleEditNuocHoa)
-// xóa sản phẩm
+// xóa sản phẩm nước hoa
 router.delete("/xoa-sp-nuoc-hoa/:idxoa", deleteSP)
 // get home tìm kiếm sản phẩm nước hoa
 router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoa)
@@ -192,7 +197,24 @@ router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoa)
 router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoaPhanTrang)
 
 
-
+// get home quản lý sản phẩm là game
+router.get("/page-qly-game", getHomeGame)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/page-qly-game", getHomeGamePhanTrang)
+// get trang nhập liệu create
+router.get("/create-sp-game", getCreateGame)
+// xử lý nút create sản phẩm game
+router.post("/create-sp-game", createGame)
+// get trang nhập liệu edit
+router.get("/edit-sp-game", getEditGame)
+// xử lý nút save sản phẩm game
+router.put("/save-sp-game/:idEdit", handleEditGame)
+// xóa sản phẩm game
+router.delete("/xoa-sp-game/:idxoa", deleteSP)
+// get home tìm kiếm sản phẩm game
+router.get("/search-qly-game", getHomeSearchGame)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/search-qly-game", getHomeSearchGamePhanTrang)
 
 
 

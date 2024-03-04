@@ -108,5 +108,147 @@ module.exports = {
                 errCode: -1,
             })
         }    
-    }
+    },
+
+    // **************************************************************
+    // trang nhập liệu để edit sản phẩm đã xóa
+    getEditNuocHoaDaXoa: async (req, res) => {
+        let tk = req.session.tk
+        let logged = req.session.loggedIn
+        let activee = 'active_sanpham'
+        let idEdit = req.query.idEditDaXoa.trim()
+        console.log("idEdit:",idEdit);
+
+        // Hàm để định dạng số tiền thành chuỗi có ký tự VND
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+        }
+
+        // edit file img
+        function getRelativeImagePath(absolutePath) {
+            const rootPath = '<%= rootPath.replace(/\\/g, "\\\\") %>';
+            const relativePath = absolutePath ? absolutePath.replace(rootPath, '').replace(/\\/g, '/').replace(/^\/?images\/upload\//, '') : '';
+            return relativePath;
+        } 
+
+        let loaiSP = await LoaiSP.find({}).exec()        
+
+        let loaiSPNamNu = await LoaiSPNamNu.find({}).exec()
+        
+        // tức là tìm theo deleted: true trước rồi lặp for tìm theo idEdit
+        const all = await SanPham.findWithDeleted({deleted: true}).populate('IdLoaiSP').populate('IdNam_Nu').exec();
+        let sanPhamEdit = null;
+
+        all.forEach(sanPham => {
+            if (sanPham._id.toString() === idEdit) {
+                sanPhamEdit = sanPham;
+                return; // Dừng vòng lặp khi đã tìm thấy sản phẩm cần chỉnh sửa
+            }
+        });
+
+        console.log("edit: ",sanPhamEdit);
+
+        // res.json({data: sanPhamEdit})
+
+        res.render("AdminQL/TrangQLAdmin/QuanLySanPham/QuanLySPNuocHoa/getEditNuocHoaDaXoa.ejs", {
+            tk, logged, activee,
+            rootPath: '/', 
+            formatCurrency, getRelativeImagePath,
+            loaiSP, loaiSPNamNu, sanPhamEdit
+        })
+    },
+
+    // xử lý nút edit sản phẩm đã xóa
+    handleEditNuocHoaDaXoa: async (req, res) => {
+        let idEdit = req.params.idEditDaXoa
+        // let idEdit = req.body.idEdit
+        console.log(">>> check params idEdit: ",idEdit);
+        let TenSP = req.body.TenSP
+        let IdLoaiSP = req.body.IdLoaiSP
+        let GiaBan = req.body.GiaBan
+        let GiaCu = req.body.GiaCu
+        let MoTa = req.body.MoTa
+        let New_Hot = req.body.New_Hot
+        let SpMoi_SpNoiBat = req.body.SpMoi_SpNoiBat
+        let DaXoa = req.body.daxoa
+        let IdNam_Nu = req.body.IdNam_Nu
+
+        console.log("daxoa: ",DaXoa);
+        let imageUrl = req.body.noFileSelected
+        let imageUrl1 = req.body.noFileSelected1
+        let imageUrl2 = req.body.noFileSelected2
+        // let imageUrl = ''
+        // let imageUrl1 = ''
+        // let imageUrl2 = ''
+        // kiem tra xem da co file hay chua
+        if (!req.files || Object.keys(req.files).length === 0) {
+            // khong lam gi
+        }
+        else {
+            let kq = await uploadSingleFile(req.files.Image)
+            let kq1 = await uploadSingleFile(req.files.Image1)
+            let kq2 = await uploadSingleFile(req.files.Image2)
+            imageUrl = kq.path
+            imageUrl1 = kq1.path
+            imageUrl2 = kq2.path
+            console.log(">>> check kq: ", kq.path);
+        }
+
+        try {
+            // Tìm tất cả các sản phẩm đã xóa
+            const allDeletedProducts = await SanPham.findWithDeleted({ deleted: true }).populate('IdLoaiSP').populate('IdNam_Nu').exec();
+            console.log("allDeletedProducts: ",allDeletedProducts);
+            // Tìm sản phẩm cần cập nhật dựa trên idEdit
+            const productToUpdate = allDeletedProducts.find(product => String(product._id) === idEdit);
+            console.log("productToUpdate: ",productToUpdate);
+        
+            if (!productToUpdate) {
+                return res.status(404).json({
+                    message: "Không tìm thấy sản phẩm cần cập nhật!",
+                    success: false,
+                    errCode: -1,
+                });
+            }
+
+            productToUpdate.TenSP = TenSP 
+            productToUpdate.IdLoaiSP = IdLoaiSP 
+            productToUpdate.GiaBan = GiaBan 
+            productToUpdate.GiaCu = GiaCu
+            productToUpdate.MoTa = MoTa
+            productToUpdate.New_Hot = New_Hot            
+            productToUpdate.Image = imageUrl
+            productToUpdate.Image1 = imageUrl1
+            productToUpdate.Image2 = imageUrl2
+            productToUpdate.SpMoi_SpNoiBat = SpMoi_SpNoiBat
+            productToUpdate.deleted = DaXoa
+            productToUpdate.IdNam_Nu = IdNam_Nu
+
+            try {
+                const updatedProduct = await productToUpdate.save();
+            
+                console.log(">>> check updatedProduct: ", updatedProduct);
+                return res.status(200).json({
+                    message: "Bạn đã chỉnh sửa sản phẩm thành công!",
+                    success: true,
+                    errCode: 0,
+                    data: updatedProduct
+                });
+            } catch (error) {
+                console.error("Lỗi khi cập nhật sản phẩm:", error);
+                return res.status(500).json({
+                    message: "Có lỗi xảy ra khi cập nhật sản phẩm!",
+                    success: false,
+                    errCode: -1,
+                });
+            }
+        
+        } catch (error) {
+            console.error("Lỗi khi cập nhật sản phẩm:", error);
+            return res.status(500).json({
+                message: "Có lỗi xảy ra khi cập nhật sản phẩm!",
+                success: false,
+                errCode: -1,
+            });
+        }
+    },
 }

@@ -11,7 +11,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets\img\logo-KTT1.ico">
 
-    <title>Quản lý sản phẩm nước hoa</title>
+    <title>Quản lý sản phẩm nước hoa đã xóa</title>
 
     <!-- Custom fonts for this template-->
     <link href="AdminQL/HomeAdminQL/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -78,7 +78,7 @@
                     <!-- Topbar Search -->
                     <form action="/search-qly-nuoc-hoa" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" id="search-ben-admin">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm nước hoa đi sếp..." name="search_ben_admin" value="<%= searchSPSession %>"
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm nước hoa đi sếp..." name="search_ben_admin"
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
@@ -99,9 +99,10 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <a href="/da-xoa-sp-nuochoa" class="btn btn-danger">Sản phẩm đã xóa</a>
-                        <h1 class="h3 mb-0 text-gray-800">Quản lý sản phẩm nước hoa</h1>     
-                        <a href="/create-sp-nuochoa" class="btn btn-primary">Thêm sản phẩm</a>                   
+                        <a href="/page-qly-nuoc-hoa" class="btn btn-dark">Trở lại</a>                   
+                        <h1 class="h3 mb-0 text-gray-800">Quản lý sản phẩm nước hoa đã xóa</h1>     
+                        <!-- <a href="/create-sp-nuochoa" class="btn btn-primary">Thêm sản phẩm</a>                    -->
+                        <a href=""></a>
                     </div> 
                     
                     <!-- Content Row -->
@@ -207,7 +208,7 @@
                                     <th style="text-align: center; vertical-align: middle;">New/Hot</th>
                                     <th style="text-align: center; vertical-align: middle;">Mới/Nổi Bật</th>
                                     <th style="text-align: center; vertical-align: middle;">Hiển thị/Ẩn</th>
-                                    <th style="width: 200px; text-align: center; vertical-align: middle;">Mô tả</th>                                    
+                                    <th style="width: 200px; text-align: center; vertical-align: middle; ">Mô tả</th>                                    
                                     <th style="text-align: center; vertical-align: middle;">Chức Năng</th>
                                 </tr>
                             </thead>
@@ -224,23 +225,17 @@
                                     <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;"><%= allsp.IdLoaiSP.TenLoaiSP %></td>                                                                                                                                                                                                                                                                                                                        
                                     <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;"><%= allsp.IdNam_Nu.TenLoaiNamNu %></td>                                                                                                                                                                                                                                                                                                                        
                                     <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;"><%= allsp.New_Hot %></td>                                                                                                                                                                                                                                                                                                                        
-                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;"><%= allsp.SpMoi_SpNoiBat %></td>  
-                                    <% if (!allsp.deleted) { %>
-                                        <td style="font-weight: bold; color: #ff0000; font-size: 18px; text-align: center;">Hiển thị</td>
+                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;"><%= allsp.SpMoi_SpNoiBat %></td>     
+                                    <% if (allsp.deleted) { %>
+                                        <td style="font-weight: bold; color: red; font-size: 18px; text-align: center;">Đã ẩn</td> 
                                     <% } else { %>
                                         <td></td>
-                                    <% } %>                                                                                                                                                                                                                                                                                                                       
+                                    <% } %>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                                     <td><%= convertHtml(allsp.MoTa) %></td>                                                                                                                                                                                                                                                                                                                        
                                     <td style="text-align: center; vertical-align: middle;">
                                         <a 
                                             class="btn btn-success button-SUA-XOA" 
-                                            href="/edit-sp-nuochoa?idEdit=<%= allsp._id %>">Edit</a>   
-                                                        
-                                        <a                                                
-                                            id="deleteButton" 
-                                            class="btn btn-danger" 
-                                            onclick="deleteSP('<%= allsp._id %>')"
-                                        >Delete</a>                                                
+                                            href="/edit-sp-nuochoa-daxoa?idEditDaXoa=<%= allsp._id %>">Edit hiển thị lại</a>                                                
                                     </td>                                  
                                 </tr>                                
                                 <% }); %>                                         
@@ -261,7 +256,7 @@
                           const next = curPage >= soTrang ? curPage : parseInt(curPage) + 1            
                         %>
                             <li class="page-item">
-                                <a class="page-link" style=" font-weight: bolder;" href="/search-qly-nuoc-hoa?search_ben_admin=<%= searchSPSession %>&page=<%=pre%>">
+                                <a class="page-link" style=" font-weight: bolder;" href="/da-xoa-sp-nuochoa?page=<%=pre%>">
                                     &lt;
                                 </a>
                             </li>
@@ -269,13 +264,13 @@
                             var active="" ; 
                             if(i == curPage) active="active" ; %>
                             <li class="page-item <%=active%>">
-                                <a class="page-link" style="font-size: 18px; font-weight: bolder;"  href="/search-qly-nuoc-hoa?search_ben_admin=<%= searchSPSession %>&page=<%=i%>">
+                                <a class="page-link" style="font-size: 18px; font-weight: bolder;"  href="/da-xoa-sp-nuochoa?page=<%=i%>">
                                     <%=i%>                          
                                 </a>
                             </li>                
                         <% } %>                                                      
                             <li class="page-item">
-                                <a class="page-link" style=" font-weight: bolder;" href="/search-qly-nuoc-hoa?search_ben_admin=<%= searchSPSession %>&page=<%=next%>">
+                                <a class="page-link" style=" font-weight: bolder;" href="/da-xoa-sp-nuochoa?page=<%=next%>">
                                     &gt;
                                 </a>
                             </li>                     
@@ -346,7 +341,6 @@
     <script src="AdminQL/HomeAdminQL/js/demo/chart-pie-demo.js"></script>
 
     <script src="assets\js\hamDinhDangTien_VaLinkAnh.js"></script>
-    <script src="AdminQL/HomeAdminQL/js/xuLyNutXoaSP.js"></script>
 
     
 </body>

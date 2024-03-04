@@ -28,13 +28,14 @@ const { getCreateTKAdmin, createTKAdmin } = require('../controllers/AdminQL/Quan
 const { getHomePhanTrang_SearchTKAdmin, getSearchTKAdmin } = require('../controllers/AdminQL/QuanLyTKAdmin/searchTKAdminController');
 const { getHomeNuocHoa, getHomeNuocHoaPhanTrang } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/homeQLNuocHoa');
 const { getCreateNuocHoa, createNuocHoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/createSPNuocHoa');
-const { getEditNuocHoa, handleEditNuocHoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/editSPNuocHoa');
+const { getEditNuocHoa, handleEditNuocHoa, getEditNuocHoaDaXoa, handleEditNuocHoaDaXoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/editSPNuocHoa');
 const { deleteSP } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/deleteSPNuocHoa');
 const { getHomeSearchNuocHoa, getHomeSearchNuocHoaPhanTrang } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/searchSPNuocHoa');
 const { getHomeGame, getHomeGamePhanTrang } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/homeQLGame');
 const { getCreateGame, createGame } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/createSPGame');
 const { getEditGame, handleEditGame } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/editSPGame');
 const { getHomeSearchGamePhanTrang, getHomeSearchGame } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/searchSPGame');
+const { getHomeDaXoaNuocHoaPhanTrang, getHomeDaXoaNuocHoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/daXoaSPNuocHoa');
 
 
 const router = express.Router();
@@ -191,6 +192,16 @@ router.get("/edit-sp-nuochoa", getEditNuocHoa)
 router.put("/save-sp-nuochoa/:idEdit", handleEditNuocHoa)
 // xóa sản phẩm nước hoa
 router.delete("/xoa-sp-nuoc-hoa/:idxoa", deleteSP)
+// get home sản phẩm nước hoa đã xóa
+router.get("/da-xoa-sp-nuochoa", getHomeDaXoaNuocHoa)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/da-xoa-sp-nuochoa", getHomeDaXoaNuocHoaPhanTrang)
+// get trang nhập liệu edit đã xóa
+router.get("/edit-sp-nuochoa-daxoa", getEditNuocHoaDaXoa)
+// xử lý nút save sản phẩm nước hoa đã xóa
+router.put("/save-sp-nuochoa-da-xoa/:idEditDaXoa", handleEditNuocHoaDaXoa)
+
+
 // get home tìm kiếm sản phẩm nước hoa
 router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoa)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...

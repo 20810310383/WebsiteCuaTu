@@ -27,7 +27,10 @@ const { deleteTKAdmin } = require('../controllers/AdminQL/QuanLyTKAdmin/deleteTK
 const { getCreateTKAdmin, createTKAdmin } = require('../controllers/AdminQL/QuanLyTKAdmin/createTKAdminController');
 const { getHomePhanTrang_SearchTKAdmin, getSearchTKAdmin } = require('../controllers/AdminQL/QuanLyTKAdmin/searchTKAdminController');
 const { getHomeNuocHoa, getHomeNuocHoaPhanTrang } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/homeQLNuocHoa');
-const { getCreateNuocHoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/createSPNuocHoa');
+const { getCreateNuocHoa, createNuocHoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/createSPNuocHoa');
+const { getEditNuocHoa, handleEditNuocHoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/editSPNuocHoa');
+const { deleteSP } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/deleteSPNuocHoa');
+const { getHomeSearchNuocHoa, getHomeSearchNuocHoaPhanTrang } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/searchSPNuocHoa');
 
 
 const router = express.Router();
@@ -175,10 +178,18 @@ router.get("/page-qly-nuoc-hoa", getHomeNuocHoa)
 router.get("/page-qly-nuoc-hoa", getHomeNuocHoaPhanTrang)
 // get trang nhập liệu create
 router.get("/create-sp-nuochoa", getCreateNuocHoa)
-
-
-
-
+// xử lý nút create sản phẩm nước hoa
+router.post("/create-sp-nuochoa", createNuocHoa)
+// get trang nhập liệu edit
+router.get("/edit-sp-nuochoa", getEditNuocHoa)
+// xử lý nút save sản phẩm nước hoa
+router.put("/save-sp-nuochoa/:idEdit", handleEditNuocHoa)
+// xóa sản phẩm
+router.delete("/xoa-sp-nuoc-hoa/:idxoa", deleteSP)
+// get home tìm kiếm sản phẩm nước hoa
+router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoa)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoaPhanTrang)
 
 
 

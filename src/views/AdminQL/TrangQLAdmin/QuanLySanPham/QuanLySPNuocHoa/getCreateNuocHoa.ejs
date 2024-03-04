@@ -86,45 +86,44 @@
                     </div>                                         
 
                     <!-- Content Row -->
-                    <div class="container-fluid py-3">                                    
+                    <div class="container-fluid py-3">   
+                        <form enctype="multipart/form-data" id="createSPForm">                             
                         <div class="p-5 bg-white rounded shadow mb-5">
                             <div class="mb-3">
-                                <label for="TenSP" class="form-label">Tên sản phẩm</label>
-                                <input type="text" class="form-control" id="TenSP" placeholder="Nhập tên sản phẩm..." name="TenSP">
+                                <label for="TenSP" class="form-label">Tên sản phẩm  <span style="color: red;font-size: 18px;">*</span></label>
+                                <input type="text" class="form-control" id="TenSP" placeholder="Nhập tên sản phẩm..." name="TenSP" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="GiaCu" class="form-label">Giá cũ</label>
-                                <input type="number" class="form-control" id="GiaCu" placeholder="Nhập giá cũ" name="GiaCu">
+                                <label for="GiaCu" class="form-label">Giá cũ  <span style="color: red;font-size: 18px;">*</span></label>
+                                <input type="number" class="form-control" id="GiaCu" placeholder="Nhập giá cũ" name="GiaCu" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="GiaBan" class="form-label">Giá mới</label>
-                                <input type="number" class="form-control" id="GiaBan" placeholder="Nhập giá mới" name="GiaBan">
+                                <label for="GiaBan" class="form-label">Giá mới  <span style="color: red;font-size: 18px;">*</span></label>
+                                <input type="number" class="form-control" id="GiaBan" placeholder="Nhập giá mới" name="GiaBan" required>
                             </div>
 
                             <div class="mb-3">
-                                <label for="IdLoaiSP" class="form-label">Loại sản phẩm</label>
-                                <select id="IdLoaiSP" name="IdLoaiSP" class="form-control" aria-label="Default select example" style="width: 320px; font-size: 18px;">
-                                    <option value="Rượu" selected>
-                                        ---- Hãy chọn loại sản phẩm ----
-                                    </option>                                    
-                                    <option value="Quần">Quần</option>
-                                    <option value="Rượu">Rượu</option>
-                                    
+                                <label for="IdLoaiSP" class="form-label">Loại sản phẩm  <span style="color: red;font-size: 18px;">*</span></label>
+                                <select id="IdLoaiSP" name="IdLoaiSP" class="form-control" aria-label="Default select example" style="width: 320px; font-size: 18px;" >                                                                       
+                                    <% loaiSP.forEach(function(loaiSP) { %> 
+                                    <option value="<%= loaiSP._id %>" selected><%= loaiSP.TenLoaiSP %></option>
+                                    <% }); %>
                                 </select>
                             </div>
 
                             <div class="mb-3">
-                                <label for="IdNam_Nu" class="form-label">Loại Nam / Nữ</label>
+                                <label for="IdNam_Nu" class="form-label">Loại Nam / Nữ  <span style="color: red;font-size: 18px;">*</span></label>
                                 <select id="IdNam_Nu" name="IdNam_Nu" class="form-control" aria-label="Default select example" style="width: 320px; font-size: 18px;">                                   
-                                    <option value="nam" selected>nam</option>
-                                    <option value="nữ">nữ</option>                                    
+                                    <% loaiSPNamNu.forEach(function(loaiSPNamNu) { %> 
+                                    <option value="<%= loaiSPNamNu._id %>" selected><%= loaiSPNamNu.TenLoaiNamNu %></option>
+                                    <% }); %>                             
                                 </select>
                             </div>
 
                             <div class="mb-3">
-                                <label for="New_Hot" class="form-label">Loại New / Hot</label>
+                                <label for="New_Hot" class="form-label">Loại New / Hot  <span style="color: red;font-size: 18px;">*</span></label>
                                 <select id="New_Hot" name="New_Hot" class="form-control" aria-label="Default select example" style="width: 320px; font-size: 18px;">                                   
                                     <option value="New" selected>New</option>
                                     <option value="Hot">Hot</option>                                    
@@ -132,7 +131,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="SpMoi_SpNoiBat" class="form-label">Sản phẩm Mới / Nổi Bật</label>
+                                <label for="SpMoi_SpNoiBat" class="form-label">Sản phẩm Mới / Nổi Bật  <span style="color: red;font-size: 18px;">*</span></label>
                                 <select id="SpMoi_SpNoiBat" name="SpMoi_SpNoiBat" class="form-control" aria-label="Default select example" style="width: 320px; font-size: 18px;">                                   
                                     <option value="Mới" selected>Mới</option>
                                     <option value="Nổi Bật">Nổi Bật</option>                                    
@@ -140,16 +139,16 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="Image" class="form-label">Hình ảnh 1</label>
-                                <input type="file" class="form-control" id="Image" name="Image" style="border: none;">
+                                <label for="Image" class="form-label">Hình ảnh 1  <span style="color: red;font-size: 18px;">*</span></label>
+                                <input type="file" class="form-control" id="Image" name="Image" style="border: none;" multiple required>
                             </div>
                             <div class="mb-3">
-                                <label for="Image1" class="form-label">Hình ảnh 2</label>
-                                <input type="file" class="form-control" id="Image1" name="Image1" style="border: none;">
+                                <label for="Image1" class="form-label">Hình ảnh 2  <span style="color: red;font-size: 18px;">*</span></label>
+                                <input type="file" class="form-control" id="Image1" name="Image1" style="border: none;" multiple required>
                             </div>
                             <div class="mb-3">
-                                <label for="Image2" class="form-label">Hình ảnh 3</label>
-                                <input type="file" class="form-control" id="Image2" name="Image2" style="border: none;">
+                                <label for="Image2" class="form-label">Hình ảnh 3  <span style="color: red;font-size: 18px;">*</span></label>
+                                <input type="file" class="form-control" id="Image2" name="Image2" style="border: none;" multiple required>
                             </div>
 
                             <div class="mb-3">
@@ -158,7 +157,18 @@
 
                                 </textarea>
                             </div>
+
+                            <a                                      
+                                onclick="history.go(-1);"
+                                class="btn btn-dark" >Trở Về </a>
+                                
+                            <!-- <a                                                
+                                class="btn btn-success" 
+                                onclick="createSP_NuocHoa()"
+                            >Tạo mới</a>   -->
+                            <button type="submit" class="btn btn-success" >Tạo mới</button>
                         </div>
+                        </form>    
                     </div>
 
                 </div>
@@ -227,6 +237,7 @@
     <script src="AdminQL/HomeAdminQL/js/demo/chart-pie-demo.js"></script>
 
     <script src="assets\js\hamDinhDangTien_VaLinkAnh.js"></script>
+    <script src="AdminQL/HomeAdminQL/js/xuLyNutCreateSP.js"></script> 
     <script src="ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('MoTa', {

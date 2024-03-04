@@ -13,27 +13,43 @@ function convertToVietnamTime(dateTime) {
 }
 
 module.exports = {
-    // trang nhập liệu để tạo mới sản phẩm
-    getCreateNuocHoa: async (req, res) => {
+    // trang nhập liệu để edit sản phẩm
+    getEditNuocHoa: async (req, res) => {
         let tk = req.session.tk
         let logged = req.session.loggedIn
         let activee = 'active_sanpham'
+        let idEdit = req.query.idEdit
 
-        let loaiSP = await LoaiSP.find({}).exec()
-        console.log("loaiSP: ", loaiSP);
+        // Hàm để định dạng số tiền thành chuỗi có ký tự VND
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+        }
+
+        // edit file img
+        function getRelativeImagePath(absolutePath) {
+            const rootPath = '<%= rootPath.replace(/\\/g, "\\\\") %>';
+            const relativePath = absolutePath ? absolutePath.replace(rootPath, '').replace(/\\/g, '/').replace(/^\/?images\/upload\//, '') : '';
+            return relativePath;
+        } 
+
+        let loaiSP = await LoaiSP.find({}).exec()        
 
         let loaiSPNamNu = await LoaiSPNamNu.find({}).exec()
-        console.log("LoaiSPNamNu: ", loaiSPNamNu);        
+        
+        let sanPhamEdit = await SanPham.findById(idEdit).populate('IdLoaiSP').populate('IdNam_Nu').exec()
 
-        res.render("AdminQL/TrangQLAdmin/QuanLySanPham/QuanLySPNuocHoa/getCreateNuocHoa.ejs", {
+        res.render("AdminQL/TrangQLAdmin/QuanLySanPham/QuanLySPNuocHoa/getEditNuocHoa.ejs", {
             tk, logged, activee,
-            loaiSP, loaiSPNamNu, 
+            rootPath: '/', 
+            formatCurrency, getRelativeImagePath,
+            loaiSP, loaiSPNamNu, sanPhamEdit
         })
     },
 
-    // xử lý nút tạo mới
-    createNuocHoa: async (req, res) => {
-        
+    // xử lý nút edit
+    handleEditNuocHoa: async (req, res) => {
+        let id = req.params.idEdit
+        console.log(">>> check id: ",id);
         let TenSP = req.body.TenSP
         let IdLoaiSP = req.body.IdLoaiSP
         let GiaBan = req.body.GiaBan
@@ -43,9 +59,12 @@ module.exports = {
         let SpMoi_SpNoiBat = req.body.SpMoi_SpNoiBat
         let IdNam_Nu = req.body.IdNam_Nu
 
-        let imageUrl = ""
-        let imageUrl1 = ""
-        let imageUrl2 = ""
+        let imageUrl = req.body.noFileSelected
+        let imageUrl1 = req.body.noFileSelected1
+        let imageUrl2 = req.body.noFileSelected2
+        // let imageUrl = ''
+        // let imageUrl1 = ''
+        // let imageUrl2 = ''
         // kiem tra xem da co file hay chua
         if (!req.files || Object.keys(req.files).length === 0) {
             // khong lam gi
@@ -60,7 +79,7 @@ module.exports = {
             console.log(">>> check kq: ", kq.path);
         }
 
-        let SP = await SanPham.create({
+        let updateSP = await SanPham.findByIdAndUpdate({_id: id},{
             TenSP: TenSP, 
             IdLoaiSP: IdLoaiSP, 
             GiaBan: GiaBan, 
@@ -74,21 +93,20 @@ module.exports = {
             IdNam_Nu: IdNam_Nu
         })
 
-        if(SP){
-            console.log(">>> check kq: ", SP);
+        if(updateSP){
+            console.log(">>> check updateSP: ", updateSP);
             return res.status(200).json({
-                message: "Bạn đã thêm mới sản phẩm thành công!",
+                message: "Bạn đã chỉnh sửa sản phẩm thành công!",
                 success: true,
                 errCode: 0,
-                data: SP
+                data: updateSP
             })
         } else {
             return res.status(500).json({
-                message: "Bạn thêm mới sản phẩm thất bại!",
+                message: "Bạn chỉnh sửa sản phẩm thất bại!",
                 success: false,
                 errCode: -1,
             })
         }    
-    },
-
+    }
 }

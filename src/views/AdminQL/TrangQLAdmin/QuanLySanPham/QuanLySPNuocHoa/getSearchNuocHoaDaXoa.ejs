@@ -78,7 +78,7 @@
                     <!-- Topbar Search -->
                     <form action="/search-qly-nuoc-hoa-da-xoa" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" id="search-ben-admin">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm nước hoa đã xóa đi sếp..." name="search_ben_admin"
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm nước hoa đã xóa đi sếp..." name="search_ben_admin" value="<%= searchSPSession %>"
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
@@ -256,7 +256,7 @@
                           const next = curPage >= soTrang ? curPage : parseInt(curPage) + 1            
                         %>
                             <li class="page-item">
-                                <a class="page-link" style=" font-weight: bolder;" href="/da-xoa-sp-nuochoa?page=<%=pre%>">
+                                <a class="page-link" style=" font-weight: bolder;" href="/search-qly-nuoc-hoa-da-xoa?search_ben_admin=<%= searchSPSession %>&page=<%=pre%>">
                                     &lt;
                                 </a>
                             </li>
@@ -264,13 +264,13 @@
                             var active="" ; 
                             if(i == curPage) active="active" ; %>
                             <li class="page-item <%=active%>">
-                                <a class="page-link" style="font-size: 18px; font-weight: bolder;"  href="/da-xoa-sp-nuochoa?page=<%=i%>">
+                                <a class="page-link" style="font-size: 18px; font-weight: bolder;"  href="/search-qly-nuoc-hoa-da-xoa?search_ben_admin=<%= searchSPSession %>&page=<%=i%>">
                                     <%=i%>                          
                                 </a>
                             </li>                
                         <% } %>                                                      
                             <li class="page-item">
-                                <a class="page-link" style=" font-weight: bolder;" href="/da-xoa-sp-nuochoa?page=<%=next%>">
+                                <a class="page-link" style=" font-weight: bolder;" href="/search-qly-nuoc-hoa-da-xoa?search_ben_admin=<%= searchSPSession %>&page=<%=next%>">
                                     &gt;
                                 </a>
                             </li>                     

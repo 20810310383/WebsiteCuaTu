@@ -161,7 +161,6 @@ module.exports = {
     // xử lý nút edit sản phẩm đã xóa
     handleEditNuocHoaDaXoa: async (req, res) => {
         let idEdit = req.params.idEditDaXoa
-        // let idEdit = req.body.idEdit
         console.log(">>> check params idEdit: ",idEdit);
         let TenSP = req.body.TenSP
         let IdLoaiSP = req.body.IdLoaiSP

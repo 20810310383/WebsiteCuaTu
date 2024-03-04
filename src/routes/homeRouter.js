@@ -30,7 +30,7 @@ const { getHomeNuocHoa, getHomeNuocHoaPhanTrang } = require('../controllers/Admi
 const { getCreateNuocHoa, createNuocHoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/createSPNuocHoa');
 const { getEditNuocHoa, handleEditNuocHoa, getEditNuocHoaDaXoa, handleEditNuocHoaDaXoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/editSPNuocHoa');
 const { deleteSP } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/deleteSPNuocHoa');
-const { getHomeSearchNuocHoa, getHomeSearchNuocHoaPhanTrang } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/searchSPNuocHoa');
+const { getHomeSearchNuocHoa, getHomeSearchNuocHoaPhanTrang, getHomeSearchNuocHoaDaXoaPhanTrang, getHomeSearchNuocHoaDaXoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/searchSPNuocHoa');
 const { getHomeGame, getHomeGamePhanTrang } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/homeQLGame');
 const { getCreateGame, createGame } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/createSPGame');
 const { getEditGame, handleEditGame } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/editSPGame');
@@ -46,6 +46,7 @@ router.get("/", getHomeHienThi1)
 router.get("/hien-thi-2-home", getHomeHienThi2)
 
 
+
 // LOGIN Tai Khoan Khach Hang
 router.get("/login-tk-kh", getFormLoginKH)
 // Dang Ky Tai Khoan Khach Hang
@@ -56,10 +57,12 @@ router.post("/dang-nhap-tkkh", dangNhapTKKH)
 router.get("/dang-xuat-tkkh", dangXuatTKKH)
 
 
+
 // Chi Tiet San Pham
 router.post("/detailt-sp", chiTietSPHomeHienThi1)
 router.get("/detailt-sp-ht1", chiTietSPHomeHienThi1_ChiTiet)
 router.get("/detailt-sp-ht2", chiTietSPHomeHienThi2_ChiTiet)
+
 
 
 // list shop
@@ -73,6 +76,7 @@ router.get("/search-nuoc-hoa", searchNH)
 router.get("/search-nuoc-hoa", searchNH_PhanTrang)
 
 
+
 // SHOP Ban GAME
 router.get("/shop-list-ht2", getHomeListShopGame)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
@@ -81,6 +85,7 @@ router.get("/shop-list-ht2", getHomeListShopGame_PhanTrang)
 router.get("/search-game", searchGame)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 router.get("/search-game", searchGame_PhanTrang)
+
 
 
 // Phan Loai San Pham 
@@ -95,6 +100,7 @@ router.get("/shop-list-phan-loai-nuoc-hoa-nu", getHomeListShopPhanLoaiNu)
 router.get("/shop-list-phan-loai-nuoc-hoa-nu", getHomeListShopPhanLoaiNu_PhanTrang)
 
 
+
 // SHOP GAME
 // phan loai nam
 router.get("/shop-list-phan-loai-game-nam", getHomeListShopGamePhanLoaiNam)
@@ -104,6 +110,7 @@ router.get("/shop-list-phan-loai-game-nam", getHomeListShopGamePhanLoaiNam_PhanT
 router.get("/shop-list-phan-loai-game-nu", getHomeListShopGamePhanLoaiNu)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 router.get("/shop-list-phan-loai-game-nu", getHomeListShopGamePhanLoaiNu_PhanTrang)
+
 
 
 // Cart Products
@@ -127,6 +134,7 @@ router.post("/update-sp-cart", updateAProductCart)
 router.post("/dat-hang", datHang)
 
 
+
 // Lịch sử mua hàng
 router.get("/lsu-mua-hang", home_LichSuMuaHang)
 
@@ -140,6 +148,7 @@ router.get("/login-admin", getLoginAdmin)
 router.post("/login-admin", dangNhapAdmin)
 // get gome page admin
 router.get("/home-page-admin", getHomePageAdmin)
+
 
 
 // get home quản lý tài khoản khách hàng
@@ -156,6 +165,7 @@ router.delete("/xoatkkh/:idxoa", deleteTKKH)
 router.get("/get-page-edit", getEditTKKH)
 // xử lý nút save tài khoản khách hàng
 router.put("/update-tk-kh/:idDeEdit", editTKKH)
+
 
 
 // get home quản lý tài khoản admin
@@ -178,6 +188,7 @@ router.get("/page-search-tkadmin", getSearchTKAdmin)
 router.get("/page-search-tkadmin", getHomePhanTrang_SearchTKAdmin)
 
 
+
 // get home quản lý sản phẩm là nước hoa
 router.get("/page-qly-nuoc-hoa", getHomeNuocHoa)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
@@ -192,6 +203,11 @@ router.get("/edit-sp-nuochoa", getEditNuocHoa)
 router.put("/save-sp-nuochoa/:idEdit", handleEditNuocHoa)
 // xóa sản phẩm nước hoa
 router.delete("/xoa-sp-nuoc-hoa/:idxoa", deleteSP)
+// get home tìm kiếm sản phẩm nước hoa
+router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoa)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoaPhanTrang)
+
 // get home sản phẩm nước hoa đã xóa
 router.get("/da-xoa-sp-nuochoa", getHomeDaXoaNuocHoa)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
@@ -200,12 +216,12 @@ router.get("/da-xoa-sp-nuochoa", getHomeDaXoaNuocHoaPhanTrang)
 router.get("/edit-sp-nuochoa-daxoa", getEditNuocHoaDaXoa)
 // xử lý nút save sản phẩm nước hoa đã xóa
 router.put("/save-sp-nuochoa-da-xoa/:idEditDaXoa", handleEditNuocHoaDaXoa)
-
-
-// get home tìm kiếm sản phẩm nước hoa
-router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoa)
+// get home tìm kiếm sản phẩm nước hoa đã xóa
+router.get("/search-qly-nuoc-hoa-da-xoa", getHomeSearchNuocHoaDaXoa)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
-router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoaPhanTrang)
+router.get("/search-qly-nuoc-hoa-da-xoa", getHomeSearchNuocHoaDaXoaPhanTrang)
+
+
 
 
 // get home quản lý sản phẩm là game

@@ -27,3 +27,5 @@ document.getElementById('Image2').addEventListener('change', function() {
         noFileSelected2.style.display = 'none';
     }
 });
+
+// ------------------------------------

@@ -59,15 +59,18 @@ module.exports = {
         let SpMoi_SpNoiBat = req.body.SpMoi_SpNoiBat
         let IdNam_Nu = req.body.IdNam_Nu
 
-        let imageUrl = req.body.noFileSelected
-        let imageUrl1 = req.body.noFileSelected1
-        let imageUrl2 = req.body.noFileSelected2
-        // let imageUrl = ''
-        // let imageUrl1 = ''
-        // let imageUrl2 = ''
+        
+        let imageUrl = ''
+        let imageUrl1 = ''
+        let imageUrl2 = ''
         // kiem tra xem da co file hay chua
         if (!req.files || Object.keys(req.files).length === 0) {
-            // khong lam gi
+            console.log(">>> khong co file anh nao trong này ");
+            // đoạn này là khi client không nhận được ảnh hiện tại của sp cần edit,
+            // thì tự gán = giá trị của 1 value hiển thị link ảnh khác
+            imageUrl = req.body.noFileSelected
+            imageUrl1 = req.body.noFileSelected1
+            imageUrl2 = req.body.noFileSelected2
         }
         else {
             let kq = await uploadSingleFile(req.files.Image)

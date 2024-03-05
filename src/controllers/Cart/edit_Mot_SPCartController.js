@@ -10,6 +10,7 @@ module.exports = {
     getEditAProductCart: async (req, res) => {
         let hoten = req.session.hoten
         let logIn = req.session.loggedIn
+        let active = "shoplist"
 
         // Hàm để định dạng số tiền thành chuỗi có ký tự VND
         function formatCurrency(amount) {
@@ -46,7 +47,7 @@ module.exports = {
             console.log("spEdit", spEdit);
 
             res.render("TrangChu/layouts/ChiTietCart/editAProductCart.ejs", {
-                formatCurrency, 
+                formatCurrency, active,
                 rootPath: '/', 
                 getRelativeImagePath, rutGonMa,        
                 hoten, logIn, spEdit

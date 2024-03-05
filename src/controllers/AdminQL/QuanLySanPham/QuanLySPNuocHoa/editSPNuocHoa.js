@@ -36,13 +36,13 @@ module.exports = {
 
         let loaiSPNamNu = await LoaiSPNamNu.find({}).exec()
         
-        let sanPhamEdit = await SanPham.findById(idEdit).populate('IdLoaiSP').populate('IdNam_Nu').exec()
+        let sanPhamEdit = await SanPham.findById(idEdit).populate('IdLoaiSP').populate('IdNam_Nu').exec()     
 
         res.render("AdminQL/TrangQLAdmin/QuanLySanPham/QuanLySPNuocHoa/getEditNuocHoa.ejs", {
             tk, logged, activee,
             rootPath: '/', 
             formatCurrency, getRelativeImagePath,
-            loaiSP, loaiSPNamNu, sanPhamEdit
+            loaiSP, loaiSPNamNu, sanPhamEdit, 
         })
     },
 
@@ -59,24 +59,41 @@ module.exports = {
         let SpMoi_SpNoiBat = req.body.SpMoi_SpNoiBat
         let IdNam_Nu = req.body.IdNam_Nu
 
-        let imageUrl = req.body.noFileSelected
-        let imageUrl1 = req.body.noFileSelected1
-        let imageUrl2 = req.body.noFileSelected2
-        // let imageUrl = ''
-        // let imageUrl1 = ''
-        // let imageUrl2 = ''
+
+        let imageUrl = ''
+        let imageUrl1 = ''
+        let imageUrl2 = ''
+
         // kiem tra xem da co file hay chua
         if (!req.files || Object.keys(req.files).length === 0) {
-            // khong lam gi
+            console.log(">>> khong co file anh nao trong này ");
+            // đoạn này là khi client không nhận được ảnh hiện tại của sp cần edit,
+            // thì tự gán = giá trị của 1 value hiển thị link ảnh khác
+            imageUrl = req.body.noFileSelected
+            imageUrl1 = req.body.noFileSelected1
+            imageUrl2 = req.body.noFileSelected2
         }
         else {
-            let kq = await uploadSingleFile(req.files.Image)
-            let kq1 = await uploadSingleFile(req.files.Image1)
-            let kq2 = await uploadSingleFile(req.files.Image2)
-            imageUrl = kq.path
-            imageUrl1 = kq1.path
-            imageUrl2 = kq2.path
-            console.log(">>> check kq: ", kq.path);
+            // Lặp qua các tệp được tải lên và lưu đường dẫn vào các biến imageUrl
+            if (req.files.Image) {
+                let kq = await uploadSingleFile(req.files.Image);
+                imageUrl = kq.path;
+            }
+            if (req.files.Image1) {
+                let kq1 = await uploadSingleFile(req.files.Image1);
+                imageUrl1 = kq1.path;
+            }
+            if (req.files.Image2) {
+                let kq2 = await uploadSingleFile(req.files.Image2);
+                imageUrl2 = kq2.path;
+            }
+            // let kq = await uploadSingleFile(req.files.Image)
+            // let kq1 = await uploadSingleFile(req.files.Image1)
+            // let kq2 = await uploadSingleFile(req.files.Image2)
+            // imageUrl = kq.path
+            // imageUrl1 = kq1.path
+            // imageUrl2 = kq2.path
+            // console.log(">>> check kq: ", kq.path);
         }
 
         let updateSP = await SanPham.findByIdAndUpdate({_id: id},{
@@ -147,6 +164,7 @@ module.exports = {
         });
 
         console.log("edit: ",sanPhamEdit);
+        console.log("sanPhamEdit.Image: ",sanPhamEdit.Image);
 
         // res.json({data: sanPhamEdit})
 
@@ -173,24 +191,34 @@ module.exports = {
         let IdNam_Nu = req.body.IdNam_Nu
 
         console.log("daxoa: ",DaXoa);
-        let imageUrl = req.body.noFileSelected
-        let imageUrl1 = req.body.noFileSelected1
-        let imageUrl2 = req.body.noFileSelected2
-        // let imageUrl = ''
-        // let imageUrl1 = ''
-        // let imageUrl2 = ''
+        
+        let imageUrl = ''
+        let imageUrl1 = ''
+        let imageUrl2 = ''
+
         // kiem tra xem da co file hay chua
         if (!req.files || Object.keys(req.files).length === 0) {
-            // khong lam gi
+            console.log(">>> khong co file anh nao trong này ");
+            // đoạn này là khi client không nhận được ảnh hiện tại của sp cần edit,
+            // thì tự gán = giá trị của 1 value hiển thị link ảnh khác
+            imageUrl = req.body.noFileSelected
+            imageUrl1 = req.body.noFileSelected1
+            imageUrl2 = req.body.noFileSelected2
         }
         else {
-            let kq = await uploadSingleFile(req.files.Image)
-            let kq1 = await uploadSingleFile(req.files.Image1)
-            let kq2 = await uploadSingleFile(req.files.Image2)
-            imageUrl = kq.path
-            imageUrl1 = kq1.path
-            imageUrl2 = kq2.path
-            console.log(">>> check kq: ", kq.path);
+            // Lặp qua các tệp được tải lên và lưu đường dẫn vào các biến imageUrl
+            if (req.files.Image) {
+                let kq = await uploadSingleFile(req.files.Image);
+                imageUrl = kq.path;
+            }
+            if (req.files.Image1) {
+                let kq1 = await uploadSingleFile(req.files.Image1);
+                imageUrl1 = kq1.path;
+            }
+            if (req.files.Image2) {
+                let kq2 = await uploadSingleFile(req.files.Image2);
+                imageUrl2 = kq2.path;
+            }
         }
 
         try {

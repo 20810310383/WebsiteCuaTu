@@ -64,6 +64,7 @@ module.exports = {
     getChiTietCart_XemCT: async (req, res) => {
         let hoten = req.session.hoten
         let logIn = req.session.loggedIn
+        let active = "shoplist"
 
         // Hàm để định dạng số tiền thành chuỗi có ký tự VND
         function formatCurrency(amount) {
@@ -136,7 +137,7 @@ module.exports = {
         }  
 
         res.render("TrangChu/layouts/ChiTietCart/chiTietCart.ejs", {
-            formatCurrency: formatCurrency, 
+            formatCurrency: formatCurrency, active,
             rootPath: '/', 
             getRelativeImagePath: getRelativeImagePath,            
             hoten, logIn,

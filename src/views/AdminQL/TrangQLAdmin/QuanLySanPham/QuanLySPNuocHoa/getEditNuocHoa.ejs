@@ -155,17 +155,17 @@
 
                                 <div class="mb-3">
                                     <label for="Image" class="form-label">Hình ảnh 1  <span style="color: red;font-size: 18px;">*</span></label>
-                                    <input type="file" class="form-control" id="Image" name="Image" style="border: none;"  multiple value="<%= sanPhamEdit.Image %>">
+                                    <input type="file" class="form-control" id="Image" name="Image" style="border: none;" value="<%= sanPhamEdit.Image %>">
                                     <input placeholder="Vui lòng chọn tệp ảnh" type="text" id="noFileSelected" name="noFileSelected" value="<%= sanPhamEdit.Image %>" readonly style="border: none; width: 90%;position: relative;top: -30px; left: 95px;">
                                 </div>
                                 <div class="mb-3">
                                     <label for="Image1" class="form-label">Hình ảnh 2  <span style="color: red;font-size: 18px;">*</span></label>
-                                    <input type="file" class="form-control" id="Image1" name="Image1" style="border: none;"  multiple value="<%= sanPhamEdit.Image1 %>">
+                                    <input type="file" class="form-control" id="Image1" name="Image1" style="border: none;" value="<%= sanPhamEdit.Image1 %>">
                                     <input placeholder="Vui lòng chọn tệp ảnh" type="text" id="noFileSelected1" name="noFileSelected1" value="<%= sanPhamEdit.Image1 %>" readonly style="border: none; width: 90%;position: relative;top: -30px; left: 95px;">
                                 </div>
                                 <div class="mb-3">
                                     <label for="Image2" class="form-label">Hình ảnh 3  <span style="color: red;font-size: 18px;">*</span></label>
-                                    <input type="file" class="form-control" id="Image2" name="Image2" style="border: none;"  multiple value="<%= sanPhamEdit.Image2 %>">
+                                    <input type="file" class="form-control" id="Image2" name="Image2" style="border: none;" value="<%= sanPhamEdit.Image2 %>">
                                     <input placeholder="Vui lòng chọn tệp ảnh" type="text" id="noFileSelected2" name="noFileSelected2" value="<%= sanPhamEdit.Image2 %>" readonly style="border: none; width: 90%;position: relative;top: -30px; left: 95px;">
                                 </div>
 
@@ -178,11 +178,7 @@
 
                                 <a                                      
                                     onclick="history.go(-1);"
-                                    class="btn btn-dark" >Trở Về </a>
-                                
-                                <!-- <a                                      
-                                    onclick="updateSP('<%= sanPhamEdit._id %>')"
-                                    class="btn btn-danger" >Save </a> -->                                
+                                    class="btn btn-dark" >Trở Về </a>                                                                                     
                                 
                                 <button type="submit" class="btn btn-danger" >Save</button>
                             </div>

@@ -13,6 +13,7 @@ module.exports = {
     getCheckOut: async (req, res) => {
         let hoten = req.session.hoten
         let logIn = req.session.loggedIn
+        let active = "shoplist"
 
         // Hàm để định dạng số tiền thành chuỗi có ký tự VND
         function formatCurrency(amount) {
@@ -91,7 +92,7 @@ module.exports = {
         }
 
         res.render("TrangChu/layouts/ChiTietCart/checkOut.ejs", {
-            formatCurrency, 
+            formatCurrency, active,
             rootPath: '/' , 
             getRelativeImagePath, rutGonMa,
             hoten, logIn, 

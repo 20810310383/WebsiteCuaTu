@@ -198,6 +198,7 @@
                         <table class="table table-hover">
                             <thead>                                
                                 <tr style="background-color: #DC143C; color: white; font-size: 18px; ">
+                                    <th style="text-align: center; vertical-align: middle;">STT</th>
                                     <th style="text-align: center; vertical-align: middle;">Hình Ảnh</th>
                                     <th style="width: 150px;text-align: center; vertical-align: middle;">Tên SP</th>
                                     <th style="text-align: center; vertical-align: middle;">Giá mới</th>
@@ -211,22 +212,30 @@
                                     <th style="text-align: center; vertical-align: middle;">Chức Năng</th>
                                 </tr>
                             </thead>
-                            <tbody>   
+                            <tbody>  
+                                <%
+                                 <!-- Tính toán số thứ tự bắt đầu của sản phẩm đầu tiên trên trang -->
+                                const startIndex = (curPage - 1) * itemsPerPage + 1;
+
+                                 <!-- Tính toán số thứ tự của các sản phẩm tiếp theo trên trang -->
+                                const endIndex = Math.min(startIndex + itemsPerPage - 1, totalItems);
+                                %> 
                                 <!-- Hiển thị all sản phẩm - end -->  
                                 <% all.forEach(function(allsp, index) { %>                                                       
-                                <tr >                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-                                    <td style="text-align: center; vertical-align: middle;  width: 150px;font-weight: bold; color: #180766; font-size: 18px;">
+                                <tr >   
+                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center; vertical-align: middle;"><%= startIndex  + index %></td>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+                                    <td style="text-align: center; vertical-align: middle;  width: 200px;font-weight: bold; color: #180766; font-size: 18px;">
                                         <img  src="images/upload/<%= getRelativeImagePath(allsp.Image) %>" class="img-fluid" alt="Image">
                                     </td>                                                                                                                                                                                                                                                                                                                       
-                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;"><%= allsp.TenSP %></td>
-                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;"><%= formatCurrency(allsp.GiaBan) %></td>                                  
-                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;"><%= formatCurrency(allsp.GiaCu) %></td>                                                                                                                                                                                                                                                                                                                        
-                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;"><%= allsp.IdLoaiSP.TenLoaiSP %></td>                                                                                                                                                                                                                                                                                                                        
-                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;"><%= allsp.IdNam_Nu.TenLoaiNamNu %></td>                                                                                                                                                                                                                                                                                                                        
-                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;"><%= allsp.New_Hot %></td>                                                                                                                                                                                                                                                                                                                        
-                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;"><%= allsp.SpMoi_SpNoiBat %></td>   
+                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;vertical-align: middle;"><%= allsp.TenSP %></td>
+                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;vertical-align: middle;"><%= formatCurrency(allsp.GiaBan) %></td>                                  
+                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;vertical-align: middle;"><%= formatCurrency(allsp.GiaCu) %></td>                                                                                                                                                                                                                                                                                                                        
+                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;vertical-align: middle;"><%= allsp.IdLoaiSP.TenLoaiSP %></td>                                                                                                                                                                                                                                                                                                                        
+                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;vertical-align: middle;"><%= allsp.IdNam_Nu.TenLoaiNamNu %></td>                                                                                                                                                                                                                                                                                                                        
+                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;vertical-align: middle;"><%= allsp.New_Hot %></td>                                                                                                                                                                                                                                                                                                                        
+                                    <td style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;vertical-align: middle;"><%= allsp.SpMoi_SpNoiBat %></td>   
                                     <% if (!allsp.deleted) { %>
-                                        <td style="font-weight: bold; color: #ff0000; font-size: 18px; text-align: center;">Hiển thị</td>
+                                        <td style="font-weight: bold; color: #ff0000; font-size: 18px; text-align: center;vertical-align: middle;">Hiển thị</td>
                                     <% } else { %>
                                         <td></td>
                                     <% } %>                                                                                                                                                                                                                                                                                                                      

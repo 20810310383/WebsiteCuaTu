@@ -52,9 +52,9 @@ module.exports = {
         } else if (500000 < totalCartPrice && totalCartPrice <= 1000000) {
             giam_Gia = totalCartPrice * 0.03 // giam 3% tong so tien
         } else if (1000000 < totalCartPrice && totalCartPrice <= 10000000) {
-            giam_Gia = totalCartPrice * 0.05 // giam 5% tong so tien
+            giam_Gia = totalCartPrice * 0.04 // giam 4% tong so tien
         } else {
-            giam_Gia = totalCartPrice * 0.1 // giam 10% tong so tien
+            giam_Gia = totalCartPrice * 0.05 // giam 5% tong so tien
         }
         console.log("giamgia chi tiet: ", giam_Gia);
 

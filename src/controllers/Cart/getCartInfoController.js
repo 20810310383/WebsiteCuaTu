@@ -41,9 +41,9 @@ module.exports = {
             } else if (500000 < totalPrice && totalPrice <= 1000000) {
                 giamGia = totalPrice * 0.03 // giam 3% tong so tien
             } else if (1000000 < totalPrice && totalPrice <= 20000000) {
-                giamGia = totalPrice * 0.05 // giam 5% tong so tien
+                giamGia = totalPrice * 0.04 // giam 4% tong so tien
             } else {
-                giamGia = totalPrice * 0.1 // giam 10% tong so tien
+                giamGia = totalPrice * 0.05 // giam 5% tong so tien
             }
             console.log("giamgia: ", giamGia);
 

@@ -80,6 +80,8 @@ module.exports = {
             soTrang: numPage, 
             curPage: page, 
             all: slicedResults,
+            itemsPerPage: limit,
+            totalItems: totalProducts
         })
     }
 }

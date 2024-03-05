@@ -47,7 +47,7 @@ module.exports = {
         }
 
         let page = 1
-        const limit = 6
+        const limit = 4
         
         if(req.query.page){
             page = req.query.page
@@ -87,6 +87,8 @@ module.exports = {
             curPage: page, 
             all: slicedResults,
             searchSPSession: req.session.tenSPSearch || '',
+            itemsPerPage: limit,
+            totalItems: totalProducts
         })
     },
 
@@ -125,7 +127,7 @@ module.exports = {
         }
 
         let page = 1
-        const limit = 6
+        const limit = 4
         
         if(req.query.page){
             page = req.query.page
@@ -164,7 +166,9 @@ module.exports = {
             soTrang: numPage, 
             curPage: page, 
             all: slicedResults,
-            searchSPSession: req.session.tenSPSearch || '',
+            searchSPSession: req.session.tenSPSearch || '',            
+            itemsPerPage: limit,
+            totalItems: totalProducts
         })
     },
 }

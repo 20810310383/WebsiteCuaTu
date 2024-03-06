@@ -19,32 +19,54 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
-                        // Show success alert
-                        // alert("Sản phẩm đã được thêm vào giỏ hàng!");
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Thành công!',
-                            text: 'Sản phẩm đã được thêm vào giỏ hàng.',
-                            confirmButtonText: 'Mua Tiếp'
-                        })
-                        .then(() => {
-                            // Redirect to the specified URL after clicking "OK"
-                            // window.location.href = '/';
-                            // window.history.back(); // Quay lại trang trước đó
-                            window.location.reload(); // Tải lại trang hiện tại
-
-                        });
+                    if(data.logged){
+                        if (data.success) {
+                            // Show success alert
+                            // alert("Sản phẩm đã được thêm vào giỏ hàng!");
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!',
+                                text: 'Sản phẩm đã được thêm vào giỏ hàng.',
+                                confirmButtonText: 'Mua Tiếp'
+                            })
+                            .then(() => {
+                                window.location.reload(); // Tải lại trang hiện tại    
+                            });
+                        } else {
+                            // Show error alert
+                            // alert("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng!"); 
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi!',
+                                text: 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng. Vui lòng thử lại sau.',
+                                confirmButtonText: 'OK SHOP'
+                            });                       
+                        }
                     } else {
-                        // Show error alert
-                        // alert("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng!"); 
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Lỗi!',
-                            text: 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng. Vui lòng thử lại sau.',
-                            confirmButtonText: 'OK SHOP'
-                        });                       
+                        if (data.success) {
+                            // Show success alert
+                            // alert("Sản phẩm đã được thêm vào giỏ hàng!");
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!', 
+                                text: 'Sản phẩm đã được thêm vào giỏ hàng. Nhưng bạn cần đăng nhập để tiến hành đặt hàng',
+                                confirmButtonText: 'Đi tới đăng nhập'
+                            })
+                            .then(() => {
+                                window.location.href = '/login-tk-kh';
+                            });
+                        } else {
+                            // Show error alert
+                            // alert("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng!"); 
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi!',
+                                text: 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng. Vui lòng thử lại sau.',
+                                confirmButtonText: 'OK SHOP'
+                            });                       
+                        }
                     }
+                    
                 })
                 .catch(error => {
                     console.error("Error:", error);

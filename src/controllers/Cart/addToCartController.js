@@ -8,7 +8,7 @@ require('rootpath')();
 module.exports = {
     addToCart: async (req, res) => {
         try {
-
+            let logged = req.session.loggedIn
             const productId = req.query.productId;
             const size = req.body.size;
             const qtyy = parseInt(req.body.quantity);
@@ -108,7 +108,7 @@ module.exports = {
     
             // await cart.save();
 
-            return res.status(200).json({ success: true, message: 'Đã thêm sản phẩm vào giỏ hàng' });
+            return res.status(200).json({ success: true, message: 'Đã thêm sản phẩm vào giỏ hàng', logged });
         } catch (error) {
             console.error(error);
             return res.status(500).json({ success: false, message: 'Lỗi server' });

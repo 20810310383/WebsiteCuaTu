@@ -10,8 +10,12 @@ module.exports = {
         let logged = req.session.loggedIn
         let activee = 'trangchu'
 
-        res.render("AdminQL/TrangQLAdmin/homeAdmin.ejs", {
-            tk, logged, activee
-        })
+        if(logged){
+            res.render("AdminQL/TrangQLAdmin/homeAdmin.ejs", {
+                tk, logged, activee
+            })
+        } else {
+            res.render("AdminQL/LoginAdmin/loginAdmin.ejs");
+        }        
     },
 }   

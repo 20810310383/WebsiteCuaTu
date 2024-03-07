@@ -41,6 +41,7 @@ module.exports = {
         let skip = (page - 1) * limit
 
         const all = await SanPham.find().populate('IdLoaiSP').populate('IdNam_Nu').exec();
+        const loaiSPNamNu = await LoaiSPNamNu.find().exec();
 
         // Lọc kết quả bằng cách sử dụng filter
         const filteredResults = all.filter(product => 
@@ -65,7 +66,8 @@ module.exports = {
             formatCurrency, getRelativeImagePath,
             soTrang: numPage, 
             curPage: page, 
-            all: slicedResults
+            all: slicedResults,
+            loaiSPNamNu
         })
     },
 
@@ -104,6 +106,7 @@ module.exports = {
         let skip = (page - 1) * limit
 
         const all = await SanPham.find().populate('IdLoaiSP').populate('IdNam_Nu').exec();
+        const loaiSPNamNu = await LoaiSPNamNu.find().exec();
 
         // Lọc kết quả bằng cách sử dụng filter
         const filteredResults = all.filter(product => 
@@ -129,7 +132,7 @@ module.exports = {
             soTrang: numPage, 
             curPage: page, 
             all: slicedResults,
-            
+            loaiSPNamNu
         })
     },
 

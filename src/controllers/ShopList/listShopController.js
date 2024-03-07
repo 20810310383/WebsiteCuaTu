@@ -41,6 +41,7 @@ module.exports = {
         let skip = (page - 1) * limit
 
         const all = await SanPham.find().populate('IdLoaiSP').exec();
+        const loaiSPNamNu = await LoaiSPNamNu.find().exec();
 
         // Lọc kết quả bằng cách sử dụng filter
         const filteredResults = all.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP !== "Avatar"));
@@ -64,7 +65,7 @@ module.exports = {
             soTrang: numPage, 
             curPage: page, 
             all: slicedResults,
-            
+            loaiSPNamNu
         })
     },
 

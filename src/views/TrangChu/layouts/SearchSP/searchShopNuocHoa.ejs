@@ -134,20 +134,57 @@
                                             <!-- <div class="page_amount">
                                                 <p>Showing 1–9 of 21 results</p>
                                             </div> -->
+                                            <!-- <%- include("../../partials/phanLoaiNH_ChiTiet.ejs") %> -->
                                             <div class="select_option">
-                                                <form action="#">
-                                                    <label>Chọn Loại Sản Phẩm</label>
-                                                    <select name="orderby" id="short">
-                                                        <option selected="" value="1">____  Chọn đi nàng  ____</option>
-                                                        <option value="1">Nước Hoa Nam</option>
-                                                        <option value="1">Nước Hoa Nữ</option>                                                        
-                                                    </select>
-                                                    <!-- <button style="border: none; background-color: white; cursor: pointer;position: relative; top: 2px; float: right;" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" height="15" width="15" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>                                                    
-                                                    </button> -->
+                                                <form action="/search-nuoc-hoa" method="get">       
+                                                    <ul class="nav" role="tablist">
+                                                        <li>
+                                                            <select name="giaSP" id="short">
+                                                                <option selected value="<%= giaSPSession %>"><%= convertPriceRange(giaSPSession) %></option>
+                                                                <option value="50-500"> Nhỏ hơn 500k</option>
+                                                                <option value="500-1900">500k đến 1M9</option>
+                                                                <option value="2000-4500">2M đến 4M5</option>
+                                                                <option value="5000-10000">5M đến 10M</option>
+                                                                <option value="10000-99999">Trên 10M</option>                                                                            
+                                                            </select>
+                                                        </li>
+                                                        <li>
+                                                            <select name="tenloaiNH" id="short1">
+                                                                <% loaiSPNamNu.forEach(function(loai) { %>
+                                                                    <% if (loai._id == tenloaiNHSession) { %>
+                                                                        <option selected value="<%= loai._id %>">Nước Hoa <%= loai.TenLoaiNamNu %></option>
+                                                                    <% } else { %>
+                                                                        <option value="<%= loai._id %>">Nước Hoa <%= loai.TenLoaiNamNu %></option>
+                                                                    <% } %>
+                                                                <% }); %>                                                                     
+                                                            </select>
+                                                        </li>
+                                                        <li><button style="margin-left: 10px;cursor: pointer;" type="submit" class="btn btn-primary">Xem Sản Phẩm</button></li>
+                                                    </ul>
                                                 </form>
                                             </div>
                                         </div>
+                                        <script>
+                                            function convertPriceRange(range) {
+                                                const ranges = range.split('-');
+                                                const minPrice = parseFloat(ranges[0]);
+                                                const maxPrice = parseFloat(ranges[1]);
+                                                
+                                                // Chuyển đổi minPrice và maxPrice thành dạng chuỗi mong muốn
+                                                let formattedMinPrice = minPrice < 1000 ? `${minPrice}k` : `${minPrice / 1000}M`;
+                                                let formattedMaxPrice = maxPrice < 1000 ? `${maxPrice}k` : `${maxPrice / 1000}M`;
+
+                                                // Kiểm tra nếu giá trị chia cho 1000 là NaN thì sử dụng giá ban đầu
+                                                formattedMinPrice = isNaN(formattedMinPrice) ? `${minPrice}k` : formattedMinPrice;
+                                                formattedMaxPrice = isNaN(formattedMaxPrice) ? `${maxPrice}k` : formattedMaxPrice;
+
+                                                // Kiểm tra nếu giá trị rỗng, trả về chuỗi "Hãy chọn"
+                                                const finalMinPrice = formattedMinPrice == '' ? 'Hãy' : formattedMinPrice;
+                                                const finalMaxPrice = formattedMaxPrice == '' ? 'Chọn' : formattedMaxPrice;
+                                        
+                                                return `${finalMinPrice} đến ${finalMaxPrice}`;
+                                            }
+                                        </script>
                                         <!--shop toolbar end-->
                                         
                                         <!--shop tab product-->
@@ -161,7 +198,47 @@
                                         <!--shop tab product end-->
 
                                         <!--pagination style start phan trang 123--> 
-                                        <%- include('../../layouts/SearchSP/search_phan_trang_pagination_nuochoa.ejs') %>       
+                                        <!-- <%- include('../../layouts/SearchSP/search_phan_trang_pagination_nuochoa.ejs') %>        -->
+                                        <div class="pagination_style" >
+                                            <div class="item_page">
+                                            </div>
+                                            
+                                            <nav aria-label="...">
+                                                <ul style="font-size: 25px;" class="pagination">
+                                        
+                                                    <% 
+                                                        const pre = curPage <= 1 ? curPage : curPage - 1; 
+                                                        const next = curPage >= soTrang ? curPage : parseInt(curPage) + 1   
+                                                        const queryParams = searchSPSession ? `search_nuochoa=${searchSPSession}` : `tenloaiNH=${tenloaiNHSession}&giaSP=${giaSPSession}`;         
+                                                    %>  
+                                                    <li class="page-item disabled">
+                                                      <a class="page-link" href="/search-nuoc-hoa?<%=queryParams%>&page=<%=pre%>">&laquo;</a>              
+                                                    </li>
+                                        
+                                                   <% for(var i=1; i <=soTrang; i++) { 
+                                                                var active="" ; 
+                                                                if(i == curPage) active="active" ; %>
+                                                
+                                                    <li class="<%=active%> page-item " aria-current="page">
+                                                        <a  class="page-link" href="/search-nuoc-hoa?<%=queryParams%>&page=<%=i%>">
+                                                            <%=i%>                          
+                                                        </a>
+                                                    </li>
+                                                
+                                                    <% } %>
+                                        
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/search-nuoc-hoa?<%=queryParams%>&page=<%=next%>">&raquo;</a>
+                                                    </li>
+                                                  
+                                                </ul>
+                                            </nav>
+                                        
+                                            <div class="page_number">
+                                            </div>
+                                        </div>
+                                        
+                                        
                                         <!--pagination style phan trang 123 end--> 
                                     </div>
 

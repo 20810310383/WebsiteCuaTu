@@ -26,6 +26,7 @@
     "flash": "^1.1.0",
     "google-auth-library": "^9.4.1",
     "googleapis": "^130.0.0",
+    "jsonwebtoken": "^9.0.2",
     "moment-timezone": "0.5.43",
     "mongodb": "^4.13.0",
     "mongoose": "^8.0.1",

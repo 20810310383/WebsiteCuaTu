@@ -4,7 +4,7 @@ const { getFormLoginKH, dangKyTKKH, dangNhapTKKH, dangXuatTKKH } = require('../c
 const { chiTietSPHomeHienThi1, chiTietSPHomeHienThi1_ChiTiet, chiTietSPHomeHienThi2_ChiTiet } = require('../controllers/CTSanPham/detailtSP');
 const { getHomeListShop, getHomeListShop_PhanTrang } = require('../controllers/ShopList/listShopController');
 const { getHomeListShopGame, getHomeListShopGame_PhanTrang } = require('../controllers/ShopList/listShopGameController');
-const { searchNH_PhanTrang, searchNH } = require('../controllers/SearchSP/searchNHController');
+const { searchNH_PhanTrang, searchNH, searchNH_PhanLoai_PhanTrang } = require('../controllers/SearchSP/searchNHController');
 const { searchGame, searchGame_PhanTrang } = require('../controllers/SearchSP/searchGameController');
 const { getHomeListShopPhanLoaiNam, getHomeListShopPhanLoaiNam_PhanTrang, getHomeListShopPhanLoaiNu, getHomeListShopPhanLoaiNu_PhanTrang } = require('../controllers/PhanLoaiSP/phanLoaiNuocHoaController');
 const { getHomeListShopGamePhanLoaiNam_PhanTrang, getHomeListShopGamePhanLoaiNam, getHomeListShopGamePhanLoaiNu_PhanTrang, getHomeListShopGamePhanLoaiNu } = require('../controllers/PhanLoaiSP/phanLoaiGameController');
@@ -73,7 +73,19 @@ router.get("/shop-list-ht1", getHomeListShop_PhanTrang)
 // Search SanPham
 router.get("/search-nuoc-hoa", searchNH)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
-router.get("/search-nuoc-hoa", searchNH_PhanTrang)
+// router.get("/search-nuoc-hoa", searchNH_PhanTrang)
+// router.get("/search-nuoc-hoa", searchNH_PhanLoai_PhanTrang)
+router.get("/search-nuoc-hoa", async (req, res) => {
+    if (req.query.search_nuochoa) {
+        return searchNH_PhanTrang(req, res);
+
+    } else if (req.query.tenloaiNH && req.query.giaSP) {
+        return searchNH_PhanLoai_PhanTrang(req, res);
+        
+    } else {
+        res.redirect(`/search-nuoc-hoa`);
+    }
+});
 
 
 

@@ -34,7 +34,8 @@ module.exports = {
         }
         
         let skip = (page - 1) * limit
-        const allTKKH = await TaiKhoan_Admin.find({deleted: false}).skip(skip).limit(limit).exec()
+        const allTKKH = await TaiKhoan_Admin.find({}).skip(skip).limit(limit).exec()
+        console.log("tai khoan admin: ", allTKKH);
 
         // Chuyển đổi ngày giờ tạo tài khoản admin sang múi giờ Việt Nam
         const allTKKhachHangnWithVietnamTime = allTKKH.map(item => ({
@@ -43,7 +44,7 @@ module.exports = {
         }));
 
         // tính toán tổng số trang cần hiển thị bằng cách: CHIA (tổng số sản phẩm) cho (số lượng sản phẩm trên mỗi trang)
-        let numPage = parseInt((await TaiKhoan_Admin.find({deleted: false})).length) / limit
+        let numPage = parseInt((await TaiKhoan_Admin.find({})).length) / limit
 
         // kiểm tra xem phần thập phân của numPage có bằng 0 hay không
         // Nếu bằng 0, nghĩa là numPage là một số nguyên, không cần phải thêm một trang nữa

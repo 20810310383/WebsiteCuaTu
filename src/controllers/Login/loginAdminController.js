@@ -39,7 +39,8 @@ module.exports = {
 
             // Lưu trạng thái đăng nhập vào session
             req.session.loggedIn = true
-			req.session.tk = tk
+			req.session.tk = user.HoTen
+			req.session.user = user
             console.log("user: ", user); 
         
             return res.status(200).json({ success: true, message: 'Đăng nhập thành công' });

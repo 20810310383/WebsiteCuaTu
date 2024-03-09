@@ -36,6 +36,8 @@ const { getCreateGame, createGame } = require('../controllers/AdminQL/QuanLySanP
 const { getEditGame, handleEditGame } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/editSPGame');
 const { getHomeSearchGamePhanTrang, getHomeSearchGame } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/searchSPGame');
 const { getHomeDaXoaNuocHoaPhanTrang, getHomeDaXoaNuocHoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/daXoaSPNuocHoa');
+const { getHomeQLAdminPhanQuyen, getHomePhanTrang_TKAdminPhanQuyen } = require('../controllers/AdminQL/QuanLyTKAdmin_PhanQuyen/quanLyTKAdminPhanQuyenController');
+const { getCreateTKAdminPhanQuyen } = require('../controllers/AdminQL/QuanLyTKAdmin_PhanQuyen/createTKAdminPhanQuyenController');
 
 
 const router = express.Router();
@@ -199,6 +201,11 @@ router.get("/page-search-tkadmin", getSearchTKAdmin)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 router.get("/page-search-tkadmin", getHomePhanTrang_SearchTKAdmin)
 
+// get home quản lý tài khoản admin phân quyền
+router.get("/page-qly-tkadmin-phan-quyen", getHomeQLAdminPhanQuyen)
+router.get("/page-qly-tkadmin-phan-quyen", getHomePhanTrang_TKAdminPhanQuyen)
+// get trang nhập liệu create
+router.get("/create-admin-phan-quyen", getCreateTKAdminPhanQuyen)
 
 
 // get home quản lý sản phẩm là nước hoa

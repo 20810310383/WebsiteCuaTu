@@ -10,8 +10,11 @@ const TaiKhoan_Admin_Schema = new mongoose.Schema({
   },
   MatKhau: { type: String, required: true },
   HoTen: { type: String },
+  SDT: { type: String },
+  DiaChi: { type: String },
+  NgaySinh: { type: Date },
+  Note: { type: String },
   NgayTao: { type: Date, default: Date.now(), immutable: true },
-
 });
 
 TaiKhoan_Admin_Schema.plugin(mongoose_delete, { TaiKhoan_Admin_Schema: 'all' });

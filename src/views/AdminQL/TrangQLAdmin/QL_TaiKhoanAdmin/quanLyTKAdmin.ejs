@@ -112,13 +112,14 @@
                                 <th style="text-align: center; vertical-align: middle;">Mật Khẩu</th>
                                 <th style="text-align: center; vertical-align: middle;">Họ Tên</th>
                                 <th style="text-align: center; vertical-align: middle;">Ngày Tạo</th>
+                                <th style="text-align: center; vertical-align: middle;">Trạng thái</th>
                                 <th style="text-align: center; vertical-align: middle;">Chức Năng</th>
                             </tr>
                             </thead>
                             <tbody>                            
                                 <!-- Hiển thị all sản phẩm  -->                                                                                                                                                
                                     <% QLtaikhoan_kh.forEach(function(QLtaikhoan_kh, index) { %>
-                                        <tr style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;">                                                                                                                               
+                                        <tr style=" color: #180766; font-size: 18px; text-align: center;">                                                                                                                               
                                             <td><%= QLtaikhoan_kh.TenDangNhap %></td>
                                             <td>
                                                 <!-- Hiển thị mật khẩu -->
@@ -129,7 +130,14 @@
                                             </td>
                                                                                         
                                             <td><%= QLtaikhoan_kh.HoTen %></td>
-                                            <td><%= QLtaikhoan_kh.NgayTao %></td>                                                                                                                                                                                                                                                                               
+                                            <td><%= QLtaikhoan_kh.NgayTao %></td> 
+                                            <% if (QLtaikhoan_kh.deleted == true) { %>
+                                                <td><p style="color: rgb(255, 0, 0);">Không hoạt động <img width="25" src="AdminQL/HomeAdminQL/img/toggle.png"></p></td> 
+                                            <% } else { %>
+                                                <td><p style="color: rgb(12, 153, 12);">Đang hoạt động  <img width="25" src="AdminQL/HomeAdminQL/img/active-user.png"></p></td> 
+                                            <% } %>
+                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                          
                                             <td style="text-align: center; vertical-align: middle;">
                                                 <a 
                                                     class="btn btn-success button-SUA-XOA" 
@@ -139,7 +147,7 @@
                                                     id="deleteButton_<%= index %>" 
                                                     class="btn btn-danger" 
                                                     onclick="deleteAdmin('<%= QLtaikhoan_kh._id %>')"
-                                                >Delete</a>                                                
+                                                >Khóa Account</a>                                                
                                             </td>                                  
                                         </tr>                                        
                                     <% }); %>  

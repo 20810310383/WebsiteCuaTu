@@ -1,6 +1,10 @@
 const SanPham = require("../../../../models/SanPham")
 const LoaiSP = require("../../../../models/LoaiSP")
 const LoaiSPNamNu = require("../../../../models/LoaiSPNamNu")
+const PhanQuyen = require("../../../../models/PhanQuyen")
+const TaiKhoan_Admin = require("../../../../models/TaiKhoan_Admin")
+const ChucNang = require("../../../../models/ChucNang")
+
 require('rootpath')();
 const cheerio = require('cheerio');
 const moment = require('moment-timezone');
@@ -11,6 +15,24 @@ function convertToVietnamTime(dateTime) {
     // 'Asia/Ho_Chi_Minh' là mã của múi giờ Việt Nam
     return moment(dateTime).tz('Asia/Ho_Chi_Minh').format('DD-MM-YYYY ');
 }
+async function KiemTraChucNang(req, idChucNang){
+    let nvSession = req.session.user
+    console.log("req.session.user: ",req.session.user);
+
+    let count = await PhanQuyen.findOne({
+        IdAdminNhanVien: nvSession._id,
+        IdChucNang: idChucNang
+    });
+    console.log("count: ", count);
+
+    if(count){
+        console.log("thanh true ");
+        return true
+    }else {
+        console.log("thanh false ");
+        return false
+    }
+}
 
 module.exports = {
     // phân trang ...
@@ -20,10 +42,10 @@ module.exports = {
         }
         res.redirect(`/page-qly-nuoc-hoa`)
     },
-
+    
     // home quản lý nước hoa
     getHomeNuocHoa: async (req, res) => {
-
+        
         let tk = req.session.tk
         let logged = req.session.loggedIn
         let activee = 'active_sanpham'
@@ -44,6 +66,17 @@ module.exports = {
         function convertHtml(html) {
             const $ = cheerio.load(html);
             return $('body').text();
+        }
+
+        // phân quyền 
+        if(await KiemTraChucNang(req, '65eb06c95d2a4f66ed3852e4') === false){
+
+            // dùng return để dừng việc thực hiện hàm khi điều kiện không đúng
+            return res.render("AdminQL/TrangQLAdmin/QuanLySanPham/QuanLySPNuocHoa/error404_KhongCoQuyen.ejs", {
+                tk, logged, activee,
+                rootPath: '/', 
+                formatCurrency, getRelativeImagePath, convertHtml,            
+            })
         }
 
         let page = 1

@@ -117,12 +117,14 @@ function updateAdmin(id) {
     const TenDangNhap = document.getElementById('TenDangNhap').value;
     const HoTen = document.getElementById('HoTen').value;
     const MatKhau = document.getElementById('MatKhau').value;
+    const Deleted = document.getElementById('Deleted').value;
 
     // Dữ liệu cập nhật
     const updateData = {
         TenDangNhap: TenDangNhap,
         HoTen: HoTen,
-        MatKhau: MatKhau
+        MatKhau: MatKhau,
+        deleted: Deleted
     };
 
     fetch(`/update-tk-admin/${id}`, {

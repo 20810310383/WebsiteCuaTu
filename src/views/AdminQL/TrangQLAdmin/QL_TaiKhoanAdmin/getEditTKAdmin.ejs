@@ -118,6 +118,19 @@
                                     <div id="name-error" class="form-text text-danger"></div>
                                 </div>
 
+                                <div class="mb-3">                                  
+                                    <label for="Deleted" class="form-label" title="Tài Khoản và Họ Tên">Trạng thái <span style="color: red;font-size: 16px;">*</span></label>
+                                    <select class="form-control" id="Deleted" style="width: 400px;" name="Deleted">
+                                        <!-- <%  var idDeleted = tkEdit.deleted == false ? "Đang họat động" : "Không hoạt động"  %> -->
+                                        <% if (tkEdit.deleted == true) { %>
+                                            <option value="true" selected>Không hoạt động</option> 
+                                            <option value="false" >Đang hoạt động</option> 
+                                        <% } else { %>
+                                            <option value="false" selected>Đang hoạt động</option> 
+                                        <% } %>                                                                                
+                                    </select>
+                                </div>
+
                                 <div class="mb-3">
                                     <label for="MatKhau" class="form-label">Mật khẩu <span style="color: red;font-size: 16px;">*</span></label>
                                     <input style="width: 400px;" value="<%= tkEdit.MatKhau %>" type="password" class="form-control" name="MatKhau" id="MatKhau" required>  

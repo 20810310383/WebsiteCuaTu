@@ -1,4 +1,5 @@
-
+const PhanQuyen = require("../../../models/PhanQuyen")
+const ChucNang = require("../../../models/ChucNang")
 require('rootpath')();
 
 // --------------------------------------------

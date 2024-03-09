@@ -38,7 +38,7 @@ module.exports = {
         // Lưu trữ giá trị tìm kiếm trong session hoặc cookie
         req.session.tenSPSearch = tenSPSearch;
 
-        const timKiemTaiKhoanKH = await TaiKhoan_Admin.find({ TenDangNhap: { $regex: new RegExp(tenSPSearch, 'i') }, deleted: false }).skip(skip).limit(limit).exec();
+        const timKiemTaiKhoanKH = await TaiKhoan_Admin.find({ TenDangNhap: { $regex: new RegExp(tenSPSearch, 'i') }, }).skip(skip).limit(limit).exec();
 
         // Chuyển đổi ngày giờ tạo tài khoản admin sang múi giờ Việt Nam
         const allTKKHWithVietnamTime = timKiemTaiKhoanKH.map(item => ({
@@ -52,7 +52,7 @@ module.exports = {
         }
 
         // tính toán tổng số trang cần hiển thị bằng cách: CHIA (tổng số sản phẩm) cho (số lượng sản phẩm trên mỗi trang)
-        let numPage = parseInt((await TaiKhoan_Admin.find({ TenDangNhap: { $regex: new RegExp(tenSPSearch, 'i') }, deleted: false })).length) / limit
+        let numPage = parseInt((await TaiKhoan_Admin.find({ TenDangNhap: { $regex: new RegExp(tenSPSearch, 'i') }, })).length) / limit
 
         numPage = numPage - parseInt(numPage) === 0 ? numPage : numPage + 1 
 

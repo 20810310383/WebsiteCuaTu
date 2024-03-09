@@ -11,7 +11,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets\img\logo-KTT1.ico">
 
-    <title>Tạo tài khoản admin</title>
+    <title>Quản lý sản phẩm nước hoa</title>
 
     <!-- Custom fonts for this template-->
     <link href="AdminQL/HomeAdminQL/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -58,7 +58,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <%- include("../partials/danhMuc.ejs") %>
+        <%- include("../../partials/danhMuc.ejs") %>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -76,9 +76,9 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form action="/page-search-tkadmin" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" id="search-ben-admin">
+                    <form action="/search-qly-nuoc-hoa" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" id="search-ben-admin">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm account admin đi sếp..." name="search_ben_admin"
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm nước hoa đi sếp..." name="search_ben_admin"
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
@@ -89,7 +89,7 @@
                     </form>
 
                     <!-- Topbar Navbar -->
-                    <%- include("../partials/topAccount.ejs") %>
+                    <%- include("../../partials/topAccount.ejs") %>
 
                 </nav>
                 <!-- End of Topbar -->
@@ -97,51 +97,26 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Tạo tài khoản đi cậu</h1>                        
-                    </div>                
+                    <!-- Page Heading -->                                                       
 
-                    <!-- Content Row -->
-                    <div class="row">
-                        <div class="container" style="display: flex; justify-content: center;">
-                            <form >
-                                <div class="mb-3">                                  
-                                    <label for="TenDangNhap" class="form-label">Tài khoản đăng nhập <span style="color: red;font-size: 16px;">*</span></label>
-                                    <input style="width: 400px;" type="text" class="form-control" name="TenDangNhap" id="TenDangNhap" aria-describedby="emailHelp" required>
-                                    <div id="username-error" class="form-text text-danger"></div>
-                                </div>
+                </div>
 
-                                <div class="mb-3">
-                                    <label for="HoTen" class="form-label">Họ và tên <span style="color: red;font-size: 16px;">*</span></label>
-                                    <input style="width: 400px;" type="text" class="form-control" name="HoTen" id="HoTen" aria-describedby="emailHelp" required>
-                                    <div id="name-error" class="form-text text-danger"></div>
-                                </div>
 
-                                <div class="mb-3">
-                                    <label for="MatKhau" class="form-label">Mật khẩu <span style="color: red;font-size: 16px;">*</span></label>
-                                    <input style="width: 400px;" type="password" class="form-control" name="MatKhau" id="MatKhau" required>  
-                                    <br>                                  
-                                    <a id="togglePassword" style="cursor: pointer;"> <i class="fas fa-eye" style="color: blue; margin-left: 20px; cursor: pointer;"></i>&nbsp;Hiển thị mật khẩu</a>
-                                    <div id="password-error" class="form-text text-danger"></div>
-                                </div>
-                                
-                                <a                                      
-                                    onclick="history.go(-1);"
-                                    class="btn btn-dark" >Trở Về </a>
-                                
-                                <a                                                
-                                    class="btn btn-primary" 
-                                    onclick="createAdmin()"
-                                >Tạo Mới</a>   
-                            </form>    
-                        </div>
-                                         
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- 404 Error Text -->
+                    <div class="text-center">
+                        <div class="error mx-auto" data-text="404">404</div>
+                        <p class="lead text-gray-800 mb-5">Page Not Found</p>
+                        <p class="text-gray-500 mb-0">Bạn không có quyền truy cập vào trang này!</p>
+                        <a href="/home-page-admin">&larr; Back to Home</a>
                     </div>
 
                 </div>
                 <!-- /.container-fluid -->
-                
+
+
             </div>
             <!-- End of Main Content -->
 
@@ -204,26 +179,9 @@
     <script src="AdminQL/HomeAdminQL/js/demo/chart-area-demo.js"></script>
     <script src="AdminQL/HomeAdminQL/js/demo/chart-pie-demo.js"></script>
 
-    <script src="AdminQL/HomeAdminQL/js/togglePassword.js"></script>  
-    <script src="AdminQL/HomeAdminQL/js/xuLyNutCreateTK.js"></script>  
+    <script src="assets\js\hamDinhDangTien_VaLinkAnh.js"></script>
+    <script src="AdminQL/HomeAdminQL/js/xuLyNutXoaSP.js"></script>
 
-    <!-- xử lý mắt hiển thị/ẩn mật khẩu -->
-    <script>
-        document.getElementById('togglePassword').addEventListener('click', function () {
-            var passwordField = document.getElementById('MatKhau');
-            var passwordIcon = document.getElementById('togglePassword').querySelector('i');
-
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                passwordIcon.classList.remove('fa-eye');
-                passwordIcon.classList.add('fa-eye-slash');
-            } else {
-                passwordField.type = 'password';
-                passwordIcon.classList.remove('fa-eye-slash');
-                passwordIcon.classList.add('fa-eye');
-            }
-        });
-    </script>
     
 </body>
 

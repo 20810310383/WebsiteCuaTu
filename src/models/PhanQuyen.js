@@ -10,18 +10,18 @@ const PhanQuyen_Schema = new mongoose.Schema({
 });
 
 // Hook trước khi xóa
-PhanQuyen_Schema.pre('remove', async function(next) {
-    try {
-        // Xóa nhân viên từ bảng TaiKhoan_Admin
-        await mongoose.model('TaiKhoan_Admin').deleteMany({ _id: this.IdAdminNhanVien });
+// PhanQuyen_Schema.pre('remove', async function(next) {
+//     try {
+//         // Xóa nhân viên từ bảng TaiKhoan_Admin
+//         await mongoose.model('TaiKhoan_Admin').deleteMany({ _id: this.IdAdminNhanVien });
 
 
-        next();
-    } catch (error) {
-        next(error);
-    }
-});
+//         next();
+//     } catch (error) {
+//         next(error);
+//     }
+// });
 
-PhanQuyen_Schema.plugin(mongoose_delete, { PhanQuyen_Schema: 'all' });
+// PhanQuyen_Schema.plugin(mongoose_delete, { PhanQuyen_Schema: 'all' });
 
 module.exports = mongoose.model("PhanQuyen", PhanQuyen_Schema);

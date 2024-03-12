@@ -31,7 +31,7 @@ async function KiemTraChucNang(req, idChucNang){
 
 module.exports = {
 
-    // phân trang ...
+    // phân trang ... (hiện tại không cần)
     getHomePhanTrang_TKAdminPhanQuyen: (req, res) => { 
         if (req.query.page) {
             return res.redirect(`/page-qly-tkadmin-phan-quyen?page=${req.query.page}`)
@@ -45,16 +45,16 @@ module.exports = {
         let logged = req.session.loggedIn
         let activee = 'danhmucquanly'
 
-        let page = 1
-        const limit = 6
+        // let page = 1
+        // const limit = 6
         
-        if(req.query.page){
-            page = req.query.page
-            page = page < 1 ? page + 1 : page
-        }
-        
-        let skip = (page - 1) * limit
-        const allPhanQuyen  = await PhanQuyen.find({}).populate('IdAdminNhanVien').populate('IdChucNang').skip(skip).limit(limit).exec()
+        // if(req.query.page){
+        //     page = req.query.page
+        //     page = page < 1 ? page + 1 : page
+        // }        
+        // let skip = (page - 1) * limit
+
+        const allPhanQuyen  = await PhanQuyen.find({}).populate('IdAdminNhanVien').populate('IdChucNang').exec()
         console.log("tai khoan admin: ", allPhanQuyen )
 
         // Tạo một đối tượng để lưu trữ thông tin của mỗi nhân viên
@@ -67,11 +67,12 @@ module.exports = {
             // Kiểm tra xem nhân viên đã được thêm vào danh sách hay chưa
             if (!employees[IdAdminNhanVien._id]) {
                 employees[IdAdminNhanVien._id] = {
-                    _id: phanQuyen._id,
+                    _idAdminNV: IdAdminNhanVien._id,
                     TenDangNhap: IdAdminNhanVien.TenDangNhap,
                     MatKhau: IdAdminNhanVien.MatKhau,
                     HoTen: IdAdminNhanVien.HoTen,
                     GhiChu: phanQuyen.GhiChu,
+                    deleted: IdAdminNhanVien.deleted,
                     TenChucNang: [] // Mảng để lưu trữ các chức năng của nhân viên
                 };
             }
@@ -86,19 +87,19 @@ module.exports = {
         console.log("employeesArray: ",employeesArray);
        
 
-        // tính toán tổng số trang cần hiển thị bằng cách: CHIA (tổng số sản phẩm) cho (số lượng sản phẩm trên mỗi trang)
-        let numPage = parseInt((await PhanQuyen.find({}).populate('IdAdminNhanVien').populate('IdChucNang')).length) / limit
+        // // tính toán tổng số trang cần hiển thị bằng cách: CHIA (tổng số sản phẩm) cho (số lượng sản phẩm trên mỗi trang)
+        // let numPage = parseInt((await PhanQuyen.find({}).populate('IdAdminNhanVien').populate('IdChucNang')).length) / limit
 
-        // kiểm tra xem phần thập phân của numPage có bằng 0 hay không
-        // Nếu bằng 0, nghĩa là numPage là một số nguyên, không cần phải thêm một trang nữa
-        // Ngược lại, nếu có phần thập phân, nó thêm một trang nữa để đảm bảo rằng tất cả các sản phẩm được hiển thị.
-        numPage = numPage - parseInt(numPage) === 0 ? numPage : numPage + 1   
+        // // kiểm tra xem phần thập phân của numPage có bằng 0 hay không
+        // // Nếu bằng 0, nghĩa là numPage là một số nguyên, không cần phải thêm một trang nữa
+        // // Ngược lại, nếu có phần thập phân, nó thêm một trang nữa để đảm bảo rằng tất cả các sản phẩm được hiển thị.
+        // numPage = numPage - parseInt(numPage) === 0 ? numPage : numPage + 1   
 
         // res.json({data: allPhanQuyen })
         res.render("AdminQL/TrangQLAdmin/QL_TaiKhoanAdminPhanQuyen/quanLyTKAdminPhanQuyen.ejs", {
             tk, logged, activee,
-            soTrang: numPage, 
-            curPage: page, 
+            // soTrang: numPage, 
+            // curPage: page, 
             QLtaikhoan_kh: employeesArray ,
             searchSPSession: req.session.tenSPSearch || '',
         })

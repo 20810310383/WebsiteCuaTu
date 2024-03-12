@@ -37,7 +37,8 @@ const { getEditGame, handleEditGame } = require('../controllers/AdminQL/QuanLySa
 const { getHomeSearchGamePhanTrang, getHomeSearchGame } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/searchSPGame');
 const { getHomeDaXoaNuocHoaPhanTrang, getHomeDaXoaNuocHoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/daXoaSPNuocHoa');
 const { getHomeQLAdminPhanQuyen, getHomePhanTrang_TKAdminPhanQuyen } = require('../controllers/AdminQL/QuanLyTKAdmin_PhanQuyen/quanLyTKAdminPhanQuyenController');
-const { getCreateTKAdminPhanQuyen } = require('../controllers/AdminQL/QuanLyTKAdmin_PhanQuyen/createTKAdminPhanQuyenController');
+const { getCreateTKAdminPhanQuyen, createTKAdminPhanQuyen } = require('../controllers/AdminQL/QuanLyTKAdmin_PhanQuyen/createTKAdminPhanQuyenController');
+const { deleteTKPhanQuyen } = require('../controllers/AdminQL/QuanLyTKAdmin_PhanQuyen/deleteTKAdminPhanQuyenController');
 
 
 const router = express.Router();
@@ -203,9 +204,16 @@ router.get("/page-search-tkadmin", getHomePhanTrang_SearchTKAdmin)
 
 // get home quản lý tài khoản admin phân quyền
 router.get("/page-qly-tkadmin-phan-quyen", getHomeQLAdminPhanQuyen)
-router.get("/page-qly-tkadmin-phan-quyen", getHomePhanTrang_TKAdminPhanQuyen)
+// router.get("/page-qly-tkadmin-phan-quyen", getHomePhanTrang_TKAdminPhanQuyen)
 // get trang nhập liệu create
 router.get("/create-admin-phan-quyen", getCreateTKAdminPhanQuyen)
+// xử lý nút create admin phân quyền
+router.post("/create-admin-phan-quyen", createTKAdminPhanQuyen)
+// xóa tài khoản phân quyền
+router.delete("/xoatk-phan-quyen", deleteTKPhanQuyen)
+
+
+
 
 
 // get home quản lý sản phẩm là nước hoa

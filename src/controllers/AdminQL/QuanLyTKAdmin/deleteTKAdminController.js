@@ -13,7 +13,7 @@ module.exports = {
         let xoaAdmin = await TaiKhoan_Admin.delete({_id: idXoa})
 
         return res.status(200).json({
-            message: "Bạn đã xóa tài admin hàng thành công!",
+            message: "Bạn đã khóa tài admin hàng thành công!",
             success: true,
             KQ: 0,
             data: xoaAdmin

@@ -116,12 +116,17 @@
                                 </div>
 
                                 <div class="mb-3">                                  
-                                    <label for="ChucNang1" class="form-label">Chức năng quản lý <span style="color: red;font-size: 16px;">*</span></label> <br>
-                                    <% chucNang.forEach(function(chucNang, index) { %>
-                                    <input type="checkbox" id="ChucNang-<%= index %>" name="ChucNang1" value="<%= chucNang._id %>">
-                                    <label for="ChucNang-<%= index %>"> <%= chucNang.TenChucNang %></label><br>
+                                    <label for="ChucNang" class="form-label">Chức năng quản lý <span style="color: red;font-size: 16px;">*</span></label> <br>
+                                    <% chucNang.forEach(function(chucNang) { %>
+                                    <input type="checkbox" id="ChucNang-<%= chucNang._id %>" name="ChucNang" value="<%= chucNang._id %>">
+                                    <label for="ChucNang-<%= chucNang._id %>"> <%= chucNang.TenChucNang %></label><br>
                                     <% }); %>
-                                </div>                                
+                                </div> 
+                                
+                                <div class="mb-3">                                  
+                                    <label for="GhiChu" class="form-label">Ghi chú </label> <br>
+                                    <input type="text" name="GhiChu" id="GhiChu" class="form-control">                                    
+                                </div> 
                                 
                                 
                                 <a                                      
@@ -130,7 +135,7 @@
                                 
                                 <a                                                
                                     class="btn btn-primary" 
-                                    onclick="createAdmin()"
+                                    onclick="createAdminPhanQuyen()"
                                 >Tạo Mới</a>   
                             </form>    
                         </div>
@@ -204,6 +209,7 @@
 
     <script src="AdminQL/HomeAdminQL/js/togglePassword.js"></script>  
     <script src="AdminQL/HomeAdminQL/js/xuLyNutCreateTK.js"></script>  
+
 
     <!-- xử lý mắt hiển thị/ẩn mật khẩu -->
     <script>

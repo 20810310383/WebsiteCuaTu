@@ -76,17 +76,9 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form action="/page-search-tkadmin" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" id="search-ben-admin">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm account admin đi sếp..." name="search_ben_admin" 
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <a                                      
+                            href="/page-qly-tkadmin"
+                            class="btn btn-dark" >Trở Về </a> 
 
                     <!-- Topbar Navbar -->
                     <%- include("../partials/topAccount.ejs") %>
@@ -99,6 +91,8 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        
+                                
                         <h1 class="h3 mb-0 text-gray-800">Quản lý tài khoản Admin & Nhân viên - Phân quyền </h1>    
                         <a href="/create-admin-phan-quyen" class="btn btn-primary">Thêm tài khoản cần phân quyền</a>                    
                     </div>                
@@ -108,20 +102,34 @@
                         <table class="table table-hover">
                             <thead>                                
                             <tr style="background-color: #DC143C; color: white; font-size: 18px; ">
+                                <th style="text-align: center; vertical-align: middle;">Tác vụ</th>
                                 <th style="width: 150px;text-align: center; vertical-align: middle; width: 200px;">Tên Đăng Nhập</th>
                                 <th style="text-align: center; vertical-align: middle;">Mật Khẩu</th>
                                 <th style="text-align: center; vertical-align: middle;">Họ Tên</th>
+                                <th style="text-align: center; vertical-align: middle;">Chức Năng Quản Lý</th>
+                                <th style="text-align: center; vertical-align: middle;">Trạng thái</th>
                                 <th style="text-align: center; vertical-align: middle;">Note</th>
-                                <th style="text-align: center; vertical-align: middle;width: 350px;">Chức Năng Quản Lý</th>
-                                <th style="text-align: center; vertical-align: middle;">Options</th>
                             </tr>
                             </thead>
                             <tbody>                            
                                 <!-- Hiển thị all sản phẩm  -->                                                                                                                                                
                                     <% QLtaikhoan_kh.forEach(function(QLtaikhoan_kh, index) { %>
-                                        <tr style=" color: #180766; font-size: 18px; text-align: center;">                                                                                                                               
-                                            <td><%= QLtaikhoan_kh.TenDangNhap %></td>
-                                            <td>
+                                        <tr style=" color: #180766; font-size: 18px; text-align: center;">    
+                                            <td style="text-align: center; vertical-align: middle;">
+                                                <a 
+                                                    class="btn btn-success button-SUA-XOA" 
+                                                    href="/get-page-tk-admin-edit?idEdit=<%= QLtaikhoan_kh._id %>">Edit</a>   
+                                                        
+                                                <!-- <a                                                                                                    
+                                                    class="btn btn-danger" 
+                                                    onclick="deleteAdminPhanQuyen('<%= QLtaikhoan_kh._idAdminNV %>')"
+                                                >Delete</a>                                                 -->
+                                                <input type="hidden" id="adminId" value="<%= QLtaikhoan_kh._idAdminNV %>" name="adminId">
+                                                <a class="btn btn-danger" onclick="deleteAdminPhanQuyenFromInput()">Delete</a>
+                                            </td>  
+
+                                            <td style="text-align: center; vertical-align: middle;"><%= QLtaikhoan_kh.TenDangNhap %></td>
+                                            <td style="text-align: center; vertical-align: middle;">
                                                 <!-- Hiển thị mật khẩu -->
                                                 <span id="password<%= index %>">********</span>
                                                     
@@ -129,20 +137,15 @@
                                                 <i id="togglePasswordIcon<%= index %>" class="fas fa-eye" onclick="togglePassword('<%= index %>', '<%= QLtaikhoan_kh.MatKhau %>')"></i>
                                             </td>
                                                                                         
-                                            <td><%= QLtaikhoan_kh.HoTen %></td>
-                                            <td><%= QLtaikhoan_kh.GhiChu %></td>
-                                            <td><pre style="font-size: 17px;font-family: Arial, Helvetica, sans-serif;"><%= QLtaikhoan_kh.TenChucNang.join('\n') %></pre></td>
-                                            <td style="text-align: center; vertical-align: middle;">
-                                                <a 
-                                                    class="btn btn-success button-SUA-XOA" 
-                                                    href="/get-page-tk-admin-edit?idEdit=<%= QLtaikhoan_kh._id %>">Edit</a>   
-                                                        
-                                                <a                                                
-                                                    id="deleteButton_<%= index %>" 
-                                                    class="btn btn-danger" 
-                                                    onclick="deleteAdmin('<%= QLtaikhoan_kh._id %>')"
-                                                >Delete</a>                                                
-                                            </td>                                  
+                                            <td style="text-align: center; vertical-align: middle;"><%= QLtaikhoan_kh.HoTen %></td>                                            
+                                            <td style="text-align: center; vertical-align: middle;"><pre style="font-size: 17px;font-family: Arial, Helvetica, sans-serif;"><%= QLtaikhoan_kh.TenChucNang.join('\n') %></pre></td>                                            
+                                            <td style="text-align: center; vertical-align: middle;"><%= QLtaikhoan_kh.GhiChu %></td>
+                                            <% if (QLtaikhoan_kh.deleted == true) { %>
+                                                <td style="text-align: center; vertical-align: middle;"><p style="color: rgb(255, 0, 0);">Không hoạt động <img width="25" src="AdminQL/HomeAdminQL/img/toggle.png"></p></td> 
+                                            <% } else { %>
+                                                <td style="text-align: center; vertical-align: middle;"><p style="color: rgb(12, 153, 12);">Đang hoạt động  <img width="25" src="AdminQL/HomeAdminQL/img/active-user.png"></p></td> 
+                                            <% } %>  
+                                                                                                                                                                                                                  
                                         </tr>                                        
                                     <% }); %>  
                                 <!-- Hiển thị all sản phẩm - end -->   
@@ -154,35 +157,7 @@
                 <!-- /.container-fluid -->
 
                 <!-- đoạn này phân trang -->
-                <!-- <div class="pagination-container">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                        <% 
-                          const pre = curPage <= 1 ? curPage : curPage - 1; 
-                          const next = curPage >= soTrang ? curPage : parseInt(curPage) + 1            
-                        %>
-                            <li class="page-item">
-                                <a class="page-link" style=" font-weight: bolder;" href="/page-qly-tkadmin-phan-quyen?page=<%=pre%>">
-                                    &lt;
-                                </a>
-                            </li>
-                        <% for(var i=1; i <=soTrang; i++) { 
-                            var active="" ; 
-                            if(i == curPage) active="active" ; %>
-                            <li class="page-item <%=active%>">
-                                <a class="page-link" style="font-size: 18px; font-weight: bolder;"  href="/page-qly-tkadmin-phan-quyen?page=<%=i%>">
-                                    <%=i%>                          
-                                </a>
-                            </li>                
-                        <% } %>                                                      
-                            <li class="page-item">
-                                <a class="page-link" style=" font-weight: bolder;" href="/page-qly-tkadmin-phan-quyen?page=<%=next%>">
-                                    &gt;
-                                </a>
-                            </li>                     
-                        </ul>
-                    </nav>
-                </div>  -->
+               
                 <!-- đoạn này phân trang - end -->
             </div>
             <!-- End of Main Content -->

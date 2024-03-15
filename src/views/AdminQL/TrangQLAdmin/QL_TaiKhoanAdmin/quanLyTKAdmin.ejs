@@ -99,9 +99,15 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <a href="/page-qly-tkadmin-phan-quyen" class="btn btn-success">Xem chi tiết phân quyền tài khoản</a>                    
+                        <a href="/page-qly-tkadmin-phan-quyen" class="btn btn-success" style="position: relative;display: inline-flex;width: 300px;">
+                            <img width="23" src="AdminQL/HomeAdminQL/img/visible.png" />
+                            <p style="position: absolute;top: 6px;right: 10px;">Xem chi tiết phân quyền tài khoản</p>                            
+                        </a>                    
                         <h1 class="h3 mb-0 text-gray-800">Quản lý tài khoản Admin</h1>    
-                        <a href="/create-admin" class="btn btn-primary">Thêm tài khoản</a>                    
+                        <a href="/create-admin" class="btn btn-primary" style="position: relative;display: inline-flex;width: 165px;">
+                            <img width="23" src="AdminQL/HomeAdminQL/img/user.png" />
+                            <p style="position: absolute;top: 6px;right: 10px;">Thêm tài khoản</p>
+                        </a>                    
                     </div>                
 
                     <!-- Content Row -->
@@ -127,7 +133,7 @@
                                                 <span id="password<%= index %>">********</span>
                                                     
                                                 <!-- Icon ẩn/hiện mật khẩu -->
-                                                <i id="togglePasswordIcon<%= index %>" class="fas fa-eye" onclick="togglePassword('<%= index %>', '<%= QLtaikhoan_kh.MatKhau %>')"></i>
+                                                <i id="togglePasswordIcon<%= index %>" class="fas fa-eye-slash" onclick="togglePassword('<%= index %>', '<%= QLtaikhoan_kh.MatKhau %>')"></i>
                                             </td>
                                                                                         
                                             <td><%= QLtaikhoan_kh.HoTen %></td>
@@ -140,15 +146,21 @@
                                                                                                                                                                                                                                                                                                                           
                                                                                                                                                                                                                                                                                                                           
                                             <td style="text-align: center; vertical-align: middle;">
-                                                <a 
+                                                <a  style="position: relative;display: inline-flex;width: 85px;"
                                                     class="btn btn-success button-SUA-XOA" 
-                                                    href="/get-page-tk-admin-edit?idEdit=<%= QLtaikhoan_kh._id %>">Edit</a>   
+                                                    href="/get-page-tk-admin-edit?idEdit=<%= QLtaikhoan_kh._id %>">
+                                                    <img width="22" src="AdminQL/HomeAdminQL/img/pencil.png" />
+                                                    <p style="position: absolute;top: 6px;right: 10px;">Edit</p>
+                                                </a>   
                                                         
-                                                <a                                                
+                                                <a  style="position: relative;display: inline-flex;width: 150px;"                                          
                                                     id="deleteButton_<%= index %>" 
                                                     class="btn btn-danger" 
                                                     onclick="deleteAdmin('<%= QLtaikhoan_kh._id %>')"
-                                                >Khóa Account</a>                                                
+                                                >
+                                                    <img width="25" src="AdminQL/HomeAdminQL/img/ban-user.png" />
+                                                    <p style="position: absolute;top: 6px;right: 10px;">Khóa Account</p>
+                                                </a>                                                
                                             </td>                                  
                                         </tr>                                        
                                     <% }); %>  

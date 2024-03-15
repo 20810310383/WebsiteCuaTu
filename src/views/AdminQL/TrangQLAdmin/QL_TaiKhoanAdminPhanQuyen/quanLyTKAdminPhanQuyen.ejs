@@ -76,9 +76,12 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <a                                      
-                            href="/page-qly-tkadmin"
-                            class="btn btn-dark" >Trở Về </a> 
+                    <a  style="position: relative;display: inline-flex;width: 85px;"                                    
+                        href="/page-qly-tkadmin"
+                        class="btn btn-dark" >
+                        <img width="18" src="AdminQL/HomeAdminQL/img/left-chevron.png" />    
+                        <p style="position: absolute;top: 4px;right: 12px;">Back</p>
+                    </a> 
 
                     <!-- Topbar Navbar -->
                     <%- include("../partials/topAccount.ejs") %>
@@ -94,7 +97,10 @@
                         
                                 
                         <h1 class="h3 mb-0 text-gray-800">Quản lý tài khoản Admin & Nhân viên - Phân quyền </h1>    
-                        <a href="/create-admin-phan-quyen" class="btn btn-primary">Thêm tài khoản cần phân quyền</a>                    
+                        <a href="/create-admin-phan-quyen" class="btn btn-primary" style="position: relative;display: inline-flex;width: 280px;">
+                            <img width="23" src="AdminQL/HomeAdminQL/img/user.png" />
+                            <p style="position: absolute;top: 6px;right: 10px;">Thêm tài khoản cần phân quyền</p>                            
+                        </a>                    
                     </div>                
 
                     <!-- Content Row -->
@@ -116,16 +122,22 @@
                                     <% QLtaikhoan_kh.forEach(function(QLtaikhoan_kh, index) { %>
                                         <tr style=" color: #180766; font-size: 18px; text-align: center;">    
                                             <td style="text-align: center; vertical-align: middle;">
-                                                <a 
+                                                <a  style="position: relative;display: inline-flex;width: 85px;"
                                                     class="btn btn-success button-SUA-XOA" 
-                                                    href="/get-page-tk-admin-edit?idEdit=<%= QLtaikhoan_kh._id %>">Edit</a>   
+                                                    href="/get-page-tk-admin-edit?idEdit=<%= QLtaikhoan_kh._id %>">
+                                                    <img width="22" src="AdminQL/HomeAdminQL/img/pencil.png" />
+                                                    <p style="position: absolute;top: 6px;right: 10px;">Edit</p>
+                                                </a>   
                                                         
                                                 <!-- <a                                                                                                    
                                                     class="btn btn-danger" 
                                                     onclick="deleteAdminPhanQuyen('<%= QLtaikhoan_kh._idAdminNV %>')"
                                                 >Delete</a>                                                 -->
                                                 <input type="hidden" id="adminId" value="<%= QLtaikhoan_kh._idAdminNV %>" name="adminId">
-                                                <a class="btn btn-danger" onclick="deleteAdminPhanQuyenFromInput()">Delete</a>
+                                                <a class="btn btn-danger" style="position: relative;display: inline-flex;width: 100px;" onclick="deleteAdminPhanQuyenFromInput()">
+                                                    <img width="25" src="AdminQL/HomeAdminQL/img/delete.png" />
+                                                    <p style="position: absolute;top: 7px;right: 10px;">Delete</p>
+                                                </a>
                                             </td>  
 
                                             <td style="text-align: center; vertical-align: middle;"><%= QLtaikhoan_kh.TenDangNhap %></td>

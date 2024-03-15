@@ -126,15 +126,20 @@
                                             <td><%= QLtaikhoan_kh.HoTen %></td>
                                             <td><%= QLtaikhoan_kh.NgayTao %></td>                                                                                                                                                                                                                                                                               
                                             <td style="text-align: center; vertical-align: middle;">
-                                                <a 
+                                                <a  style="position: relative;display: inline-flex;width: 80px;"
                                                     class="btn btn-success button-SUA-XOA" 
-                                                    href="/get-page-edit?idEdit=<%= QLtaikhoan_kh._id %>">Edit</a>   
-                                                        
-                                                <a                                                
+                                                    href="/get-page-edit?idEdit=<%= QLtaikhoan_kh._id %>">
+                                                    <img width="22" src="AdminQL/HomeAdminQL/img/pencil.png" />
+                                                    <p style="position: absolute;top: 6px;right: 10px;">Edit</p>
+                                                </a>        
+                                                <a  style="position: relative;display: inline-flex;width: 100px;"                                          
                                                     id="deleteButton_<%= index %>" 
                                                     class="btn btn-danger" 
                                                     onclick="deleteUser('<%= QLtaikhoan_kh._id %>')"
-                                                >Delete</a>   
+                                                >
+                                                    <img width="25" src="AdminQL/HomeAdminQL/img/delete.png" />
+                                                    <p style="position: absolute;top: 7px;right: 10px;">Delete</p>
+                                                </a>   
                                             </td>                                  
                                         </tr>
                                     <% }); %>  

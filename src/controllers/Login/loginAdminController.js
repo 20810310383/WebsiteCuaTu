@@ -21,7 +21,7 @@ module.exports = {
             let matkhau = req.body.MatKhau
       
             // Check if the user exists
-            const user = await TaiKhoan_Admin.findOne({ TenDangNhap: tk, MatKhau: matkhau });
+            const user = await TaiKhoan_Admin.findOne({ TenDangNhap: tk, MatKhau: matkhau, deleted: false });
             if (!user) {
                 return res.status(401).json({ message: 'Sai tài khoản hoặc mật khẩu' });
             }                               

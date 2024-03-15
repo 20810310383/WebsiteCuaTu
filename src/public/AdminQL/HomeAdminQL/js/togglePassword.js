@@ -5,9 +5,9 @@ function togglePassword(index, actualPassword) {
     // Toggle password visibility
     if (passwordSpan.innerHTML === '********') {
         passwordSpan.innerHTML = actualPassword; // Display the actual password
-        toggleIcon.className = 'fas fa-eye-slash'; // Icon when password is visible
+        toggleIcon.className = 'fas fa-eye'; // Icon when password is visible
     } else {
         passwordSpan.innerHTML = '********'; // Hide the actual password
-        toggleIcon.className = 'fas fa-eye'; // Icon when password is hidden
+        toggleIcon.className = 'fas fa-eye-slash'; // Icon when password is hidden
     }
 }

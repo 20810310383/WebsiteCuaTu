@@ -95,6 +95,7 @@ module.exports = {
 
         let skip = (page - 1) * limit
 
+        // tìm trên thanh tìm kiếm
         if(tenSPSearch){
             const all = await SanPham.find({TenSP: { $regex: new RegExp(tenSPSearch, 'i') }}).populate('IdLoaiSP').populate('IdNam_Nu').exec();
             const loaiSPNamNu = await LoaiSPNamNu.find().exec();
@@ -123,6 +124,7 @@ module.exports = {
                 loaiSPNamNu,
                 convertPriceRange
             })
+            
         } else if(tenloaiNH && giaSP) {
             
             const loaiSPNamNu = await LoaiSPNamNu.find().exec();

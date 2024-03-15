@@ -135,7 +135,7 @@
                                     <label for="MatKhau" class="form-label">Mật khẩu <span style="color: red;font-size: 16px;">*</span></label>
                                     <input style="width: 400px;" value="<%= tkEdit.MatKhau %>" type="password" class="form-control" name="MatKhau" id="MatKhau" required>  
                                     <br>                                  
-                                    <a id="togglePassword" style="cursor: pointer;"> <i class="fas fa-eye" style="color: blue; margin-left: 20px; cursor: pointer;"></i>&nbsp;Hiển thị mật khẩu</a>
+                                    <a id="togglePassword" style="cursor: pointer;"> <i class="fas fa-eye-slash" style="color: blue; margin-left: 20px; cursor: pointer;"></i>&nbsp;Hiển thị mật khẩu</a>
                                     <div id="password-error" class="form-text text-danger"></div>
                                 </div>
                                 
@@ -258,12 +258,12 @@
 
             if (passwordField.type === 'password') {
                 passwordField.type = 'text';
-                passwordIcon.classList.remove('fa-eye');
-                passwordIcon.classList.add('fa-eye-slash');
+                passwordIcon.classList.add('fa-eye');
+                passwordIcon.classList.remove('fa-eye-slash');
             } else {
                 passwordField.type = 'password';
-                passwordIcon.classList.remove('fa-eye-slash');
-                passwordIcon.classList.add('fa-eye');
+                passwordIcon.classList.add('fa-eye-slash');
+                passwordIcon.classList.remove('fa-eye');
             }
         });
     </script>

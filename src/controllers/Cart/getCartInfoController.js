@@ -27,7 +27,8 @@ module.exports = {
     
             for (const item of cart.cart.items) {                
                 totalQuaty += item.qty;
-                totalPrice += item.qty * item.productId.GiaBan; 
+                //totalPrice += item.qty * item.productId.GiaBan; 
+                totalPrice += item.qty * item.donGia; 
             }            
     
             // Kiểm tra điều kiện và thiết lập giá trị của PhiShip

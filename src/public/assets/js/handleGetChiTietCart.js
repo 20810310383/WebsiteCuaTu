@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 productLink.textContent = product.productDetails.TenSP; 
                 const cartPrice = document.createElement('span');
                 cartPrice.classList.add('cart_price');
-                cartPrice.textContent = formatCurrency(product.totalPriceForItem); 
+                cartPrice.textContent = formatCurrency(product.donGia); 
                 const quantity = document.createElement('span');
                 quantity.classList.add('quantity');
                 quantity.textContent = 'Số lượng đặt: ' + product.qty;

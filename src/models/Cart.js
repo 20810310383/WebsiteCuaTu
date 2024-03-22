@@ -13,6 +13,11 @@ const CartSchema = new Schema({
                 ref: 'SanPham',
                 required: true
             },
+            donGia: {
+                type: Number,
+                required: true,
+                // default: 1
+            },
             qty: {
                 type: Number,
                 required: true,

@@ -39,6 +39,10 @@ const HoaDon_Schema = new mongoose.Schema({
             type: Number,
             required: true
           },
+          donGia: {
+            type: Number,
+            required: true
+          },
           size: { type: String}
       }],
     },

@@ -305,8 +305,19 @@
                                                 </div>
                                                 <form id="form-addtocart" action="/addtocart?productId=<%= productDetails._id %>" method="POST">
                                                     <div class="content_price mb-15">
-                                                        <span style="color: red;"><%= formatCurrency(productDetails.GiaBan) %></span>
-                                                        <span class="old-price" style="font-style: italic;"><%= formatCurrency(productDetails.GiaCu) %></span>
+                                                        <!-- <span style="color: red;"><%= formatCurrency(productDetails.GiaBan) %></span>
+                                                        <span class="old-price" style="font-style: italic;"><%= formatCurrency(productDetails.GiaCu) %></span> -->
+                                                        <!-- 2 thẻ này chỉ là để ấy giá trị 2 giá xuống js xử lý -->
+                                                        <input type="hidden" name="" value="<%= (productDetails.GiaBan) %>" id="PriceBanConvert">
+                                                        <input type="hidden" name="" value="<%= (productDetails.GiaCu) %>" id="PriceCuConvert">   
+
+                                                        <!-- còn đây là để truyền sang bên controller để lấy được 2 giá trị giá mới -->
+                                                        <input type="hidden" name="PriceBanMoi" value="<%= (productDetails.GiaBan) %>" >
+                                                        <input type="hidden" name="PriceCuMoi" value="<%= (productDetails.GiaCu) %>">                                                      
+
+                                                        <!-- hiển thị giá mới lên giao diện trang chủ -->
+                                                        <span id="PriceBanMoi" style="color: red;"><%= formatCurrency(productDetails.GiaBan) %></span>
+                                                        <span id="PriceCuMoi" class="old-price" style="font-style: italic;"><%= formatCurrency(productDetails.GiaCu) %></span>
                                                     </div>
                                                     <div class="box_quantity mb-20">
                                                        
@@ -330,25 +341,56 @@
 
                                                     <div class="sidebar_widget color">
                                                         <h2 style="font-family: Arial, Helvetica, sans-serif;">Chọn Size:</h2>
-                                                        <div class="widget_color">
-                                                            <!-- <ul>
-                                                                <li><a href="#"></a></li>
-                                                                <li><a href="#"></a></li>
-                                                                <li><a href="#"></a></li>
-                                                                <li><a href="#"></a></li>
-                                                                <li><a href="#"></a></li>
-                                                                <li><a href="#"></a></li>
-                                                            </ul> -->
-                                                            <select name="size" id="group_2" >
-                                                                <option value="S">S</option>
-                                                                <option value="M">M</option>
-                                                                <option value="L">L</option>
-                                                                <option value="XL">XL</option>
-                                                                <option value="XXL">XXL</option>
-                                                                <option value="XXXL">XXXL</option>
+                                                        <div class="widget_color">                                                           
+                                                            <select name="size" id="group_2" onchange="changePrice()">
+                                                                <option value="100ml">100ml</option>
+                                                                <option value="200ml">200ml</option>
+                                                                <option value="300ml">300ml</option>
+                                                                <option value="400ml">400ml</option>
                                                             </select>
                                                         </div>
                                                     </div>                 
+
+                                                    <script>                                                         
+                                                        function changePrice(){
+                                                            var selectedSize = document.getElementById("group_2").value;
+                                                            var giaBan = document.getElementById("PriceBanConvert").value
+                                                            var giaCu = document.getElementById("PriceCuConvert").value
+                                                            //var giaCu = parseInt("<%= productDetails.giaCu %>")
+
+                                                            console.log("giaban:", giaBan);
+                                                            console.log("selectedSize:", selectedSize);
+                                                            var newGiaBanMoi;
+                                                            var newGiaCuMoi;
+                                                            switch(selectedSize) {
+                                                                case "100ml": 
+                                                                    newGiaBanMoi = giaBan * 1;
+                                                                    newGiaCuMoi = giaCu *1;
+                                                                    break;
+                                                                case "200ml": 
+                                                                    newGiaBanMoi = giaBan * 1.2;
+                                                                    newGiaCuMoi = giaCu *1.2;
+                                                                    break;
+                                                                case "300ml": 
+                                                                    newGiaBanMoi = giaBan * 1.4;
+                                                                    newGiaCuMoi = giaCu *1.4;
+                                                                    break;
+                                                                case "400ml": 
+                                                                    newGiaBanMoi = giaBan * 1.6;
+                                                                    newGiaCuMoi = giaCu *1.6;
+                                                                    break;
+                                                                default: 
+                                                                    newGiaBanMoi = giaBan;
+                                                                    newGiaCuMoi = giaCu;
+                                                                    break;
+                                                            }
+                                                            document.getElementsByName("PriceBanMoi")[0].value = parseInt(newGiaBanMoi);
+                                                            document.getElementsByName("PriceCuMoi")[0].value = parseInt(newGiaCuMoi);
+
+                                                            document.getElementById("PriceBanMoi").innerHTML = formatCurrency(parseInt(newGiaBanMoi));
+                                                            document.getElementById("PriceCuMoi").innerHTML = formatCurrency(parseInt(newGiaCuMoi))
+                                                        }
+                                                    </script>
 
                                                     <div class="product_stock mb-20">
                                                         <span> Trong kho còn: <%= productDetails.SoLuongTon  %> </span>

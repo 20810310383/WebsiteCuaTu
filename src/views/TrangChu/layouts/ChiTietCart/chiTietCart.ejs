@@ -107,9 +107,9 @@
                                                         
                                                         <td class="product_name" ><a style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;"><%= spDetailCart.productDetails.TenSP %></a></td>
                                                         <td class="product_name" ><a style="font-family: Arial, Helvetica, sans-serif; font-size: 18px; width: 30px;"><%= spDetailCart.size %></a></td>
-                                                        <td class="product-price"><%= formatCurrency(spDetailCart.productDetails.GiaBan) %></td>
+                                                        <td class="product-price"><%= formatCurrency(spDetailCart.donGia) %></td>
                                                         <td class="product_quantity"><input style="font-size: 20px;width: 100px;text-align: center;" min="1" max="1000" value="<%= spDetailCart.qty %>" type="number" disabled ></td>
-                                                        <td class="product_total"><%= formatCurrency(spDetailCart.productDetails.GiaBan * spDetailCart.qty ) %></td>
+                                                        <td class="product_total"><%= formatCurrency(spDetailCart.donGia * spDetailCart.qty ) %></td>
                                                     </tr>
                                                     <% }); %> 
                                                 </tbody>

@@ -61,6 +61,7 @@ module.exports = {
     updateAProductCart: async (req, res) => {
         const quantityy = req.body.quantity;
         const size = req.body.size;
+        const PriceBanMoi = req.body.PriceBanMoi;
         let idupdateCart = req.body.idupdateCart
 
         const customerAccountId = req.session.userId;
@@ -74,6 +75,7 @@ module.exports = {
             // Cập nhật qty
             updatedCartItem.qty = quantityy;
             updatedCartItem.size = size;
+            updatedCartItem.donGia = PriceBanMoi;
 
             // Lưu lại dữ liệu đã chỉnh sửa
             await timCart.save();

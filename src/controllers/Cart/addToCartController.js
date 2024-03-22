@@ -11,6 +11,7 @@ module.exports = {
             let logged = req.session.loggedIn
             const productId = req.query.productId;
             const size = req.body.size;
+            const PriceBanMoi = req.body.PriceBanMoi;
             const qtyy = parseInt(req.body.quantity);
             const qty = !isNaN(qtyy) && qtyy > 0 ? qtyy : 1;
     
@@ -18,6 +19,7 @@ module.exports = {
             const customerAccountId = req.session.userId;
             console.log(">>> check id customerAccountId: ", customerAccountId);
             console.log(">>> check so luong: ", qty);
+            console.log(">>> check PriceBanMoi: ", PriceBanMoi);
             // Kiểm tra xem sản phẩm có tồn tại không
             const product = await SanPham.findById(productId);
             if (!product) {
@@ -53,7 +55,7 @@ module.exports = {
                         cart: {
                             items: [],
                             // totalPrice: 0,
-                            totalQuaty: 0,
+                            totalQuaty: 0,                            
                         },
                         MaTKKH: null,
                     });
@@ -82,6 +84,7 @@ module.exports = {
                 cart.cart.items.push({
                     productId: product._id,
                     qty: qty,
+                    donGia: PriceBanMoi,
                     size: size
                 });
             }

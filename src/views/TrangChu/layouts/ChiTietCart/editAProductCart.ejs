@@ -88,6 +88,7 @@
                                                         <th class="product-price" style="font-family: Arial, Helvetica, sans-serif;">Giá Bán</th>
                                                         <th style="font-family: Arial, Helvetica, sans-serif; width: 100px;">Size</th>
                                                         <th style="font-family: Arial, Helvetica, sans-serif; width: 120px;">Số Lượng</th>
+                                                        <th style="font-family: Arial, Helvetica, sans-serif; width: 120px;">Tổng Tiền</th>
                                                     </tr>
                                                 </thead> 
                                                 <tbody > 
@@ -105,24 +106,66 @@
                                                                 </a>
                                                             </td>
                                                             <td class="product_name" ><a style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;"><%= spEdit.productId.TenSP %></a></td>
-                                                            <td class="product-price"><%= formatCurrency(spEdit.productId.GiaBan) %></td>
-                                                            <td class="product_name" >     
-                                                                <select name="size" id="group_2" style="width: 150px;">
+                                                            <td class="product-price">
+                                                                <!-- <%= formatCurrency(spEdit.productId.GiaBan) %> -->
+
+                                                                <!-- 2 thẻ này chỉ là để ấy giá trị 2 giá xuống js xử lý -->
+                                                                <input type="hidden" name="" value="<%= (spEdit.productId.GiaBan) %>" id="PriceBanConvert">
+
+                                                                <!-- còn đây là để truyền sang bên controller để lấy được 2 giá trị giá mới -->
+                                                                <input type="hidden" name="PriceBanMoi" value="<%= (spEdit.donGia) %>" >
+
+                                                                <!-- hiển thị giá mới lên giao diện trang chủ -->
+                                                                <input type="hidden" name="" value="<%= (spEdit.donGia) %>" id="PriceBanConvertHT">
+                                                                <span id="PriceBanMoi" ><%= formatCurrency(spEdit.donGia) %></span>
+                                                            </td>
+                                                            <td class="product_name" >                                                                      
+                                                                <select name="size" id="group_2" onchange="changePrice()">
                                                                     <option style="font-weight: bold; color: navy;" selected value="<%= spEdit.size %>"><%= spEdit.size %></option>
-                                                                    <option value="S">S</option>
-                                                                    <option value="M">M</option>
-                                                                    <option value="L">L</option>
-                                                                    <option value="XL">XL</option>
-                                                                    <option value="XXL">XXL</option>
-                                                                    <option value="XXXL">XXXL</option>
-                                                                </select>                                                                                                                                                                                                                                                          
+                                                                    <option value="100ml">100ml</option>
+                                                                    <option value="200ml">200ml</option>
+                                                                    <option value="300ml">300ml</option>
+                                                                    <option value="400ml">400ml</option>
+                                                                </select>
+                                                                                                                                   
                                                             </td>
                                                             <td class="product_total">
-                                                                <input type="number" name="quantity" min="1" max="1000" value="<%= spEdit.qty %>" style="text-align: center; font-size: 18px;">
+                                                                <input id="quantity" type="number" name="quantity" min="1" max="1000" value="<%= spEdit.qty %>" style="text-align: center; font-size: 18px;">
                                                             </td>
                                                             
                                                         </tr>    
-                                                    </form>                          
+                                                    </form>    
+                                                    <script>                                                         
+
+                                                        function changePrice(){
+                                                            var selectedSize = document.getElementById("group_2").value;
+                                                            var giaBan = document.getElementById("PriceBanConvert").value
+
+                                                            console.log("giaban:", giaBan);
+                                                            console.log("selectedSize:", selectedSize);
+                                                            var newGiaBanMoi;
+                                                            switch(selectedSize) {
+                                                                case "100ml": 
+                                                                    newGiaBanMoi = giaBan * 1;
+                                                                    break;
+                                                                case "200ml": 
+                                                                    newGiaBanMoi = giaBan * 1.2;
+                                                                    break;
+                                                                case "300ml": 
+                                                                    newGiaBanMoi = giaBan * 1.4;
+                                                                    break;
+                                                                case "400ml": 
+                                                                    newGiaBanMoi = giaBan * 1.6;
+                                                                    break;
+                                                                default: 
+                                                                    newGiaBanMoi = giaBan;
+                                                                    break;
+                                                            }
+                                                            document.getElementsByName("PriceBanMoi")[0].value = parseInt(newGiaBanMoi);
+
+                                                            document.getElementById("PriceBanMoi").innerHTML = formatCurrency(parseInt(newGiaBanMoi));
+                                                        }
+                                                    </script>                      
                                                 </tbody>
                                             </table>  
                                         </div>

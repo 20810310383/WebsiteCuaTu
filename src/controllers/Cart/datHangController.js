@@ -43,7 +43,7 @@ module.exports = {
         // Tính tổng giá của tất cả sản phẩm trong giỏ hàng
         for (const item of cartItemss.items) {
             const productDetails = await SanPham.findById(item.productId).exec();
-            totalCartPrice += productDetails.GiaBan * item.qty;
+            totalCartPrice += item.donGia * item.qty;
         }
 
         let giam_Gia = 0
@@ -72,12 +72,14 @@ module.exports = {
                         const tensp = productDetails.TenSP;
                         const qty = item.qty;
                         const size = item.size;
+                        const donGia = item.donGia;
                         const giaBan = productDetails.GiaBan;
 
                         // Đẩy chi tiết sản phẩm vào mảng
                         productDetailsArray.push({
                             productDetails, 
                             qty, size,
+                            donGia, donGia,
                             _id: item._id
                         });
                     } else {
@@ -205,7 +207,8 @@ module.exports = {
                     items: cartItems.map(item => ({
                         productId: item.productId._id,
                         qty: item.qty,
-                        size: item.size
+                        size: item.size,
+                        donGia: item.donGia,
                     })),                    
                 }
             }) 

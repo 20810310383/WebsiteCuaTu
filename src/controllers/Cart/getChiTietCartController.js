@@ -28,12 +28,13 @@ module.exports = {
     
                     if (productDetails) {
                         const { TenSP, GiaBan } = productDetails;
-                        const totalPriceForItem = item.qty * GiaBan;
+                        const totalPriceForItem = item.qty * item.donGia;
     
                         return {
                             productDetails,
                             qty: item.qty,
                             size: item.size,
+                            donGia: item.donGia,
                             totalPriceForItem,
                             _id: item._id
                         };
@@ -47,7 +48,7 @@ module.exports = {
                 }
             }));
     
-            const totalCartPrice = cartItems.reduce((acc, cur) => acc + cur.qty * cur.GiaBan, 0);
+            const totalCartPrice = cartItems.reduce((acc, cur) => acc + cur.qty * cur.donGia, 0);
     
             res.json({
                 success: true,
@@ -87,8 +88,8 @@ module.exports = {
         let totalCartPrice = 0;
         // Tính tổng giá của tất cả sản phẩm trong giỏ hàng
         for (const item of cartItemss.items) {
-            const productDetails = await SanPham.findById(item.productId).exec();
-            totalCartPrice += productDetails.GiaBan * item.qty;
+            //const productDetails = await SanPham.findById(item.productId).exec();
+            totalCartPrice += item.donGia * item.qty;
         }
 
         let giam_Gia = 0
@@ -117,12 +118,13 @@ module.exports = {
                         const tensp = productDetails.TenSP;
                         const qty = item.qty;
                         const size = item.size;
+                        const donGia = item.donGia;
                         const giaBan = productDetails.GiaBan;
 
                         // Đẩy chi tiết sản phẩm vào mảng
                         productDetailsArray.push({
                             productDetails, 
-                            qty, size,
+                            qty, size, donGia,
                             _id: item._id
                         });
                     } else {

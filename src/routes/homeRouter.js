@@ -39,6 +39,9 @@ const { getHomeDaXoaNuocHoaPhanTrang, getHomeDaXoaNuocHoa } = require('../contro
 const { getHomeQLAdminPhanQuyen, getHomePhanTrang_TKAdminPhanQuyen } = require('../controllers/AdminQL/QuanLyTKAdmin_PhanQuyen/quanLyTKAdminPhanQuyenController');
 const { getCreateTKAdminPhanQuyen, createTKAdminPhanQuyen } = require('../controllers/AdminQL/QuanLyTKAdmin_PhanQuyen/createTKAdminPhanQuyenController');
 const { deleteTKPhanQuyen } = require('../controllers/AdminQL/QuanLyTKAdmin_PhanQuyen/deleteTKAdminPhanQuyenController');
+const { getTrangQLDonHang, getTrangQLDonHang_ChuaGiao_PhanTrang} = require('../controllers/AdminQL/QuanLyDonHang/quanLyDonHangController');
+const { getEditDH, putUpdate_QLDH } = require('../controllers/AdminQL/QuanLyDonHang/editDonHangController');
+const { DeleteDH } = require('../controllers/AdminQL/QuanLyDonHang/deleteDonHangController');
 
 
 const router = express.Router();
@@ -269,6 +272,20 @@ router.delete("/xoa-sp-game/:idxoa", deleteSP)
 router.get("/search-qly-game", getHomeSearchGame)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 router.get("/search-qly-game", getHomeSearchGamePhanTrang)
+
+
+
+// quản lý đơn hàng -- admin
+router.get("/ql-don-hang", getTrangQLDonHang)
+// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
+router.get("/ql-don-hang", getTrangQLDonHang_ChuaGiao_PhanTrang)
+// get form edit đơn hàng
+router.get("/update-HoaDon", getEditDH)
+// update đơn hàng
+router.put("/update-HoaDon/:id_QLDH", putUpdate_QLDH)
+// Xóa đơn hàng Đã Giao Hàng
+router.delete("/delete-HoaDon/:idXoaDH", DeleteDH)
+
 
 
 

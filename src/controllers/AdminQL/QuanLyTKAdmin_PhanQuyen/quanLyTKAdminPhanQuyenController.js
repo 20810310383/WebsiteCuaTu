@@ -43,7 +43,7 @@ module.exports = {
 
         let tk = req.session.tk
         let logged = req.session.loggedIn
-        let activee = 'danhmucquanly'
+        let activee = 'danhmucquanly'        
 
         // let page = 1
         // const limit = 6
@@ -54,6 +54,15 @@ module.exports = {
         // }        
         // let skip = (page - 1) * limit
 
+        // phân quyền 
+        if(await KiemTraChucNang(req, '65eb06c95d2a4f66ed3852e4') === false){
+
+            // dùng return để dừng việc thực hiện hàm khi điều kiện không đúng
+            return res.render("AdminQL/TrangQLAdmin/QuanLySanPham/QuanLySPNuocHoa/error404_KhongCoQuyen.ejs", {
+                tk, logged, activee,                                       
+            })
+        }
+        
         const allPhanQuyen  = await PhanQuyen.find({}).populate('IdAdminNhanVien').populate('IdChucNang').exec()
         console.log("tai khoan admin: ", allPhanQuyen )
 

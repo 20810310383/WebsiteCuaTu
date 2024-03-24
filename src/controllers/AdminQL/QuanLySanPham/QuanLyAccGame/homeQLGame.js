@@ -68,7 +68,7 @@ module.exports = {
         }
 
         // phân quyền 
-        if(await KiemTraChucNang(req, '65eb06c95d2a4f66ed3852e4') === false){
+        if(await KiemTraChucNang(req, '65fffd74a8a948b402a806dd') === false){
 
             // dùng return để dừng việc thực hiện hàm khi điều kiện không đúng
             return res.render("AdminQL/TrangQLAdmin/QuanLySanPham/QuanLySPNuocHoa/error404_KhongCoQuyen.ejs", {

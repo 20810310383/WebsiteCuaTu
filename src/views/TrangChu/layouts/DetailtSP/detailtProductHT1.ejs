@@ -309,13 +309,12 @@
                                                         <span class="old-price" style="font-style: italic;"><%= formatCurrency(productDetails.GiaCu) %></span> -->
 
                                                         <!-- 2 thẻ này chỉ là để lấy giá trị 2 giá xuống js xử lý -->
-                                                        <!-- và để truyền sang bên controller để lấy được giá trị giá mới để thêm vào cart-->
-                                                        <input type="hidden" name="PriceBanMoi" value="<%= (productDetails.GiaBan) %>" id="PriceBanConvert">
-                                                        <input type="hidden" name="PriceCuMoi" value="<%= (productDetails.GiaCu) %>" id="PriceCuConvert">   
+                                                        <input type="hidden"  value="<%= (productDetails.GiaBan) %>" id="PriceBanConvert">
+                                                        <input type="hidden"  value="<%= (productDetails.GiaCu) %>"  id="PriceCuConvert">   
 
                                                         <!-- còn đây là để truyền sang bên controller để lấy được 2 giá trị giá mới -->
-                                                        <!-- <input type="hidden" name="PriceBanMoi" value="<%= (productDetails.GiaBan) %>" >
-                                                        <input type="hidden" name="PriceCuMoi" value="<%= (productDetails.GiaCu) %>">                                                       -->
+                                                        <input type="hidden" name="PriceBanMoi" value="<%= (productDetails.GiaBan) %>" >
+                                                        <input type="hidden" name="PriceCuMoi" value="<%= (productDetails.GiaCu) %>" >                                                      
 
                                                         <!-- hiển thị giá mới lên giao diện trang chủ -->
                                                         <span id="PriceBanMoi" style="color: red;"><%= formatCurrency(productDetails.GiaBan) %></span>

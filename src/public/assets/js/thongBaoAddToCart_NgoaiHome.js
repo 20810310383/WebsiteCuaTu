@@ -6,12 +6,14 @@
             form.addEventListener("submit", function (event) {
                 event.preventDefault();
                 const productId = form.querySelector("input[name='quantity']").getAttribute("data-product-id");
+                const PriceBanMoi = form.querySelector("input[name='PriceBanMoi']").value
 
                 fetch(`/addtocart?productId=${productId}`, {
                     method: "POST",
                     body: new URLSearchParams({
                         quantity: 1,
-                        size: "S"
+                        size: "100ml",
+                        PriceBanMoi: PriceBanMoi
                     }),
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",

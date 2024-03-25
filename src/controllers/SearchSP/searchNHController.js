@@ -76,6 +76,21 @@ module.exports = {
             return `${finalMinPrice} đến ${finalMaxPrice}`;
         }
 
+        let loaiSP = await LoaiSP.find().exec();
+        let tongSL = 0;
+
+        for (const loai of loaiSP) {
+            const tongSLSanPham = await SanPham.countDocuments({ IdLoaiSP: loai._id });
+            console.log("loaiSP._id:", loai._id);
+            console.log("Số lượng sản phẩm:", tongSLSanPham);
+            tongSL += tongSLSanPham; // Cộng dồn số lượng sản phẩm cho mỗi loại sản phẩm
+        }
+
+        console.log("Tổng số lượng sản phẩm:", tongSL);
+
+        
+
+
         let page = 1
         const limit = 3
         let tenSPSearch = req.query.search_nuochoa
@@ -122,7 +137,8 @@ module.exports = {
                 tenloaiNHSession: '',
                 giaSPSession: '',
                 loaiSPNamNu,
-                convertPriceRange
+                convertPriceRange,
+                loaiSP, tongSL
             })
             
         } else if(tenloaiNH && giaSP) {
@@ -167,7 +183,7 @@ module.exports = {
                 searchSPSession: req.session.tenSPSearch || '',
                 tenloaiNHSession: req.session.tenloaiNH || '',
                 giaSPSession: req.session.giaSP || '',
-                loaiSPNamNu
+                loaiSPNamNu, loaiSP, tongSL
             })
         } else {
             // Trường hợp không xác định được tiêu chí tìm kiếm
@@ -195,7 +211,7 @@ module.exports = {
                 searchSPSession: req.session.tenSPSearch || '',
                 tenloaiNHSession: '',
                 giaSPSession: '',
-                loaiSPNamNu, convertPriceRange
+                loaiSPNamNu, convertPriceRange, loaiSP, tongSL
             })
         }        
     },

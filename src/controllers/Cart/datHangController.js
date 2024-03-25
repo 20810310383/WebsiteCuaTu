@@ -31,7 +31,8 @@ module.exports = {
         function rutGonMa(hexString ) {
             const shortenedHex = hexString.substring(hexString.length - 10);
             return shortenedHex;
-        }
+        }        
+        
 
         const customerAccountId = req.session.userId;
         console.log("customerAccountId:", customerAccountId);

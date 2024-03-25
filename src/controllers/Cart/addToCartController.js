@@ -12,6 +12,7 @@ module.exports = {
             const productId = req.query.productId;
             const size = req.body.size;
             const PriceBanMoi = req.body.PriceBanMoi;
+            const SoLuongTon = req.body.SoLuongTon;
             const qtyy = parseInt(req.body.quantity);
             const qty = !isNaN(qtyy) && qtyy > 0 ? qtyy : 1;
     
@@ -23,7 +24,12 @@ module.exports = {
             // Kiểm tra xem sản phẩm có tồn tại không
             const product = await SanPham.findById(productId);
             if (!product) {
-                return res.status(404).json({ message: 'Sản phẩm không tồn tại' });
+                return res.status(404).json({success: false, message: 'Sản phẩm không tồn tại' });
+            }
+
+            let mess = `Số lượng tồn của sản phẩm này chỉ còn ${SoLuongTon} sản phẩm. Vui lòng chọn số lượng hoặc sản phẩm khác!`
+            if(qty > SoLuongTon){
+                return res.status(404).json({success: false, message: mess, logged });
             }
     
             // Kiểm tra xem giỏ hàng đã tồn tại chưa, nếu chưa thì tạo mới

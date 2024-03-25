@@ -7,13 +7,15 @@
                 event.preventDefault();
                 const productId = form.querySelector("input[name='quantity']").getAttribute("data-product-id");
                 const PriceBanMoi = form.querySelector("input[name='PriceBanMoi']").value
+                const SoLuongTon = form.querySelector("input[name='SoLuongTon']").value
 
                 fetch(`/addtocart?productId=${productId}`, {
                     method: "POST",
                     body: new URLSearchParams({
                         quantity: 1,
                         size: "100ml",
-                        PriceBanMoi: PriceBanMoi
+                        PriceBanMoi: PriceBanMoi,
+                        SoLuongTon: SoLuongTon,
                     }),
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
@@ -40,7 +42,7 @@
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Lỗi!',
-                                text: 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng. Vui lòng thử lại sau.',
+                                text: data.message,
                                 confirmButtonText: 'OK SHOP'
                             });                       
                         }

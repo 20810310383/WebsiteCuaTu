@@ -15,12 +15,12 @@ const SanPham_Schema = new mongoose.Schema(
         },
         Size: { 
             type: String, 
-            enum: ["S", "M", "L", "XL", "XXL"], 
-            default: "S" 
+            enum: ["100ml", "200ml", "300ml", "400ml"], 
+            default: "100ml" 
         },
         MauSac: { type: String },
-        SoLuongTon: { type: Number, required: false, default: "1"  },
-        SoLuongBan: { type: Number, required: false, default: "10" },
+        SoLuongTon: { type: Number, required: false, default: "100"  },
+        SoLuongBan: { type: Number, required: false, default: "100" },
         SoLuotDanhGia: { type: Number, required: false, default: "1000" },
         Image: String,
         Image1: String,

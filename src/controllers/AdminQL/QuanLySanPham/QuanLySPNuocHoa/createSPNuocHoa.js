@@ -38,6 +38,7 @@ module.exports = {
         let IdLoaiSP = req.body.IdLoaiSP
         let GiaBan = req.body.GiaBan
         let GiaCu = req.body.GiaCu
+        let SoLuongTon = req.body.SoLuongTon
         let MoTa = req.body.MoTa
         let New_Hot = req.body.New_Hot
         let SpMoi_SpNoiBat = req.body.SpMoi_SpNoiBat
@@ -65,6 +66,7 @@ module.exports = {
             IdLoaiSP: IdLoaiSP, 
             GiaBan: GiaBan, 
             GiaCu: GiaCu, 
+            SoLuongTon: SoLuongTon, 
             MoTa: MoTa, 
             New_Hot: New_Hot,            
             Image: imageUrl,

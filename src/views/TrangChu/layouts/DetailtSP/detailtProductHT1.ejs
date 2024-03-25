@@ -16,6 +16,12 @@
         <link rel="stylesheet" href="assets\css\style.css">
         <link rel="stylesheet" href="assets\css\responsive.css">
         <script src="assets\js\vendor\modernizr-2.8.3.min.js"></script>
+
+        <!-- Thêm Thư Viện Flash -->
+        <script src="link-to-flash-library.js"></script>
+        <!-- Ví dụ với thư viện sweetalert2 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body>
             <!-- Add your site or application content here -->
@@ -297,7 +303,7 @@
                                                     <div class="box_quantity mb-20">
                                                        
                                                         <label>Số Lượng Mua</label>
-                                                        <input min="0" max="100" value="1" type="number" name="quantity">
+                                                        <input min="0" max="1000" value="1" type="number" name="quantity">
                                                        
                                                         <button type="submit"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                                         <a href="#" title="add to wishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>    
@@ -368,6 +374,7 @@
                                                     </script>
 
                                                     <div class="product_stock mb-20">
+                                                        <input type="hidden" name="SoLuongTon" value="<%= productDetails.SoLuongTon  %>" />
                                                         <span> Trong kho còn: <%= productDetails.SoLuongTon  %> </span>
                                                     </div>
                                                     <div class="wishlist-share">
@@ -711,22 +718,81 @@
             });
 
 
-            // Hàm gửi yêu cầu thêm sản phẩm vào giỏ hàng và cập nhật thông tin giỏ hàng
+            // Hàm gửi yêu cầu thêm sản phẩm vào giỏ hàng và cập nhật thông tin giỏ hàng 
+            // cách 1: sử dụng thư viện sweetalert2 để thông báo
             function addToCart(formData) {
+                fetch('/addtocart?productId=<%= productDetails._id %>', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams(formData),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Show success alert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thành công!',
+                            text: data.message,
+                            confirmButtonText: 'Mua Tiếp'
+                        })
+                        .then(() => {
+                            window.location.reload(); // Reload the current page
+                        });
+                    } else {
+                        // Show error alert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi!',
+                            text: data.message,
+                            confirmButtonText: 'OK SHOP'
+                        })
+                        // .then(() => {
+                        //     window.location.reload(); // Reload the current page
+                        // });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+
+            // cách 2 dùng khi hết hàng thì show dòng chữ 
+            function addToCart1(formData) {
+                const quantity = parseInt($('input[name="quantity"]').val()); // Get the quantity from the form
+                const SoLuongTon = parseInt('<%= productDetails.SoLuongTon %>'); // Get the available quantity from the server-side template
+
+                if (isNaN(quantity) || quantity <= 0) {
+                    // Handle invalid quantity input
+                    console.error('Invalid quantity input');
+                    return;
+                }
+
+                if (quantity > SoLuongTon) {
+                    // If quantity exceeds available quantity, display an alert
+                    showCustomAlert_ThongBaoHetHang(`Số lượng sản phẩm này chỉ còn ${SoLuongTon}`);
+                    return;
+                }
+
                 $.ajax({
                     url: '/addtocart?productId=<%= productDetails._id %>',
                     type: 'POST',
                     data: formData,
                     success: function(response) {
-                        // Thêm thành công, cập nhật thông tin giỏ hàng
-                        // updateCartInfo();
-
-                        // Hiển thị thông báo khi thành công
-                        // alert('Đã thêm sản phẩm vào giỏ hàng thành công!');
-                        showCustomAlert('Đã thêm sản phẩm vào giỏ hàng thành công!');
-
-                        // Chuyển hướng trang sau khi thêm vào giỏ hàng thành công
-                        // window.location.href = '/detail-cart';
+                        if (response.success) {    
+                            // Hiển thị thông báo khi thành công
+                            // alert('Đã thêm sản phẩm vào giỏ hàng thành công!');
+                            showCustomAlert('Đã thêm sản phẩm vào giỏ hàng thành công!');
+                            
+                            // Chuyển hướng trang sau khi thêm vào giỏ hàng thành công
+                            // window.location.href = '/detailt-cart-trang-moi';
+                        } else {
+                            // Hiển thị thông báo lỗi từ server
+                            showCustomAlert_ThongBaoHetHang(response.message)
+                            //alert(response.message);
+                        }
                     },
                     error: function(error) {
                         console.error('Lỗi khi thêm vào giỏ hàng:', error);
@@ -747,6 +813,21 @@
                 setTimeout(() => {
                     hideCustomAlert();
                     window.location.href = '/detailt-cart-trang-moi';
+                }, 1000);
+            }
+            function showCustomAlert_ThongBaoHetHang(message) {
+                const alertElement = document.getElementById('custom-alert');
+                const messageElement = document.getElementById('alert-message');
+
+                // Hiển thị thông báo và đặt nội dung
+                alertElement.style.display = 'block';
+                messageElement.innerText = message;
+
+                // Ẩn thông báo sau một khoảng thời gian (ví dụ: 5 giây)
+                setTimeout(() => {
+                    hideCustomAlert();
+                    window.location.reload();
+                    
                 }, 1000);
             }
 

@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const IdLoaiSP = document.getElementById('IdLoaiSP').value;
         const GiaBan = document.getElementById('GiaBan').value;
         const GiaCu = document.getElementById('GiaCu').value;
+        const SoLuongTon = document.getElementById('SoLuongTon').value;
         // const MoTa = document.getElementById('MoTa').value;
         // Lấy giá trị từ CKEditor
         const MoTa = CKEDITOR.instances.MoTa.getData();
@@ -34,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('IdLoaiSP', IdLoaiSP);
         formData.append('GiaBan', GiaBan);
         formData.append('GiaCu', GiaCu);
+        formData.append('SoLuongTon', SoLuongTon);
         formData.append('MoTa', MoTa);
         formData.append('New_Hot', New_Hot);
         formData.append('SpMoi_SpNoiBat', SpMoi_SpNoiBat);
@@ -103,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const IdLoaiSP = document.getElementById('IdLoaiSP').value;
         const GiaBan = document.getElementById('GiaBan').value;
         const GiaCu = document.getElementById('GiaCu').value;
+        const SoLuongTon = document.getElementById('SoLuongTon').value;
         // const MoTa = document.getElementById('MoTa').value;
         // Lấy giá trị từ CKEditor
         const MoTa = CKEDITOR.instances.MoTa.getData();
@@ -127,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('IdLoaiSP', IdLoaiSP);
         formData.append('GiaBan', GiaBan);
         formData.append('GiaCu', GiaCu);
+        formData.append('SoLuongTon', SoLuongTon);
         formData.append('MoTa', MoTa);
         formData.append('New_Hot', New_Hot);
         formData.append('SpMoi_SpNoiBat', SpMoi_SpNoiBat);

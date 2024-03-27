@@ -17,6 +17,11 @@
         <link rel="stylesheet" href="assets\css\responsive.css">
         <script src="assets\js\vendor\modernizr-2.8.3.min.js"></script>
 
+        <!-- Thêm Thư Viện Flash -->
+        <script src="link-to-flash-library.js"></script>
+        <!-- Ví dụ với thư viện sweetalert2 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <style>
             #group_2 {
                 width: auto; /* Đặt chiều rộng tự động để các tùy chọn có thể hiển thị trên một hàng */
@@ -92,10 +97,13 @@
                                                     </tr>
                                                 </thead> 
                                                 <tbody > 
-                                                    <form method="post" action="/update-sp-cart">
+                                                    <form >
                                                         <tr>
-                                                            <td class="product_total">                                                                
-                                                                <button type="submit" class="btn btn-primary" style="cursor: pointer;font-size: 18px;">Update</button>                                                                    
+                                                            <td class="product_total">  
+                                                                <a  style="cursor: pointer;font-size: 18px;color: white;"                                              
+                                                                    class="btn btn-primary" 
+                                                                    onclick="updateCart('<%= spEdit._id %>')"
+                                                                >Update</a>                                                               
                                                                 <br> <br>        
                                                                 <input type="hidden" name="idupdateCart" value="<%= spEdit._id %>">                                          
                                                                 <a href="#" style="cursor: pointer;font-size: 18px;" class="btn btn-success" onclick="history.go(-1);" >Back</a>
@@ -113,7 +121,7 @@
                                                                 <input type="hidden" name="" value="<%= (spEdit.productId.GiaBan) %>" id="PriceBanConvert">
 
                                                                 <!-- còn đây là để truyền sang bên controller để lấy được 2 giá trị giá mới -->
-                                                                <input type="hidden" name="PriceBanMoi" value="<%= (spEdit.donGia) %>" >
+                                                                <input type="hidden" id="PriceBanMoi" name="PriceBanMoi" value="<%= (spEdit.donGia) %>" >
 
                                                                 <!-- hiển thị giá mới lên giao diện trang chủ -->
                                                                 <input type="hidden" name="" value="<%= (spEdit.donGia) %>" id="PriceBanConvertHT">
@@ -204,6 +212,7 @@
         <script src="assets\js\plugins.js"></script>
         <script src="assets\js\main.js"></script>
         <script src="assets\js\hamDinhDangTien_VaLinkAnh.js"></script>
+        <script src="assets\js\xuLyNutSaveMotSanPhamTrongGioHang.js"></script>
 
         
     </body>

@@ -41,7 +41,7 @@
                             // alert("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng!"); 
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Lỗi!',
+                                title: 'Hết hàng!',
                                 text: data.message,
                                 confirmButtonText: 'OK SHOP'
                             });                       

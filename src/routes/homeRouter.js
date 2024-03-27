@@ -147,7 +147,7 @@ router.get("/checkout", getCheckOut)
 // get Edit A Product Cart
 router.get("/get-edit-sp-cart", getEditAProductCart)
 // xử lý nút update 
-router.post("/update-sp-cart", updateAProductCart)
+router.put("/update-sp-cart/:idupdateCart", updateAProductCart)
 // xử lý nút bấm đặt hàng
 router.post("/dat-hang", datHang)
 

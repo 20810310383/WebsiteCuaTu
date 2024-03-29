@@ -141,7 +141,7 @@
                                                             <div id="custom-alert" class="custom-alert hidden">
                                                                 <p id="alert-message" style="display: block;"></p>
                                                             </div>
-                                                            <div id="error-message" style="font-size: 20px; color: red;text-align: center;background-color: rgb(255, 241, 241); padding: 15px;border-radius: 15px;"></div>
+                                                            <div id="error-message" style="font-size: 20px;display: none; color: red;text-align: center;background-color: rgb(255, 241, 241); padding: 15px;border-radius: 15px;"></div>
                                                         </div>
                                                         
                                                     </div>
@@ -354,10 +354,13 @@
                         } else {
                             if (data.error) {
                                 errorElement.textContent = data.error; // Hiển thị thông báo lỗi từ máy chủ
+                                errorElement.style.display = "block";
                             } else if (data.message) {
                                 errorElement.textContent = data.message; // Hiển thị thông báo từ máy chủ
+                                errorElement.style.display = "block";
                             } else {
                                 errorElement.textContent = 'Có vẻ có một số sản phẩm đã hết hàng. Vui lòng kiểm tra lại giỏ hàng của bạn.'; 
+                                errorElement.style.display = "block";
                             }
                         }
                     })

@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="assets\css\style.css">
         <link rel="stylesheet" href="assets\css\responsive.css">
         <script src="assets\js\vendor\modernizr-2.8.3.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/umd/qrcode.min.js"></script>
 
     </head>
     <body>
@@ -140,6 +141,7 @@
                                                             <div id="custom-alert" class="custom-alert hidden">
                                                                 <p id="alert-message" style="display: block;"></p>
                                                             </div>
+                                                            <div id="error-message" style="font-size: 20px; color: red;text-align: center;background-color: rgb(255, 241, 241); padding: 15px;border-radius: 15px;"></div>
                                                         </div>
                                                         
                                                     </div>
@@ -197,15 +199,19 @@
 
                                                     <div class="cart_subtotal">
                                                         <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Số tiền cần thanh toán</p>
+                                                        <input type="hidden" name="SoLuongTon" value="" >
+                                                        <input type="hidden" name="SoLuongBan" value="" >
 
                                                         <% if (totalCartPrice >= 1000000) { %>
                                                             <p class="cart_amount" style="color: red; font-weight: bold;"><%= formatCurrency(totalCartPrice - giam_Gia ) %></p>
                                                             <% } else { %>
+
                                                             <p class="cart_amount" style="color: red; font-weight: bold;"><%= formatCurrency(detailCart.cart.PhiShip + totalCartPrice - giam_Gia ) %></p>
                                                             <% } %>
 
                                                     </div>
-                                                    
+
+                                                  
                                                     </div>
                                                 </div>
                                                 <!-- <img src="assets/img/cart/kmkm.png" alt=""> -->
@@ -328,6 +334,7 @@
 
             document.addEventListener("DOMContentLoaded", function () {
                 const form = document.getElementById("dathang");
+                const errorElement = document.getElementById("error-message");
 
                 form.addEventListener("submit", function (event) {
                     event.preventDefault(); // Prevent the form from submitting in the traditional way
@@ -345,7 +352,13 @@
                         if (data.success) {
                             showCustomAlert(data.message);
                         } else {
-                            console.error("Error in dat-hang:", data.message);
+                            if (data.error) {
+                                errorElement.textContent = data.error; // Hiển thị thông báo lỗi từ máy chủ
+                            } else if (data.message) {
+                                errorElement.textContent = data.message; // Hiển thị thông báo từ máy chủ
+                            } else {
+                                errorElement.textContent = 'Có vẻ có một số sản phẩm đã hết hàng. Vui lòng kiểm tra lại giỏ hàng của bạn.'; 
+                            }
                         }
                     })
                     .catch((error) => {

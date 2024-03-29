@@ -40,7 +40,7 @@ module.exports = {
         await Cart.findByIdAndUpdate(
           { _id: removedProduct._id },
           { $set: { "cart.totalQuaty": totalQuaty } }
-        );
+        );        
 
         res.redirect("/detailt-cart-trang-moi");
       } else {

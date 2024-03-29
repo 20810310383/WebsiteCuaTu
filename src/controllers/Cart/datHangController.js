@@ -7,6 +7,48 @@ require('dotenv').config();
 require('rootpath')();
 
 // --------------------------------------
+const giamSoLuongTonKho = async (productId, quantity) => {
+    try {
+        // Tìm sản phẩm trong cơ sở dữ liệu
+        let product = await SanPham.findById(productId);
+
+        // Kiểm tra nếu sản phẩm tồn tại và có số lượng tồn kho đủ để giảm
+        if (product && product.SoLuongTon >= quantity) {
+            // Giảm số lượng tồn kho của sản phẩm
+            product.SoLuongTon -= quantity;
+            // Lưu sản phẩm sau khi giảm số lượng tồn kho
+            await product.save();
+            return true; // Trả về true nếu thành công
+        } else {
+            return false; // Trả về false nếu không đủ số lượng tồn kho
+        }
+    } catch (error) {
+        console.error("Lỗi khi giảm số lượng tồn kho:", error);
+        return false; // Trả về false nếu có lỗi xảy ra
+    }
+};
+
+// Tăng số lượng bán của sản phẩm
+const tangSoLuongBan = async (productId, quantity) => {
+    try {
+        // Tìm sản phẩm trong cơ sở dữ liệu
+        let product = await SanPham.findById(productId);
+
+        // Kiểm tra nếu sản phẩm tồn tại
+        if (product) {
+            // Tăng số lượng bán của sản phẩm
+            product.SoLuongBan += quantity;
+            // Lưu sản phẩm sau khi tăng số lượng bán
+            await product.save();
+            return true; // Trả về true nếu thành công
+        } else {
+            return false; // Trả về false nếu sản phẩm không tồn tại
+        }
+    } catch (error) {
+        console.error("Lỗi khi tăng số lượng bán:", error);
+        return false; // Trả về false nếu có lỗi xảy ra
+    }
+};
 
 module.exports = {
     // trang dien thong tin dat hang va check don hang
@@ -127,7 +169,7 @@ module.exports = {
             let GiamGia = req.body.GiamGia
             let SoTienGiamGia = req.body.SoTienGiamGia
 
-            console.log(" soluongdat: ", Soluongdat, "\n PhiShip: ", PhiShip, "\n CanThanhToan: ",CanThanhToan);
+            console.log(" soluongdat: ", Soluongdat, "\n PhiShip: ", PhiShip, "\n CanThanhToan: ",CanThanhToan);            
 
             //---- GỬI XÁC NHẬN ĐƠN HÀNG VỀ EMAIL
             const transporter = nodemailer.createTransport({
@@ -187,6 +229,35 @@ module.exports = {
 
             // chọc tới items để lấy ra tất cả sp trong giỏ hàng để chút nữa map ra thêm vào hóa đđn
             const cartItems = giohang.cart.items
+
+            // Kiểm tra số lượng tồn kho trước khi đặt hàng
+            for (const item of cartItems) {
+                // try {
+                    const product = await SanPham.findById(item.productId);
+                    if (!product || !product.TenSP || !product.SoLuongTon) {
+                        console.error("Sản phẩm không hợp lệ:", product);
+                        //throw new Error("Sản phẩm không hợp lệ");
+                        return res.status(400).json({ success: false, message: 'Sản phẩm không hợp lệ. Vui lòng liên hệ lại với admin!' });
+                    }
+
+                    if (product.SoLuongTon < item.qty) {
+                        let sl = `Sản phẩm "${product.TenSP}" chỉ còn ${product.SoLuongTon} sản phẩm, không đủ để đặt hàng. Vui lòng kiểm tra lại giỏ hàng của bạn hoặc liên hệ lại với admin!`;
+                        console.error("Số lượng tồn kho không đủ: ", sl);
+                        // Xử lý lỗi và trả về thông báo cho người dùng
+                        return res.status(400).json({ success: false, message: sl });
+                    }
+                // } catch (error) {
+                //     console.error("Lỗi khi kiểm tra sản phẩm:", error);
+                //     // Xử lý lỗi và trả về thông báo cho người dùng
+                //     return res.status(400).json({ success: false, message: 'Có lỗi xảy ra khi kiểm tra sản phẩm' });
+                // }
+            }
+
+            // khi đặt hàng thì số lượng tồn kho sẽ giảm đi và số lượng bán sẽ tăng lên
+            for (const item of cartItems) {
+                await giamSoLuongTonKho(item.productId, item.qty);
+                await tangSoLuongBan(item.productId, item.qty);
+            }
 
             let datHang = await HoaDon.create({
                 Ho: Ho,

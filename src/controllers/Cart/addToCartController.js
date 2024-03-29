@@ -31,6 +31,14 @@ module.exports = {
             if(qty > SoLuongTon){
                 return res.status(404).json({success: false, message: mess, logged });
             }
+            // Giảm số lượng tồn của sản phẩm chỉ khi số lượng tồn đủ để thêm vào giỏ hàng
+            // if (qty <= SoLuongTon) {
+            //     product.SoLuongTon -= qtyy;
+            //     await product.save();
+            // } else {
+            //     return res.status(404).json({ success: false, message: mess, logged });
+            // }
+
     
             // Kiểm tra xem giỏ hàng đã tồn tại chưa, nếu chưa thì tạo mới
             let cart;
@@ -111,11 +119,9 @@ module.exports = {
             }
 
             // Lưu giỏ hàng vào cơ sở dữ liệu hoặc session
-            if (customerAccountId) {
+            if (customerAccountId) {                
                 await cart.save();
             }    
-    
-            // await cart.save();
 
             return res.status(200).json({ success: true, message: 'Đã thêm sản phẩm vào giỏ hàng', logged });
         } catch (error) {

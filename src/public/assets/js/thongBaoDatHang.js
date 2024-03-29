@@ -24,6 +24,8 @@ function hideCustomAlert() {
 
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("dathang");
+  const errorElement = document.getElementById("error-message");
+
 
   form.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the form from submitting in the traditional way
@@ -38,14 +40,21 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.success) {
-          showCustomAlert(data.message);
-        } else {
-          console.error("Error in dat-hang:", data.message);
-        }
+          if (data.success) {
+              showCustomAlert(data.message);
+          } else {
+              if (data.error) {
+                  errorElement.textContent = data.error; // Hiển thị thông báo lỗi từ máy chủ
+              } else if (data.message) {
+                  errorElement.textContent = data.message; // Hiển thị thông báo từ máy chủ
+              } else {
+                  errorElement.textContent = 'Có vẻ có một số sản phẩm đã hết hàng. Vui lòng kiểm tra lại giỏ hàng của bạn.'; 
+              }
+          }
       })
       .catch((error) => {
-        console.error("Error in dat-hang:", error);
+          console.error("Error in dat-hang:", error);
+          errorElement.textContent = "Có lỗi xảy ra khi đặt hàng.";
       });
   });
 });

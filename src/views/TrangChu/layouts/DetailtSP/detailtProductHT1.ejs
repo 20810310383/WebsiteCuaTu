@@ -375,7 +375,9 @@
 
                                                     <div class="product_stock mb-20">
                                                         <input type="hidden" name="SoLuongTon" value="<%= productDetails.SoLuongTon  %>" />
-                                                        <span> Trong kho còn: <%= productDetails.SoLuongTon  %> </span>
+                                                        <input type="hidden" name="SoLuongBan" value="<%= productDetails.SoLuongBan  %>" />
+                                                        <!-- <span> Trong kho còn: <%= productDetails.SoLuongTon  %> </span> -->
+                                                        <span> Đã bán: <%= productDetails.SoLuongBan  %> sản phẩm</span>
                                                     </div>
                                                     <div class="wishlist-share">
                                                         <h4>Share on:</h4>
@@ -597,7 +599,7 @@
             
             
               <!-- modal area start --> 
-           <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true">
+           <!-- <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -688,7 +690,7 @@
                         </div>    
                     </div>
                 </div>
-            </div> 
+            </div>  -->
             
           <!-- modal area end --> 
             
@@ -730,28 +732,49 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
-                        // Show success alert
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Thành công!',
-                            text: data.message,
-                            confirmButtonText: 'Mua Tiếp'
-                        })
-                        .then(() => {
-                            window.location.reload(); // Reload the current page
-                        });
+                    if(data.logged){
+                        if (data.success) {
+                            // Show success alert
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!',
+                                text: data.message,
+                                confirmButtonText: 'Mua Tiếp'
+                            })
+                            .then(() => {
+                                window.location.reload(); // Reload the current page
+                            });
+                        } else {
+                            // Show error alert
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Hết hàng!',
+                                text: data.message,
+                                confirmButtonText: 'OK SHOP'
+                            })
+                            // .then(() => {
+                            //     window.location.reload(); // Reload the current page
+                            // });
+                        }
                     } else {
-                        // Show error alert
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Hết hàng!',
-                            text: data.message,
-                            confirmButtonText: 'OK SHOP'
-                        })
-                        // .then(() => {
-                        //     window.location.reload(); // Reload the current page
-                        // });
+                        if (data.success) {
+                            Swal.fire({
+                                icon: 'warning',
+                                //title: 'Hãy đăng nhập để tiến hành mua hàng!', 
+                                text: 'Bạn cần đăng nhập để tiến hành mua hàng',
+                                confirmButtonText: 'Đi tới đăng nhập'
+                            })
+                            .then(() => {
+                                window.location.href = '/login-tk-kh';
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi!',
+                                text: 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng. Vui lòng thử lại sau.',
+                                confirmButtonText: 'OK SHOP'
+                            });                       
+                        }
                     }
                 })
                 .catch(error => {

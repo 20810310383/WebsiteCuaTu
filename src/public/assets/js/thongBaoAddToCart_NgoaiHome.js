@@ -51,9 +51,9 @@
                             // Show success alert
                             // alert("Sản phẩm đã được thêm vào giỏ hàng!");
                             Swal.fire({
-                                icon: 'success',
-                                title: 'Thành công!', 
-                                text: 'Sản phẩm đã được thêm vào giỏ hàng. Nhưng bạn cần đăng nhập để tiến hành đặt hàng',
+                                icon: 'warning',
+                                //title: 'Hãy đăng nhập để tiến hành mua hàng!', 
+                                text: 'Bạn cần đăng nhập để tiến hành mua hàng',
                                 confirmButtonText: 'Đi tới đăng nhập'
                             })
                             .then(() => {

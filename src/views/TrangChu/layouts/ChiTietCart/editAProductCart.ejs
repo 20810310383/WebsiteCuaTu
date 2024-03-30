@@ -117,14 +117,14 @@
                                                             <td class="product-price">
                                                                 <!-- <%= formatCurrency(spEdit.productId.GiaBan) %> -->
 
-                                                                <!-- 2 thẻ này chỉ là để ấy giá trị 2 giá xuống js xử lý -->
-                                                                <input type="hidden" name="" value="<%= (spEdit.productId.GiaBan) %>" id="PriceBanConvert">
+                                                                <!--  thẻ này chỉ là để ấy giá trị giá xuống js xử lý -->
+                                                                <input type="hidden" value="<%= (spEdit.productId.GiaBan) %>" id="PriceBanConvert">
 
                                                                 <!-- còn đây là để truyền sang bên controller để lấy được 2 giá trị giá mới -->
                                                                 <input type="hidden" name="PriceBanMoi" value="<%= (spEdit.donGia) %>" >
 
                                                                 <!-- hiển thị giá mới lên giao diện trang chủ -->
-                                                                <input type="hidden" name="" value="<%= (spEdit.donGia) %>" id="PriceBanConvertHT">
+                                                                <input type="hidden" value="<%= (spEdit.donGia) %>" id="PriceBanConvertHT">
                                                                 <span id="PriceBanMoi" ><%= formatCurrency(spEdit.donGia) %></span>
                                                             </td>
                                                             <td class="product_name" >                                                                      
@@ -141,7 +141,7 @@
                                                             </td>
                                                             <td class="product-price">
                                                                 <!-- thẻ này chỉ là để ấy giá trị 2 giá xuống js xử lý -->
-                                                                <input type="hidden" name="" value="<%= (spEdit.qty * spEdit.donGia) %>">
+                                                                <!-- <input type="hidden" name="" value="<%= (spEdit.qty * spEdit.donGia) %>"> -->
 
                                                                 <span id="PriceTongTien" ><%= formatCurrency(spEdit.qty * spEdit.donGia) %></span>
                                                             </td>

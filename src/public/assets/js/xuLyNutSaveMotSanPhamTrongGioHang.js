@@ -1,8 +1,8 @@
 function updateCart(id) {
 
     // Lấy các giá trị từ form
-    const PriceBanMoi = document.getElementById('PriceBanMoi').value;
-    const quantity = document.getElementById('quantity').value;
+    const PriceBanMoi = document.getElementsByName("PriceBanMoi")[0].value;
+    const quantity = document.getElementsByName("quantity")[0].value;
     const group_2 = document.getElementById('group_2').value;
 
     // Dữ liệu cập nhật
@@ -38,7 +38,10 @@ function updateCart(id) {
                 title: 'Hết hàng!',
                 text: data.message,
                 confirmButtonText: 'OK SHOP'
-            });                       
+            })
+            // .then(() => {                    
+            //     location.reload(); // Làm mới trang
+            // });                    
         }
     })
     .catch(error => {

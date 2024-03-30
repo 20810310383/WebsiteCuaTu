@@ -58,6 +58,67 @@ module.exports = {
     },
 
     // xu ly nut update 
+    updateAProductCart1: async (req, res) => {
+        const quantityy = req.body.quantity;
+        const size = req.body.size;
+        const PriceBanMoi = req.body.PriceBanMoi;
+        // let idupdateCart = req.body.idupdateCart        
+        let idupdateCart = req.params.idupdateCart        
+
+        const customerAccountId = req.session.userId;
+        // Tìm cai gio hang dua vao MaKH trc tien
+        let timCart = await Cart.findOne({ MaTKKH: customerAccountId }).populate('cart.items.productId');
+
+        // Tìm sản phẩm cần cập nhật trong mảng items dựa trên _id
+        const updatedCartItem = timCart.cart.items.find(item => item._id.toString() === idupdateCart);
+
+        // kiểm tra số lượng tồn
+        let sp = await SanPham.findOne({ _id: updatedCartItem.productId._id });
+        console.log("sp: ",sp);
+        let mess = `Số lượng tồn của sản phẩm này chỉ còn ${updatedCartItem.productId.SoLuongTon} sản phẩm. Vui lòng chọn số lượng khác!`
+        console.log("mess: ",mess);
+
+        // Thêm một biến để kiểm tra xem có cần cập nhật giá hay không
+        let needToUpdatePrice = false;
+        if (sp.SoLuongTon < quantityy) {
+            console.log("Hết hàng rồi.");
+            return res.status(400).json({ success: false, message: mess });
+        }
+
+        // Kiểm tra xem số lượng tồn có đủ không
+        // if (sp.SoLuongTon < quantityy) {
+        //     console.log("Hết hàng rồi.");
+        //     // Nếu hết hàng, không cần cập nhật giá nữa
+        //     needToUpdatePrice = false;
+        //     return res.status(400).json({ success: false, message: mess });
+        // } else {
+        //     // Nếu còn hàng, cần cập nhật giá
+        //     needToUpdatePrice = true;
+        // }
+
+
+        if (updatedCartItem) {
+            // Cập nhật qty
+            updatedCartItem.qty = quantityy;
+            updatedCartItem.size = size;
+            updatedCartItem.donGia = PriceBanMoi;
+
+            // Kiểm tra nếu cần cập nhật giá
+            // if (needToUpdatePrice) {
+            //     updatedCartItem.donGia = PriceBanMoi;
+            // }
+
+            // Lưu lại dữ liệu đã chỉnh sửa
+            await timCart.save();
+
+            console.log('Số lượng sản phẩm đã được cập nhật thành công.');
+            // return res.redirect('/detailt-cart-trang-moi')
+            return res.status(200).json({ success: true, message: "Cập nhật thành công!" });
+        } else {
+            console.log('Không tìm thấy sản phẩm cần cập nhật trong giỏ hàng.');
+        }
+    },
+    // xu ly nut update 
     updateAProductCart: async (req, res) => {
         const quantityy = req.body.quantity;
         const size = req.body.size;

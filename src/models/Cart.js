@@ -25,7 +25,6 @@ const CartSchema = new Schema({
             },
             size: {
                 type: String,               
-                // default: "M"
             }
         }],
         // totalPrice: {

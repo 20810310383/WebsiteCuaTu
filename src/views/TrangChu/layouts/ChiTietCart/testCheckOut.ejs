@@ -17,7 +17,6 @@
         <link rel="stylesheet" href="assets\css\responsive.css">
         <script src="assets\js\vendor\modernizr-2.8.3.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/umd/qrcode.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     </head>
     <body>
@@ -206,10 +205,10 @@
                                                         <% if (totalCartPrice >= 1000000) { %>
                                                             <p class="cart_amount" style="color: red; font-weight: bold;"><%= formatCurrency(totalCartPrice - giam_Gia ) %></p>
                                                             
-                                                        <% } else { %>
+                                                            <% } else { %>
 
                                                             <p class="cart_amount" style="color: red; font-weight: bold;"><%= formatCurrency(detailCart.cart.PhiShip + totalCartPrice - giam_Gia ) %></p>
-                                                        <% } %>
+                                                            <% } %>
 
                                                             
 
@@ -227,53 +226,39 @@
                                                     </div>                                                     
 
                                                     <div class="panel-default">
-                                                        <input required id="payment_defult" name="check_method" type="radio" data-toggle="collapse" data-target="#collapsedefultt" >
+                                                        <input required id="payment_defult" name="check_method" type="radio" data-toggle="collapse" data-target="#collapsedefultt">
                                                         <label style="font-size: 18px;" for="payment_defult" data-toggle="collapse" data-target="#collapsedefultt" aria-controls="collapsedefultt">Momo/Atm <img src="assets\img\visha\papyel.png" alt=""></label>
                                                         <div class="col-12">
                                                             <div class="order-notes" >
                                                                 <img style="width: 500px;" src="assets/img/cart/hinhthuctt.jpg" alt="">                                                            
                                                             </div>    
                                                         </div> 
-
-                                                        <div class="col-12">
-                                                            <div style="display: none;" id="collapsedefult" class="collapse one" data-parent="#accordion">
-                                                                <div class="card-body1" style="text-align: center;display: block;">
-                                                                    <% if (totalCartPrice >= 1000000) { %>
-                                                                        <div style="display: inline-block;">
-                                                                            <img style="width: 500px;" src='https://img.vietqr.io/image/970407-19035666339011-print.png?amount=<%= totalCartPrice - giam_Gia %>&addInfo=WebShopKT+TenKhachHang+SoDienThoai&accountName=DO+KHAC+TU'/>
-                                                                        </div>
-                                                                        <!-- <div style="display: inline-block;">
-                                                                            <img style="width: 500px;" src='https://img.vietqr.io/image/970418-21510003260941-print.png?amount=<%= totalCartPrice - giam_Gia %>&addInfo=WebShopKT+TenKhachHang+SoDienThoai&accountName=DO+KHAC+TU'/>
-                                                                        </div> -->
-                                                                    <% } else { %>   
-                                                                        <div style="display: inline-block;">
-                                                                            <img style="width: 500px;" src='https://img.vietqr.io/image/970407-19035666339011-print.png?amount=<%= detailCart.cart.PhiShip + totalCartPrice - giam_Gia %>&addInfo=WebShopKT+TenKhachHang+SoDienThoai&accountName=DO+KHAC+TU'/>
-                                                                        </div>
-                                                                        <!-- <div style="display: inline-block;">
-                                                                            <img style="width: 500px;" src='https://img.vietqr.io/image/970418-21510003260941-print.png?amount=<%= detailCart.cart.PhiShip + totalCartPrice - giam_Gia %>&addInfo=WebShopKT+TenKhachHang+SoDienThoai&accountName=DO+KHAC+TU'/>
-                                                                        </div> -->
-                                                                    <% } %>
-
-                                                                </div>
-                                                                <p style="font-size: 18px;margin: 20px 0">
-                                                                    Bấm vào đây để 
-                                                                    <a target="_blank" style="text-decoration-line: underline; color: blue;" href="https://www.facebook.com/messages/t/dokhactudz">Xác nhận đơn hàng</a>
-                                                                    sau khi chuyển khoản thành công
-                                                                </p>
-                                                                
+                                                        
+                                                    </div>   
+                                                    
+                                                    <div class="col-12">
+                                                        <div style="display: block;" id="collapsedefult" class="collapse one" data-parent="#accordion">
+                                                            <div class="card-body1" style="text-align: center;">
+                                                                <p style="font-size: 18px;line-height: 30px;">                                                                 
+                                                                    Cú pháp chuyển khoản: <span style="color: red; font-size: 18px;">ShopKT_MaDonHang_TenKhachHang_SoDienThoai </span>
+                                                                    <br> Ví Dụ:&emsp;  <span style="color: rgb(55, 0, 255); font-size: 18px;">ShopKT 36B63DAF05 KhacTu 0972138493 </span>                                                                   
+                                                                    <div style="display: flex; text-align: center;">
+                                                                        <img style="width: 250px;" src="assets\img\visha\atm.jpg" alt=""> <br>
+                                                                        <img style="width: 300px;margin-left: 15px;" src="assets\img\visha\momo.jpg" alt=""> <br>
+                                                                    </div>
+                                                                    <p style="font-size: 18px;margin: 20px 0">
+                                                                        Bấm vào đây để 
+                                                                        <a target="_blank" style="text-decoration-line: underline; color: blue;" href="https://www.facebook.com/messages/t/dokhactudz">Xác nhận đơn hàng</a>
+                                                                        sau khi chuyển khoản thành công
+                                                                    </p>
+                                                                </p> 
                                                             </div>
                                                         </div>
-                                                        <script type="text/javascript">
-                                                            $("#payment").click(function () {
-                                                                $("#collapsedefult").hide();
-                                                            })
-
-                                                            $("#payment_defult").click(function () {
-                                                                $("#collapsedefult").show();
-                                                            })
-                                                        </script>
-                                                    </div>    
+                                                    </div>
+                                                                                                        
+                                                    
                                                 </div> 
+                                                <!-- <img  src="assets/img/cart/tt.jpg" alt=""> -->
                                             </div>
                                             
                                         </div> 

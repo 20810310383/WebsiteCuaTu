@@ -52,14 +52,14 @@ module.exports = {
     },
 
     // đăng xuất
-    // dangXuatAdmin: (req, res) => {
-    //     if (req.session.tk) {
-    //         req.session.destroy();
-    //     }
-    //     // req.logout();
-    //     res.redirect("/login-admin");
-    // },
-    dangXuatAdmin: async (req, res) => { 
+    dangXuatAdmin: (req, res) => {
+        if (req.session.tk) {
+            req.session.destroy();
+        }
+        // req.logout();
+        res.redirect("/login-admin");
+    },
+    dangXuatAdmin1: async (req, res) => { 
         // if (req.session.tk) {
         // }
         // xóa cookie 

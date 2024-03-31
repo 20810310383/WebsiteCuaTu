@@ -76,19 +76,16 @@ module.exports = {
             return `${finalMinPrice} đến ${finalMaxPrice}`;
         }
 
+        // hiển thị kiểu phân loại
         let loaiSP = await LoaiSP.find().exec();
-        let tongSL = 0;
-
-        for (const loai of loaiSP) {
-            const tongSLSanPham = await SanPham.countDocuments({ IdLoaiSP: loai._id });
-            console.log("loaiSP._id:", loai._id);
-            console.log("Số lượng sản phẩm:", tongSLSanPham);
-            tongSL += tongSLSanPham; // Cộng dồn số lượng sản phẩm cho mỗi loại sản phẩm
+        const tongSL = [];
+        for (const loaiSp of loaiSP) {
+            const soLuongSanPham = await SanPham.countDocuments({ IdLoaiSP: loaiSp._id });
+            tongSL.push({ TenLoaiSP: loaiSp.TenLoaiSP, soLuongSanPham, IDLoaiSP: loaiSp._id });
         }
 
-        console.log("Tổng số lượng sản phẩm:", tongSL);
-
-        
+        // sản phẩm bán chạy (SoLuongBan > 100)
+        const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 100 } });
 
 
         let page = 1
@@ -138,7 +135,7 @@ module.exports = {
                 giaSPSession: '',
                 loaiSPNamNu,
                 convertPriceRange,
-                loaiSP, tongSL
+                tongSL, spBanChay
             })
             
         } else if(tenloaiNH && giaSP) {
@@ -183,7 +180,7 @@ module.exports = {
                 searchSPSession: req.session.tenSPSearch || '',
                 tenloaiNHSession: req.session.tenloaiNH || '',
                 giaSPSession: req.session.giaSP || '',
-                loaiSPNamNu, loaiSP, tongSL
+                loaiSPNamNu, tongSL, spBanChay
             })
         } else {
             // Trường hợp không xác định được tiêu chí tìm kiếm
@@ -211,7 +208,7 @@ module.exports = {
                 searchSPSession: req.session.tenSPSearch || '',
                 tenloaiNHSession: '',
                 giaSPSession: '',
-                loaiSPNamNu, convertPriceRange, loaiSP, tongSL
+                loaiSPNamNu, convertPriceRange, tongSL, spBanChay
             })
         }        
     },

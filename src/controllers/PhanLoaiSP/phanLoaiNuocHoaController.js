@@ -17,6 +17,8 @@ module.exports = {
         let hoten = req.session.hoten
         let logIn = req.session.loggedIn
         let active = 'phanloai'
+        let idPL = req.body.idPL
+        req.session.idPL = idPL;
 
         // Hàm để định dạng số tiền thành chuỗi có ký tự VND
         function formatCurrency(amount) {
@@ -39,6 +41,17 @@ module.exports = {
         }
 
         let skip = (page - 1) * limit
+
+        // hiển thị kiểu phân loại
+        let loaiSP = await LoaiSP.find().exec();
+        const tongSL = [];
+        for (const loaiSp of loaiSP) {
+            const soLuongSanPham = await SanPham.countDocuments({ IdLoaiSP: loaiSp._id });
+            tongSL.push({ TenLoaiSP: loaiSp.TenLoaiSP, soLuongSanPham, IDLoaiSP: loaiSp._id });
+        }
+        
+        // sản phẩm bán chạy (SoLuongBan > 100)
+        const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 100 } });
 
         const all = await SanPham.find().populate('IdLoaiSP').populate('IdNam_Nu').exec();
         const loaiSPNamNu = await LoaiSPNamNu.find().exec();
@@ -67,7 +80,8 @@ module.exports = {
             soTrang: numPage, 
             curPage: page, 
             all: slicedResults,
-            loaiSPNamNu
+            loaiSPNamNu,
+            searchSPSession: req.session.idPL, tongSL, spBanChay
         })
     },
 
@@ -82,6 +96,8 @@ module.exports = {
         let hoten = req.session.hoten
         let logIn = req.session.loggedIn
         let active = 'phanloai'
+        let idPL = req.body.idPL
+        req.session.idPL = idPL;
 
         // Hàm để định dạng số tiền thành chuỗi có ký tự VND
         function formatCurrency(amount) {
@@ -104,6 +120,17 @@ module.exports = {
         }
 
         let skip = (page - 1) * limit
+
+        // hiển thị kiểu phân loại
+        let loaiSP = await LoaiSP.find().exec();
+        const tongSL = [];
+        for (const loaiSp of loaiSP) {
+            const soLuongSanPham = await SanPham.countDocuments({ IdLoaiSP: loaiSp._id });
+            tongSL.push({ TenLoaiSP: loaiSp.TenLoaiSP, soLuongSanPham, IDLoaiSP: loaiSp._id });
+        }
+        
+        // sản phẩm bán chạy (SoLuongBan > 100)
+        const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 100 } });
 
         const all = await SanPham.find().populate('IdLoaiSP').populate('IdNam_Nu').exec();
         const loaiSPNamNu = await LoaiSPNamNu.find().exec();
@@ -132,7 +159,8 @@ module.exports = {
             soTrang: numPage, 
             curPage: page, 
             all: slicedResults,
-            loaiSPNamNu
+            loaiSPNamNu, 
+            searchSPSession: req.session.idPL, tongSL, spBanChay
         })
     },
 

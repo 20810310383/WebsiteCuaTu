@@ -64,8 +64,8 @@
                             // alert("Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng!"); 
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Lỗi!',
-                                text: 'Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng. Vui lòng thử lại sau.',
+                                title: 'Hết hàng!',
+                                text: data.message,
                                 confirmButtonText: 'OK SHOP'
                             });                       
                         }

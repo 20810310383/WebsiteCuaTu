@@ -237,7 +237,7 @@ module.exports = {
                     if (!product || !product.TenSP || !product.SoLuongTon) {
                         console.error("Sản phẩm không hợp lệ:", product);
                         //throw new Error("Sản phẩm không hợp lệ");
-                        return res.status(400).json({ success: false, message: 'Sản phẩm không hợp lệ. Vui lòng liên hệ lại với admin!' });
+                        return res.status(400).json({ success: false, message: 'Sản phẩm không hợp lệ, có thể do sản phẩm nào đó đã hết hàng. Vui lòng liên hệ lại với admin hoặc đặt sản phẩm khác!' });
                     }
 
                     if (product.SoLuongTon < item.qty) {

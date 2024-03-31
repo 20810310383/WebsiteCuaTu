@@ -20,6 +20,17 @@ module.exports = {
             return relativePath;
         }   
         
+        // hiển thị kiểu phân loại
+        let loaiSP = await LoaiSP.find().exec();
+        const tongSL = [];
+        for (const loaiSp of loaiSP) {
+            const soLuongSanPham = await SanPham.countDocuments({ IdLoaiSP: loaiSp._id });
+            tongSL.push({ TenLoaiSP: loaiSp.TenLoaiSP, soLuongSanPham, IDLoaiSP: loaiSp._id });
+        }
+        
+        // sản phẩm bán chạy (SoLuongBan > 100)
+        const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 100 } });
+        
         // Hiển thị 1: select tất cả sp KHÔNG PHẢI LÀ Avatar
         const TimSpNew = await SanPham.find({ SpMoi_SpNoiBat: "Mới" }).populate("IdLoaiSP");
         const spNew = TimSpNew.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP !== "Avatar" ));
@@ -32,7 +43,7 @@ module.exports = {
             hoten, logIn, active,
             rootPath: '/', 
             formatCurrency, getRelativeImagePath,
-            spNew, spNoiBat,      
+            spNew, spNoiBat, tongSL, spBanChay
             
         })
 

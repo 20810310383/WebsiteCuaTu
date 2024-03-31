@@ -16,10 +16,11 @@
 
             <% 
                 const pre = curPage <= 1 ? curPage : curPage - 1; 
-                const next = curPage >= soTrang ? curPage : parseInt(curPage) + 1            
+                const next = curPage >= soTrang ? curPage : parseInt(curPage) + 1   
+                const queryParams = searchSPSession ? `idPL=${searchSPSession}` : ``;                  
             %>  
             <li class="page-item disabled">
-              <a class="page-link" href="/shop-list-ht1?page=<%=pre%>">&laquo;</a>
+              <a class="page-link" href="/shop-list-ht1?<%=queryParams%>&page=<%=pre%>">&laquo;</a>
             </li>
 
            <% for(var i=1; i <=soTrang; i++) { 
@@ -27,7 +28,7 @@
                         if(i == curPage) active="active" ; %>
         
             <li class="<%=active%> page-item " aria-current="page">
-                <a  class="page-link" href="/shop-list-ht1?page=<%=i%>">
+                <a  class="page-link" href="/shop-list-ht1?<%=queryParams%>&page=<%=i%>">
                     <%=i%>                          
                 </a>
             </li>
@@ -35,7 +36,7 @@
             <% } %>
 
             <li class="page-item">
-                <a class="page-link" href="/shop-list-ht1?page=<%=next%>">&raquo;</a>
+                <a class="page-link" href="/shop-list-ht1?<%=queryParams%>&page=<%=next%>">&raquo;</a>
             </li>
           
         </ul>

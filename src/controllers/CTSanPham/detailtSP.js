@@ -52,6 +52,16 @@ module.exports = {
                 return $('body').text();
             }
 
+            // hiển thị kiểu phân loại
+            let loaiSP = await LoaiSP.find().exec();
+            const tongSL = [];
+            for (const loaiSp of loaiSP) {
+                const soLuongSanPham = await SanPham.countDocuments({ IdLoaiSP: loaiSp._id });
+                tongSL.push({ TenLoaiSP: loaiSp.TenLoaiSP, soLuongSanPham, IDLoaiSP: loaiSp._id });
+            }
+            // sản phẩm bán chạy (SoLuongBan > 100)
+            const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 100 } });
+
             // Hiển thị 1: select tất cả sp KHÔNG PHẢI LÀ Avatar
             const TimSpNoiBat = await SanPham.find({ SpMoi_SpNoiBat: "Nổi Bật" }).populate("IdLoaiSP");
             const spNoiBat = TimSpNoiBat.filter(product => product.IdLoaiSP && product.IdLoaiSP.TenLoaiSP !== "Avatar");       
@@ -65,7 +75,8 @@ module.exports = {
                 rootPath: '/', 
                 formatCurrency, getRelativeImagePath, convertHtml,
                 spNoiBat,   
-                productDetails, active
+                productDetails, active,
+                tongSL, spBanChay
             })
         } catch (error) {
             console.error('Error fetching product details:', error);

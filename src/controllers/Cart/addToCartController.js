@@ -18,9 +18,10 @@ module.exports = {
     
             // Lấy thông tin đăng nhập của khách hàng từ request
             const customerAccountId = req.session.userId;
-            console.log(">>> check id customerAccountId: ", customerAccountId);
-            console.log(">>> check so luong: ", qty);
-            console.log(">>> check PriceBanMoi: ", PriceBanMoi);
+            // console.log(">>> check id customerAccountId: ", customerAccountId);
+            
+            // console.log(">>> check so luong: ", qty);
+            // console.log(">>> check PriceBanMoi: ", PriceBanMoi);
             // Kiểm tra xem sản phẩm có tồn tại không
             const product = await SanPham.findById(productId);
             if (!product) {
@@ -111,7 +112,7 @@ module.exports = {
             cart.cart.totalQuaty = cart.cart.items.reduce((total, item) => total + item.qty, 0);
             // cart.cart.totalPrice = cart.cart.items.reduce((total, item) => total + (item.qty * product.GiaBan), 0);
     
-            console.log("so luong tong: ", cart.cart.totalQuaty);
+            //console.log("so luong tong: ", cart.cart.totalQuaty);
             // console.log("gia: ", cart.cart.totalPrice);
             // Lưu cart vào session nếu user không đăng nhập
             if (!customerAccountId) {

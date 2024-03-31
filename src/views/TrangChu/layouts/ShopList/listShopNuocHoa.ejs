@@ -133,29 +133,32 @@
                                     <div class="col-lg-3 col-md-12">
                                        <!--layere categorie"-->
                                           <div class="sidebar_widget shop_c">
-                                                <div class="categorie__titile">
-                                                    <h4>Categories</h4>
-                                                </div>
-                                                <div class="layere_categorie">
-                                                    <ul>
-                                                        <li>
-                                                            <input id="acces" type="checkbox">
-                                                            <label for="acces">Accessories<span>(1)</span></label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="dress" type="checkbox">
-                                                            <label for="dress">Dresses <span>(2)</span></label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="tops" type="checkbox">
-                                                            <label for="tops">Tops<span>(3)</span></label>
-                                                        </li>
-                                                        <li>
-                                                            <input id="bag" type="checkbox">
-                                                            <label for="bag">HandBags<span>(4)</span></label>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                            <div class="categorie__titile">
+                                                <h4 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Loại sản phẩm</h4>
+                                            </div>
+                                            <div class="layere_categorie">
+                                                <ul>
+                                                    <li>
+                                                        <a href="/shop-list-ht1?idPL=">
+                                                            <label for="acces">
+                                                                <input type="hidden" name="idPL" value="">
+                                                                <span style="font-size: 16px;">Tất cả</span>                                                                    
+                                                            </label>
+                                                        </a>                                                            
+                                                    </li>
+                                                    <% tongSL.forEach(function(tongSL) { %>                                                           
+                                                    <li>
+                                                        <a href="/shop-list-ht1?idPL=<%= tongSL.IDLoaiSP %>">
+                                                            <label for="acces">
+                                                                <input type="hidden" name="idPL" value="<%= tongSL.IDLoaiSP %>">
+                                                                <span style="font-size: 16px;"><%= tongSL.TenLoaiSP %></span>
+                                                                <span style="font-size: 16px;">(<%= tongSL.soLuongSanPham %>)</span>
+                                                            </label>
+                                                        </a>                                                            
+                                                    </li>                                                        
+                                                    <% }); %>                                                                                                     
+                                                </ul>
+                                            </div>
                                             </div>
                                         <!--layere categorie end-->
 
@@ -182,33 +185,19 @@
                                         </div>                 
                                         <!--color area end--> 
 
-                                        <!--price slider start-->                                     
-                                        <div class="sidebar_widget price">
-                                            <h2>Price</h2>
-                                            <div class="ca_search_filters">
-
-                                                <input type="text" name="text" id="amount">  
-                                                <div id="slider-range"></div> 
-                                            </div>
-                                        </div>                                                       
-                                        <!--price slider end-->
+                                       
                                         
 
                                         <!--popular tags area-->
                                         <div class="sidebar_widget tags  mb-30">
                                             <div class="block_title">
-                                                <h3>popular tags</h3>
+                                                <h3 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">thẻ danh mục</h3>
                                             </div>
                                             <div class="block_tags">
-                                                <a href="#">ipod</a>
-                                                <a href="#">sam sung</a>
-                                                <a href="#">apple</a>
-                                                <a href="#">iphone 5s</a>
-                                                <a href="#">superdrive</a>
-                                                <a href="#">shuffle</a>
-                                                <a href="#">nano</a>
-                                                <a href="#">iphone 4s</a>
-                                                <a href="#">canon</a>
+                                                <% tongSL.forEach(function(tongSL) { %> 
+                                                <input type="hidden" name="idPL" value="<%= tongSL.IDLoaiSP %>">
+                                                <a href="/shop-list-ht1?idPL=<%= tongSL.IDLoaiSP %>"><%= tongSL.TenLoaiSP %></a>
+                                                <% }); %> 
                                             </div>
                                         </div>
                                         <!--popular tags end-->
@@ -229,11 +218,12 @@
                                         <!--special product start-->
                                         <div class="sidebar_widget special">
                                             <div class="block_title">
-                                                <h3>Special Products</h3>
+                                                <h3 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Sản phẩm bán chạy</h3>
                                             </div>
+                                            <% spBanChay.forEach(function(spBanChay) { %> 
                                             <div class="special_product_inner mb-20">
                                                 <div class="special_p_thumb">
-                                                    <a href="#"><img src="assets\img\cart\cart3.jpg" alt=""></a>
+                                                    <a href="/detailt-sp-ht1?idDetailtSP=<%= spBanChay._id %>"><img width="120" height="110" src="images/upload/<%= getRelativeImagePath(spBanChay.Image) %>" alt=""></a>
                                                 </div>
                                                 <div class="small_p_desc">
                                                     <div class="product_ratting">
@@ -245,34 +235,15 @@
                                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
                                                        </ul>
                                                    </div>
-                                                    <h3><a href="#">Lorem ipsum dolor</a></h3>
+                                                    <h3><a href="/detailt-sp-ht1?idDetailtSP=<%= spBanChay._id %>"><%= spBanChay.TenSP %></a></h3>
                                                     <div class="special_product_proce">
-                                                        <span class="old_price">$124.58</span>
-                                                        <span class="new_price">$118.35</span>
+                                                        <span class="old_price"><%= formatCurrency(spBanChay.GiaCu) %></span>
+                                                        <span class="new_price"><%= formatCurrency(spBanChay.GiaBan) %></span>
                                                     </div>
+                                                    <p style="position: relative; left: -50px;">Số lượng bán: <%= spBanChay.SoLuongBan %></p>
                                                 </div>
-                                            </div>
-                                            <div class="special_product_inner">
-                                                <div class="special_p_thumb">
-                                                    <a href="#"><img src="assets\img\cart\cart18.jpg" alt=""></a>
-                                                </div>
-                                                <div class="small_p_desc">
-                                                    <div class="product_ratting">
-                                                       <ul>
-                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                           <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                       </ul>
-                                                   </div>
-                                                    <h3><a href="#">Printed Summer</a></h3>
-                                                    <div class="special_product_proce">
-                                                        <span class="old_price">$124.58</span>
-                                                        <span class="new_price">$118.35</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </div>   
+                                            <% }); %>                                          
                                         </div>
                                         <!--special product end-->
 

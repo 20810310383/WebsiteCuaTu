@@ -42,6 +42,7 @@ const { deleteTKPhanQuyen } = require('../controllers/AdminQL/QuanLyTKAdmin_Phan
 const { getTrangQLDonHang, getTrangQLDonHang_ChuaGiao_PhanTrang} = require('../controllers/AdminQL/QuanLyDonHang/quanLyDonHangController');
 const { getEditDH, putUpdate_QLDH } = require('../controllers/AdminQL/QuanLyDonHang/editDonHangController');
 const { DeleteDH } = require('../controllers/AdminQL/QuanLyDonHang/deleteDonHangController');
+const { contactUs } = require('../controllers/ContactUs/contactUsController');
 
 
 const router = express.Router();
@@ -161,6 +162,10 @@ router.get("/get-edit-sp-cart", getEditAProductCart)
 router.put("/update-sp-cart/:idupdateCart", updateAProductCart)
 // xử lý nút bấm đặt hàng
 router.post("/dat-hang", datHang)
+
+
+// contact us
+router.get("/contact", contactUs)
 
 
 

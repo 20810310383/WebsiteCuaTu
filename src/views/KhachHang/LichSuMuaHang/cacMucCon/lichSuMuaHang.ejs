@@ -69,56 +69,727 @@
             <!--all -->            
             <div class="tab-pane fade" id="tatCa" role="tabpanel" aria-labelledby="pills-product-tab">
                 <div class="container-fluid">
-                    <table>                    
-                        <tr style="width: 100%; border-bottom: 10px solid rgb(245, 245, 245);">               
-                            <td style="width: 200px; background-color: white; ">
+                    <table>      
+                        <% if (all.length > 0) { %>
+                            <% all.forEach(function(all, index) { %>  
+                        <tr style="width: 100%;height: 220px; border-bottom: 20px solid rgb(245, 245, 245); ">               
+                            <td style="width: 150px; background-color: white; ">
                                 <div style="background-color: rgb(255, 255, 255); ">
-                                    <img width="180" height="200" src="images/upload/6789-1705824651641.jpg" alt="">
+                                    <img height="210" src="images/upload/<%= getRelativeImagePath(all.cart.items[0].productId.Image) %>" alt="">
                                 </div>
                             </td>
 
-                            <td>2</td>
-                            <td>3</td>                            
-                        </tr>
+                            <td style="width: 375px;background-color: rgb(255, 255, 255);">
+                                <p style=" font-size: 18px; color: black; font-family: Arial, Helvetica, sans-serif; padding-left: 20px;">
+                                    <a style="color: navy;" href="/detailt-sp-ht1?idDetailtSP=<%= all.cart.items[0].productId._id %>"><%= all.cart.items[0].productId.TenSP %></a>
+                                    <p style="padding-left: 20px; margin-top: 5px;">Size: <%= all.cart.items[0].size %>, Số lượng: <%= all.cart.items[0].qty %> sản phẩm</p>
+                                </p>
 
-                        <tr style="width: 100%; border-bottom: 10px solid rgb(245, 245, 245);">               
-                            <td style="width: 200px; background-color: white; ">
-                                <div style="background-color: rgb(255, 255, 255); ">
-                                    <img width="180" height="200" src="images/upload/6789-1705824651641.jpg" alt="">
-                                </div>
+                                <% if (all.cart.items.length > 1) { %>
+                                    <p style="font-size: 16px;color: rgb(80, 80, 80);padding-left: 20px;">và <%= all.cart.items.length - 1 %> sản phẩm khác</p>
+                                <% } %>
+
+                                <% if (all.TinhTrangDonHang == 'Chưa giao hàng') { %>
+                                    <span style="
+                                        background-color: rgb(255, 234, 234);                                             
+                                        padding: 8px 10px;
+                                        width: 190px;
+                                        border: none;
+                                        font-size: 16px;
+                                        color: rgb(255, 0, 0);   
+                                        position: relative; left: 20px;  
+                                        border-radius: 5px;                          
+                                    "class="text-danger ">                                        
+                                        <%= all.TinhTrangDonHang %>
+                                    </span>
+            
+                                    <% } else if (all.TinhTrangDonHang == 'Đang giao hàng') { %>
+                                    <span style="
+                                        background-color: rgb(255, 217, 0);                                             
+                                        padding: 5px 10px;
+                                        width: 170px;
+                                        border: 2px solid rgb(255, 217, 0);
+                                        font-size: 16px;
+                                        border-radius: 5px; 
+                                        color: black;
+                                        position: relative; left: 20px;  
+                                    ">
+                                    <%= all.TinhTrangDonHang %>
+                                    </span>
+            
+                                    <% } else { %>
+                                    <span style="
+                                            background-color: rgb(209, 255, 209);                                             
+                                            padding: 5px 10px;
+                                            width: 150px;
+                                            border-radius: 5px; 
+                                            border: 2px solid  rgb(209, 255, 209);
+                                            font-size: 16px;
+                                            color: rgb(0, 128, 9);
+                                            position: relative; left: 20px;  
+                                    ">                                    
+                                        <%= all.TinhTrangDonHang %>
+                                    </span>
+            
+                                    <% } %> 
+
+
+                                    <% if (all.TinhTrangThanhToan == 'Chưa Thanh Toán') { %>
+                                        <span style=" 
+                                            background-color: rgb(255, 234, 234);                                             
+                                            padding: 8px 10px;
+                                            width: 190px;
+                                            border: none;
+                                            font-size: 16px;
+                                            color: rgb(255, 0, 0);   
+                                            position: relative; left: 40px;  
+                                            border-radius: 5px;  
+                                        ">                          
+                                          <%= all.TinhTrangThanhToan %>
+                                        </span>
+                
+                                        <% } else { %>
+                                        <span style=" 
+                                            background-color: rgb(209, 255, 209);  
+                                            padding: 8px 10px;                                                                                                                           
+                                            color: rgb(0, 128, 9);
+                                            border: none;
+                                            font-size: 16px;
+                                            width: 190px;
+                                            position: relative; left: 40px;  
+                                            border-radius: 5px;  
+                                        ">
+                                            <%= all.TinhTrangThanhToan %>
+                                        </span>                
+                                        <% } %>
+
+                                <p style="font-weight: bold; font-size: 18px; color: rgb(255, 0, 0); position: relative;top: 20px; left: 30px;" id="giaBan">
+                                    <% if (all.cart.items[0].size == "100ml") { %>
+                                        <%= formatCurrency( all.cart.items[0].donGia * all.cart.items[0].qty ) %>
+
+                                    <% } else if (all.cart.items[0].size == "200ml") { %>
+                                        <%= formatCurrency( all.cart.items[0].donGia * 1.2 * all.cart.items[0].qty ) %>
+
+                                    <% } else if (all.cart.items[0].size == "300ml") { %>
+                                        <%= formatCurrency( all.cart.items[0].donGia * 1.4 * all.cart.items[0].qty ) %>
+
+                                    <% } else { %>
+                                        <%= formatCurrency( all.cart.items[0].donGia * 1.6 * all.cart.items[0].qty ) %>
+
+                                    <% } %>                                    
+                                </p>
+                               
                             </td>
 
-                            <td>2</td>
-                            <td>3</td>                            
-                        </tr>
-                        
+                            <td style="width: 262.5px;background-color: rgb(255, 255, 255);">
+                                <% if (all.TinhTrangThanhToan == "Chưa Thanh Toán") { %>
+                                    <a  onclick="huyDonHang('<%= all._id %>')" class="btn btn-danger" style="
+                                        color: white;
+                                        position: relative;
+                                        top: 30px;
+                                        right: -70px;
+                                        height: 40px;
+                                        line-height: 40px;
+                                        border-radius: 5px;
+                                        font-size: 15px;
+                                        "
+                                    >Hủy đơn hàng</a>    
+                                    
+                                    <a href="" class="btn btn-success" style="
+                                    display: inline-block; color: white;
+                                    position: relative;
+                                    right: -40px; top: 50px;
+                                    height: 40px; line-height: 40px;
+                                    border-radius: 5px;
+                                    font-size: 15px;
+                                    "
+                                >Xem chi tiết hóa đơn</a>
+                                <% } else { %>
+                                    <a href="" class="btn btn-success" style="
+                                    display: inline-block; color: white;
+                                    position: relative;
+                                    right: -40px; top: 50px;
+                                    height: 40px; line-height: 40px;
+                                    border-radius: 5px;
+                                    font-size: 15px;
+                                    "
+                                >Xem chi tiết hóa đơn</a>
+                                <% } %>                                                                                                                                                                            
+                            </td>                            
+                        </tr>                                               
+                            <% }); %> 
+                        <% } else { %>
+                            <p>Chưa có sản phẩm nào</p>
+                        <% } %>
                     </table>
                 </div>
             </div>
-            
-                 
-            <!-- Đang giao hàng -->
+                             
+            <!-- Chưa giao hàng -->
             <div class="tab-pane fade" id="chuaGH" role="tabpanel" aria-labelledby="pills-product-tab">
                 <div class="container-fluid">
-                    <table>                    
-                        <tr style="width: 100%; border-bottom: 20px solid rgb(245, 245, 245);">               
-                            <td style="width: 200px; background-color: white; ">
+                    <table>      
+                        <% if (chuaGiao.length > 0) { %>
+                            <% chuaGiao.forEach(function(chuaGiao, index) { %>  
+                        <tr style="width: 100%;height: 220px; border-bottom: 20px solid rgb(245, 245, 245); ">               
+                            <td style="width: 150px; background-color: white; ">
                                 <div style="background-color: rgb(255, 255, 255); ">
-                                    <img width="180" height="200" src="images/upload/6789-1705824651641.jpg" alt="">
+                                    <img height="210" src="images/upload/<%= getRelativeImagePath(chuaGiao.cart.items[0].productId.Image) %>" alt="">
                                 </div>
                             </td>
 
-                            <td>4</td>
-                            <td>5</td>
-                            
-                        </tr>
-                        
+                            <td style="width: 375px;background-color: rgb(255, 255, 255);">
+                                <p style=" font-size: 18px; color: black; font-family: Arial, Helvetica, sans-serif; padding-left: 20px;">
+                                    <a style="color: navy;" href="/detailt-sp-ht1?idDetailtSP=<%= chuaGiao.cart.items[0].productId._id %>"><%= chuaGiao.cart.items[0].productId.TenSP %></a>
+                                    <p style="padding-left: 20px; margin-top: 5px;">Size: <%= chuaGiao.cart.items[0].size %>, Số lượng: <%= chuaGiao.cart.items[0].qty %> sản phẩm</p>
+                                </p>
+
+                                <% if (chuaGiao.cart.items.length > 1) { %>
+                                    <p style="font-size: 16px;color: rgb(80, 80, 80);padding-left: 20px;">và <%= chuaGiao.cart.items.length - 1 %> sản phẩm khác</p>
+                                <% } %>
+
+                                <% if (chuaGiao.TinhTrangDonHang == 'Chưa giao hàng') { %>
+                                    <span style="
+                                        background-color: rgb(255, 234, 234);                                             
+                                        padding: 8px 10px;
+                                        width: 190px;
+                                        border: none;
+                                        font-size: 16px;
+                                        color: rgb(255, 0, 0);   
+                                        position: relative; left: 20px;  
+                                        border-radius: 5px;                          
+                                    "class="text-danger ">                                        
+                                        <%= chuaGiao.TinhTrangDonHang %>
+                                    </span>
+            
+                                    <% } else if (chuaGiao.TinhTrangDonHang == 'Đang giao hàng') { %>
+                                    <span style="
+                                        background-color: rgb(255, 217, 0);                                             
+                                        padding: 5px 10px;
+                                        width: 170px;
+                                        border: 2px solid rgb(255, 217, 0);
+                                        font-size: 16px;
+                                        border-radius: 5px; 
+                                        color: black;
+                                        position: relative; left: 20px;  
+                                    ">
+                                    <%= chuaGiao.TinhTrangDonHang %>
+                                    </span>
+            
+                                    <% } else { %>
+                                    <span style="
+                                            background-color: rgb(209, 255, 209);                                             
+                                            padding: 5px 10px;
+                                            width: 150px;
+                                            border-radius: 5px; 
+                                            border: 2px solid  rgb(209, 255, 209);
+                                            font-size: 16px;
+                                            color: rgb(0, 128, 9);
+                                            position: relative; left: 20px;  
+                                    ">                                    
+                                        <%= chuaGiao.TinhTrangDonHang %>
+                                    </span>
+            
+                                    <% } %> 
+
+
+                                    <% if (chuaGiao.TinhTrangThanhToan == 'Chưa Thanh Toán') { %>
+                                        <span style=" 
+                                            background-color: rgb(255, 234, 234);                                             
+                                            padding: 8px 10px;
+                                            width: 190px;
+                                            border: none;
+                                            font-size: 16px;
+                                            color: rgb(255, 0, 0);   
+                                            position: relative; left: 40px;  
+                                            border-radius: 5px;  
+                                        ">                          
+                                          <%= chuaGiao.TinhTrangThanhToan %>
+                                        </span>
+                
+                                        <% } else { %>
+                                        <span style=" 
+                                            background-color: rgb(209, 255, 209);  
+                                            padding: 8px 10px;                                                                                                                           
+                                            color: rgb(0, 128, 9);
+                                            border: none;
+                                            font-size: 16px;
+                                            width: 190px;
+                                            position: relative; left: 40px;  
+                                            border-radius: 5px;  
+                                        ">
+                                            <%= chuaGiao.TinhTrangThanhToan %>
+                                        </span>                
+                                        <% } %>
+                                
+                                <p style="font-weight: bold; font-size: 18px; color: rgb(255, 0, 0); position: relative;top: 20px; left: 30px;" id="giaBan">
+                                    <% if (chuaGiao.cart.items[0].size == "100ml") { %>
+                                        <%= formatCurrency( chuaGiao.cart.items[0].donGia * chuaGiao.cart.items[0].qty ) %>
+
+                                    <% } else if (chuaGiao.cart.items[0].size == "200ml") { %>
+                                        <%= formatCurrency( chuaGiao.cart.items[0].donGia * 1.2 * chuaGiao.cart.items[0].qty ) %>
+
+                                    <% } else if (chuaGiao.cart.items[0].size == "300ml") { %>
+                                        <%= formatCurrency( chuaGiao.cart.items[0].donGia * 1.4 * chuaGiao.cart.items[0].qty ) %>
+
+                                    <% } else { %>
+                                        <%= formatCurrency( chuaGiao.cart.items[0].donGia * 1.6 * chuaGiao.cart.items[0].qty ) %>
+
+                                    <% } %>                                    
+                                </p>
+                               
+                            </td>
+
+                            <td style="width: 262.5px;background-color: rgb(255, 255, 255);">
+                                <a onclick="huyDonHang('<%= chuaGiao._id %>')" class="btn btn-danger" style="
+                                    color: white;
+                                    position: relative;
+                                    top: 30px;
+                                    right: -70px;
+                                    height: 40px;
+                                    line-height: 40px;
+                                    border-radius: 5px;
+                                    font-size: 15px;
+                                    "
+                                >Hủy đơn hàng</a>
+                                                                                                             
+                                <a href="" class="btn btn-success" style="
+                                    display: inline-block; color: white;
+                                    position: relative;
+                                    right: -40px; top: 50px;
+                                    height: 40px; line-height: 40px;
+                                    border-radius: 5px;
+                                    font-size: 15px;
+                                    "
+                                >Xem chi tiết hóa đơn</a>
+                            </td>                            
+                        </tr>                                               
+                            <% }); %> 
+                        <% } else { %>
+                            <p>Chưa có sản phẩm nào</p>
+                        <% } %>
                     </table>
                 </div>
-              </div>            
+            </div>            
+
+            <!-- Đang giao hàng -->
+            <div class="tab-pane fade" id="dangGH" role="tabpanel" aria-labelledby="pills-product-tab">
+                <div class="container-fluid">
+                    <table>      
+                        <% if (dangGiao.length > 0) { %>
+                            <% dangGiao.forEach(function(dangGiao, index) { %>  
+                        <tr style="width: 100%;height: 220px; border-bottom: 20px solid rgb(245, 245, 245); ">               
+                            <td style="width: 150px; background-color: white; ">
+                                <div style="background-color: rgb(255, 255, 255); ">
+                                    <img height="210" src="images/upload/<%= getRelativeImagePath(dangGiao.cart.items[0].productId.Image) %>" alt="">
+                                </div>
+                            </td>
+
+                            <td style="width: 375px;background-color: rgb(255, 255, 255);">
+                                <p style=" font-size: 18px; color: black; font-family: Arial, Helvetica, sans-serif; padding-left: 20px;">
+                                    <a style="color: navy;" href="/detailt-sp-ht1?idDetailtSP=<%= dangGiao.cart.items[0].productId._id %>"><%= dangGiao.cart.items[0].productId.TenSP %></a>
+                                    <p style="padding-left: 20px; margin-top: 5px;">Size: <%= dangGiao.cart.items[0].size %>, Số lượng: <%= dangGiao.cart.items[0].qty %> sản phẩm</p>
+                                </p>
+
+                                <% if (dangGiao.cart.items.length > 1) { %>
+                                    <p style="font-size: 16px;color: rgb(80, 80, 80);padding-left: 20px;">và <%= dangGiao.cart.items.length - 1 %> sản phẩm khác</p>
+                                <% } %>
+
+                                <% if (dangGiao.TinhTrangDonHang == 'Chưa giao hàng') { %>
+                                    <span style="
+                                        background-color: rgb(255, 234, 234);                                             
+                                        padding: 8px 10px;
+                                        width: 190px;
+                                        border: none;
+                                        font-size: 16px;
+                                        color: rgb(255, 0, 0);   
+                                        position: relative; left: 20px;  
+                                        border-radius: 5px;                          
+                                    "class="text-danger ">                                        
+                                        <%= dangGiao.TinhTrangDonHang %>
+                                    </span>
+            
+                                    <% } else if (dangGiao.TinhTrangDonHang == 'Đang giao hàng') { %>
+                                    <span style="
+                                        background-color: rgb(255, 217, 0);                                             
+                                        padding: 5px 10px;
+                                        width: 170px;
+                                        border: 2px solid rgb(255, 217, 0);
+                                        font-size: 16px;
+                                        border-radius: 5px; 
+                                        color: black;
+                                        position: relative; left: 20px;  
+                                    ">
+                                    <%= dangGiao.TinhTrangDonHang %>
+                                    </span>
+            
+                                    <% } else { %>
+                                    <span style="
+                                            background-color: rgb(209, 255, 209);                                             
+                                            padding: 5px 10px;
+                                            width: 150px;
+                                            border-radius: 5px; 
+                                            border: 2px solid  rgb(209, 255, 209);
+                                            font-size: 16px;
+                                            color: rgb(0, 128, 9);
+                                            position: relative; left: 20px;  
+                                    ">                                    
+                                        <%= dangGiao.TinhTrangDonHang %>
+                                    </span>
+            
+                                    <% } %> 
+
+
+                                    <% if (dangGiao.TinhTrangThanhToan == 'Chưa Thanh Toán') { %>
+                                        <span style=" 
+                                            background-color: rgb(255, 234, 234);                                             
+                                            padding: 8px 10px;
+                                            width: 190px;
+                                            border: none;
+                                            font-size: 16px;
+                                            color: rgb(255, 0, 0);   
+                                            position: relative; left: 40px;  
+                                            border-radius: 5px;  
+                                        ">                          
+                                          <%= dangGiao.TinhTrangThanhToan %>
+                                        </span>
+                
+                                        <% } else { %>
+                                        <span style=" 
+                                            background-color: rgb(209, 255, 209);  
+                                            padding: 8px 10px;                                                                                                                           
+                                            color: rgb(0, 128, 9);
+                                            border: none;
+                                            font-size: 16px;
+                                            width: 190px;
+                                            position: relative; left: 40px;  
+                                            border-radius: 5px;  
+                                        ">
+                                            <%= dangGiao.TinhTrangThanhToan %>
+                                        </span>                
+                                        <% } %>
+                                
+                                <p style="font-weight: bold; font-size: 18px; color: rgb(255, 0, 0); position: relative;top: 20px; left: 30px;" id="giaBan">
+                                    <% if (dangGiao.cart.items[0].size == "100ml") { %>
+                                        <%= formatCurrency( dangGiao.cart.items[0].donGia * dangGiao.cart.items[0].qty ) %>
+
+                                    <% } else if (dangGiao.cart.items[0].size == "200ml") { %>
+                                        <%= formatCurrency( dangGiao.cart.items[0].donGia * 1.2 * dangGiao.cart.items[0].qty ) %>
+
+                                    <% } else if (dangGiao.cart.items[0].size == "300ml") { %>
+                                        <%= formatCurrency( dangGiao.cart.items[0].donGia * 1.4 * dangGiao.cart.items[0].qty ) %>
+
+                                    <% } else { %>
+                                        <%= formatCurrency( dangGiao.cart.items[0].donGia * 1.6 * dangGiao.cart.items[0].qty ) %>
+
+                                    <% } %>                                    
+                                </p>
+                               
+                            </td>
+
+                            <td style="width: 262.5px;background-color: rgb(255, 255, 255);">
+                                <a  onclick="huyDonHang('<%= dangGiao._id %>')" class="btn btn-danger" style="
+                                    color: white;
+                                    position: relative;
+                                    top: 30px;
+                                    right: -70px;
+                                    height: 40px;
+                                    line-height: 40px;
+                                    border-radius: 5px;
+                                    font-size: 15px;
+                                    "
+                                >Hủy đơn hàng</a>
+                                                                                                             
+                                <a href="" class="btn btn-success" style="
+                                    display: inline-block; color: white;
+                                    position: relative;
+                                    right: -40px; top: 50px;
+                                    height: 40px; line-height: 40px;
+                                    border-radius: 5px;
+                                    font-size: 15px;
+                                    "
+                                >Xem chi tiết hóa đơn</a>
+                            </td>                            
+                        </tr>                                               
+                            <% }); %> 
+                        <% } else { %>
+                            <p>Chưa có sản phẩm nào</p>
+                        <% } %>
+                    </table>
+                </div>
+            </div>
 
             <!-- Đã giao hàng -->
+            <div class="tab-pane fade" id="daGH" role="tabpanel" aria-labelledby="pills-product-tab">
+                <div class="container-fluid">
+                    <table>      
+                        <% if (daGiao.length > 0) { %>
+                            <% daGiao.forEach(function(daGiao, index) { %>  
+                        <tr style="width: 100%;height: 220px; border-bottom: 20px solid rgb(245, 245, 245); ">               
+                            <td style="width: 150px; background-color: white; ">
+                                <div style="background-color: rgb(255, 255, 255); ">
+                                    <img height="210" src="images/upload/<%= getRelativeImagePath(daGiao.cart.items[0].productId.Image) %>" alt="">
+                                </div>
+                            </td>
+
+                            <td style="width: 375px;background-color: rgb(255, 255, 255);">
+                                <p style=" font-size: 18px; color: black; font-family: Arial, Helvetica, sans-serif; padding-left: 20px;">
+                                    <a style="color: navy;" href="/detailt-sp-ht1?idDetailtSP=<%= daGiao.cart.items[0].productId._id %>"><%= daGiao.cart.items[0].productId.TenSP %></a>
+                                    <p style="padding-left: 20px; margin-top: 5px;">Size: <%= daGiao.cart.items[0].size %>, Số lượng: <%= daGiao.cart.items[0].qty %> sản phẩm</p>
+                                </p>
+
+                                <% if (daGiao.cart.items.length > 1) { %>
+                                    <p style="font-size: 16px;color: rgb(80, 80, 80);padding-left: 20px;">và <%= daGiao.cart.items.length - 1 %> sản phẩm khác</p>
+                                <% } %>
+
+                                <% if (daGiao.TinhTrangDonHang == 'Chưa giao hàng') { %>
+                                    <span style="
+                                        background-color: rgb(255, 234, 234);                                             
+                                        padding: 8px 10px;
+                                        width: 190px;
+                                        border: none;
+                                        font-size: 16px;
+                                        color: rgb(255, 0, 0);   
+                                        position: relative; left: 20px;  
+                                        border-radius: 5px;                          
+                                    "class="text-danger ">                                        
+                                        <%= daGiao.TinhTrangDonHang %>
+                                    </span>
             
+                                    <% } else if (daGiao.TinhTrangDonHang == 'Đang giao hàng') { %>
+                                    <span style="
+                                        background-color: rgb(255, 217, 0);                                             
+                                        padding: 5px 10px;
+                                        width: 170px;
+                                        border: 2px solid rgb(255, 217, 0);
+                                        font-size: 16px;
+                                        border-radius: 5px; 
+                                        color: black;
+                                        position: relative; left: 20px;  
+                                    ">
+                                    <%= daGiao.TinhTrangDonHang %>
+                                    </span>
+            
+                                    <% } else { %>
+                                    <span style="
+                                            background-color: rgb(209, 255, 209);                                             
+                                            padding: 5px 10px;
+                                            width: 150px;
+                                            border-radius: 5px; 
+                                            border: 2px solid  rgb(209, 255, 209);
+                                            font-size: 16px;
+                                            color: rgb(0, 128, 9);
+                                            position: relative; left: 20px;  
+                                    ">                                    
+                                        <%= daGiao.TinhTrangDonHang %>
+                                    </span>
+            
+                                    <% } %> 
+
+
+                                    <% if (daGiao.TinhTrangThanhToan == 'Chưa Thanh Toán') { %>
+                                        <span style=" 
+                                            background-color: rgb(255, 234, 234);                                             
+                                            padding: 8px 10px;
+                                            width: 190px;
+                                            border: none;
+                                            font-size: 16px;
+                                            color: rgb(255, 0, 0);   
+                                            position: relative; left: 40px;  
+                                            border-radius: 5px;  
+                                        ">                          
+                                          <%= daGiao.TinhTrangThanhToan %>
+                                        </span>
+                
+                                        <% } else { %>
+                                        <span style=" 
+                                            background-color: rgb(209, 255, 209);  
+                                            padding: 8px 10px;                                                                                                                           
+                                            color: rgb(0, 128, 9);
+                                            border: none;
+                                            font-size: 16px;
+                                            width: 190px;
+                                            position: relative; left: 40px;  
+                                            border-radius: 5px;  
+                                        ">
+                                            <%= daGiao.TinhTrangThanhToan %>
+                                        </span>                
+                                        <% } %>
+                                
+                                <p style="font-weight: bold; font-size: 18px; color: rgb(255, 0, 0); position: relative;top: 20px; left: 30px;" id="giaBan">
+                                    <% if (daGiao.cart.items[0].size == "100ml") { %>
+                                        <%= formatCurrency( daGiao.cart.items[0].donGia * daGiao.cart.items[0].qty ) %>
+
+                                    <% } else if (daGiao.cart.items[0].size == "200ml") { %>
+                                        <%= formatCurrency( daGiao.cart.items[0].donGia * 1.2 * daGiao.cart.items[0].qty ) %>
+
+                                    <% } else if (daGiao.cart.items[0].size == "300ml") { %>
+                                        <%= formatCurrency( daGiao.cart.items[0].donGia * 1.4 * daGiao.cart.items[0].qty ) %>
+
+                                    <% } else { %>
+                                        <%= formatCurrency( daGiao.cart.items[0].donGia * 1.6 * daGiao.cart.items[0].qty ) %>
+
+                                    <% } %>                                    
+                                </p>
+                               
+                            </td>
+
+                            <td style="width: 262.5px;background-color: rgb(255, 255, 255);">                                
+                                                                                                             
+                                <a href="" class="btn btn-success" style="
+                                    display: inline-block; color: white;
+                                    position: relative;
+                                    right: -40px; top: 50px;
+                                    height: 40px; line-height: 40px;
+                                    border-radius: 5px;
+                                    font-size: 15px;
+                                    "
+                                >Xem chi tiết hóa đơn</a>
+                            </td>                            
+                        </tr>                                               
+                            <% }); %> 
+                        <% } else { %>
+                            <p>Chưa có sản phẩm nào</p>
+                        <% } %>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Đã hủy -->
+            <div class="tab-pane fade" id="daHuy" role="tabpanel" aria-labelledby="pills-product-tab">
+                <div class="container-fluid">
+                    <table>      
+                        <% if (daHuy.length > 0) { %>
+                            <% daHuy.forEach(function(daHuy, index) { %>  
+                        <tr style="width: 100%;height: 220px; border-bottom: 20px solid rgb(245, 245, 245); ">               
+                            <td style="width: 150px; background-color: white; ">
+                                <div style="background-color: rgb(255, 255, 255); ">
+                                    <img height="210" src="images/upload/<%= getRelativeImagePath(daHuy.cart.items[0].productId.Image) %>" alt="">
+                                </div>
+                            </td>
+
+                            <td style="width: 375px;background-color: rgb(255, 255, 255);">
+                                <p style=" font-size: 18px; color: black; font-family: Arial, Helvetica, sans-serif; padding-left: 20px;">
+                                    <a style="color: navy;" href="/detailt-sp-ht1?idDetailtSP=<%= daHuy.cart.items[0].productId._id %>"><%= daHuy.cart.items[0].productId.TenSP %></a>
+                                    <p style="padding-left: 20px; margin-top: 5px;">Size: <%= daHuy.cart.items[0].size %>, Số lượng: <%= daHuy.cart.items[0].qty %> sản phẩm</p>
+                                </p>
+
+                                <% if (daHuy.cart.items.length > 1) { %>
+                                    <p style="font-size: 16px;color: rgb(80, 80, 80);padding-left: 20px;">và <%= daHuy.cart.items.length - 1 %> sản phẩm khác</p>
+                                <% } %>
+
+                                <% if (daHuy.TinhTrangDonHang == 'Chưa giao hàng') { %>
+                                    <span style="
+                                        background-color: rgb(255, 234, 234);                                             
+                                        padding: 8px 10px;
+                                        width: 190px;
+                                        border: none;
+                                        font-size: 16px;
+                                        color: rgb(255, 0, 0);   
+                                        position: relative; left: 20px;  
+                                        border-radius: 5px;                          
+                                    "class="text-danger ">                                        
+                                        <%= daHuy.TinhTrangDonHang %>
+                                    </span>
+            
+                                    <% } else if (daHuy.TinhTrangDonHang == 'Đang giao hàng') { %>
+                                    <span style="
+                                        background-color: rgb(255, 217, 0);                                             
+                                        padding: 5px 10px;
+                                        width: 170px;
+                                        border: 2px solid rgb(255, 217, 0);
+                                        font-size: 16px;
+                                        border-radius: 5px; 
+                                        color: black;
+                                        position: relative; left: 20px;  
+                                    ">
+                                    <%= daHuy.TinhTrangDonHang %>
+                                    </span>
+            
+                                    <% } else { %>
+                                    <span style="
+                                            background-color: rgb(209, 255, 209);                                             
+                                            padding: 5px 10px;
+                                            width: 150px;
+                                            border-radius: 5px; 
+                                            border: 2px solid  rgb(209, 255, 209);
+                                            font-size: 16px;
+                                            color: rgb(0, 128, 9);
+                                            position: relative; left: 20px;  
+                                    ">                                    
+                                        <%= daHuy.TinhTrangDonHang %>
+                                    </span>
+            
+                                    <% } %> 
+
+
+                                    <% if (daHuy.TinhTrangThanhToan == 'Chưa Thanh Toán') { %>
+                                        <span style=" 
+                                            background-color: rgb(255, 234, 234);                                             
+                                            padding: 8px 10px;
+                                            width: 190px;
+                                            border: none;
+                                            font-size: 16px;
+                                            color: rgb(255, 0, 0);   
+                                            position: relative; left: 40px;  
+                                            border-radius: 5px;  
+                                        ">                          
+                                          <%= daHuy.TinhTrangThanhToan %>
+                                        </span>
+                
+                                        <% } else { %>
+                                        <span style=" 
+                                            background-color: rgb(209, 255, 209);  
+                                            padding: 8px 10px;                                                                                                                           
+                                            color: rgb(0, 128, 9);
+                                            border: none;
+                                            font-size: 16px;
+                                            width: 190px;
+                                            position: relative; left: 40px;  
+                                            border-radius: 5px;  
+                                        ">
+                                            <%= daHuy.TinhTrangThanhToan %>
+                                        </span>                
+                                        <% } %>
+                                
+                                <p style="font-weight: bold; font-size: 18px; color: rgb(255, 0, 0); position: relative;top: 20px; left: 30px;" id="giaBan">
+                                    <% if (daHuy.cart.items[0].size == "100ml") { %>
+                                        <%= formatCurrency( daHuy.cart.items[0].donGia * daHuy.cart.items[0].qty ) %>
+
+                                    <% } else if (daHuy.cart.items[0].size == "200ml") { %>
+                                        <%= formatCurrency( daHuy.cart.items[0].donGia * 1.2 * daHuy.cart.items[0].qty ) %>
+
+                                    <% } else if (daHuy.cart.items[0].size == "300ml") { %>
+                                        <%= formatCurrency( daHuy.cart.items[0].donGia * 1.4 * daHuy.cart.items[0].qty ) %>
+
+                                    <% } else { %>
+                                        <%= formatCurrency( daHuy.cart.items[0].donGia * 1.6 * daHuy.cart.items[0].qty ) %>
+
+                                    <% } %>                                    
+                                </p>
+                               
+                            </td>
+
+                            <td style="width: 262.5px;background-color: rgb(255, 255, 255);">                                
+                                                                                                             
+                                <a href="" class="btn btn-success" style="
+                                    display: inline-block; color: white;
+                                    position: relative;
+                                    right: -40px; top: 50px;
+                                    height: 40px; line-height: 40px;
+                                    border-radius: 5px;
+                                    font-size: 15px;
+                                    "
+                                >Xem chi tiết hóa đơn</a>
+                            </td>                            
+                        </tr>                                               
+                            <% }); %> 
+                        <% } else { %>
+                            <p>Chưa có sản phẩm nào</p>
+                        <% } %>
+                    </table>
+                </div>
+            </div>
 
         </div>
     </div>

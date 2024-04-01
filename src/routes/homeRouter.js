@@ -43,6 +43,7 @@ const { getTrangQLDonHang, getTrangQLDonHang_ChuaGiao_PhanTrang} = require('../c
 const { getEditDH, putUpdate_QLDH } = require('../controllers/AdminQL/QuanLyDonHang/editDonHangController');
 const { DeleteDH } = require('../controllers/AdminQL/QuanLyDonHang/deleteDonHangController');
 const { contactUs } = require('../controllers/ContactUs/contactUsController');
+const { huyDonHang } = require('../controllers/LichSuMuaHang/huyDonHangController');
 
 
 const router = express.Router();
@@ -171,6 +172,7 @@ router.get("/contact", contactUs)
 
 // Lịch sử mua hàng
 router.get("/lsu-mua-hang", home_LichSuMuaHang)
+router.delete("/huy-don-hang/:huydonhang", huyDonHang)
 
 
 //**********************************************************************

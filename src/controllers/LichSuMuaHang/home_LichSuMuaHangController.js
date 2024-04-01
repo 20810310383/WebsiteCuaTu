@@ -32,12 +32,28 @@ module.exports = {
             return shortenedHex;
         }
 
+        const customerAccountId = req.session.userId;
+        console.log("customerAccountId: ",customerAccountId);
+
+        let soLuongDH = await HoaDon.find({MaKH: customerAccountId})
+        console.log("tong hoa don: ", soLuongDH.length);
+        let tongTienHD = soLuongDH.map(item => item.CanThanhToan || 0).reduce((acc, CanThanhToan) => acc + CanThanhToan, 0);
+        console.log("Tổng giá của tất cả hóa đơn: ", tongTienHD);
+
+        let all = await HoaDon.find({MaKH: customerAccountId}).populate('cart.items.productId')
+        let chuaGiao = await HoaDon.find({MaKH: customerAccountId, TinhTrangDonHang: 'Chưa giao hàng'}).populate('cart.items.productId')
+        let dangGiao = await HoaDon.find({MaKH: customerAccountId, TinhTrangDonHang: 'Đang giao hàng'}).populate('cart.items.productId')
+        let daGiao = await HoaDon.find({MaKH: customerAccountId, TinhTrangDonHang: 'Đã giao hàng'}).populate('cart.items.productId')
+        let daHuy = await HuyDonHang.find({MaKH: customerAccountId}).populate('cart.items.productId')
+
         res.render("KhachHang/LichSuMuaHang/trangChuLichSuMuaHang.ejs", {
             formatCurrency, 
             rootPath: '/' , 
             getRelativeImagePath, rutGonMa,
             hoten, logIn, 
-            active
+            active,
+            soLuongDH, tongTienHD, 
+            all, chuaGiao, dangGiao, daGiao, daHuy
         })
     }
 }

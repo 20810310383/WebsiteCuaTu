@@ -40,7 +40,11 @@ const HuyDonHang_Schema = new mongoose.Schema({
           type: Number,
           required: true,
         },
-        size: { type: String },
+        donGia: {
+          type: Number,
+          required: true
+        },
+        size: { type: String}
       },
     ],
   },

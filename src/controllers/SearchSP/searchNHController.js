@@ -2,6 +2,7 @@ const SanPham = require("../../models/SanPham")
 const LoaiSP = require("../../models/LoaiSP")
 const LoaiSPNamNu = require("../../models/LoaiSPNamNu")
 require('rootpath')();
+const cheerio = require('cheerio');
 
 module.exports = {
     searchNH_PhanTrang: async (req, res) => {
@@ -55,6 +56,12 @@ module.exports = {
             return relativePath;
         } 
 
+         // Đoạn mã JavaScript để chuyển đổi HTML thành văn bản
+         function convertHtml(html) {
+            const $ = cheerio.load(html);
+            return $('body').text();
+        }
+
         // convert tiền từ số thành dạng có cả chữ. ví dụ: 1000 -> 1M
         function convertPriceRange(range) {
             const ranges = range.split('-');
@@ -85,7 +92,7 @@ module.exports = {
         }
 
         // sản phẩm bán chạy (SoLuongBan > 100)
-        const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 100 } });
+        const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 200 } });
 
 
         let page = 1
@@ -135,7 +142,8 @@ module.exports = {
                 giaSPSession: '',
                 loaiSPNamNu,
                 convertPriceRange,
-                tongSL, spBanChay
+                tongSL, spBanChay,
+                convertHtml
             })
             
         } else if(tenloaiNH && giaSP) {
@@ -180,7 +188,8 @@ module.exports = {
                 searchSPSession: req.session.tenSPSearch || '',
                 tenloaiNHSession: req.session.tenloaiNH || '',
                 giaSPSession: req.session.giaSP || '',
-                loaiSPNamNu, tongSL, spBanChay
+                loaiSPNamNu, tongSL, spBanChay,
+                convertHtml
             })
         } else {
             // Trường hợp không xác định được tiêu chí tìm kiếm
@@ -208,7 +217,8 @@ module.exports = {
                 searchSPSession: req.session.tenSPSearch || '',
                 tenloaiNHSession: '',
                 giaSPSession: '',
-                loaiSPNamNu, convertPriceRange, tongSL, spBanChay
+                loaiSPNamNu, convertPriceRange, tongSL, spBanChay,
+                convertHtml
             })
         }        
     },

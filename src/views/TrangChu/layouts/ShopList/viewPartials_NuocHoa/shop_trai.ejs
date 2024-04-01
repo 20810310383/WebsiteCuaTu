@@ -36,8 +36,7 @@
                     <div class="product_info">
                         <ul>
                             <li><a href="#" title=" Add to Wishlist ">Add to Wishlist</a></li>
-                            <li><a href="#" title="Quick view">View Detail</a></li>
-                            <!-- <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Quick view">View Detail</a></li> -->
+                            <li><a id="viewDetailt" href="#" data-product-id="<%= all._id %>"  data-toggle="modal" data-target="#modal_box" title="Quick view" >View Detail</a></li>
                         </ul>
                     </div>
                 </form>
@@ -49,3 +48,66 @@
         <% } %>
     </div>  
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var viewDetailLinks = document.querySelectorAll('#viewDetailt');
+        viewDetailLinks.forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                var productId = link.dataset.productId;
+                fetch('/detailt-sp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ idDetailtSPP: productId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Lấy dữ liệu từ API
+                    const product = data.productDetails;
+                    console.log("pro: ", product);
+
+                    // Cập nhật nội dung các phần tử modal với dữ liệu sản phẩm
+                    document.getElementById('anh1').src = product.Image;
+                    document.getElementById('anh1_1').src = product.Image;
+                    document.getElementById('anh2').src = product.Image1;
+                    document.getElementById('anh1_2').src = product.Image1;
+                    document.getElementById('anh3').src = product.Image2;
+                    document.getElementById('anh1_3').src = product.Image2;
+                    document.getElementById('productName').innerHTML = product.TenSP;
+
+                    // Lấy giá trị sản phẩm từ dữ liệu nhận được từ API
+                    const productPrice = product.GiaBan;
+                    // Lấy thẻ input bằng id
+                    const priceBanConvertInput = document.getElementById('PriceBanConvert');
+                    // Đặt giá trị của input là giá trị sản phẩm
+                    priceBanConvertInput.value = productPrice;
+                    document.getElementById('PriceBanMoi').innerHTML = formatCurrency(productPrice);
+                    document.getElementsByName('PriceBanMoi')[0].value = (productPrice);
+
+                    const productPriceCu = product.GiaCu;
+                    const priceCuConvertInput = document.getElementById('PriceCuConvert');
+                    priceCuConvertInput.value = productPriceCu;
+                    document.getElementById('PriceCuMoi').innerHTML = formatCurrency(productPriceCu);
+                    document.getElementsByName('PriceCuMoi')[0].value = (productPriceCu);
+
+                    document.getElementById("idVaoDay").value = product._id
+                    document.getElementById("SoLuongTon").value = product.SoLuongTon
+                    document.getElementById("SoLuongBan").value = product.SoLuongBan
+                    document.getElementById("slBan").textContent = product.SoLuongBan
+
+                    document.getElementById('productDescription').innerHTML = (product.MoTa);
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+
+    // Đoạn mã JavaScript để chuyển đổi HTML thành văn bản
+    function convertHtml(html) {
+        const $ = cheerio.load(html);
+        return $('body').text();
+    }
+</script>

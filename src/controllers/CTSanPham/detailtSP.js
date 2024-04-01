@@ -7,12 +7,19 @@ module.exports = {
     chiTietSPHomeHienThi1: async (req, res) => {
 
         try {
+            // Đoạn mã JavaScript để chuyển đổi HTML thành văn bản
+            function convertHtml(html) {
+                const $ = cheerio.load(html);
+                return $('body').text();
+            }
+
             const productId = req.body.idDetailtSPP;
             console.log("productId: ",productId);
             const productDetails = await SanPham.findById(productId).populate("IdLoaiSP");
             console.log("productDetails: ",productDetails);
             res.json({
-                productDetails
+                productDetails,
+                
                 // name: productDetails.TenSP,
                 // Image: productDetails.Image,
                 // newPrice: productDetails.GiaBan,
@@ -59,8 +66,8 @@ module.exports = {
                 const soLuongSanPham = await SanPham.countDocuments({ IdLoaiSP: loaiSp._id });
                 tongSL.push({ TenLoaiSP: loaiSp.TenLoaiSP, soLuongSanPham, IDLoaiSP: loaiSp._id });
             }
-            // sản phẩm bán chạy (SoLuongBan > 100)
-            const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 100 } });
+            // sản phẩm bán chạy (SoLuongBan > 200)
+            const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 200 } });
 
             // Hiển thị 1: select tất cả sp KHÔNG PHẢI LÀ Avatar
             const TimSpNoiBat = await SanPham.find({ SpMoi_SpNoiBat: "Nổi Bật" }).populate("IdLoaiSP");

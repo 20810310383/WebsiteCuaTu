@@ -19,7 +19,12 @@ module.exports = {
             const relativePath = absolutePath ? absolutePath.replace(rootPath, '').replace(/\\/g, '/').replace(/^\/?images\/upload\//, '') : '';
             return relativePath;
         }   
-        
+        // Đoạn mã JavaScript để chuyển đổi HTML thành văn bản
+        function convertHtml(html) {
+            const $ = cheerio.load(html);
+            return $('body').text();
+        }
+
         // hiển thị kiểu phân loại
         let loaiSP = await LoaiSP.find().exec();
         const tongSL = [];
@@ -29,7 +34,7 @@ module.exports = {
         }
         
         // sản phẩm bán chạy (SoLuongBan > 100)
-        const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 100 } });
+        const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 200 } });
         
         // Hiển thị 1: select tất cả sp KHÔNG PHẢI LÀ Avatar
         const TimSpNew = await SanPham.find({ SpMoi_SpNoiBat: "Mới" }).populate("IdLoaiSP");
@@ -42,7 +47,7 @@ module.exports = {
         res.render("home.ejs", {
             hoten, logIn, active,
             rootPath: '/', 
-            formatCurrency, getRelativeImagePath,
+            formatCurrency, getRelativeImagePath, convertHtml,
             spNew, spNoiBat, tongSL, spBanChay
             
         })

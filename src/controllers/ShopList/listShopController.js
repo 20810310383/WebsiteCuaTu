@@ -2,7 +2,7 @@ const SanPham = require("../../models/SanPham")
 const LoaiSP = require("../../models/LoaiSP")
 const LoaiSPNamNu = require("../../models/LoaiSPNamNu")
 require('rootpath')();
-
+const cheerio = require('cheerio');
 
 
 module.exports = {
@@ -44,6 +44,11 @@ module.exports = {
             return relativePath;
         } 
 
+        // Đoạn mã JavaScript để chuyển đổi HTML thành văn bản
+        function convertHtml(html) {
+            const $ = cheerio.load(html);
+            return $('body').text();
+        }
         let page = 1
         const limit = 6
         
@@ -63,7 +68,7 @@ module.exports = {
         }
         
         // sản phẩm bán chạy (SoLuongBan > 100)
-        const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 100 } });
+        const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 200 } });
 
         if(!idPL){
 
@@ -94,7 +99,8 @@ module.exports = {
                 all: slicedResults,
                 loaiSPNamNu, tongSL, 
                 searchSPSession: req.session.idPL,
-                spBanChay
+                spBanChay,
+                convertHtml
             })
         } else {
             const all = await SanPham.find({IdLoaiSP: idPL}).populate('IdLoaiSP').exec();
@@ -124,7 +130,8 @@ module.exports = {
                 all: slicedResults,
                 loaiSPNamNu, tongSL, 
                 searchSPSession: req.session.idPL,
-                spBanChay
+                spBanChay,
+                convertHtml
             })
         }
     },

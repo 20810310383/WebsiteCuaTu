@@ -17,12 +17,12 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer_widget">
                         <h3>My Account</h3>
-                        <ul>
-                            <li><a href="#">Your Account</a></li>
-                            <li><a href="#">My orders</a></li>
-                            <li><a href="#">My credit slips</a></li>
-                            <li><a href="#">My addresses</a></li>
-                            <li><a href="/login-tk-kh">Login</a></li>
+                        <ul>                                                        
+                            <% if (logIn) { %> 
+                                <li><a href="/lsu-mua-hang">Tài khoản của tôi</a></li>
+                            <% } else { %> 
+                                <li><a href="/login-tk-kh">Login</a></li>
+                            <% } %> 
                         </ul>
                     </div>
                 </div>

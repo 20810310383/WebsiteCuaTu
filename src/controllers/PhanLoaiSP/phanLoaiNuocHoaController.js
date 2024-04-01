@@ -2,7 +2,7 @@ const SanPham = require("../../models/SanPham")
 const LoaiSP = require("../../models/LoaiSP")
 const LoaiSPNamNu = require("../../models/LoaiSPNamNu")
 require('rootpath')();
-
+const cheerio = require('cheerio');
 
 
 module.exports = {
@@ -31,7 +31,11 @@ module.exports = {
             const relativePath = absolutePath ? absolutePath.replace(rootPath, '').replace(/\\/g, '/').replace(/^\/?images\/upload\//, '') : '';
             return relativePath;
         } 
-
+        // Đoạn mã JavaScript để chuyển đổi HTML thành văn bản
+        function convertHtml(html) {
+            const $ = cheerio.load(html);
+            return $('body').text();
+        }
         let page = 1
         const limit = 6
         
@@ -51,7 +55,7 @@ module.exports = {
         }
         
         // sản phẩm bán chạy (SoLuongBan > 100)
-        const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 100 } });
+        const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 200 } });
 
         const all = await SanPham.find().populate('IdLoaiSP').populate('IdNam_Nu').exec();
         const loaiSPNamNu = await LoaiSPNamNu.find().exec();
@@ -80,7 +84,7 @@ module.exports = {
             soTrang: numPage, 
             curPage: page, 
             all: slicedResults,
-            loaiSPNamNu,
+            loaiSPNamNu, convertHtml,
             searchSPSession: req.session.idPL, tongSL, spBanChay
         })
     },
@@ -111,6 +115,12 @@ module.exports = {
             return relativePath;
         } 
 
+         // Đoạn mã JavaScript để chuyển đổi HTML thành văn bản
+         function convertHtml(html) {
+            const $ = cheerio.load(html);
+            return $('body').text();
+        }
+
         let page = 1
         const limit = 6
         
@@ -130,7 +140,7 @@ module.exports = {
         }
         
         // sản phẩm bán chạy (SoLuongBan > 100)
-        const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 100 } });
+        const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 200 } });
 
         const all = await SanPham.find().populate('IdLoaiSP').populate('IdNam_Nu').exec();
         const loaiSPNamNu = await LoaiSPNamNu.find().exec();
@@ -160,7 +170,8 @@ module.exports = {
             curPage: page, 
             all: slicedResults,
             loaiSPNamNu, 
-            searchSPSession: req.session.idPL, tongSL, spBanChay
+            searchSPSession: req.session.idPL, tongSL, spBanChay,
+            convertHtml
         })
     },
 

@@ -91,48 +91,4 @@ module.exports = {
         }
     },
 
-    chiTietSPHomeHienThi2_ChiTiet: async (req, res) => {
-
-        try {
-            let hoten = req.session.hoten
-            let logIn = req.session.loggedIn
-            let active =''
-
-            // Hàm để định dạng số tiền thành chuỗi có ký tự VND
-            function formatCurrency(amount) {
-                return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
-            }
-
-            // edit file img
-            function getRelativeImagePath(absolutePath) {
-                const rootPath = '<%= rootPath.replace(/\\/g, "\\\\") %>';
-                const relativePath = absolutePath ? absolutePath.replace(rootPath, '').replace(/\\/g, '/').replace(/^\/?images\/upload\//, '') : '';
-                return relativePath;
-            }
-
-            // Đoạn mã JavaScript để chuyển đổi HTML thành văn bản
-            function convertHtml(html) {
-                const $ = cheerio.load(html);
-                return $('body').text();
-            }
-
-            // Hiển thị 1: select tất cả sp KHÔNG PHẢI LÀ Avatar
-            const TimSpNew = await SanPham.find({ SpMoi_SpNoiBat: "Mới" }).populate("IdLoaiSP");
-            const spNew = TimSpNew.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP === "Avatar" ));           
-
-            const productId = req.query.idDetailtSP_ht2;
-            const productDetails = await SanPham.findById(productId).populate("IdLoaiSP");
-            
-            res.render("TrangChu/layouts/DetailtSP/detailtProductHT2.ejs", {
-                hoten, logIn,
-                rootPath: '/', 
-                formatCurrency, getRelativeImagePath, convertHtml,
-                spNew,
-                productDetails, active
-            })
-        } catch (error) {
-            console.error('Error fetching product details:', error);
-            res.status(500).json({ error: 'Internal server error' });
-        }
-    },
 }

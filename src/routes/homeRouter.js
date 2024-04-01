@@ -1,13 +1,10 @@
 const express = require('express');
-const { getHomeHienThi2, getHomeHienThi1 } = require("../controllers/TrangChu/homeController");
+const { getHomeHienThi1 } = require("../controllers/TrangChu/homeController");
 const { getFormLoginKH, dangKyTKKH, dangNhapTKKH, dangXuatTKKH } = require('../controllers/Login/loginKHController');
-const { chiTietSPHomeHienThi1, chiTietSPHomeHienThi1_ChiTiet, chiTietSPHomeHienThi2_ChiTiet } = require('../controllers/CTSanPham/detailtSP');
+const { chiTietSPHomeHienThi1, chiTietSPHomeHienThi1_ChiTiet } = require('../controllers/CTSanPham/detailtSP');
 const { getHomeListShop, getHomeListShop_PhanTrang, getHomeListShop_TheoLoai_PhanTrang } = require('../controllers/ShopList/listShopController');
-const { getHomeListShopGame, getHomeListShopGame_PhanTrang } = require('../controllers/ShopList/listShopGameController');
 const { searchNH_PhanTrang, searchNH, searchNH_PhanLoai_PhanTrang } = require('../controllers/SearchSP/searchNHController');
-const { searchGame, searchGame_PhanTrang } = require('../controllers/SearchSP/searchGameController');
 const { getHomeListShopPhanLoaiNam, getHomeListShopPhanLoaiNam_PhanTrang, getHomeListShopPhanLoaiNu, getHomeListShopPhanLoaiNu_PhanTrang } = require('../controllers/PhanLoaiSP/phanLoaiNuocHoaController');
-const { getHomeListShopGamePhanLoaiNam_PhanTrang, getHomeListShopGamePhanLoaiNam, getHomeListShopGamePhanLoaiNu_PhanTrang, getHomeListShopGamePhanLoaiNu } = require('../controllers/PhanLoaiSP/phanLoaiGameController');
 const { addToCart } = require('../controllers/Cart/addToCartController');
 const { getCartInfo } = require('../controllers/Cart/getCartInfoController');
 const {getChiTietCart, getChiTietCart_XemCT} = require('../controllers/Cart/getChiTietCartController');
@@ -31,10 +28,6 @@ const { getCreateNuocHoa, createNuocHoa } = require('../controllers/AdminQL/Quan
 const { getEditNuocHoa, handleEditNuocHoa, getEditNuocHoaDaXoa, handleEditNuocHoaDaXoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/editSPNuocHoa');
 const { deleteSP } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/deleteSPNuocHoa');
 const { getHomeSearchNuocHoa, getHomeSearchNuocHoaPhanTrang, getHomeSearchNuocHoaDaXoaPhanTrang, getHomeSearchNuocHoaDaXoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/searchSPNuocHoa');
-const { getHomeGame, getHomeGamePhanTrang } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/homeQLGame');
-const { getCreateGame, createGame } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/createSPGame');
-const { getEditGame, handleEditGame } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/editSPGame');
-const { getHomeSearchGamePhanTrang, getHomeSearchGame } = require('../controllers/AdminQL/QuanLySanPham/QuanLyAccGame/searchSPGame');
 const { getHomeDaXoaNuocHoaPhanTrang, getHomeDaXoaNuocHoa } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/daXoaSPNuocHoa');
 const { getHomeQLAdminPhanQuyen, getHomePhanTrang_TKAdminPhanQuyen } = require('../controllers/AdminQL/QuanLyTKAdmin_PhanQuyen/quanLyTKAdminPhanQuyenController');
 const { getCreateTKAdminPhanQuyen, createTKAdminPhanQuyen } = require('../controllers/AdminQL/QuanLyTKAdmin_PhanQuyen/createTKAdminPhanQuyenController');
@@ -51,8 +44,6 @@ const router = express.Router();
 
 // TRANG CHU
 router.get("/", getHomeHienThi1)
-router.get("/hien-thi-2-home", getHomeHienThi2)
-
 
 
 // LOGIN Tai Khoan Khach Hang
@@ -69,7 +60,6 @@ router.get("/dang-xuat-tkkh", dangXuatTKKH)
 // Chi Tiet San Pham
 router.post("/detailt-sp", chiTietSPHomeHienThi1)
 router.get("/detailt-sp-ht1", chiTietSPHomeHienThi1_ChiTiet)
-router.get("/detailt-sp-ht2", chiTietSPHomeHienThi2_ChiTiet)
 
 
 
@@ -108,17 +98,6 @@ router.get("/search-nuoc-hoa", async (req, res) => {
 
 
 
-// SHOP Ban GAME
-router.get("/shop-list-ht2", getHomeListShopGame)
-// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
-router.get("/shop-list-ht2", getHomeListShopGame_PhanTrang)
-// Search SanPham
-router.get("/search-game", searchGame)
-// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
-router.get("/search-game", searchGame_PhanTrang)
-
-
-
 // Phan Loai San Pham 
 // SHOP Nuoc Hoa
 // phan loai nam
@@ -129,18 +108,6 @@ router.get("/shop-list-phan-loai-nuoc-hoa-nam", getHomeListShopPhanLoaiNam_PhanT
 router.get("/shop-list-phan-loai-nuoc-hoa-nu", getHomeListShopPhanLoaiNu)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 router.get("/shop-list-phan-loai-nuoc-hoa-nu", getHomeListShopPhanLoaiNu_PhanTrang)
-
-
-
-// SHOP GAME
-// phan loai nam
-router.get("/shop-list-phan-loai-game-nam", getHomeListShopGamePhanLoaiNam)
-// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
-router.get("/shop-list-phan-loai-game-nam", getHomeListShopGamePhanLoaiNam_PhanTrang)
-// phan loai nu
-router.get("/shop-list-phan-loai-game-nu", getHomeListShopGamePhanLoaiNu)
-// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
-router.get("/shop-list-phan-loai-game-nu", getHomeListShopGamePhanLoaiNu_PhanTrang)
 
 
 
@@ -269,27 +236,6 @@ router.get("/search-qly-nuoc-hoa-da-xoa", getHomeSearchNuocHoaDaXoa)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 router.get("/search-qly-nuoc-hoa-da-xoa", getHomeSearchNuocHoaDaXoaPhanTrang)
 
-
-
-
-// get home quản lý sản phẩm là game
-router.get("/page-qly-game", getHomeGame)
-// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
-router.get("/page-qly-game", getHomeGamePhanTrang)
-// get trang nhập liệu create
-router.get("/create-sp-game", getCreateGame)
-// xử lý nút create sản phẩm game
-router.post("/create-sp-game", createGame)
-// get trang nhập liệu edit
-router.get("/edit-sp-game", getEditGame)
-// xử lý nút save sản phẩm game
-router.put("/save-sp-game/:idEdit", handleEditGame)
-// xóa sản phẩm game
-router.delete("/xoa-sp-game/:idxoa", deleteSP)
-// get home tìm kiếm sản phẩm game
-router.get("/search-qly-game", getHomeSearchGame)
-// khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
-router.get("/search-qly-game", getHomeSearchGamePhanTrang)
 
 
 

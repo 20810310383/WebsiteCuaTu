@@ -182,18 +182,7 @@
                             </td>
 
                             <td style="width: 262.5px;background-color: rgb(255, 255, 255);">
-                                <% if (all.TinhTrangThanhToan == "Chưa Thanh Toán") { %>
-                                    <a  onclick="huyDonHang('<%= all._id %>')" class="btn btn-danger" style="
-                                        color: white;
-                                        position: relative;
-                                        top: 30px;
-                                        right: -70px;
-                                        height: 40px;
-                                        line-height: 40px;
-                                        border-radius: 5px;
-                                        font-size: 15px;
-                                        "
-                                    >Hủy đơn hàng</a>    
+                                <% if (all.TinhTrangThanhToan == "Đã Thanh Toán" && all.TinhTrangDonHang == "Đã giao hàng") { %>                                       
                                     
                                     <a href="" class="btn btn-success" style="
                                     display: inline-block; color: white;
@@ -205,6 +194,18 @@
                                     "
                                 >Xem chi tiết hóa đơn</a>
                                 <% } else { %>
+                                    <a  onclick="huyDonHang('<%= all._id %>')" class="btn btn-danger" style="
+                                        color: white;
+                                        position: relative;
+                                        top: 30px;
+                                        right: -70px;
+                                        height: 40px;
+                                        line-height: 40px;
+                                        border-radius: 5px;
+                                        font-size: 15px;
+                                        "
+                                    >Hủy đơn hàng</a> 
+                                    
                                     <a href="" class="btn btn-success" style="
                                     display: inline-block; color: white;
                                     position: relative;

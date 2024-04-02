@@ -2,6 +2,7 @@ const TaiKhoan_KH = require("../../../models/TaiKhoan_KH")
 const SanPham = require("../../../models/SanPham")
 const LoaiSP = require("../../../models/LoaiSP")
 const HoaDon = require("../../../models/HoaDon")
+const HuyDonHang = require("../../../models/HuyDonHang")
 const PhanQuyen = require("../../../models/PhanQuyen")
 
 const aqp = require('api-query-params')
@@ -46,6 +47,9 @@ module.exports = {
 
         } else if (req.query.page_daGH){
             return res.redirect(`/ql-don-hang?page_daGH=${req.query.page_daGH}`)
+
+        } else if (req.query.page_DaHuyDH){
+            return res.redirect(`/ql-don-hang?page_DaHuyDH=${req.query.page_DaHuyDH}`)
 
         } else {
             res.redirect(`/ql-don-hang`)
@@ -137,10 +141,29 @@ module.exports = {
             NgayLap: convertToVietnamTime(item.NgayLap)
         }));
 
+        // hiển thị đơn hàng khi "Đã hủy đơn hàng"
+        let page_DaHuyDH = 1
+        const limit_DaHuyDH = 3        
+        if(req.query.page_DaHuyDH){
+            page_DaHuyDH = req.query.page_DaHuyDH
+            page_DaHuyDH = page_DaHuyDH < 1 ? page_DaHuyDH + 1 : page_DaHuyDH
+        }        
+        let skip_DaHuyDH = (page_DaHuyDH - 1) * limit_DaHuyDH
+        const showHDDaHuy = await HuyDonHang.find({ deleted: false}).skip(skip_DaHuyDH).limit(limit_DaHuyDH).populate("cart.items.productId").exec()
+        
+        let numPage_DaHuyDH = parseInt((await HuyDonHang.find({ deleted: false}).populate("cart.items.productId")).length) / limit_DaHuyDH
+        numPage_DaHuyDH = numPage_DaHuyDH - parseInt(numPage_DaHuyDH) === 0 ? numPage_DaHuyDH : numPage_DaHuyDH + 1
+
+        const showHDDaHuyWithVietnamTime = showHDDaHuy.map(item => ({
+            ...item._doc,
+            NgayLap: convertToVietnamTime(item.NgayLap)
+        }));
+
         res.render("AdminQL/TrangQLAdmin/QL_DonHang/quanLyDonHang.ejs", {
             soTrang: numPage, curPage: page, 
             soTrang_dangGH: numPage_dangGH, curPage_dangGH: page_dangGH, 
             soTrang_daGH: numPage_daGH, curPage_daGH: page_daGH, 
+            soTrang_daHuyDH: numPage_DaHuyDH, curPage_DaHuyDH: page_DaHuyDH, 
             logged: loggedIn, 
             tk: taikhoan,
             rootPath: '/', 
@@ -149,6 +172,7 @@ module.exports = {
             showHDChuaGiao: showHDChuaGiaoWithVietnamTime,
             showHDDangGiao: showHDDangGiaoWithVietnamTime,
             showHDDaGiao: showHDDaGiaoWithVietnamTime,
+            showHDDaHuyDH: showHDDaHuyWithVietnamTime,
             activee
         })
     }   

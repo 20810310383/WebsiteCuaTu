@@ -133,6 +133,12 @@ module.exports = {
         let skip_daGH = (page_daGH - 1) * limit_daGH
         const showHDDaGiao = await HoaDon.find({TinhTrangDonHang: "Đã giao hàng", TinhTrangThanhToan: "Đã Thanh Toán", deleted: false}).skip(skip_daGH).limit(limit_daGH).populate("cart.items.productId").exec()
         
+        const showHDDaGiaoo = await HoaDon.find({TinhTrangDonHang: "Đã giao hàng", TinhTrangThanhToan: "Đã Thanh Toán", deleted: false})
+        let doanhThu = 0;
+        for(tt of showHDDaGiaoo){
+            doanhThu += tt.CanThanhToan
+        }
+
         let numPage_daGH = parseInt((await HoaDon.find({TinhTrangDonHang: "Đã giao hàng", TinhTrangThanhToan: "Đã Thanh Toán", deleted: false}).populate("cart.items.productId")).length) / limit_daGH
         numPage_daGH = numPage_daGH - parseInt(numPage_daGH) === 0 ? numPage_daGH : numPage_daGH + 1
 
@@ -150,7 +156,8 @@ module.exports = {
         }        
         let skip_DaHuyDH = (page_DaHuyDH - 1) * limit_DaHuyDH
         const showHDDaHuy = await HuyDonHang.find({ deleted: false}).skip(skip_DaHuyDH).limit(limit_DaHuyDH).populate("cart.items.productId").exec()
-        
+        const showHDDaHuyy = await HuyDonHang.find({ deleted: false})
+
         let numPage_DaHuyDH = parseInt((await HuyDonHang.find({ deleted: false}).populate("cart.items.productId")).length) / limit_DaHuyDH
         numPage_DaHuyDH = numPage_DaHuyDH - parseInt(numPage_DaHuyDH) === 0 ? numPage_DaHuyDH : numPage_DaHuyDH + 1
 
@@ -171,8 +178,8 @@ module.exports = {
             getRelativeImagePath: getRelativeImagePath,
             showHDChuaGiao: showHDChuaGiaoWithVietnamTime,
             showHDDangGiao: showHDDangGiaoWithVietnamTime,
-            showHDDaGiao: showHDDaGiaoWithVietnamTime,
-            showHDDaHuyDH: showHDDaHuyWithVietnamTime,
+            showHDDaGiao: showHDDaGiaoWithVietnamTime, doanhThu, showHDDaGiaoo,
+            showHDDaHuyDH: showHDDaHuyWithVietnamTime, showHDDaHuyy,
             activee
         })
     }   

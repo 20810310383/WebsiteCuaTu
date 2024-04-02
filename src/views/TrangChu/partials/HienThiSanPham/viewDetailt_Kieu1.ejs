@@ -176,8 +176,8 @@
         })
         .then(response => response.json())
         .then(data => {
-            if(data.logged){
-                if (data.success) {
+            if(data.logged && data.hoten){
+                if (data.success ) {
                     // Hiển thị thông báo thành công
                     Swal.fire({
                         icon: 'success',

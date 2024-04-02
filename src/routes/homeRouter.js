@@ -1,4 +1,5 @@
 const express = require('express');
+
 const { getHomeHienThi1 } = require("../controllers/TrangChu/homeController");
 const { getFormLoginKH, dangKyTKKH, dangNhapTKKH, dangXuatTKKH } = require('../controllers/Login/loginKHController');
 const { chiTietSPHomeHienThi1, chiTietSPHomeHienThi1_ChiTiet } = require('../controllers/CTSanPham/detailtSP');

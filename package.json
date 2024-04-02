@@ -38,6 +38,7 @@
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "qrcode-generator": "^1.4.4",
-    "rootpath": "^0.1.2"
+    "rootpath": "^0.1.2",
+    "socket.io": "^4.7.5"
   }
 }

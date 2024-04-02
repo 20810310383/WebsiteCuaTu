@@ -23,7 +23,7 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if(data.logged){
+                    if(data.logged && data.hoten){
                         if (data.success) {
                             // Show success alert
                             // alert("Sản phẩm đã được thêm vào giỏ hàng!");

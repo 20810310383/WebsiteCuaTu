@@ -9,6 +9,7 @@ module.exports = {
     addToCart: async (req, res) => {
         try {
             let logged = req.session.loggedIn
+            let hoten = req.session.hoten
             const productId = req.query.productId;
             const size = req.body.size;
             const PriceBanMoi = req.body.PriceBanMoi;
@@ -30,7 +31,7 @@ module.exports = {
 
             let mess = `Số lượng tồn của sản phẩm này chỉ còn ${SoLuongTon} sản phẩm. Vui lòng chọn số lượng hoặc sản phẩm khác!`
             if(qty > SoLuongTon){
-                return res.status(404).json({success: false, message: mess, logged });
+                return res.status(404).json({success: false, message: mess, logged, hoten });
             }
             // Giảm số lượng tồn của sản phẩm chỉ khi số lượng tồn đủ để thêm vào giỏ hàng
             // if (qty <= SoLuongTon) {
@@ -124,7 +125,7 @@ module.exports = {
                 await cart.save();
             }    
 
-            return res.status(200).json({ success: true, message: 'Đã thêm sản phẩm vào giỏ hàng', logged });
+            return res.status(200).json({ success: true, message: 'Đã thêm sản phẩm vào giỏ hàng', logged, hoten });
         } catch (error) {
             console.error(error);
             return res.status(500).json({ success: false, message: 'Lỗi server' });

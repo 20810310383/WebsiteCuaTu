@@ -18,7 +18,13 @@
         <script src="assets\js\vendor\modernizr-2.8.3.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/umd/qrcode.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="AdminQL/HomeAdminQL/thuVienToastr/toastr.min.css">
 
+        <style>
+            .toast {
+                font-size: 18px;
+            }
+        </style>
     </head>
     <body>
             <!-- Add your site or application content here -->
@@ -318,7 +324,7 @@
 
                     setTimeout(function () {
                         loader.style.display = "none";
-                    }, 2500);
+                    }, 5000);
                 });
             });
         </script>
@@ -367,17 +373,99 @@
                     .then((response) => response.json())
                     .then((data) => {
                         if (data.success) {
-                            showCustomAlert(data.message);
+                            // showCustomAlert(data.message);
+
+                            toastr.options = {
+                                "closeButton": true,
+                                "debug": false,
+                                "newestOnTop": true,
+                                "progressBar": true,
+                                "positionClass": "toast-top-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "2000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
+                            toastr["success"](data.message, "Thành Công!")
+                            setTimeout(function() {
+                                toastr.clear();
+                                window.location.href = "/detailt-cart-trang-moi";
+                            }, 2000);
+
                         } else {
                             if (data.error) {
-                                errorElement.textContent = data.error; // Hiển thị thông báo lỗi từ máy chủ
-                                errorElement.style.display = "block";
+                                // errorElement.textContent = data.error; // Hiển thị thông báo lỗi từ máy chủ
+                                // errorElement.style.display = "block";
+
+                                toastr.options = {
+                                    "closeButton": true,
+                                    "debug": false,
+                                    "newestOnTop": true,
+                                    "progressBar": true,
+                                    "positionClass": "toast-bottom-left",
+                                    "preventDuplicates": false,
+                                    "onclick": null,
+                                    "showDuration": "300",
+                                    "hideDuration": "1000",
+                                    "timeOut": "5000",
+                                    "extendedTimeOut": "1000",
+                                    "showEasing": "swing",
+                                    "hideEasing": "linear",
+                                    "showMethod": "fadeIn",
+                                    "hideMethod": "fadeOut"
+                                }
+                                toastr["error"](data.error, "Thất bại")
+
                             } else if (data.message) {
-                                errorElement.textContent = data.message; // Hiển thị thông báo từ máy chủ
-                                errorElement.style.display = "block";
+                                // errorElement.textContent = data.message; // Hiển thị thông báo từ máy chủ
+                                // errorElement.style.display = "block";
+
+                                toastr.options = {
+                                    "closeButton": true,
+                                    "debug": false,
+                                    "newestOnTop": true,
+                                    "progressBar": true,
+                                    "positionClass": "toast-bottom-left",
+                                    "preventDuplicates": false,
+                                    "onclick": null,
+                                    "showDuration": "300",
+                                    "hideDuration": "1000",
+                                    "timeOut": "5000",
+                                    "extendedTimeOut": "1000",
+                                    "showEasing": "swing",
+                                    "hideEasing": "linear",
+                                    "showMethod": "fadeIn",
+                                    "hideMethod": "fadeOut"
+                                }
+                                toastr["error"](data.message, "Thất bại")
                             } else {
-                                errorElement.textContent = 'Có vẻ có một số sản phẩm đã hết hàng. Vui lòng kiểm tra lại giỏ hàng của bạn.'; 
-                                errorElement.style.display = "block";
+                                // errorElement.textContent = 'Có vẻ có một số sản phẩm đã hết hàng. Vui lòng kiểm tra lại giỏ hàng của bạn.'; 
+                                // errorElement.style.display = "block";
+
+                                toastr.options = {
+                                    "closeButton": true,
+                                    "debug": false,
+                                    "newestOnTop": true,
+                                    "progressBar": true,
+                                    "positionClass": "toast-bottom-left",
+                                    "preventDuplicates": false,
+                                    "onclick": null,
+                                    "showDuration": "300",
+                                    "hideDuration": "1000",
+                                    "timeOut": "5000",
+                                    "extendedTimeOut": "1000",
+                                    "showEasing": "swing",
+                                    "hideEasing": "linear",
+                                    "showMethod": "fadeIn",
+                                    "hideMethod": "fadeOut"
+                                }
+                                toastr["error"]('Có vẻ có một số sản phẩm đã hết hàng. Vui lòng kiểm tra lại giỏ hàng của bạn.', "Thất bại")
                             }
                         }
                     })
@@ -401,7 +489,7 @@
                 });
             });
         </script> -->
-        
+        <script src="AdminQL/HomeAdminQL/thuVienToastr/toastr.min.js"></script>
         
     </body>
 </html>

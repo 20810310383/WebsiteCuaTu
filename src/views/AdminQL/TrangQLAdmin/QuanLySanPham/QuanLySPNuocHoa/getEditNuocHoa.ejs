@@ -90,6 +90,7 @@
                         <form method="POST" action="/save-sp-nuochoa/<%= sanPhamEdit._id %>" enctype="multipart/form-data" id="edit-form">
                             <!-- sử dụng hidden để gửi phương thức PUT, hiểu là làm giả method PUT -->
                             <input type="hidden" name="_method" value="PUT" />  
+                            
                             <div class="p-5 bg-white rounded shadow mb-5">
                                 <div class="mb-3">
                                     <input hidden value="<%= sanPhamEdit._id %>" id="idEdit" name="idEdit">

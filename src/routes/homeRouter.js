@@ -1,4 +1,7 @@
 const express = require('express');
+const multipart = require('connect-multiparty')
+const multipartMiddleware = multipart();
+const fs = require('fs').promises;
 
 const { getHomeHienThi1 } = require("../controllers/TrangChu/homeController");
 const { getFormLoginKH, dangKyTKKH, dangNhapTKKH, dangXuatTKKH } = require('../controllers/Login/loginKHController');
@@ -223,6 +226,47 @@ router.delete("/xoa-sp-nuoc-hoa/:idxoa", deleteSP)
 router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoa)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoaPhanTrang)
+
+
+// upload hình ảnh trong phần thêm/chỉnh sửa sản phẩm phía admin textarea
+const path = require('path');
+async function uploadSingleFile(file) {
+    // Implement the logic to upload the file here
+    // Example logic for uploading the file to a specific directory:
+    const uploadPath = path.resolve(__dirname, "../public/images/upload/");
+    const fileName = file.name;
+    const filePath = `${uploadPath}/${fileName}`;
+    await fs.writeFile(filePath, file.data);
+    
+    // Return the result of the upload operation
+    return {
+        status: "thanh cong",
+        path: filePath,
+        error: null
+    };
+}
+router.post('/upload', async (req, res) => {
+    try {
+        const file = req.files.upload;
+        const result = await uploadSingleFile(file);
+
+        if (result.status === "thanh cong") {
+            const fileName = path.basename(result.path);
+            const url = `/images/upload/${fileName}`;
+            const msg = 'Upload thành công!';
+            const funcNum = req.query.CKEditorFuncNum;
+            console.log({ url, msg, funcNum });
+            res.status(201).send(`<script>window.parent.CKEDITOR.tools.callFunction('${funcNum}','${url}','${msg}');</script>`);
+        } else {
+            console.error("File upload failed:", result.error);
+            res.status(500).send('Internal server error');
+        }
+    } catch (error) {
+        console.error("Error uploading file:", error.message);
+        res.status(500).send('Internal server error');
+    }
+});
+
 
 // get home sản phẩm nước hoa đã xóa
 router.get("/da-xoa-sp-nuochoa", getHomeDaXoaNuocHoa)

@@ -10,16 +10,28 @@ function deleteUser(userId) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Show success alert
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Thành Công!',
-                    text: data.message,
-                    confirmButtonText: 'OK'
-                })
-                .then(() => {                    
-                    window.location.reload(); // Tải lại trang hiện tại
-                });
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "1500",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["success"](data.message, "Thành Công!")
+                setTimeout(function() {
+                    toastr.clear();
+                    window.location.reload();
+                }, 1500); 
             } else {                
                 Swal.fire({
                     icon: 'error',
@@ -48,16 +60,28 @@ function deleteAdmin(userId) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Show success alert
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Thành Công!',
-                    text: data.message,
-                    confirmButtonText: 'OK'
-                })
-                .then(() => {                    
-                    window.location.reload(); // Tải lại trang hiện tại
-                });
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "1500",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["success"](data.message, "Thành Công!")
+                setTimeout(function() {
+                    toastr.clear();
+                    window.location.reload();
+                }, 1500); 
             } else {                
                 Swal.fire({
                     icon: 'error',

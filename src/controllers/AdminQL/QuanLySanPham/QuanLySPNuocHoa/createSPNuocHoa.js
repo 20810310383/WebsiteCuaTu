@@ -73,7 +73,7 @@ module.exports = {
             Image1: imageUrl1,
             Image2: imageUrl2,
             SpMoi_SpNoiBat: SpMoi_SpNoiBat,
-            IdNam_Nu: IdNam_Nu
+            IdNam_Nu: IdNam_Nu 
         })
 
         if(SP){

@@ -9,7 +9,7 @@ module.exports = {
         res.render("AdminQL/LoginAdmin/loginAdmin.ejs");
     },
 
-    // đăng ký tài khoản
+    // đăng ký tài khoản 
     dangKyAdmin: async (req, res) => {
 
     },
@@ -19,7 +19,8 @@ module.exports = {
         try {
             let tk = req.body.TenDangNhap
             let matkhau = req.body.MatKhau
-      
+            console.log("tk: ",tk);
+            console.log("matkhau: ",matkhau);
             // Check if the user exists
             const user = await TaiKhoan_Admin.findOne({ TenDangNhap: tk, MatKhau: matkhau, deleted: false });
             if (!user) {

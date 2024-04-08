@@ -68,52 +68,54 @@
                                         <div class="col-12">
                                             <div class="table_desc">
                                                 <div class="cart_page table-responsive">
-                                                    <table>
-                                                <thead>
-                                                    <tr>
-                                                        <th style="font-family: Arial, Helvetica, sans-serif;">STT</th>
-                                                        <th class="product_remove" style="font-family: Arial, Helvetica, sans-serif;">Chức Năng</th>
-                                                        <th class="product_thumb" style="font-family: Arial, Helvetica, sans-serif;">Hình Ảnh</th>
-                                                        <th class="product_name" style="font-family: Arial, Helvetica, sans-serif;">Sản Phẩm</th>
-                                                        <th style="font-family: Arial, Helvetica, sans-serif; width: 200px;">Size</th>
-                                                        <th class="product-price" style="font-family: Arial, Helvetica, sans-serif;">Giá Bán</th>
-                                                        <th style="font-family: Arial, Helvetica, sans-serif;">Số Lượng</th>
-                                                        <th class="product_total" style="font-family: Arial, Helvetica, sans-serif;">Tổng Tiền</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody > 
-                                                    <% productDetailsArray.forEach(function(spDetailCart, index) { %>
-                                                    <tr>
-                                                        <td style="font-size: 18px;">
-                                                            <%= index + 1 %>
-                                                        </td>
-                                                       <td class="product_remove">
-                                                        <form action="/remove-mot-sp" method="post" >
-                                                            <input type="hidden" name="idARemove" value="<%= spDetailCart._id %>">
-                                                            <button style="border: none;background-color: white;" type="submit">
-                                                                <i style="font-size: 24px;" id="dltSP" title="Xóa sản phẩm này" class="fa fa-trash-o"></i>
-                                                            </button>
-                                                        </form>
-                                                            <!-- <a href="#"><i title="Xóa sản phẩm này" class="fa fa-trash-o"></i></a> -->
-                                                            <br>
-                                                            <a href="/get-edit-sp-cart?getIdEditSPCart=<%= spDetailCart._id %>"><i style="font-size: 24px;" title="Edit số lượng và size của sản phẩm này"  class="fa fa-pencil"></i></a>
-                                                        </td>
+                                                    <div class="scrollable-content" style="max-height: 690px; max-width: 1655px;overflow-x: auto; overflow-y: auto;">
+                                                        <table>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="font-family: Arial, Helvetica, sans-serif;">STT</th>
+                                                                    <th class="product_remove" style="font-family: Arial, Helvetica, sans-serif;">Chức Năng</th>
+                                                                    <th class="product_thumb" style="font-family: Arial, Helvetica, sans-serif;">Hình Ảnh</th>
+                                                                    <th class="product_name" style="font-family: Arial, Helvetica, sans-serif;">Sản Phẩm</th>
+                                                                    <th style="font-family: Arial, Helvetica, sans-serif; width: 200px;">Size</th>
+                                                                    <th class="product-price" style="font-family: Arial, Helvetica, sans-serif;">Giá Bán</th>
+                                                                    <th style="font-family: Arial, Helvetica, sans-serif;">Số Lượng</th>
+                                                                    <th class="product_total" style="font-family: Arial, Helvetica, sans-serif;">Tổng Tiền</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody > 
+                                                                <% productDetailsArray.forEach(function(spDetailCart, index) { %>
+                                                                <tr>
+                                                                    <td style="font-size: 18px;">
+                                                                        <%= index + 1 %>
+                                                                    </td>
+                                                                <td class="product_remove">
+                                                                    <form action="/remove-mot-sp" method="post" >
+                                                                        <input type="hidden" name="idARemove" value="<%= spDetailCart._id %>">
+                                                                        <button style="border: none;background-color: white;" type="submit">
+                                                                            <i style="font-size: 24px;" id="dltSP" title="Xóa sản phẩm này" class="fa fa-trash-o"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                        <!-- <a href="#"><i title="Xóa sản phẩm này" class="fa fa-trash-o"></i></a> -->
+                                                                        <br>
+                                                                        <a href="/get-edit-sp-cart?getIdEditSPCart=<%= spDetailCart._id %>"><i style="font-size: 24px;" title="Edit số lượng và size của sản phẩm này"  class="fa fa-pencil"></i></a>
+                                                                    </td>
 
-                                                        <% if (spDetailCart.productDetails.IdLoaiSP.TenLoaiSP == "Avatar") { %>
-                                                            <td class="product_thumb"><a href="/detailt-sp-ht2?idDetailtSP_ht2=<%= spDetailCart.productDetails._id %>"><img src="images/upload/<%= getRelativeImagePath(spDetailCart.productDetails.Image) %>" alt=""></a></td>
-                                                        <% } else { %>
-                                                            <td class="product_thumb"><a href="/detailt-sp-ht1?idDetailtSP=<%= spDetailCart.productDetails._id %>"><img src="images/upload/<%= getRelativeImagePath(spDetailCart.productDetails.Image) %>" alt=""></a></td>
-                                                        <% } %>                                                        
-                                                        
-                                                        <td class="product_name" ><a style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;"><%= spDetailCart.productDetails.TenSP %></a></td>
-                                                        <td class="product_name" ><a style="font-family: Arial, Helvetica, sans-serif; font-size: 18px; width: 30px;"><%= spDetailCart.size %></a></td>
-                                                        <td class="product-price"><%= formatCurrency(spDetailCart.donGia) %></td>
-                                                        <td class="product_quantity"><input style="font-size: 20px;width: 100px;text-align: center;" min="1" max="1000" value="<%= spDetailCart.qty %>" type="number" disabled ></td>
-                                                        <td class="product_total"><%= formatCurrency(spDetailCart.donGia * spDetailCart.qty ) %></td>
-                                                    </tr>
-                                                    <% }); %> 
-                                                </tbody>
-                                            </table>   
+                                                                    <% if (spDetailCart.productDetails.IdLoaiSP.TenLoaiSP == "Avatar") { %>
+                                                                        <td class="product_thumb"><a href="/detailt-sp-ht2?idDetailtSP_ht2=<%= spDetailCart.productDetails._id %>"><img src="images/upload/<%= getRelativeImagePath(spDetailCart.productDetails.Image) %>" alt=""></a></td>
+                                                                    <% } else { %>
+                                                                        <td class="product_thumb"><a href="/detailt-sp-ht1?idDetailtSP=<%= spDetailCart.productDetails._id %>"><img src="images/upload/<%= getRelativeImagePath(spDetailCart.productDetails.Image) %>" alt=""></a></td>
+                                                                    <% } %>                                                        
+                                                                    
+                                                                    <td class="product_name" ><a style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;"><%= spDetailCart.productDetails.TenSP %></a></td>
+                                                                    <td class="product_name" ><a style="font-family: Arial, Helvetica, sans-serif; font-size: 18px; width: 30px;"><%= spDetailCart.size %></a></td>
+                                                                    <td class="product-price"><%= formatCurrency(spDetailCart.donGia) %></td>
+                                                                    <td class="product_quantity"><input style="font-size: 20px;width: 100px;text-align: center;" min="1" max="1000" value="<%= spDetailCart.qty %>" type="number" disabled ></td>
+                                                                    <td class="product_total"><%= formatCurrency(spDetailCart.donGia * spDetailCart.qty ) %></td>
+                                                                </tr>
+                                                                <% }); %> 
+                                                            </tbody>
+                                                        </table>   
+                                                    </div>
                                                 </div>  
                                                 <div class="checkout_btn cart_submit">
                                                     <a href="#" onclick="history.go(-1);" style="font-family: Arial, Helvetica, sans-serif; ">Back</a>

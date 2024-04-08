@@ -81,115 +81,119 @@
 
                          <!--Chỉnh sửa Size và Số lượng đặt start -->
                          <div class="shopping_cart_area" style="padding: 35px 100px 0;">
-                            <div class="row">                                
+                            <div class="row">      
+                                <div class="col-12">                        
                                     <div class="table_desc" >
                                         <div class="cart_page table-responsive" >
-                                            <table >
-                                                <thead>
-                                                    <tr>
-                                                        <th style="font-family: Arial, Helvetica, sans-serif;">Options</th>
-                                                        <th style="font-family: Arial, Helvetica, sans-serif; width: 200px;">Hình Ảnh</th>
-                                                        <th class="product_name" style="font-family: Arial, Helvetica, sans-serif;">Sản Phẩm</th>
-                                                        <th class="product-price" style="font-family: Arial, Helvetica, sans-serif;">Giá Bán</th>
-                                                        <th style="font-family: Arial, Helvetica, sans-serif; width: 100px;">Size</th>
-                                                        <th style="font-family: Arial, Helvetica, sans-serif; width: 120px;">Số Lượng</th>
-                                                        <th style="font-family: Arial, Helvetica, sans-serif; width: 120px;">Tổng Tiền</th>
-                                                    </tr>
-                                                </thead> 
-                                                <tbody > 
-                                                    <form >
+                                            <div class="scrollable-content" style="max-width: 1020px;overflow-x: auto; overflow-y: auto;">
+                                                <table style="height: 500px;">
+                                                    <thead>
                                                         <tr>
-                                                            <td class="product_total">  
-                                                                <a  style="cursor: pointer;font-size: 18px;color: white;"                                              
-                                                                    class="btn btn-primary" 
-                                                                    onclick="updateCart('<%= spEdit._id %>')"
-                                                                >Update</a>                                                               
-                                                                <br> <br>        
-                                                                <input type="hidden" name="idupdateCart" value="<%= spEdit._id %>">                                          
-                                                                <a href="#" style="cursor: pointer;font-size: 18px;" class="btn btn-success" onclick="history.go(-1);" >Back</a>
-                                                            </td>
-                                                            <td class="product_thumb">
-                                                                <a href="#">
-                                                                    <img src="images/upload/<%= getRelativeImagePath(spEdit.productId.Image) %>" alt="">
-                                                                </a>
-                                                            </td>
-                                                            <td class="product_name" ><a style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;"><%= spEdit.productId.TenSP %></a></td>
-                                                            <td class="product-price">
-                                                                <!-- <%= formatCurrency(spEdit.productId.GiaBan) %> -->
+                                                            <th style="font-family: Arial, Helvetica, sans-serif;">Options</th>
+                                                            <th style="font-family: Arial, Helvetica, sans-serif; width: 200px;">Hình Ảnh</th>
+                                                            <th class="product_name" style="font-family: Arial, Helvetica, sans-serif;">Sản Phẩm</th>
+                                                            <th class="product-price" style="font-family: Arial, Helvetica, sans-serif;">Giá Bán</th>
+                                                            <th style="font-family: Arial, Helvetica, sans-serif; width: 100px;">Size</th>
+                                                            <th style="font-family: Arial, Helvetica, sans-serif; width: 120px;">Số Lượng</th>
+                                                            <th style="font-family: Arial, Helvetica, sans-serif; width: 120px;">Tổng Tiền</th>
+                                                        </tr>
+                                                    </thead> 
+                                                    <tbody > 
+                                                        <form >
+                                                            <tr>
+                                                                <td class="product_total">  
+                                                                    <a  style="cursor: pointer;font-size: 18px;color: white;"                                              
+                                                                        class="btn btn-primary" 
+                                                                        onclick="updateCart('<%= spEdit._id %>')"
+                                                                    >Update</a>                                                               
+                                                                    <br> <br>        
+                                                                    <input type="hidden" name="idupdateCart" value="<%= spEdit._id %>">                                          
+                                                                    <a href="#" style="cursor: pointer;font-size: 18px;" class="btn btn-success" onclick="history.go(-1);" >Back</a>
+                                                                </td>
+                                                                <td class="product_thumb">
+                                                                    <a href="#">
+                                                                        <img src="images/upload/<%= getRelativeImagePath(spEdit.productId.Image) %>" alt="">
+                                                                    </a>
+                                                                </td>
+                                                                <td class="product_name" ><a style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;"><%= spEdit.productId.TenSP %></a></td>
+                                                                <td class="product-price">
+                                                                    <!-- <%= formatCurrency(spEdit.productId.GiaBan) %> -->
 
-                                                                <!--  thẻ này chỉ là để ấy giá trị giá xuống js xử lý -->
-                                                                <input type="hidden" value="<%= (spEdit.productId.GiaBan) %>" id="PriceBanConvert">
+                                                                    <!--  thẻ này chỉ là để ấy giá trị giá xuống js xử lý -->
+                                                                    <input type="hidden" value="<%= (spEdit.productId.GiaBan) %>" id="PriceBanConvert">
 
-                                                                <!-- còn đây là để truyền sang bên controller để lấy được 2 giá trị giá mới -->
-                                                                <input type="hidden" name="PriceBanMoi" value="<%= (spEdit.donGia) %>" >
+                                                                    <!-- còn đây là để truyền sang bên controller để lấy được 2 giá trị giá mới -->
+                                                                    <input type="hidden" name="PriceBanMoi" value="<%= (spEdit.donGia) %>" >
 
-                                                                <!-- hiển thị giá mới lên giao diện trang chủ -->
-                                                                <input type="hidden" value="<%= (spEdit.donGia) %>" id="PriceBanConvertHT">
-                                                                <span id="PriceBanMoi" ><%= formatCurrency(spEdit.donGia) %></span>
-                                                            </td>
-                                                            <td class="product_name" >                                                                      
-                                                                <select name="size" id="group_2" onchange="changePrice()">
-                                                                    <option style="font-weight: bold; color: navy;" selected value="<%= spEdit.size %>"><%= spEdit.size %></option>
-                                                                    <% if(spEdit.size !== "100ml") { %> <option value="100ml">100ml</option> <% } %>
-                                                                    <% if(spEdit.size !== "200ml") { %> <option value="200ml">200ml</option> <% } %>
-                                                                    <% if(spEdit.size !== "300ml") { %> <option value="300ml">300ml</option> <% } %>
-                                                                    <% if(spEdit.size !== "400ml") { %> <option value="400ml">400ml</option> <% } %>                                                                                                                                        
-                                                                </select>                                                                                                                                   
-                                                            </td>                                                            
-                                                            <td class="product_total">
-                                                                <input onchange="changePrice()" id="quantity" type="number" name="quantity"  value="<%= spEdit.qty %>" style="text-align: center; font-size: 18px;">
-                                                            </td>
-                                                            <td class="product-price">
-                                                                <!-- thẻ này chỉ là để ấy giá trị 2 giá xuống js xử lý -->
-                                                                <!-- <input type="hidden" name="" value="<%= (spEdit.qty * spEdit.donGia) %>"> -->
+                                                                    <!-- hiển thị giá mới lên giao diện trang chủ -->
+                                                                    <input type="hidden" value="<%= (spEdit.donGia) %>" id="PriceBanConvertHT">
+                                                                    <span id="PriceBanMoi" ><%= formatCurrency(spEdit.donGia) %></span>
+                                                                </td>
+                                                                <td class="product_name" >                                                                      
+                                                                    <select name="size" id="group_2" onchange="changePrice()">
+                                                                        <option style="font-weight: bold; color: navy;" selected value="<%= spEdit.size %>"><%= spEdit.size %></option>
+                                                                        <% if(spEdit.size !== "100ml") { %> <option value="100ml">100ml</option> <% } %>
+                                                                        <% if(spEdit.size !== "200ml") { %> <option value="200ml">200ml</option> <% } %>
+                                                                        <% if(spEdit.size !== "300ml") { %> <option value="300ml">300ml</option> <% } %>
+                                                                        <% if(spEdit.size !== "400ml") { %> <option value="400ml">400ml</option> <% } %>                                                                                                                                        
+                                                                    </select>                                                                                                                                   
+                                                                </td>                                                            
+                                                                <td class="product_total">
+                                                                    <input onchange="changePrice()" id="quantity" type="number" name="quantity"  value="<%= spEdit.qty %>" style="text-align: center; font-size: 18px;">
+                                                                </td>
+                                                                <td class="product-price">
+                                                                    <!-- thẻ này chỉ là để ấy giá trị 2 giá xuống js xử lý -->
+                                                                    <!-- <input type="hidden" name="" value="<%= (spEdit.qty * spEdit.donGia) %>"> -->
 
-                                                                <span id="PriceTongTien" ><%= formatCurrency(spEdit.qty * spEdit.donGia) %></span>
-                                                            </td>
-                                                        </tr>    
-                                                    </form>    
-                                                    <script>                                                         
+                                                                    <span id="PriceTongTien" ><%= formatCurrency(spEdit.qty * spEdit.donGia) %></span>
+                                                                </td>
+                                                            </tr>    
+                                                        </form>    
+                                                        <script>                                                         
 
-                                                        function changePrice(){
-                                                            var selectedSize = document.getElementById("group_2").value;
-                                                            var giaBan = document.getElementById("PriceBanConvert").value
-                                                            var SL = document.getElementsByName("quantity")[0].value
+                                                            function changePrice(){
+                                                                var selectedSize = document.getElementById("group_2").value;
+                                                                var giaBan = document.getElementById("PriceBanConvert").value
+                                                                var SL = document.getElementsByName("quantity")[0].value
 
-                                                            console.log("giaban:", giaBan);
-                                                            console.log("selectedSize:", selectedSize);
-                                                            var newGiaBanMoi;
-                                                            var tongtien;
-                                                            switch(selectedSize) {
-                                                                case "100ml": 
-                                                                    newGiaBanMoi = giaBan * 1;
-                                                                    tongtien = SL * newGiaBanMoi;
-                                                                    break;
-                                                                case "200ml": 
-                                                                    newGiaBanMoi = giaBan * 1.2;
-                                                                    tongtien = SL * newGiaBanMoi;
-                                                                    break;
-                                                                case "300ml": 
-                                                                    newGiaBanMoi = giaBan * 1.4;
-                                                                    tongtien = SL * newGiaBanMoi;
-                                                                    break;
-                                                                case "400ml": 
-                                                                    newGiaBanMoi = giaBan * 1.6;
-                                                                    tongtien = SL * newGiaBanMoi;
-                                                                    break;
-                                                                default: 
-                                                                    newGiaBanMoi = giaBan;
-                                                                    tongtien = SL * newGiaBanMoi;
-                                                                    break;
+                                                                console.log("giaban:", giaBan);
+                                                                console.log("selectedSize:", selectedSize);
+                                                                var newGiaBanMoi;
+                                                                var tongtien;
+                                                                switch(selectedSize) {
+                                                                    case "100ml": 
+                                                                        newGiaBanMoi = giaBan * 1;
+                                                                        tongtien = SL * newGiaBanMoi;
+                                                                        break;
+                                                                    case "200ml": 
+                                                                        newGiaBanMoi = giaBan * 1.2;
+                                                                        tongtien = SL * newGiaBanMoi;
+                                                                        break;
+                                                                    case "300ml": 
+                                                                        newGiaBanMoi = giaBan * 1.4;
+                                                                        tongtien = SL * newGiaBanMoi;
+                                                                        break;
+                                                                    case "400ml": 
+                                                                        newGiaBanMoi = giaBan * 1.6;
+                                                                        tongtien = SL * newGiaBanMoi;
+                                                                        break;
+                                                                    default: 
+                                                                        newGiaBanMoi = giaBan;
+                                                                        tongtien = SL * newGiaBanMoi;
+                                                                        break;
+                                                                }
+                                                                document.getElementsByName("PriceBanMoi")[0].value = parseInt(newGiaBanMoi);
+                                                                document.getElementById("PriceBanMoi").innerHTML = formatCurrency(parseInt(newGiaBanMoi));
+
+                                                                document.getElementById("PriceTongTien").innerHTML = formatCurrency(parseInt(tongtien));
                                                             }
-                                                            document.getElementsByName("PriceBanMoi")[0].value = parseInt(newGiaBanMoi);
-                                                            document.getElementById("PriceBanMoi").innerHTML = formatCurrency(parseInt(newGiaBanMoi));
-
-                                                            document.getElementById("PriceTongTien").innerHTML = formatCurrency(parseInt(tongtien));
-                                                        }
-                                                    </script>                      
-                                                </tbody>
-                                            </table>  
+                                                        </script>                      
+                                                    </tbody>
+                                                </table>  
+                                            </div>  
                                         </div>
                                     </div>
+                                </div>  
                             </div>
                         </div>
                          <!--Chỉnh sửa Size và Số lượng đặt end -->

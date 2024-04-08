@@ -32,7 +32,7 @@
     <!-- Ví dụ với thư viện sweetalert2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <link rel="stylesheet" href="AdminQL/HomeAdminQL/thuVienToastr/toastr.min.css">
     <style>
         .pagination-container {
           display: flex;
@@ -105,53 +105,53 @@
                     <!-- Content Row -->
                     <div class="row">
                         <table class="table table-hover">
-                            <thead>                                
-                            <tr style="background-color: #DC143C; color: white; font-size: 18px; ">
-                                <th></th>
-                                <th style="width: 150px;text-align: center; vertical-align: middle; width: 200px;">Tên Đăng Nhập</th>
-                                <th style="text-align: center; vertical-align: middle;">Mật Khẩu</th>
-                                <th style="text-align: center; vertical-align: middle;">Họ Tên</th>
-                                <th style="text-align: center; vertical-align: middle;">Ngày Tạo</th>
-                                <th style="text-align: center; vertical-align: middle;">Chức Năng</th>
-                            </tr>
-                            </thead>
-                            <tbody>                            
-                                <!-- Hiển thị all sản phẩm  -->                                                                                                                                                
-                                    <% QLtaikhoan_kh.forEach(function(QLtaikhoan_kh, index) { %>
-                                        <tr style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;">         
-                                            <td></td>                                                                                                                      
-                                            <td><%= QLtaikhoan_kh.TenDangNhap %></td>
-                                            <td>
-                                                <!-- Hiển thị mật khẩu -->
-                                                <span id="password<%= index %>">********</span>
-                                                    
-                                                <!-- Icon ẩn/hiện mật khẩu -->
-                                                <i id="togglePasswordIcon<%= index %>" class="fas fa-eye-slash" onclick="togglePassword('<%= index %>', '<%= QLtaikhoan_kh.MatKhau %>')"></i>
-                                            </td>
-                                                                                        
-                                            <td><%= QLtaikhoan_kh.HoTen %></td>
-                                            <td><%= QLtaikhoan_kh.NgayTao %></td>                                                                                                                                                                                                                                                                               
-                                            <td style="text-align: center; vertical-align: middle;">
-                                                <a  style="position: relative;display: inline-flex;width: 80px;"
-                                                    class="btn btn-success button-SUA-XOA" 
-                                                    href="/get-page-edit?idEdit=<%= QLtaikhoan_kh._id %>">
-                                                    <img width="22" src="AdminQL/HomeAdminQL/img/pencil.png" />
-                                                    <p style="position: absolute;top: 6px;right: 10px;">Edit</p>
-                                                </a>        
-                                                <a  style="position: relative;display: inline-flex;width: 100px;"                                          
-                                                    id="deleteButton_<%= index %>" 
-                                                    class="btn btn-danger" 
-                                                    onclick="deleteUser('<%= QLtaikhoan_kh._id %>')"
-                                                >
-                                                    <img width="25" src="AdminQL/HomeAdminQL/img/delete.png" />
-                                                    <p style="position: absolute;top: 7px;right: 10px;">Delete</p>
-                                                </a>                                                
-                                            </td>                                  
-                                        </tr>                                        
-                                    <% }); %>  
-                                <!-- Hiển thị all sản phẩm - end -->   
-                            </tbody>
-                        </table>                       
+                                <thead>                                
+                                    <tr style="background-color: #DC143C; color: white; font-size: 18px; ">
+                                        <th></th>
+                                        <th style="width: 150px;text-align: center; vertical-align: middle; width: 200px;">Tên Đăng Nhập</th>
+                                        <th style="text-align: center; vertical-align: middle;">Mật Khẩu</th>
+                                        <th style="text-align: center; vertical-align: middle;">Họ Tên</th>
+                                        <th style="text-align: center; vertical-align: middle;">Ngày Tạo</th>
+                                        <th style="text-align: center; vertical-align: middle;">Chức Năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>                            
+                                    <!-- Hiển thị all sản phẩm  -->                                                                                                                                                
+                                        <% QLtaikhoan_kh.forEach(function(QLtaikhoan_kh, index) { %>
+                                            <tr style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;">         
+                                                <td></td>                                                                                                                      
+                                                <td><%= QLtaikhoan_kh.TenDangNhap %></td>
+                                                <td>
+                                                    <!-- Hiển thị mật khẩu -->
+                                                    <span id="password<%= index %>">********</span>
+                                                        
+                                                    <!-- Icon ẩn/hiện mật khẩu -->
+                                                    <i id="togglePasswordIcon<%= index %>" class="fas fa-eye-slash" onclick="togglePassword('<%= index %>', '<%= QLtaikhoan_kh.MatKhau %>')"></i>
+                                                </td>
+                                                                                            
+                                                <td><%= QLtaikhoan_kh.HoTen %></td>
+                                                <td><%= QLtaikhoan_kh.NgayTao %></td>                                                                                                                                                                                                                                                                               
+                                                <td style="text-align: center; vertical-align: middle;">
+                                                    <a  style="position: relative;display: inline-flex;width: 80px;"
+                                                        class="btn btn-success button-SUA-XOA" 
+                                                        href="/get-page-edit?idEdit=<%= QLtaikhoan_kh._id %>">
+                                                        <img width="22" src="AdminQL/HomeAdminQL/img/pencil.png" />
+                                                        <p style="position: absolute;top: 6px;right: 10px;">Edit</p>
+                                                    </a>        
+                                                    <a  style="position: relative;display: inline-flex;width: 100px;"                                          
+                                                        id="deleteButton_<%= index %>" 
+                                                        class="btn btn-danger" 
+                                                        onclick="deleteUser('<%= QLtaikhoan_kh._id %>')"
+                                                    >
+                                                        <img width="25" src="AdminQL/HomeAdminQL/img/delete.png" />
+                                                        <p style="position: absolute;top: 7px;right: 10px;">Delete</p>
+                                                    </a>                                                
+                                                </td>                                  
+                                            </tr>                                        
+                                        <% }); %>  
+                                    <!-- Hiển thị all sản phẩm - end -->   
+                                </tbody>
+                        </table>                                           
                     </div>
 
                 </div>
@@ -253,7 +253,8 @@
     <script src="AdminQL/HomeAdminQL/js/togglePassword.js"></script>
     <script src="AdminQL/HomeAdminQL/js/xuLyNutXoaTKKH.js"></script>
 
-    
+    <script src="AdminQL/HomeAdminQL/thuVienToastr/toastr.min.js"></script>
+
 </body>
 
 </html>

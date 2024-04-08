@@ -261,7 +261,8 @@
                                                     </ul>
                                                 </div>
                                                 <div class="product_desc">
-                                                    <p><%= convertHtml(productDetails.MoTa) %></p>
+                                                    <p class="motaODay1"></p>
+                                                    <input type="hidden" name="inpMoTa" id="inpMoTa" value="<%= (productDetails.MoTa) %>">
                                                 </div>
                                                 <form id="form-addtocart" action="/addtocart?productId=<%= productDetails._id %>" method="POST">
                                                     <div class="content_price mb-15">
@@ -287,18 +288,7 @@
                                                        
                                                         <button type="submit"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                                         <a href="#" title="add to wishlist"><i class="fa fa-heart" aria-hidden="true"></i></a>    
-                                                    </div>
-                                                    
-                                                    <!-- <div class="product_d_size mb-20">
-                                                        <label for="group_1">size</label>
-                                                        <select  name="size" id="group_1">
-                                                            <option value="100ML">100ML</option>
-                                                            <option value="200ML">200ML</option>
-                                                            <option value="300ML">300ML</option>
-                                                            <option value="400ML">400ML</option>
-                                                            <option value="500ML">500ML</option>                                                        
-                                                        </select>
-                                                    </div> -->
+                                                    </div>                                                    
 
                                                     <div class="sidebar_widget color">
                                                         <h2 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Chọn Size:</h2>
@@ -312,12 +302,28 @@
                                                         </div>
                                                     </div>                 
 
+                                                    <script>
+                                                        // Đợi cho trang được tải hoàn toàn trước khi thực hiện các thao tác JavaScript
+                                                        document.addEventListener("DOMContentLoaded", function() {
+                                                            // Lấy giá trị từ phần tử input có id là "inpMoTa"
+                                                            var inpMoTa = document.getElementById("inpMoTa").value;
+                                                            
+                                                            // Gán giá trị vừa lấy được vào phần tử p có id là "motaODay"
+                                                            //document.getElementById("motaODay").innerHTML = inpMoTa;
+                                                            var elements = document.getElementsByClassName("motaODay");
+        
+                                                            for (var i = 0; i < elements.length; i++) {
+                                                                elements[i].innerHTML = inpMoTa;
+                                                            }
+                                                        });  
+                                                    </script>
                                                     <script>                                                         
                                                         function changePrice(){
                                                             var selectedSize = document.getElementById("group_2").value;
                                                             var giaBan = document.getElementById("PriceBanConvert").value
                                                             var giaCu = document.getElementById("PriceCuConvert").value
                                                             //var giaCu = parseInt("<%= productDetails.giaCu %>")
+                                                            console.log("mota: ", inpMoTa);
 
                                                             console.log("giaban:", giaBan);
                                                             console.log("selectedSize:", selectedSize);
@@ -402,7 +408,7 @@
                                                     <div class="product_info_button">    
                                                         <ul class="nav" role="tablist">
                                                             <li>
-                                                                <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">More info</a>
+                                                                <a style="font-family: Arial, Helvetica, sans-serif;" class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Mô tả chi tiết</a>
                                                             </li>
                                                             <li>
                                                                  <a data-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Data sheet</a>
@@ -415,7 +421,7 @@
                                                     <div class="tab-content">
                                                         <div class="tab-pane fade show active" id="info" role="tabpanel">
                                                             <div class="product_info_content">
-                                                                <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
+                                                                <p class="motaODay"></p>
                                                             </div>    
                                                         </div>
 

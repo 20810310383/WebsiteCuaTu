@@ -80,7 +80,7 @@ module.exports = {
         }
 
         let page = 1
-        const limit = 4
+        const limit = 8
         
         if(req.query.page){
             page = req.query.page

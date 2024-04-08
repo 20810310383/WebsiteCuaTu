@@ -408,7 +408,7 @@
                                     "debug": false,
                                     "newestOnTop": true,
                                     "progressBar": true,
-                                    "positionClass": "toast-bottom-left",
+                                    "positionClass": "toast-top-full-width",
                                     "preventDuplicates": false,
                                     "onclick": null,
                                     "showDuration": "300",
@@ -420,7 +420,7 @@
                                     "showMethod": "fadeIn",
                                     "hideMethod": "fadeOut"
                                 }
-                                toastr["error"](data.error, "Thất bại")
+                                toastr["error"](data.error, "Đặt hàng thất bại")
 
                             } else if (data.message) {
                                 // errorElement.textContent = data.message; // Hiển thị thông báo từ máy chủ
@@ -431,7 +431,7 @@
                                     "debug": false,
                                     "newestOnTop": true,
                                     "progressBar": true,
-                                    "positionClass": "toast-bottom-left",
+                                    "positionClass": "toast-top-full-width",
                                     "preventDuplicates": false,
                                     "onclick": null,
                                     "showDuration": "300",
@@ -443,7 +443,7 @@
                                     "showMethod": "fadeIn",
                                     "hideMethod": "fadeOut"
                                 }
-                                toastr["error"](data.message, "Thất bại")
+                                toastr["error"](data.message, "Đặt hàng thất bại")
                             } else {
                                 // errorElement.textContent = 'Có vẻ có một số sản phẩm đã hết hàng. Vui lòng kiểm tra lại giỏ hàng của bạn.'; 
                                 // errorElement.style.display = "block";
@@ -453,7 +453,7 @@
                                     "debug": false,
                                     "newestOnTop": true,
                                     "progressBar": true,
-                                    "positionClass": "toast-bottom-left",
+                                    "positionClass": "toast-top-full-width",
                                     "preventDuplicates": false,
                                     "onclick": null,
                                     "showDuration": "300",
@@ -465,7 +465,7 @@
                                     "showMethod": "fadeIn",
                                     "hideMethod": "fadeOut"
                                 }
-                                toastr["error"]('Có vẻ có một số sản phẩm đã hết hàng. Vui lòng kiểm tra lại giỏ hàng của bạn.', "Thất bại")
+                                toastr["error"]('Có vẻ có một số sản phẩm đã hết hàng. Vui lòng kiểm tra lại giỏ hàng của bạn.', "Đặt hàng thất bại")
                             }
                         }
                     })

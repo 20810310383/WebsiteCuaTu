@@ -12,16 +12,39 @@ function huyDonHang(huydonhang) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "1000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["success"](data.message, "Thành Công!")
+                setTimeout(function() {
+                    toastr.clear();
+                    window.location.reload();
+                }, 1000); 
+                
                 // Show success alert
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Thành Công!',
-                    text: data.message,
-                    confirmButtonText: 'OK'
-                })
-                .then(() => {                    
-                    window.location.reload(); // Tải lại trang hiện tại
-                });
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Thành Công!',
+                //     text: data.message,
+                //     confirmButtonText: 'OK'
+                // })
+                // .then(() => {                    
+                //     window.location.reload(); // Tải lại trang hiện tại
+                // });
             } else {                
                 Swal.fire({
                     icon: 'error',

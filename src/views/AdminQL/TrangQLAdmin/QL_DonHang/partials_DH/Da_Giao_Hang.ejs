@@ -86,9 +86,35 @@
                     </button>
                     </br> </br>
                     <a  style="background-color: white;border: none;"                                           
-                        class="btn btn-danger" 
-                        onclick="deleteDonHang('<%= showHDDaGiao._id %>')"
+                        class="btn btn-danger"                         
+                        data-toggle="modal" data-target="#exampleModalCenter<%= showHDDaGiao._id %>"
                     ><i title="Xóa Đơn Hàng" style="font-size: 20px;color: red;" class="fas fa-trash-alt"></i> </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter<%= showHDDaGiao._id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Xóa Đơn Hàng?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn có chắc chắn muốn <span style="font-weight: bold;">Xóa đơn hàng</span> của bạn 
+                                <span style="color: red;"><%= showHDDaGiao.Ho %> <%= showHDDaGiao.Ten %></span> 
+                                với số điện thoại: <span style="color: blue;"><i style="color: blue;" title="Số Điện Thoại" class="fas fa-phone"></i> <%= showHDDaGiao.SoDienThoai %></span> 
+                                đã giao về địa chỉ: <span style="color: blue;"><i style="color: green;" title="Địa Chỉ Chi Tiết" class="fas fa-map-marker"></i> <%= showHDDaGiao.DiaChiChiTiet %></span>
+                                này không?
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteDonHang('<%= showHDDaGiao._id %>')">Đồng ý xoá</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
             </td>
             </tr>
             

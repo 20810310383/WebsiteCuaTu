@@ -1,7 +1,7 @@
 
 // sử dụng thư viện toastr để thông báo khi xoá thành công 
 function deleteSP(userId) {
-    if (confirm("Bạn có chắc chắn muốn xóa?")) {
+    // if (confirm("Bạn có chắc chắn muốn xóa?")) {
         fetch(`/xoa-sp-nuoc-hoa/${userId}`, {
             method: 'DELETE',
             headers: {
@@ -43,7 +43,7 @@ function deleteSP(userId) {
         .catch(error => {
             console.error("Error:", error);
         });
-    }
+    // }
 }
 
 

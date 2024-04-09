@@ -9,8 +9,8 @@ module.exports = {
     // xóa 
     deleteTKPhanQuyen: async (req, res) => {
 
-        // let idCanXoa = req.params.idxoa
-        let idCanXoa = req.body.adminId
+        let idCanXoa = req.params.idxoa
+        // let idCanXoa = req.body.adminId
         console.log("idCanXoa: ",idCanXoa);
 
         let dlt = await PhanQuyen.deleteMany({IdAdminNhanVien: idCanXoa})

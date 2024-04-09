@@ -9,7 +9,8 @@ module.exports = {
   // xóa 1 sản phẩm trong giỏ hàng
   removeACTCart: async (req, res) => {
     try {
-      let idRemove = req.body.idARemove;
+      let idRemove = req.params.idARemove;
+      // let idRemove = req.body.idARemove;
       console.log("idRemove: ", idRemove);
 
       const removedProduct = await Cart.findOneAndUpdate(
@@ -42,13 +43,15 @@ module.exports = {
           { $set: { "cart.totalQuaty": totalQuaty } }
         );        
 
-        res.redirect("/detailt-cart-trang-moi");
+        return res.status(200).json({ success: true, message: 'Đã sản phẩm khỏi giỏ hàng thành công'});
+        // res.redirect("/detailt-cart-trang-moi");
       } else {
-        res.status(404).send("Không tìm thấy sản phẩm để xóa.");
+        return res.status(404).json({success: false, message: 'Không tìm thấy sản phẩm để xóa.' });
+        // res.status(404).send("Không tìm thấy sản phẩm để xóa.");
       }
     } catch (error) {
       console.error("Lỗi xóa sản phẩm:", error);
-      return res.status(500).json({ error: "Internal server error" });
+      return res.status(500).json({ success: false, message: "Internal server error" });
     }
   },
 };

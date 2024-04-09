@@ -125,7 +125,7 @@ router.get("/get-chi-tiet-cart", getChiTietCart)
 // get trang xem chi tiết giỏ hàng
 router.get("/detailt-cart-trang-moi", getChiTietCart_XemCT)
 // xóa 1 sản phẩm trong cart
-router.post("/remove-mot-sp", removeACTCart)
+router.post("/remove-mot-sp/:idARemove", removeACTCart)
 // trang dien thong tin dat hang va check don hang
 router.get("/checkout", getCheckOut)
 // get Edit A Product Cart
@@ -202,7 +202,7 @@ router.get("/create-admin-phan-quyen", getCreateTKAdminPhanQuyen)
 // xử lý nút create admin phân quyền
 router.post("/create-admin-phan-quyen", createTKAdminPhanQuyen)
 // xóa tài khoản phân quyền
-router.delete("/xoatk-phan-quyen", deleteTKPhanQuyen)
+router.delete("/xoatk-phan-quyen/:idxoa", deleteTKPhanQuyen)
 
 
 

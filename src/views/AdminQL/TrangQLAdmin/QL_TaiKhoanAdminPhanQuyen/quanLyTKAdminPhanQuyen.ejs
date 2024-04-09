@@ -47,9 +47,11 @@
           justify-content: center;
           align-items: center;
         }
-      
+        .toast {
+                font-size: 17px;
+            }
       </style>
-
+    <link rel="stylesheet" href="AdminQL/HomeAdminQL/thuVienToastr/toastr.min.css">
 </head>
 
 <body id="page-top">
@@ -129,15 +131,35 @@
                                                     <p style="position: absolute;top: 6px;right: 10px;">Edit</p>
                                                 </a>   
                                                         
-                                                <!-- <a                                                                                                    
-                                                    class="btn btn-danger" 
-                                                    onclick="deleteAdminPhanQuyen('<%= QLtaikhoan_kh._idAdminNV %>')"
-                                                >Delete</a>                                                 -->
-                                                <input type="hidden" id="adminId" value="<%= QLtaikhoan_kh._idAdminNV %>" name="adminId">
-                                                <a class="btn btn-danger" style="position: relative;display: inline-flex;width: 100px;" onclick="deleteAdminPhanQuyenFromInput()">
+                                                <input type="hidden" id="adminId<%= QLtaikhoan_kh._idAdminNV %>" value="<%= QLtaikhoan_kh._idAdminNV %>" name="adminId<%= QLtaikhoan_kh._idAdminNV %>">
+                                                <a class="btn btn-danger" 
+                                                    style="position: relative;display: inline-flex;width: 100px;"                                                    
+                                                    data-toggle="modal" data-target="#exampleModalCenter<%= QLtaikhoan_kh._idAdminNV %>"
+                                                    >
                                                     <img width="25" src="AdminQL/HomeAdminQL/img/delete.png" />
                                                     <p style="position: absolute;top: 7px;right: 10px;">Delete</p>
                                                 </a>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModalCenter<%= QLtaikhoan_kh._idAdminNV %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Xoá tài khoản?</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Bạn có chắc chắn muốn xoá tài khoản <span style="color: red;"><%= QLtaikhoan_kh.TenDangNhap %></span> đã phân quyền này không?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                                                        <button type="button" class="btn btn-danger" onclick="deleteAdminPhanQuyen1('<%= QLtaikhoan_kh._idAdminNV %>')">Xoá ngay</button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
                                             </td>  
 
                                             <td style="text-align: center; vertical-align: middle;"><%= QLtaikhoan_kh.TenDangNhap %></td>
@@ -158,7 +180,8 @@
                                                 <td style="text-align: center; vertical-align: middle;"><p style="color: rgb(12, 153, 12);">Đang hoạt động  <img width="25" src="AdminQL/HomeAdminQL/img/active-user.png"></p></td> 
                                             <% } %>  
                                                                                                                                                                                                                   
-                                        </tr>                                        
+                                        </tr>   
+                                                                            
                                     <% }); %>  
                                 <!-- Hiển thị all sản phẩm - end -->   
                             </tbody>
@@ -234,8 +257,8 @@
     <script src="AdminQL/HomeAdminQL/js/demo/chart-pie-demo.js"></script>
 
     <script src="AdminQL/HomeAdminQL/js/togglePassword.js"></script>
-    <script src="AdminQL/HomeAdminQL/js/xuLyNutXoaTKKH.js"></script>
-
+    <script src="AdminQL/HomeAdminQL/js/xuLyNutXoaTKKH.js"></script> 
+    <script src="AdminQL/HomeAdminQL/thuVienToastr/toastr.min.js"></script>
     
 </body>
 

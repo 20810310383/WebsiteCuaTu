@@ -1,7 +1,7 @@
 // cách 1 dùng params
 function deleteDonHang(userId) {
     console.log("userId >>>",userId);
-    if (confirm("Bạn có chắc chắn muốn xóa đơn hàng này không?")) {
+    // if (confirm("Bạn có chắc chắn muốn xóa đơn hàng này không?")) {
         fetch(`/delete-HoaDon/${userId}`, {
             method: 'DELETE',
             headers: {
@@ -34,5 +34,5 @@ function deleteDonHang(userId) {
         .catch(error => {
             console.error("Error:", error);
         });
-    }
+    // }
 }

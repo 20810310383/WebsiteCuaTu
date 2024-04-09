@@ -1,5 +1,6 @@
+
 function deleteUser(userId) {
-    if (confirm("Bạn có chắc chắn muốn xóa?")) {
+    
         fetch(`/xoatkkh/${userId}`, {
             method: 'DELETE',
             headers: {
@@ -20,7 +21,7 @@ function deleteUser(userId) {
                     "onclick": null,
                     "showDuration": "300",
                     "hideDuration": "1000",
-                    "timeOut": "1500",
+                    "timeOut": "1000",
                     "extendedTimeOut": "1000",
                     "showEasing": "swing",
                     "hideEasing": "linear",
@@ -31,7 +32,7 @@ function deleteUser(userId) {
                 setTimeout(function() {
                     toastr.clear();
                     window.location.reload();
-                }, 1500); 
+                }, 1000); 
             } else {                
                 Swal.fire({
                     icon: 'error',
@@ -44,12 +45,12 @@ function deleteUser(userId) {
         .catch(error => {
             console.error("Error:", error);
         });
-    }
+    
 }
 
 
 function deleteAdmin(userId) {
-    if (confirm("Bạn có chắc chắn muốn khóa tài khoản này không?")) {
+
         fetch(`/xoatkAdmin/${userId}`, {
             method: 'DELETE',
             headers: {
@@ -70,7 +71,7 @@ function deleteAdmin(userId) {
                     "onclick": null,
                     "showDuration": "300",
                     "hideDuration": "1000",
-                    "timeOut": "1500",
+                    "timeOut": "1000",
                     "extendedTimeOut": "1000",
                     "showEasing": "swing",
                     "hideEasing": "linear",
@@ -81,7 +82,7 @@ function deleteAdmin(userId) {
                 setTimeout(function() {
                     toastr.clear();
                     window.location.reload();
-                }, 1500); 
+                }, 1000); 
             } else {                
                 Swal.fire({
                     icon: 'error',
@@ -94,7 +95,7 @@ function deleteAdmin(userId) {
         .catch(error => {
             console.error("Error:", error);
         });
-    }
+
 }
 
 
@@ -102,7 +103,7 @@ function deleteAdmin(userId) {
 // cách 1 dùng params
 function deleteAdminPhanQuyen1(userId) {
     console.log("userId >>>",userId);
-    if (confirm("Bạn có chắc chắn muốn xóa tài khoản này không?")) {
+    // if (confirm("Bạn có chắc chắn muốn xóa tài khoản này không?")) {
         fetch(`/xoatk-phan-quyen/${userId}`, {
             method: 'DELETE',
             headers: {
@@ -113,16 +114,39 @@ function deleteAdminPhanQuyen1(userId) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Show success alert
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Thành Công!',
-                    text: data.message,
-                    confirmButtonText: 'OK'
-                })
-                .then(() => {                    
-                    window.location.reload(); // Tải lại trang hiện tại
-                });
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "1000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["success"](data.message, "Thành Công!")
+                setTimeout(function() {
+                    toastr.clear();
+                    window.location.reload();
+                }, 1000); 
+                                
+                // // Show success alert
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Thành Công!',
+                //     text: data.message,
+                //     confirmButtonText: 'OK'
+                // })
+                // .then(() => {                    
+                //     window.location.reload(); // Tải lại trang hiện tại
+                // });
             } else {                
                 Swal.fire({
                     icon: 'error',
@@ -135,7 +159,7 @@ function deleteAdminPhanQuyen1(userId) {
         .catch(error => {
             console.error("Error:", error);
         });
-    }
+    // }
 }
 
 // cách 2 dùng req.body 
@@ -143,8 +167,7 @@ function deleteAdminPhanQuyenFromInput() {
     // Lấy giá trị của thẻ input có id là "adminId"
     const adminId = document.getElementById('adminId').value;
     console.log(">>>> ",adminId);
-
-    if (confirm("Bạn có chắc chắn muốn xóa tài khoản này không?")) {
+   
         // Gửi yêu cầu DELETE với dữ liệu adminId trong body
         fetch(`/xoatk-phan-quyen`, {
             method: 'DELETE',
@@ -177,7 +200,6 @@ function deleteAdminPhanQuyenFromInput() {
         })
         .catch(error => {
             console.error("Error:", error);
-        });
-    }    
+        });   
 }
 

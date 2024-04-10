@@ -23,6 +23,9 @@ configViewEngine(app);
 
 const oneDay = 1000 * 60 * 60 * 24;     // lưu phiên trong 1 ngày
 app.use(session({
+    genid: function(req) {
+        return new Date().getTime()
+    },
     secret: 'secret-key',  // Chuỗi bí mật để mã hóa phiên
     saveUninitialized: true,
     cookie: { 

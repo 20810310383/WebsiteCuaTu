@@ -41,20 +41,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', homeRoutes);
 app.use('/api/v1/', homeAPIRoutes);
 
-
+connection()
 //test connection
-(async () => {
-    try {
-        // using mongoose
-        await connection()
-
-        app.listen(port, hostname, () => {
-            console.log(`http://localhost:${port}`)
-        })
-    } catch(error) {
-        console.log(">>> LỖI RỒI CỤ: ", error);
-    }  
-})();
+app.listen(port, () => {
+    console.log(`App listening on port ${port}`);
+  });
 // app.listen(port, hostname, () => {
 //     console.log(`ĐÃ CHẠY ...   >>>  http://localhost:${port}`)
 // })

@@ -11,7 +11,7 @@ const SanPham_Schema = new mongoose.Schema(
         New_Hot: { type: String },
         SpMoi_SpNoiBat: { 
             type: String, 
-            enum: ["Mới", "Nổi Bật"],             
+            enum: ["", "Mới", "Nổi Bật"],             
         },
         Size: { 
             type: String, 

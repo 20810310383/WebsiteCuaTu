@@ -33,6 +33,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>    
 
+    <link rel="stylesheet" href="AdminQL/HomeAdminQL/thuVienToastr/toastr.min.css">
+
+    <style>        
+        .toast {
+                font-size: 17px;
+            }
+      </style>
 </head>
 
 <body id="page-top">
@@ -130,7 +137,8 @@
                             <div class="mb-3">
                                 <label for="New_Hot" class="form-label">Loại New / Hot  <span style="color: red;font-size: 18px;">*</span></label>
                                 <select id="New_Hot" name="New_Hot" class="form-control" aria-label="Default select example" style="width: 320px; font-size: 18px;">                                   
-                                    <option value="New" selected>New</option>
+                                    <option value="" selected>_ _ _</option>
+                                    <option value="New">New</option>
                                     <option value="Hot">Hot</option>                                    
                                 </select>
                             </div>
@@ -138,7 +146,8 @@
                             <div class="mb-3">
                                 <label for="SpMoi_SpNoiBat" class="form-label">Sản phẩm Mới / Nổi Bật  <span style="color: red;font-size: 18px;">*</span></label>
                                 <select id="SpMoi_SpNoiBat" name="SpMoi_SpNoiBat" class="form-control" aria-label="Default select example" style="width: 320px; font-size: 18px;">                                   
-                                    <option value="Mới" selected>Mới</option>
+                                    <option value="" selected>_ _ _</option>
+                                    <option value="Mới">Mới</option>
                                     <option value="Nổi Bật">Nổi Bật</option>                                    
                                 </select>
                             </div>
@@ -252,6 +261,7 @@
             filebrowserUploadUrl:'/upload'//route
         })
     </script>
+    <script src="AdminQL/HomeAdminQL/thuVienToastr/toastr.min.js"></script>
     
 </body>
 

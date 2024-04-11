@@ -105,79 +105,81 @@
                     </div>                
 
                     <!-- Content Row -->
-                    <div class="row">
-                        <table class="table table-hover">
-                                <thead>                                
-                                    <tr style="background-color: #DC143C; color: white; font-size: 18px; ">
-                                        <th></th>
-                                        <th style="width: 150px;text-align: center; vertical-align: middle; width: 200px;">Tên Đăng Nhập</th>
-                                        <th style="text-align: center; vertical-align: middle;">Mật Khẩu</th>
-                                        <th style="text-align: center; vertical-align: middle;">Họ Tên</th>
-                                        <th style="text-align: center; vertical-align: middle;">Ngày Tạo</th>
-                                        <th style="text-align: center; vertical-align: middle;">Chức Năng</th>
-                                    </tr>
-                                </thead>
-                                <tbody>                            
-                                    <!-- Hiển thị all sản phẩm  -->                                                                                                                                                
-                                        <% QLtaikhoan_kh.forEach(function(QLtaikhoan_kh, index) { %>
-                                            <tr style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;">         
-                                                <td></td>                                                                                                                      
-                                                <td><%= QLtaikhoan_kh.TenDangNhap %></td>
-                                                <td>
-                                                    <!-- Hiển thị mật khẩu -->
-                                                    <span id="password<%= index %>">********</span>
-                                                        
-                                                    <!-- Icon ẩn/hiện mật khẩu -->
-                                                    <i id="togglePasswordIcon<%= index %>" class="fas fa-eye-slash" onclick="togglePassword('<%= index %>', '<%= QLtaikhoan_kh.MatKhau %>')"></i>
-                                                </td>
-                                                                                            
-                                                <td><%= QLtaikhoan_kh.HoTen %></td>
-                                                <td><%= QLtaikhoan_kh.NgayTao %></td>                                                                                                                                                                                                                                                                               
-                                                <td style="text-align: center; vertical-align: middle;">
-                                                    <a  style="position: relative;display: inline-flex;width: 80px;"
-                                                        class="btn btn-success button-SUA-XOA" 
-                                                        href="/get-page-edit?idEdit=<%= QLtaikhoan_kh._id %>">
-                                                        <img width="22" src="AdminQL/HomeAdminQL/img/pencil.png" />
-                                                        <p style="position: absolute;top: 6px;right: 10px;">Edit</p>
-                                                    </a>   
+                    <div >
+                        <div class="scrollable-content" style="max-height: 800px; max-width: 100%;overflow-x: auto; overflow-y: auto;">
+                            <table class="table table-hover">
+                                    <thead>                                
+                                        <tr style="background-color: #DC143C; color: white; font-size: 18px; ">
+                                            <th></th>
+                                            <th style="width: 150px;text-align: center; vertical-align: middle; width: 200px;">Tên Đăng Nhập</th>
+                                            <th style="text-align: center; vertical-align: middle;">Mật Khẩu</th>
+                                            <th style="text-align: center; vertical-align: middle;">Họ Tên</th>
+                                            <th style="text-align: center; vertical-align: middle;">Ngày Tạo</th>
+                                            <th style="text-align: center; vertical-align: middle;">Chức Năng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>                            
+                                        <!-- Hiển thị all sản phẩm  -->                                                                                                                                                
+                                            <% QLtaikhoan_kh.forEach(function(QLtaikhoan_kh, index) { %>
+                                                <tr style="font-weight: bold; color: #180766; font-size: 18px; text-align: center;">         
+                                                    <td></td>                                                                                                                      
+                                                    <td><%= QLtaikhoan_kh.TenDangNhap %></td>
+                                                    <td>
+                                                        <!-- Hiển thị mật khẩu -->
+                                                        <span id="password<%= index %>">********</span>
+                                                            
+                                                        <!-- Icon ẩn/hiện mật khẩu -->
+                                                        <i id="togglePasswordIcon<%= index %>" class="fas fa-eye-slash" onclick="togglePassword('<%= index %>', '<%= QLtaikhoan_kh.MatKhau %>')"></i>
+                                                    </td>
+                                                                                                
+                                                    <td><%= QLtaikhoan_kh.HoTen %></td>
+                                                    <td><%= QLtaikhoan_kh.NgayTao %></td>                                                                                                                                                                                                                                                                               
+                                                    <td style="text-align: center; vertical-align: middle;">
+                                                        <a  style="position: relative;display: inline-flex;width: 80px;"
+                                                            class="btn btn-success button-SUA-XOA" 
+                                                            href="/get-page-edit?idEdit=<%= QLtaikhoan_kh._id %>">
+                                                            <img width="22" src="AdminQL/HomeAdminQL/img/pencil.png" />
+                                                            <p style="position: absolute;top: 6px;right: 10px;">Edit</p>
+                                                        </a>   
 
-                                                    <a  style="position: relative;display: inline-flex;width: 100px;"                                          
-                                                        id="deleteButton_<%= index %>" 
-                                                        class="btn btn-danger" 
-                                                        data-toggle="modal" data-target="#exampleModalCenter<%= QLtaikhoan_kh._id %>"
+                                                        <a  style="position: relative;display: inline-flex;width: 100px;"                                          
+                                                            id="deleteButton_<%= index %>" 
+                                                            class="btn btn-danger" 
+                                                            data-toggle="modal" data-target="#exampleModalCenter<%= QLtaikhoan_kh._id %>"
+                                                            
+                                                        >
+                                                            <img width="25" src="AdminQL/HomeAdminQL/img/delete.png" />
+                                                            <p style="position: absolute;top: 7px;right: 10px;">Delete</p>
+                                                        </a>                                                                                                        
                                                         
-                                                    >
-                                                        <img width="25" src="AdminQL/HomeAdminQL/img/delete.png" />
-                                                        <p style="position: absolute;top: 7px;right: 10px;">Delete</p>
-                                                    </a>                                                                                                        
-                                                    
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModalCenter<%= QLtaikhoan_kh._id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLongTitle">Xoá tài khoản?</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="exampleModalCenter<%= QLtaikhoan_kh._id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Xoá tài khoản?</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Bạn có chắc chắn muốn xóa tài khoản <span style="color: red;"><%= QLtaikhoan_kh.TenDangNhap %></span> này không?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                                                                <button type="button" class="btn btn-danger" onclick="deleteUser('<%= QLtaikhoan_kh._id %>')">Xoá ngay</button>
+                                                                </div>
                                                             </div>
-                                                            <div class="modal-body">
-                                                                Bạn có chắc chắn muốn xóa tài khoản <span style="color: red;"><%= QLtaikhoan_kh.TenDangNhap %></span> này không?
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
-                                                            <button type="button" class="btn btn-danger" onclick="deleteUser('<%= QLtaikhoan_kh._id %>')">Xoá ngay</button>
                                                             </div>
                                                         </div>
-                                                        </div>
-                                                    </div>
 
-                                                </td>                                  
-                                            </tr>                                        
-                                        <% }); %>  
-                                    <!-- Hiển thị all sản phẩm - end -->   
-                                </tbody>
-                        </table>                                           
+                                                    </td>                                  
+                                                </tr>                                        
+                                            <% }); %>  
+                                        <!-- Hiển thị all sản phẩm - end -->   
+                                    </tbody>
+                            </table>        
+                        </div>                                   
                     </div>
 
                 </div>

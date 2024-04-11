@@ -227,12 +227,13 @@
                                                 <div class="payment_method">
                                                         
                                                     <div class="panel-default">
-                                                        <input required id="payment" name="check_method" type="radio">
+                                                        <input required id="payment" name="TinhTrangTT" type="radio" value="Chưa Thanh Toán" >
                                                         <label style="font-size: 18px;" for="payment"  aria-controls="method">Thanh toán khi nhận hàng</label>                                                        
-                                                    </div>                                                     
+                                                    </div>     
+                                                                                                                                                                                                           
 
                                                     <div class="panel-default">
-                                                        <input required id="payment_defult" name="check_method" type="radio" data-toggle="collapse" data-target="#collapsedefultt" >
+                                                        <input required id="payment_defult" name="TinhTrangTT" value="Đã Thanh Toán" type="radio" data-toggle="modal" data-target="#exampleModalCenter" >
                                                         <label style="font-size: 18px;" for="payment_defult" data-toggle="collapse" data-target="#collapsedefultt" aria-controls="collapsedefultt">Momo/Atm <img src="assets\img\visha\papyel.png" alt=""></label>
                                                         <div class="col-12">
                                                             <div class="order-notes" >
@@ -240,34 +241,67 @@
                                                             </div>    
                                                         </div> 
 
-                                                        <div class="col-12">
-                                                            <div style="display: none;" id="collapsedefult" class="collapse one" data-parent="#accordion">
-                                                                <div class="card-body1" style="text-align: center;display: block;">
-                                                                    <% if (totalCartPrice >= 1000000) { %>
-                                                                        <div style="display: inline-block;">
-                                                                            <img style="width: 500px;" src='https://img.vietqr.io/image/970407-19035666339011-print.png?amount=<%= totalCartPrice - giam_Gia %>&addInfo=WebShopKT+TenKhachHang+SoDienThoai&accountName=DO+KHAC+TU'/>
-                                                                        </div>
-                                                                        <!-- <div style="display: inline-block;">
-                                                                            <img style="width: 500px;" src='https://img.vietqr.io/image/970418-21510003260941-print.png?amount=<%= totalCartPrice - giam_Gia %>&addInfo=WebShopKT+TenKhachHang+SoDienThoai&accountName=DO+KHAC+TU'/>
-                                                                        </div> -->
-                                                                    <% } else { %>   
-                                                                        <div style="display: inline-block;">
-                                                                            <img style="width: 500px;" src='https://img.vietqr.io/image/970407-19035666339011-print.png?amount=<%= detailCart.cart.PhiShip + totalCartPrice - giam_Gia %>&addInfo=WebShopKT+TenKhachHang+SoDienThoai&accountName=DO+KHAC+TU'/>
-                                                                        </div>
-                                                                        <!-- <div style="display: inline-block;">
-                                                                            <img style="width: 500px;" src='https://img.vietqr.io/image/970418-21510003260941-print.png?amount=<%= detailCart.cart.PhiShip + totalCartPrice - giam_Gia %>&addInfo=WebShopKT+TenKhachHang+SoDienThoai&accountName=DO+KHAC+TU'/>
-                                                                        </div> -->
-                                                                    <% } %>
 
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle" style="font-family: Arial, Helvetica, sans-serif;">Thông tin chuyển khoản</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
                                                                 </div>
-                                                                <p style="font-size: 18px;margin: 20px 0">
-                                                                    Bấm vào đây để 
-                                                                    <a target="_blank" style="text-decoration-line: underline; color: blue;" href="https://www.facebook.com/messages/t/dokhactudz">Xác nhận đơn hàng</a>
-                                                                    sau khi chuyển khoản thành công
-                                                                </p>
-                                                                
+                                                                <div class="modal-body">
+                                                                    <div class="col-12">
+                                                                        <div style="display: none;" id="collapsedefult" class="collapse one" data-parent="#accordion">
+                                                                            <div class="card-body1" style="text-align: center;display: block;">
+                                                                                <% if (totalCartPrice >= 1000000) { %>
+                                                                                    <div style="display: inline-block;">
+                                                                                        <img style="width: 500px;" src='https://img.vietqr.io/image/970407-19035666339011-print.png?amount=<%= totalCartPrice - giam_Gia %>&addInfo=WebShopKT+TenKhachHang+SoDienThoai&accountName=DO+KHAC+TU'/>
+                                                                                    </div>
+                                                                                    <!-- <div style="display: inline-block;">
+                                                                                        <img style="width: 500px;" src='https://img.vietqr.io/image/970418-21510003260941-print.png?amount=<%= totalCartPrice - giam_Gia %>&addInfo=WebShopKT+TenKhachHang+SoDienThoai&accountName=DO+KHAC+TU'/>
+                                                                                    </div> -->
+                                                                                <% } else { %>   
+                                                                                    <div style="display: inline-block;">
+                                                                                        <img style="width: 500px;" src='https://img.vietqr.io/image/970407-19035666339011-print.png?amount=<%= detailCart.cart.PhiShip + totalCartPrice - giam_Gia %>&addInfo=WebShopKT+TenKhachHang+SoDienThoai&accountName=DO+KHAC+TU'/>
+                                                                                    </div>
+                                                                                    <!-- <div style="display: inline-block;">
+                                                                                        <img style="width: 500px;" src='https://img.vietqr.io/image/970418-21510003260941-print.png?amount=<%= detailCart.cart.PhiShip + totalCartPrice - giam_Gia %>&addInfo=WebShopKT+TenKhachHang+SoDienThoai&accountName=DO+KHAC+TU'/>
+                                                                                    </div> -->
+                                                                                <% } %>
+            
+                                                                            </div>
+                                                                            <p style="font-size: 18px;margin: 20px 0">
+                                                                                Bấm vào đây để 
+                                                                                <a target="_blank" style="text-decoration-line: underline; color: blue;" href="https://www.facebook.com/messages/t/dokhactudz">Xác nhận đơn hàng</a>
+                                                                                sau khi chuyển khoản thành công
+                                                                            </p>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button style="border-radius: 5px;cursor: pointer; height: 40px;font-size: 18px;" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <script>
+                                                                    $(document).ready(function() {
+                                                                        // Bắt sự kiện khi modal được đóng
+                                                                        $('#exampleModalCenter').on('hidden.bs.modal', function () {
+                                                                            // Chọn radio button "Thanh toán khi nhận hàng"
+                                                                            $('#payment').prop('checked', true);
+                                                                            
+                                                                        });
+
+                                                                    });
+                                                                </script>
+                                                                <button style="border-radius: 5px;cursor: pointer; height: 40px;font-size: 18px;" type="submit" class="btn btn-primary">Bấm vào đây để đặt hàng khi đã thanh toán thành công</button>
+                                                                </div>
+                                                            </div>
                                                             </div>
                                                         </div>
+                                                        <!-- end Modal -->
+
                                                         <script type="text/javascript">
                                                             $("#payment").click(function () {
                                                                 $("#collapsedefult").hide();

@@ -169,7 +169,8 @@ module.exports = {
             let GiamGia = req.body.GiamGia
             let SoTienGiamGia = req.body.SoTienGiamGia
 
-            console.log(" soluongdat: ", Soluongdat, "\n PhiShip: ", PhiShip, "\n CanThanhToan: ",CanThanhToan);            
+            let TinhTrangTT = req.body.TinhTrangTT
+            console.log("TinhTrangTT: ",TinhTrangTT);
 
             //---- GỬI XÁC NHẬN ĐƠN HÀNG VỀ EMAIL
             const transporter = nodemailer.createTransport({
@@ -195,7 +196,38 @@ module.exports = {
                             <p>Số tiền cần thanh toán: <span style="color: red;">${CanThanhToan}</span></p>
                             <p>Số Điện Thoại Của Bạn ${Ho} ${Ten}: ${SoDienThoai}</p>
                             <p>Địa chỉ nhận hàng: <span style="color: navy; font-style: italic;">${DiaChiChiTiet}</span></p>                            
-                            <p>Link Website của tôi: <a href="https://webshop-dokhactu.onrender.com">WebShop Khắc Tú</a></p>
+                            <p>Link Website của tôi: <a href="http://shop-nuoc-hoa.webkhactu.top/">WebShop Khắc Tú</a></p>
+                        `
+                };
+              
+                return new Promise((resolve, reject) => {
+                    transporter.sendMail(mailOptions, (error, info) => {
+                        if (error) {
+                            reject(error);
+                        } else {
+                            console.log('Email sent: ' + info.response);
+                            resolve();
+                        }
+                    });
+                });
+            };
+
+            const sendOrderConfirmationEmail_DaThanhToan = async (toEmail) => {
+                const mailOptions = {
+                    from: 'Khắc Tú',
+                    to: toEmail,
+                    subject: 'Xác nhận đơn hàng của bạn.',
+                    html: `
+                            <p style="color: navy; font-size: 20px;">Cảm ơn bạn <span style="color: black; font-weight: bold; font-style: italic;">${Ho} ${Ten} </span>đã đặt hàng!!</p>
+                            <p style="color: green; font-style: italic;">Đơn hàng của bạn đã được xác nhận.</p>
+                            <p>Tổng số lượng đặt: <span style="color: blue;">${Soluongdat}</span> sản phẩm</p>
+                            <p>Tổng tiền của ${Soluongdat} sản phẩm: <span style="color: red;">${TongGia}</span></p>
+                            <p>Phí giao hàng: <span style="color: red;">${PhiShip}</span></p>
+                            <p>Bạn được giảm  ${GiamGia}% cụ thể là: <span style="color: red;">-${SoTienGiamGia}</span></p>
+                            <p>Số tiền đã thanh toán: <span style="color: red;">${CanThanhToan}</span></p>
+                            <p>Số Điện Thoại Của Bạn ${Ho} ${Ten}: ${SoDienThoai}</p>
+                            <p>Địa chỉ nhận hàng: <span style="color: navy; font-style: italic;">${DiaChiChiTiet}</span></p>                            
+                            <p>Link Website của tôi: <a href="http://shop-nuoc-hoa.webkhactu.top/">WebShop Khắc Tú</a></p>
                         `
                 };
               

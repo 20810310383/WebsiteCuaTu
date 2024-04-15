@@ -24,7 +24,8 @@ const connection = async () => {
         //     maxPoolSize: 50,
         //   }
         mongoose.connect(
-          `mongodb://${user}:${pass}@127.0.0.1/${dbName}?authSource=admin`
+        //   `mongodb://${user}:${pass}@127.0.0.1/${dbName}?authSource=admin`
+        `mongodb://localhost:27017/${dbName}`
         );
      dbConnection = mongoose.connection;
         // const state = Number(mongoose.connection.readyState);

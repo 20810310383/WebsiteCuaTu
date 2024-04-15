@@ -1,0 +1,157 @@
+[{
+  "_id": {
+    "$oid": "65ffff91bab915766e30768b"
+  },
+  "IdAdminNhanVien": {
+    "$oid": "65eb08dc5d2a4f66ed3852f2"
+  },
+  "IdChucNang": {
+    "$oid": "65fffd74a8a948b402a806dd"
+  },
+  "GhiChu": "Nhân viên",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "65ffff91bab915766e30768c"
+  },
+  "IdAdminNhanVien": {
+    "$oid": "65eb08dc5d2a4f66ed3852f2"
+  },
+  "IdChucNang": {
+    "$oid": "65fffd9aa8a948b402a806de"
+  },
+  "GhiChu": "Nhân viên",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "65ffffa2bab915766e307696"
+  },
+  "IdAdminNhanVien": {
+    "$oid": "65eb7c7b114eb01ac73e84ba"
+  },
+  "IdChucNang": {
+    "$oid": "65eb076d5d2a4f66ed3852e6"
+  },
+  "GhiChu": "Nhân viên",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "65ffffa2bab915766e307698"
+  },
+  "IdAdminNhanVien": {
+    "$oid": "65eb7c7b114eb01ac73e84ba"
+  },
+  "IdChucNang": {
+    "$oid": "65fffd74a8a948b402a806dd"
+  },
+  "GhiChu": "Nhân viên",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "65ffffa2bab915766e307695"
+  },
+  "IdAdminNhanVien": {
+    "$oid": "65eb7c7b114eb01ac73e84ba"
+  },
+  "IdChucNang": {
+    "$oid": "65eb07065d2a4f66ed3852e5"
+  },
+  "GhiChu": "Nhân viên",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "65ffffa2bab915766e307699"
+  },
+  "IdAdminNhanVien": {
+    "$oid": "65eb7c7b114eb01ac73e84ba"
+  },
+  "IdChucNang": {
+    "$oid": "65fffd9aa8a948b402a806de"
+  },
+  "GhiChu": "Nhân viên",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "65ffffa2bab915766e307697"
+  },
+  "IdAdminNhanVien": {
+    "$oid": "65eb7c7b114eb01ac73e84ba"
+  },
+  "IdChucNang": {
+    "$oid": "65eb07a35d2a4f66ed3852e7"
+  },
+  "GhiChu": "Nhân viên",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "660146c8cf983a0ac6eb6247"
+  },
+  "IdAdminNhanVien": {
+    "$oid": "65e061a95d2a4f66ed3852bd"
+  },
+  "IdChucNang": {
+    "$oid": "65eb07065d2a4f66ed3852e5"
+  },
+  "GhiChu": "admin quản lý tất cả",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "660146c8cf983a0ac6eb6246"
+  },
+  "IdAdminNhanVien": {
+    "$oid": "65e061a95d2a4f66ed3852bd"
+  },
+  "IdChucNang": {
+    "$oid": "65eb06c95d2a4f66ed3852e4"
+  },
+  "GhiChu": "admin quản lý tất cả",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "660146c8cf983a0ac6eb624b"
+  },
+  "IdAdminNhanVien": {
+    "$oid": "65e061a95d2a4f66ed3852bd"
+  },
+  "IdChucNang": {
+    "$oid": "65fffd9aa8a948b402a806de"
+  },
+  "GhiChu": "admin quản lý tất cả",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "660146c8cf983a0ac6eb6249"
+  },
+  "IdAdminNhanVien": {
+    "$oid": "65e061a95d2a4f66ed3852bd"
+  },
+  "IdChucNang": {
+    "$oid": "65eb07a35d2a4f66ed3852e7"
+  },
+  "GhiChu": "admin quản lý tất cả",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "660146c8cf983a0ac6eb624a"
+  },
+  "IdAdminNhanVien": {
+    "$oid": "65e061a95d2a4f66ed3852bd"
+  },
+  "IdChucNang": {
+    "$oid": "65fffd74a8a948b402a806dd"
+  },
+  "GhiChu": "admin quản lý tất cả",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "660146c8cf983a0ac6eb6248"
+  },
+  "IdAdminNhanVien": {
+    "$oid": "65e061a95d2a4f66ed3852bd"
+  },
+  "IdChucNang": {
+    "$oid": "65eb076d5d2a4f66ed3852e6"
+  },
+  "GhiChu": "admin quản lý tất cả",
+  "__v": 0
+}]

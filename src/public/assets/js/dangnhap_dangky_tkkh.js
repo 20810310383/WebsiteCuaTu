@@ -71,8 +71,75 @@ document.addEventListener('DOMContentLoaded', function () {
                 loginform.reset(); // Reset form fields 
             }, 3000);
         }        
-    });
+    });    
 
+    // lấy lại mật khẩu
+    const doimk = document.getElementById('doi-mk');
+    doimk.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(doimk);
+        const response = await fetch('/quen-mat-khau', {
+            method: 'POST',
+            body: formData
+        });
+
+        const responseData = await response.json();
+
+        if(responseData.success) {
+
+            $('#exampleModalCenter').modal('hide');
+
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            toastr["success"](responseData.message, "Thành Công!")
+            // Xóa giá trị trong input email
+            $('input[name="email_doimk"]').val('');
+            // setTimeout(function() {
+            //     toastr.clear();
+            //     window.location.reload()
+            // }, 2000);
+
+        } else {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-full-width",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            toastr["error"](responseData.message, "Xem lại Email của bạn!")
+
+        }        
+    });
 });
+
+
+
                                             
                                      

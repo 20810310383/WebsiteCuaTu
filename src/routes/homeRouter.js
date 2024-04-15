@@ -41,7 +41,7 @@ const { getEditDH, putUpdate_QLDH } = require('../controllers/AdminQL/QuanLyDonH
 const { DeleteDH } = require('../controllers/AdminQL/QuanLyDonHang/deleteDonHangController');
 const { contactUs } = require('../controllers/ContactUs/contactUsController');
 const { huyDonHang } = require('../controllers/LichSuMuaHang/huyDonHangController');
-
+const { quenMatKhauKH } = require('../controllers/Login/quenMatKhauKHController');
 
 const router = express.Router();
 //  ********************************************************
@@ -58,7 +58,8 @@ router.post("/dang-ky-tkkh", dangKyTKKH)
 router.post("/dang-nhap-tkkh", dangNhapTKKH)
 // Dang Xuat Tai Khoan Khach Hang
 router.get("/dang-xuat-tkkh", dangXuatTKKH)
-
+// quên mật khẩu
+router.post("/quen-mat-khau", quenMatKhauKH)
 
 
 // Chi Tiet San Pham
@@ -231,6 +232,7 @@ router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoaPhanTrang)
 
 // upload hình ảnh trong phần thêm/chỉnh sửa sản phẩm phía admin textarea
 const path = require('path');
+
 async function uploadSingleFile(file) {
     // Implement the logic to upload the file here
     // Example logic for uploading the file to a specific directory:

@@ -196,7 +196,7 @@ module.exports = {
                             <p>Số tiền cần thanh toán: <span style="color: red;">${CanThanhToan}</span></p>
                             <p>Số Điện Thoại Của Bạn ${Ho} ${Ten}: ${SoDienThoai}</p>
                             <p>Địa chỉ nhận hàng: <span style="color: navy; font-style: italic;">${DiaChiChiTiet}</span></p>                            
-                            <p>Link Website của tôi: <a href="http://shop-nuoc-hoa.webkhactu.top/">WebShop Khắc Tú</a></p>
+                            <p>Link Website của tôi: <a href="http://shop-cua-toi.webkhactu.top/">WebShop Khắc Tú</a></p>
                         `
                 };
               

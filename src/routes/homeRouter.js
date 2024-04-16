@@ -42,6 +42,7 @@ const { DeleteDH } = require('../controllers/AdminQL/QuanLyDonHang/deleteDonHang
 const { contactUs } = require('../controllers/ContactUs/contactUsController');
 const { huyDonHang } = require('../controllers/LichSuMuaHang/huyDonHangController');
 const { quenMatKhauKH, doiMatKhauKH } = require('../controllers/Login/quenMatKhauKHController');
+const { trangLoaiSP, deleteLoaiSP, suaLoaiSP } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/quanLyLoaiSP');
 
 const router = express.Router();
 //  ********************************************************
@@ -234,6 +235,7 @@ router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoaPhanTrang)
 // upload hình ảnh trong phần thêm/chỉnh sửa sản phẩm phía admin textarea
 const path = require('path');
 
+
 async function uploadSingleFile(file) {
     // Implement the logic to upload the file here
     // Example logic for uploading the file to a specific directory:
@@ -270,6 +272,15 @@ router.post('/upload', async (req, res) => {
         res.status(500).send('Internal server error');
     }
 });
+
+
+// hiển thị trang quản lý loại sản phẩm
+router.get("/trang-quan-ly-loaisp", trangLoaiSP)
+// xoá loại sản phẩm
+router.delete("/xoa-loaisp-nuoc-hoa/:idxoaLoaiSP", deleteLoaiSP)
+// sửa loại sản phẩm
+router.post("/sua-loaisp-nuoc-hoa", suaLoaiSP)
+
 
 
 // get home sản phẩm nước hoa đã xóa

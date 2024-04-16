@@ -41,7 +41,7 @@ const { getEditDH, putUpdate_QLDH } = require('../controllers/AdminQL/QuanLyDonH
 const { DeleteDH } = require('../controllers/AdminQL/QuanLyDonHang/deleteDonHangController');
 const { contactUs } = require('../controllers/ContactUs/contactUsController');
 const { huyDonHang } = require('../controllers/LichSuMuaHang/huyDonHangController');
-const { quenMatKhauKH } = require('../controllers/Login/quenMatKhauKHController');
+const { quenMatKhauKH, doiMatKhauKH } = require('../controllers/Login/quenMatKhauKHController');
 
 const router = express.Router();
 //  ********************************************************
@@ -60,6 +60,7 @@ router.post("/dang-nhap-tkkh", dangNhapTKKH)
 router.get("/dang-xuat-tkkh", dangXuatTKKH)
 // quên mật khẩu
 router.post("/quen-mat-khau", quenMatKhauKH)
+router.post("/doi-mat-khau-kh", doiMatKhauKH)
 
 
 // Chi Tiet San Pham

@@ -84,20 +84,47 @@ module.exports = {
 
     // sửa loại sản phẩm
     suaLoaiSP: async (req, res) => {
-        let idSua = req.body.idSua
+        // let idSua = req.body.idSua
+        let idSua = req.params.idsualoai
         let TenLoaiSP = req.body.TenLoaiSP
         console.log("idSua: ", idSua);
         console.log("TenLoaiSP: ", TenLoaiSP);
 
         let loaisp = await LoaiSP.findOne({_id: idSua})
         loaisp.TenLoaiSP = TenLoaiSP
-        await loaisp.save();
+        let sua = await loaisp.save();
 
-        console.log('loaisp đã sửa:', loaisp);            
-        return res.status(200).json({success: true, message: `Chỉnh sửa tên loại thành công!` });
+        if(sua){
+            return res.redirect("/trang-quan-ly-loaisp");
+            // return res.status(200).json({success: true, message: `Chỉnh sửa tên loại thành công!`, data: sua });
+        } else {
+            return res.status(200).json({success: false, message: `Chỉnh sửa tên loại thất bại!` });
+        }
     },
 
     // form thêm loại sản phẩm
+    themLoaiSP: async (req, res) => {
+        let ThemTenLoaiSP = req.body.ThemTenLoaiSP
+        console.log("ThemTenLoaiSP: ", ThemTenLoaiSP);
+
+        let createLoaiSP = await LoaiSP.create({TenLoaiSP: ThemTenLoaiSP})
+        
+        if(createLoaiSP){
+            console.log("createLoaiSP: ", createLoaiSP);
+            return res.status(200).json({
+                message: "Thêm tên loại sản phẩm thành công!",
+                success: true,
+                KQ: 0,
+                data: createLoaiSP
+            })
+        } else {
+            return res.status(500).json({
+                message: "Tạo tên loại sản phẩm thất bại! Vui lòng thử lại",
+                success: false,   
+                KQ: -1             
+            })
+        }   
+    },
 
     // nút xử lý thêm mới loại sản phẩm
 }

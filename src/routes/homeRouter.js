@@ -42,7 +42,7 @@ const { DeleteDH } = require('../controllers/AdminQL/QuanLyDonHang/deleteDonHang
 const { contactUs } = require('../controllers/ContactUs/contactUsController');
 const { huyDonHang } = require('../controllers/LichSuMuaHang/huyDonHangController');
 const { quenMatKhauKH, doiMatKhauKH } = require('../controllers/Login/quenMatKhauKHController');
-const { trangLoaiSP, deleteLoaiSP, suaLoaiSP } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/quanLyLoaiSP');
+const { trangLoaiSP, deleteLoaiSP, suaLoaiSP, themLoaiSP } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/quanLyLoaiSP');
 
 const router = express.Router();
 //  ********************************************************
@@ -279,7 +279,9 @@ router.get("/trang-quan-ly-loaisp", trangLoaiSP)
 // xoá loại sản phẩm
 router.delete("/xoa-loaisp-nuoc-hoa/:idxoaLoaiSP", deleteLoaiSP)
 // sửa loại sản phẩm
-router.post("/sua-loaisp-nuoc-hoa", suaLoaiSP)
+router.post("/sua-loaisp-nuoc-hoa/:idsualoai", suaLoaiSP)
+// thêm loại sản phẩm
+router.post("/them-loaisp-nuoc-hoa", themLoaiSP)
 
 
 

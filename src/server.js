@@ -36,7 +36,7 @@ app.use(session({
 }));
 app.use(cookieParser());
 
-
+  
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -60,8 +60,15 @@ app.listen(port, () => {
 //     try {
 //         // using mongoose
 //         await connection()
-
 //         app.listen(port, hostname, () => {
+//             console.log(`http://localhost:${port}`)
+//         })
+//     } catch(error) {
+//         console.log(">>> LỖI RỒI CỤ: ", error);
+//     }  
+// })();
+
+//     app.listen(port, hostname, () => {
 //             console.log(`http://localhost:${port}`)
 //         })
 //     } catch(error) {

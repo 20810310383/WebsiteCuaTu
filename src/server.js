@@ -42,7 +42,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // khai bao route
-app.use('/', homeRoutes);
+app.use(homeRoutes);
 app.use('/api/v1/', homeAPIRoutes);
 
 // -------  đoạn này là config chạy đẩy hosting lên domain

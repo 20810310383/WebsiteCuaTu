@@ -48,25 +48,25 @@ const router = express.Router();
 //  ********************************************************
 
 // TRANG CHU
-router.route("/").get(getHomeHienThi1)
+router.get("/", getHomeHienThi1)
 
 
 // LOGIN Tai Khoan Khach Hang
-router.route("/").get("/login-tk-kh", getFormLoginKH)
+router.get("/login-tk-kh", getFormLoginKH)
 // Dang Ky Tai Khoan Khach Hang
-router.route("/").post("/dang-ky-tkkh", dangKyTKKH)
+router.post("/dang-ky-tkkh", dangKyTKKH)
 // Dang Nhap Tai Khoan Khach Hang
-router.route("/").post("/dang-nhap-tkkh", dangNhapTKKH)
+router.post("/dang-nhap-tkkh", dangNhapTKKH)
 // Dang Xuat Tai Khoan Khach Hang
-router.route("/").get("/dang-xuat-tkkh", dangXuatTKKH)
+router.get("/dang-xuat-tkkh", dangXuatTKKH)
 // quên mật khẩu
-router.route("/").post("/quen-mat-khau", quenMatKhauKH)
-router.route("/").post("/doi-mat-khau-kh", doiMatKhauKH)
+router.post("/quen-mat-khau", quenMatKhauKH)
+router.post("/doi-mat-khau-kh", doiMatKhauKH)
 
 
 // Chi Tiet San Pham
-router.route("/").post("/detailt-sp", chiTietSPHomeHienThi1)
-router.route("/").get("/detailt-sp-ht1", chiTietSPHomeHienThi1_ChiTiet)
+router.post("/detailt-sp", chiTietSPHomeHienThi1)
+router.get("/detailt-sp-ht1", chiTietSPHomeHienThi1_ChiTiet)
 
 
 

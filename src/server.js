@@ -1,9 +1,9 @@
 require('dotenv').config();
+const path = require('path')
 const express = require('express')
 const configViewEngine = require('./config/viewEngine');
 const homeRoutes = require('./routes/homeRouter');
 const homeAPIRoutes = require('./routes/homeAPI');
-
 const connection = require('./config/database');
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
@@ -16,6 +16,7 @@ const app = express();
 const port = process.env.PORT || 8888;
 const hostname = process.env.HOST_NAME;
 const { v4: uuidv4 } = require('uuid');
+app.set('views', path.join(__dirname, 'src', 'views'));
 
 // default options
 app.use(fileUpload());

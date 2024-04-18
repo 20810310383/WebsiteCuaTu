@@ -11,7 +11,7 @@
     "$oid": "65eb08dc5d2a4f66ed3852f2"
   },
   "TenDangNhap": "dokhactu",
-  "MatKhau": "tu123456",
+  "MatKhau": "tu2002",
   "HoTen": "Khắc Túu",
   "SDT": "0972138493",
   "DiaChi": "Hà Nội",
@@ -44,6 +44,20 @@
       "$numberLong": "1709975773718"
     }
   },
-  "deleted": true,
+  "deleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "66136f29b3bb99217d8b4dd1"
+  },
+  "TenDangNhap": "admin1234",
+  "MatKhau": "admin1234",
+  "HoTen": "nhân viên quản lý",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1712549293629"
+    }
+  },
+  "deleted": false,
   "__v": 0
 }]

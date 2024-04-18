@@ -1,0 +1,239 @@
+[{
+  "_id": {
+    "$oid": "65bbe220de02495c0601a4ea"
+  },
+  "TenDangNhap": "dokhactu123@gmail.com",
+  "MatKhau": "abc123123",
+  "HoTen": "Khắc Tú Đỗ",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1706811804137"
+    }
+  },
+  "deleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "65cb4fd671103fc9d30e03ca"
+  },
+  "TenDangNhap": "dokhactu2@gmail.com",
+  "MatKhau": "123456",
+  "HoTen": "Khắc Tú",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1707822878374"
+    }
+  },
+  "deleted": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "65e0ef80e87329941ef63d98"
+  },
+  "TenDangNhap": "dokhactu1822@gmail.com",
+  "MatKhau": "zi4bh23ivh",
+  "HoTen": "mmm1234",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1709240169897"
+    }
+  },
+  "deleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "65e0ef8de87329941ef63d9b"
+  },
+  "TenDangNhap": "dokhactu1@gmail.com",
+  "MatKhau": "dokhactu1@gmail.com",
+  "HoTen": "quyen123",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1709240169897"
+    }
+  },
+  "deleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "65e0efa7e87329941ef63d9f"
+  },
+  "TenDangNhap": "dokhactu3@gmail.com",
+  "MatKhau": "abc12345678",
+  "HoTen": "tú đẹp trai",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1709240169897"
+    }
+  },
+  "deleted": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "65efc01bc214d72259d0e168"
+  },
+  "TenDangNhap": "quyet123@gmail.com",
+  "MatKhau": "quyet123@gmail.com",
+  "HoTen": "quyết ngu",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1710211069210"
+    }
+  },
+  "deleted": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "65f8806e50930b6c6897d3a7"
+  },
+  "TenDangNhap": "dokhactu18223@gmail.com",
+  "MatKhau": "dokhactu18223@gmail.com",
+  "HoTen": "Khắc Tú",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1710784597308"
+    }
+  },
+  "deleted": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "65fd7f99778079515676505b"
+  },
+  "TenDangNhap": "dokhactu1234@gmail.com",
+  "MatKhau": "dokhactu1234@gmail.com",
+  "HoTen": "Khắc Tú",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1711112056970"
+    }
+  },
+  "deleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6601cf9649e671e9838fbb68"
+  },
+  "TenDangNhap": "dokhactu10@gmail.com",
+  "MatKhau": "dokhactu10@gmail.com",
+  "HoTen": "Khắc Đỗ Tú",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1711394657110"
+    }
+  },
+  "deleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6601ef69686713a2c93f915c"
+  },
+  "TenDangNhap": "abc123@gmail.com",
+  "MatKhau": "abc123@gmail.com",
+  "HoTen": "Toi mua hang",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1711402537700"
+    }
+  },
+  "deleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "66026b2eab91573170c48ffc"
+  },
+  "TenDangNhap": "test1@gmail.com",
+  "MatKhau": "$2b$10$yow//TrxbHgDObOg0O6RrOrd3h8STcwm1XuGEPuDUxLA45dN4cUVa",
+  "HoTen": "tú tú",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1711434456796"
+    }
+  },
+  "deleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6606e83f2c4c1d46b90a918a"
+  },
+  "TenDangNhap": "trangteu2k2@gmail.com",
+  "MatKhau": "123456",
+  "HoTen": "Vương Đình Trang",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1711728590445"
+    }
+  },
+  "deleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "660739aef8ad60fe57383ceb"
+  },
+  "TenDangNhap": "test2@gmail.com",
+  "MatKhau": "777",
+  "HoTen": "anh tú đẹp trai đi mua hàng đây",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1711749309321"
+    }
+  },
+  "deleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "660866900604ab826c024d45"
+  },
+  "TenDangNhap": "test3@gmail.com",
+  "MatKhau": "test3@gmail.com",
+  "HoTen": "tú",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1711826540980"
+    }
+  },
+  "deleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "660ad08a9952f3e92649a520"
+  },
+  "TenDangNhap": "test4@gmail.com",
+  "MatKhau": "123",
+  "HoTen": "tôi là tú",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1711979690185"
+    }
+  },
+  "deleted": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6613914960e0f31f6b0b76c0"
+  },
+  "TenDangNhap": "quyet1234@gmail.com",
+  "MatKhau": "quyet1234@gmail.com",
+  "HoTen": "quyết",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1712557756232"
+    }
+  },
+  "deleted": true,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "661d9e882e68ae64f774f719"
+  },
+  "TenDangNhap": "nguyenhuuquyen233@gmail.com",
+  "MatKhau": "123123",
+  "HoTen": "quyền",
+  "NgayTao": {
+    "$date": {
+      "$numberLong": "1713217059230"
+    }
+  },
+  "deleted": false,
+  "__v": 0
+}]

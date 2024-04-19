@@ -11,7 +11,7 @@ module.exports = {
         let logged = req.session.loggedIn
         let activee = 'trangchu'
 
-        if(logged){
+        if(logged && tk){
             res.render("AdminQL/TrangQLAdmin/homeAdmin.ejs", {
                 tk, logged, activee
             })

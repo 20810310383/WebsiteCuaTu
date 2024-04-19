@@ -13,12 +13,53 @@ loginform.addEventListener('submit', async function (event) {
     const responseData = await response.json();   
 
     if(responseData.success) {
-        // Reset form after 3 seconds
-        alert(responseData.message)        
-        window.location.href = '/home-page-admin';
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "1500",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        toastr["success"](responseData.message, "Thành Công!")
+        setTimeout(function() {
+            toastr.clear();
+            window.location.href = '/home-page-admin';
+        }, 1000);      
+        
     } else {
         // Reset form after 3 seconds
-        alert(responseData.message)                                                    
-        loginform.reset(); // Reset form fields 
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-full-width",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        toastr["error"](responseData.message, "Đăng nhập không thành công")       
+        setTimeout(function() {
+            toastr.clear();
+            loginform.reset(); // Reset form fields 
+        }, 5000);                                             
+        
     }        
 });

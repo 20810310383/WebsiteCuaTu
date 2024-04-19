@@ -54,28 +54,29 @@ module.exports = {
 
     // đăng xuất
     dangXuatAdmin: (req, res) => {
-        if (req.session) {
-            req.session.destroy((err) => {
-                if (err) {
-                    console.error(err);
-                    res.status(500).send('Internal Server Error');
-                } else {
-                    // res.clearCookie('connect.sid'); // Xóa cookie connect.sid
-                    // res.cookie('connect.sid', '', { expires: new Date(0) });
-                    res.clearCookie('connect.sid', { path: '/', domain: 'localhost' });
-
-                    res.redirect('/login-admin');
-                }
-            });
-        } else {
-            res.redirect('/login-admin');
-        }
-
-        // if (req.session.tk) {
-        //     req.session.destroy();
+        // if (req.session) {
+        //     req.session.destroy((err) => {
+        //         if (err) {
+        //             console.error(err);
+        //             res.status(500).send('Internal Server Error');
+        //         } else {
+        //             // res.clearCookie('connect.sid'); // Xóa cookie connect.sid
+        //             // res.cookie('connect.sid', '', { expires: new Date(0) });
+        //             res.clearCookie('connect.sid', { path: '/', domain: 'localhost' });
+        //             req.session.loggedIn = false
+        //             res.redirect('/login-admin');
+        //         }
+        //     });
+        // } else {
+        //     res.redirect('/login-admin');
         // }
-        // // req.logout();
-        // res.redirect("/login-admin");
+
+        if (req.session.tk) {
+            req.session.destroy();
+            req.session.loggedIn = false
+        }
+        // req.logout();
+        res.redirect("/login-admin");
     },
     dangXuatAdmin1: async (req, res) => { 
         // if (req.session.tk) {

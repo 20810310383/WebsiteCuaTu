@@ -38,11 +38,18 @@ module.exports = {
         
         let sanPhamEdit = await SanPham.findById(idEdit).populate('IdLoaiSP').populate('IdNam_Nu').exec()     
 
+        // hiển thị kiểu phân loại
+        const tongSL = [];
+        for (const loaiSp of loaiSP) {
+            const soLuongSanPham = await SanPham.countDocuments({ IdLoaiSP: loaiSp._id });
+            tongSL.push({ TenLoaiSP: loaiSp.TenLoaiSP, soLuongSanPham, IDLoaiSP: loaiSp._id });
+        }
+
         res.render("AdminQL/TrangQLAdmin/QuanLySanPham/QuanLySPNuocHoa/getEditNuocHoa.ejs", {
             tk, logged, activee,
             rootPath: '/', 
             formatCurrency, getRelativeImagePath,
-            loaiSP, loaiSPNamNu, sanPhamEdit, 
+            loaiSP, loaiSPNamNu, sanPhamEdit, tongSL
         })
     },
 

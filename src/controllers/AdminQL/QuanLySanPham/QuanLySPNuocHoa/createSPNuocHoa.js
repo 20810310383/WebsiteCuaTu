@@ -25,9 +25,16 @@ module.exports = {
         let loaiSPNamNu = await LoaiSPNamNu.find({}).exec()
         console.log("LoaiSPNamNu: ", loaiSPNamNu);        
 
+        // hiển thị kiểu phân loại
+        const tongSL = [];
+        for (const loaiSp of loaiSP) {
+            const soLuongSanPham = await SanPham.countDocuments({ IdLoaiSP: loaiSp._id });
+            tongSL.push({ TenLoaiSP: loaiSp.TenLoaiSP, soLuongSanPham, IDLoaiSP: loaiSp._id });
+        }
+
         res.render("AdminQL/TrangQLAdmin/QuanLySanPham/QuanLySPNuocHoa/getCreateNuocHoa.ejs", {
             tk, logged, activee,
-            loaiSP, loaiSPNamNu, 
+            loaiSP, loaiSPNamNu, tongSL
         })
     },
 

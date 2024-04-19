@@ -115,21 +115,52 @@
 
                                 <div class="mb-3">
                                     <label for="IdLoaiSP" class="form-label">Loại sản phẩm  <span style="color: red;font-size: 18px;">*</span></label>
-                                    <select id="IdLoaiSP" name="IdLoaiSP" class="form-control" aria-label="Default select example" style="width: 320px; font-size: 18px;" >                                                                       
-                                        <option value="<%= sanPhamEdit.IdLoaiSP._id %>" selected><%= sanPhamEdit.IdLoaiSP.TenLoaiSP %></option>
-                                        <% loaiSP.forEach(function(loaiSP) { %>                                                                             
-                                        <option value="<%= loaiSP._id %>"><%= loaiSP.TenLoaiSP %></option>
+                                    <select id="IdLoaiSP" name="IdLoaiSP" class="form-control" aria-label="Default select example" style="width: 400px; font-size: 18px;" >                                                                                                               
+
+                                        <% loaiSP.forEach(function(loaiSP) { %>    
+                                            <% if (sanPhamEdit.IdLoaiSP._id.toString() === loaiSP._id.toString()) { %>
+                                                <option style="font-weight: bold;color: navy;" value="<%= loaiSP._id %>" selected>
+                                                    <%= loaiSP.TenLoaiSP %>
+                                                    <span style="color: navy;">&nbsp;&nbsp;
+                                                        (Đang có: <span style="color: red;font-weight: bold;">
+                                                            <% for (const item of tongSL) { %>
+                                                                <% if (item.IDLoaiSP.toString() === loaiSP._id.toString()) { %>
+                                                                    <%= item.soLuongSanPham %>
+                                                                <% } %>
+                                                            <% } %>
+                                                        </span> sản phẩm)
+                                                    </span>
+                                                </option>
+                                            <% } else { %>   
+                                                <option value="<%= loaiSP._id %>">
+                                                    <%= loaiSP.TenLoaiSP %>
+                                                    <span style="color: navy;">&nbsp;&nbsp;
+                                                        (Đang có: <span style="color: red;font-weight: bold;">
+                                                            <% for (const item of tongSL) { %>
+                                                                <% if (item.IDLoaiSP.toString() === loaiSP._id.toString()) { %>
+                                                                    <%= item.soLuongSanPham %>
+                                                                <% } %>
+                                                            <% } %>
+                                                        </span> sản phẩm)
+                                                    </span>
+                                                </option>
+                                            <% } %>    
                                         <% }); %>
+
                                     </select>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="IdNam_Nu" class="form-label">Loại Nam / Nữ  <span style="color: red;font-size: 18px;">*</span></label>
                                     <select id="IdNam_Nu" name="IdNam_Nu" class="form-control" aria-label="Default select example" style="width: 320px; font-size: 18px;">                                   
-                                        <option value="<%= sanPhamEdit.IdNam_Nu._id %>" selected><%= sanPhamEdit.IdNam_Nu.TenLoaiNamNu %></option>
+                                        
                                         <% loaiSPNamNu.forEach(function(loaiSPNamNu) { %> 
-                                        <option value="<%= loaiSPNamNu._id %>"><%= loaiSPNamNu.TenLoaiNamNu %></option>
-                                        <% }); %>                             
+                                            <% if (sanPhamEdit.IdNam_Nu._id.toString() === loaiSPNamNu._id.toString()) { %>
+                                                <option style="font-weight: bold;color: navy;" value="<%= loaiSPNamNu._id %>" selected><%= loaiSPNamNu.TenLoaiNamNu %></option>
+                                            <% } else { %>
+                                                <option value="<%= loaiSPNamNu._id %>"><%= loaiSPNamNu.TenLoaiNamNu %></option>
+                                            <% } %>   
+                                        <% }); %> 
                                     </select>
                                 </div>
 
@@ -137,15 +168,15 @@
                                     <label for="New_Hot" class="form-label">Loại New / Hot  <span style="color: red;font-size: 18px;">*</span></label>
                                     <select id="New_Hot" name="New_Hot" class="form-control" aria-label="Default select example" style="width: 320px; font-size: 18px;">                                   
                                         <% if(sanPhamEdit.New_Hot == "New") { %> 
-                                            <option value="<%= sanPhamEdit.New_Hot %>" selected><%= sanPhamEdit.New_Hot %></option>
+                                            <option style="font-weight: bold;color: navy;" value="<%= sanPhamEdit.New_Hot %>" selected><%= sanPhamEdit.New_Hot %></option>
                                             <option value="Hot">Hot</option> 
                                             <option value="">_ _ _</option> 
                                         <% } else if(sanPhamEdit.New_Hot == "Hot") { %>
-                                            <option value="<%= sanPhamEdit.New_Hot %>" selected><%= sanPhamEdit.New_Hot %></option>
+                                            <option style="font-weight: bold;color: navy;" value="<%= sanPhamEdit.New_Hot %>" selected><%= sanPhamEdit.New_Hot %></option>
                                             <option value="New">New</option> 
                                             <option value="">_ _ _</option> 
                                         <% } else { %>
-                                            <option value="<%= sanPhamEdit.New_Hot %>" selected>_ _ _</option>
+                                            <option style="font-weight: bold;color: navy;" value="<%= sanPhamEdit.New_Hot %>" selected>_ _ _</option>
                                             <option value="New">New</option> 
                                             <option value="Hot">Hot</option> 
                                         <% } %>                                                                     
@@ -156,15 +187,15 @@
                                     <label for="SpMoi_SpNoiBat" class="form-label">Sản phẩm Mới / Nổi Bật  <span style="color: red;font-size: 18px;">*</span></label>
                                     <select id="SpMoi_SpNoiBat" name="SpMoi_SpNoiBat" class="form-control" aria-label="Default select example" style="width: 320px; font-size: 18px;">                                   
                                         <% if(sanPhamEdit.SpMoi_SpNoiBat == "Mới") { %> 
-                                            <option value="<%= sanPhamEdit.SpMoi_SpNoiBat %>" selected><%= sanPhamEdit.SpMoi_SpNoiBat %></option>
+                                            <option style="font-weight: bold;color: navy;" value="<%= sanPhamEdit.SpMoi_SpNoiBat %>" selected><%= sanPhamEdit.SpMoi_SpNoiBat %></option>
                                             <option value="Nổi Bật">Nổi Bật</option> 
                                             <option value="">_ _ _</option> 
                                         <% } else if(sanPhamEdit.SpMoi_SpNoiBat == "Nổi Bật"){ %>
-                                            <option value="<%= sanPhamEdit.SpMoi_SpNoiBat %>" selected><%= sanPhamEdit.SpMoi_SpNoiBat %></option>
+                                            <option style="font-weight: bold;color: navy;" value="<%= sanPhamEdit.SpMoi_SpNoiBat %>" selected><%= sanPhamEdit.SpMoi_SpNoiBat %></option>
                                             <option value="Mới">Mới</option> 
                                             <option value="">_ _ _</option>
                                         <% } else { %> 
-                                            <option value="<%= sanPhamEdit.SpMoi_SpNoiBat %>" selected>_ _ _</option>
+                                            <option style="font-weight: bold;color: navy;" value="<%= sanPhamEdit.SpMoi_SpNoiBat %>" selected>_ _ _</option>
                                             <option value="Nổi Bật">Nổi Bật</option> 
                                             <option value="Mới">Mới</option> 
                                         <% } %>                                                                        

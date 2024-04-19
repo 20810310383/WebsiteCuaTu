@@ -32,7 +32,7 @@
         scrollSpeed: 900,
         animation: 'fade'
     });
-	
+
 
     /* slider activation */
     $('.slider_active').owlCarousel({

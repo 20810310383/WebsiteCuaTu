@@ -53,24 +53,24 @@ app.use('/', homeRoutes);
 app.use('/api/v1/', homeAPIRoutes);
 
 // -------  đoạn này là config chạy đẩy hosting lên domain
-connection()
-//test connection
-app.listen(port, () => {
-    console.log(`App listening on port ${port}`);
-    console.log(`ĐÃ CHẠY ...   >>>  http://localhost:${port}`)
-  });
+// connection()
+// //test connection
+// app.listen(port, () => {
+//     console.log(`App listening on port ${port}`);
+//     console.log(`ĐÃ CHẠY ...   >>>  http://localhost:${port}`)
+//   });
 
 
 // ------- đoạn dưới là connect db làm như bthg khi chạy docker
 // test connection
-// (async () => {
-//     try {
-//         // using mongoose
-//         await connection()
-//         app.listen(port, hostname, () => {
-//             console.log(`http://localhost:${port}`)
-//         })
-//     } catch(error) {
-//         console.log(">>> LỖI RỒI CỤ: ", error);
-//     }  
-// })();
+(async () => {
+    try {
+        // using mongoose
+        await connection()
+        app.listen(port, hostname, () => {
+            console.log(`http://localhost:${port}`)
+        })
+    } catch(error) {
+        console.log(">>> LỖI RỒI CỤ: ", error);
+    }  
+})();

@@ -11,11 +11,18 @@ const fileUpload = require('express-fileupload');
 const { MongoClient } = require('mongodb');
 const cookieParser = require("cookie-parser");
 const session = require('express-session');
+const cors = require('cors'); 
 
 const app = express();
 const port = process.env.PORT || 8888;
 const hostname = process.env.HOST_NAME;
 const { v4: uuidv4 } = require('uuid');
+
+// Cấu hình CORS
+app.use(cors({
+    origin: 'https://shop-cua-toi.webkhactu.top/', // Thay thế 'https://yourdomain.com' bằng domain của bạn
+    credentials: true
+}));
 
 // default options
 app.use(fileUpload());

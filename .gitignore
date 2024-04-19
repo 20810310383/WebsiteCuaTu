@@ -1,4 +1,4 @@
 node_modules
 *.env
-/src/views/
-/src/public/
+# /src/views/
+# /src/public/

@@ -79,14 +79,14 @@ module.exports = {
         }
         req.session.SapXepTheoGia = SapXepTheoGia
 
-            let sortOption = {};
-            if (SapXepTheoGia === 1) {
-                sortOption = { GiaBan: 1 }; // Sắp xếp theo giá tăng dần
-            } else if (SapXepTheoGia === -1) {
-                sortOption = { GiaBan: -1 }; // Sắp xếp theo giá giảm dần
-            } else {
-                sortOption = {  };
-            }
+        let sortOption = {};
+        if (SapXepTheoGia === 1) {
+            sortOption = { GiaBan: 1 }; // Sắp xếp theo giá tăng dần
+        } else if (SapXepTheoGia === -1) {
+            sortOption = { GiaBan: -1 }; // Sắp xếp theo giá giảm dần
+        } else {
+            sortOption = {  };
+        }
 
         if(!idPL){
 

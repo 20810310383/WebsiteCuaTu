@@ -43,7 +43,7 @@
                                <!--logo start-->
                                 <div class="col-lg-3 col-md-3">
                                     <div class="logo">
-                                        <a href="/"><img src="assets\img\logo\logo-KT.png" alt=""></a>
+                                        <a href="/"><img width="120" src="assets\img\logo\khactu-logo.jpg" alt=""></a>
                                     </div>
                                 </div>
                                 <!--logo end-->
@@ -161,6 +161,56 @@
                                                     </ul>
                                                 </form>
                                             </div>
+
+                                            <div class="page_amount">
+                                                <ul class="nav" role="tablist">
+                                                    <li>
+                                                        <select name="SapXepTheoGia" id="SapXepTheoGia" onchange="handleChange(this)">
+                                                            <optgroup label="Sắp xếp">
+                                                                <% if(ss === 1) { %>
+                                                                    <option value="1" selected>Tăng dần theo giá</option>
+                                                                    <option value="0">Không sắp xếp</option>
+                                                                    <option value="-1">Giảm dần theo giá</option>
+                                                                    <% } else if(ss === -1) { %>
+                                                                        <option value="-1" selected>Giảm dần theo giá</option>
+                                                                        <option value="0">Không sắp xếp</option>
+                                                                        <option value="1">Tăng dần theo giá</option>
+                                                                        <%  } else { %>
+                                                                            <option value="0" selected>Không sắp xếp</option>
+                                                                            <option value="-1" >Giảm dần theo giá</option>
+                                                                            <option value="1">Tăng dần theo giá</option>
+                                                                            <% } %>                    
+                                                            </optgroup>                                                         
+                                                        </select>
+                                                    </li>
+                                                </ul>
+                                            </div> 
+                                            
+                                            <script>
+                                                function handleChange(selectElement) {
+                                                    const selectedValue = selectElement.value;
+                                            
+                                                    if (!selectedValue) {
+                                                        selectedValue = "0"; // Đặt mặc định là 0 nếu không có giá trị từ máy chủ
+                                                    }
+                                            
+                                                    const tenSPSearch = '<%= searchSPSession || "" %>'; 
+                                                    let url = '/search-nuoc-hoa';
+                                                    
+                                                    if (tenSPSearch) {
+                                                        url += `?search_nuochoa=${tenSPSearch}`;
+                                                    }
+                                            
+                                                    if (url.includes('?')) {    // kiểm tra xem URL đã chứa dấu ? hay chưa
+                                                        url += `&SapXepTheoGia=${selectedValue}`;
+                                                    } else {
+                                                        url += `?SapXepTheoGia=${selectedValue}`;
+                                                    }
+                                                    
+                                                    window.location.href = url;
+                                                }
+                                            </script>
+
                                         </div>
                                         <script>
                                             function convertPriceRange(range) {
@@ -212,7 +262,20 @@
                                                     <% 
                                                         const pre = curPage <= 1 ? curPage : curPage - 1; 
                                                         const next = curPage >= soTrang ? curPage : parseInt(curPage) + 1   
-                                                        const queryParams = searchSPSession ? `search_nuochoa=${searchSPSession}` : `tenloaiNH=${tenloaiNHSession}&giaSP=${giaSPSession}`;         
+                                                        <!-- const queryParams = searchSPSession ? `search_nuochoa=${searchSPSession}` : `tenloaiNH=${tenloaiNHSession}&giaSP=${giaSPSession}`;          -->
+
+                                                        let queryParams = '';
+                                                        if (searchSPSession) {
+                                                            queryParams = `search_nuochoa=${searchSPSession}`;
+                                                            if (ss) {
+                                                                queryParams += `&SapXepTheoGia=${ss}`;
+                                                            }
+                                                        } else {
+                                                            queryParams = `tenloaiNH=${tenloaiNHSession}&giaSP=${giaSPSession}`;
+                                                            if (ss) {
+                                                                queryParams += `&SapXepTheoGia=${ss}`;
+                                                            }
+                                                        }
                                                     %>  
                                                     <li class="page-item disabled">
                                                       <a class="page-link" href="/search-nuoc-hoa?<%=queryParams%>&page=<%=pre%>">&laquo;</a>              

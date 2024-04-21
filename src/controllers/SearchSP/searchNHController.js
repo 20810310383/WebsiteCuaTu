@@ -6,36 +6,41 @@ const cheerio = require('cheerio');
 
 module.exports = {
     searchNH_PhanTrang: async (req, res) => {
+
+        // let redirectUrl = '/search-nuoc-hoa';
         // if (req.query.page) {
-        //     return res.redirect(`/search-nuoc-hoa?search_nuochoa=${req.session.tenSPSearch}&page=${req.query.page}`)
+        //     const tenSPSearch = req.session.tenSPSearch || req.query.search_nuochoa;
+        //     redirectUrl += `?search_nuochoa=${tenSPSearch}&page=${req.query.page}`;
         // }
-        // res.redirect(`/search-nuoc-hoa`)
+        // res.redirect(redirectUrl);
 
         let redirectUrl = '/search-nuoc-hoa';
-
+        const queryParams = req.query.SapXepTheoGia ? `?SapXepTheoGia=${req.query.SapXepTheoGia}` : '';
         if (req.query.page) {
             const tenSPSearch = req.session.tenSPSearch || req.query.search_nuochoa;
-            redirectUrl += `?search_nuochoa=${tenSPSearch}&page=${req.query.page}`;
+            redirectUrl += `?search_nuochoa=${tenSPSearch}&page=${req.query.page}&${queryParams}`;
         }
-
         res.redirect(redirectUrl);
     },
 
     // **********************************************************************************
     searchNH_PhanLoai_PhanTrang: async (req, res) => {
+
+        // let redirectUrl = '/search-nuoc-hoa';
         // if (req.query.page) {
-        //     return res.redirect(`/search-nuoc-hoa?tenloaiNH=${req.session.tenloaiNH}&giaSP=${req.session.giaSP}&page=${req.query.page}`)
+        //     const tenloaiNH = req.session.tenSPSearch || req.query.tenloaiNH;
+        //     const giaSP = req.session.giaSP || req.query.giaSP;
+        //     redirectUrl += `?tenloaiNH=${tenloaiNH}&giaSP=${giaSP}&page=${req.query.page}`;
         // }
-        // res.redirect(`/search-nuoc-hoa`)
+        // res.redirect(redirectUrl);
 
         let redirectUrl = '/search-nuoc-hoa';
-
+        const queryParams = req.query.SapXepTheoGia ? `?SapXepTheoGia=${req.query.SapXepTheoGia}` : '';
         if (req.query.page) {
             const tenloaiNH = req.session.tenSPSearch || req.query.tenloaiNH;
             const giaSP = req.session.giaSP || req.query.giaSP;
-            redirectUrl += `?tenloaiNH=${tenloaiNH}&giaSP=${giaSP}&page=${req.query.page}`;
+            redirectUrl += `${queryParams}&tenloaiNH=${tenloaiNH}&giaSP=${giaSP}&page=${req.query.page}`;           
         }
-
         res.redirect(redirectUrl);
     },
 
@@ -120,6 +125,22 @@ module.exports = {
 
         let skip = (page - 1) * limit              
 
+        // sắp xếp theo giá
+        let SapXepTheoGia = 0; // Mặc định là ko sắp xếp 
+        if (req.query.SapXepTheoGia) {
+            SapXepTheoGia = parseInt(req.query.SapXepTheoGia);
+        }
+        req.session.SapXepTheoGia = SapXepTheoGia
+
+        let sortOption = {};
+        if (SapXepTheoGia === 1) {
+            sortOption = { GiaBan: 1 }; // Sắp xếp theo giá tăng dần
+        } else if (SapXepTheoGia === -1) {
+            sortOption = { GiaBan: -1 }; // Sắp xếp theo giá giảm dần
+        } else {
+            sortOption = {  };
+        }
+
         // tìm trên thanh tìm kiếm
         if(tenSPSearch){                   
 
@@ -127,7 +148,8 @@ module.exports = {
             // const allSPTangDan = await SanPham.find({TenSP: { $regex: new RegExp(tenSPSearch, 'i') }}).populate('IdLoaiSP').populate('IdNam_Nu').sort({ GiaBan: 1 }).exec();
             const all = await SanPham.find({TenSP: { $regex: new RegExp(tenSPSearch, 'i') }})
                 .populate('IdLoaiSP')
-                .populate('IdNam_Nu')                
+                .populate('IdNam_Nu') 
+                .sort(sortOption)               
                 .skip(skip)
                 .limit(limit)
                 .exec();
@@ -137,6 +159,7 @@ module.exports = {
             let numPage = parseInt((await SanPham.find({TenSP: { $regex: new RegExp(tenSPSearch, 'i') }})
                 .populate('IdLoaiSP')
                 .populate('IdNam_Nu')
+                .sort(sortOption)
                 ).length) / limit
             
             // // kiểm tra xem phần thập phân của numPage có bằng 0 hay không
@@ -171,7 +194,7 @@ module.exports = {
                 ssSAPXEP: req.session.SapXepTheoGia,
                 convertPriceRange,
                 tongSL, spBanChay,
-                convertHtml
+                convertHtml, ss: req.session.SapXepTheoGia,
             })
             
         } else if(tenloaiNH && giaSP) {
@@ -192,61 +215,92 @@ module.exports = {
                     $gte: minPrice,
                     $lte: maxPrice
                 }
-            }).populate('IdLoaiSP').populate('IdNam_Nu').exec();
+            }).populate('IdLoaiSP').populate('IdNam_Nu').sort(sortOption).skip(skip).limit(limit).exec();
             
+            // // tính toán tổng số trang cần hiển thị bằng cách: CHIA (tổng số sản phẩm) cho (số lượng sản phẩm trên mỗi trang)
+            let numPage = parseInt((await SanPham.find({
+                IdNam_Nu: tenloaiNH,
+                GiaBan: {
+                    $gte: minPrice,
+                    $lte: maxPrice
+                }
+            }).populate('IdLoaiSP').populate('IdNam_Nu').sort(sortOption)).length) / limit
+
+            // // kiểm tra xem phần thập phân của numPage có bằng 0 hay không
+            // // Nếu bằng 0, nghĩa là numPage là một số nguyên, không cần phải thêm một trang nữa
+            // // Ngược lại, nếu có phần thập phân, nó thêm một trang nữa để đảm bảo rằng tất cả các sản phẩm được hiển thị.
+            numPage = numPage - parseInt(numPage) === 0 ? numPage : numPage + 1
+            console.log("tổng số trang cần hiển thị: ", numPage);
+
+            // // Lọc kết quả bằng cách sử dụng filter
+            // const filteredResults = all.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP !== "Avatar"));
     
-            // Lọc kết quả bằng cách sử dụng filter
-            const filteredResults = all.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP !== "Avatar"));
+            // // Áp dụng skip và limit sau khi đã lọc
+            // const startIndex = skip;
+            // const endIndex = startIndex + limit;
+            // const slicedResults = filteredResults.slice(startIndex, endIndex);
     
-            // Áp dụng skip và limit sau khi đã lọc
-            const startIndex = skip;
-            const endIndex = startIndex + limit;
-            const slicedResults = filteredResults.slice(startIndex, endIndex);
-    
-            // Tính toán tổng số trang
-            const totalProducts = filteredResults.length;
-            const numPage = Math.ceil(totalProducts / limit);
+            // // Tính toán tổng số trang
+            // const totalProducts = filteredResults.length;
+            // const numPage = Math.ceil(totalProducts / limit);
     
             res.render("TrangChu/layouts/SearchSP/searchShopNuocHoa.ejs", {
                 hoten, logIn, active,
                 formatCurrency, getRelativeImagePath, rootPath: '/', convertPriceRange,
                 soTrang: numPage, 
                 curPage: page, 
-                all: slicedResults,
+                // all: slicedResults,
+                all,
                 searchSPSession: req.session.tenSPSearch || '',
                 tenloaiNHSession: req.session.tenloaiNH || '',
                 giaSPSession: req.session.giaSP || '',
                 loaiSPNamNu, tongSL, spBanChay,
-                convertHtml
+                convertHtml, ss: req.session.SapXepTheoGia,
             })
         } else {
             // Trường hợp không xác định được tiêu chí tìm kiếm
-            const all = await SanPham.find({TenSP: { $regex: new RegExp(tenSPSearch, 'i') }}).populate('IdLoaiSP').populate('IdNam_Nu').exec();
+            const all = await SanPham.find({TenSP: { $regex: new RegExp(tenSPSearch, 'i') }})
+                .populate('IdLoaiSP')
+                .populate('IdNam_Nu')
+                .sort(sortOption)
+                .skip(skip)
+                .limit(limit)
+                .exec();
             const loaiSPNamNu = await LoaiSPNamNu.find().exec();
 
-            // Lọc kết quả bằng cách sử dụng filter
-            const filteredResults = all.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP !== "Avatar"));
+            // // tính toán tổng số trang cần hiển thị bằng cách: CHIA (tổng số sản phẩm) cho (số lượng sản phẩm trên mỗi trang)
+            let numPage = parseInt((await SanPham.find({TenSP: { $regex: new RegExp(tenSPSearch, 'i') }}).populate('IdLoaiSP').populate('IdNam_Nu').sort(sortOption)).length) / limit
 
-            // Áp dụng skip và limit sau khi đã lọc
-            const startIndex = skip;
-            const endIndex = startIndex + limit;
-            const slicedResults = filteredResults.slice(startIndex, endIndex);
+            // // kiểm tra xem phần thập phân của numPage có bằng 0 hay không
+            // // Nếu bằng 0, nghĩa là numPage là một số nguyên, không cần phải thêm một trang nữa
+            // // Ngược lại, nếu có phần thập phân, nó thêm một trang nữa để đảm bảo rằng tất cả các sản phẩm được hiển thị.
+            numPage = numPage - parseInt(numPage) === 0 ? numPage : numPage + 1
+            console.log("tổng số trang cần hiển thị: ", numPage);
 
-            // Tính toán tổng số trang
-            const totalProducts = filteredResults.length;
-            const numPage = Math.ceil(totalProducts / limit);
+            // // Lọc kết quả bằng cách sử dụng filter
+            // const filteredResults = all.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP !== "Avatar"));
+
+            // // Áp dụng skip và limit sau khi đã lọc
+            // const startIndex = skip;
+            // const endIndex = startIndex + limit;
+            // const slicedResults = filteredResults.slice(startIndex, endIndex);
+
+            // // Tính toán tổng số trang
+            // const totalProducts = filteredResults.length;
+            // const numPage = Math.ceil(totalProducts / limit);
 
             res.render("TrangChu/layouts/SearchSP/searchShopNuocHoa.ejs", {
                 hoten, logIn, active,
                 formatCurrency, getRelativeImagePath, rootPath: '/', 
                 soTrang: numPage, 
                 curPage: page, 
-                all: slicedResults,
+                // all: slicedResults,
+                all,
                 searchSPSession: req.session.tenSPSearch || '',
                 tenloaiNHSession: '',
                 giaSPSession: '',
                 loaiSPNamNu, convertPriceRange, tongSL, spBanChay,
-                convertHtml
+                convertHtml, ss: req.session.SapXepTheoGia,
             })
         }        
     },

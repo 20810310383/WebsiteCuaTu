@@ -131,9 +131,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <!-- <div class="page_amount">
-                                                <p>Showing 1–9 of 21 results</p>
-                                            </div> -->
+                                            
                                             <!-- <%- include("../../partials/phanLoaiNH_ChiTiet.ejs") %> -->
                                             <div class="select_option">
                                                 <form action="/search-nuoc-hoa" method="get">       
@@ -149,7 +147,7 @@
                                                             </select>
                                                         </li>
                                                         <li>
-                                                            <select name="tenloaiNH" id="short1">
+                                                            <select name="tenloaiNH" id="short1">                                                                
                                                                 <% loaiSPNamNu.forEach(function(loai) { %>
                                                                     <% if (loai._id == tenloaiNHSession) { %>
                                                                         <option selected value="<%= loai._id %>">Nước Hoa <%= loai.TenLoaiNamNu %></option>
@@ -166,9 +164,14 @@
                                         </div>
                                         <script>
                                             function convertPriceRange(range) {
-                                                const ranges = range.split('-');
-                                                const minPrice = parseFloat(ranges[0]);
-                                                const maxPrice = parseFloat(ranges[1]);
+                                                // const ranges = range.split('-');
+                                                // // const minPrice = parseFloat(ranges[0]);
+                                                // const minPrice = ranges[0] != '' ? parseFloat(ranges[0]) : 0;
+                                                // // const maxPrice = parseFloat(ranges[1]);
+                                                // const maxPrice = ranges[1] != '' ? parseFloat(ranges[1]) : 0;
+
+                                                // Nếu range không tồn tại hoặc không có giá trị nào được nhập, mặc định cho minPrice và maxPrice là 0
+                                                let [minPrice = 0, maxPrice = 0] = range ? range.split('-').map(parseFloat) : [0, 0];
                                                 
                                                 // Chuyển đổi minPrice và maxPrice thành dạng chuỗi mong muốn
                                                 let formattedMinPrice = minPrice < 1000 ? `${minPrice}k` : `${minPrice / 1000}M`;

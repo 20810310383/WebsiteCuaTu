@@ -144,14 +144,15 @@
     <div class="topbar-divider d-none d-sm-block"></div>
 
     <!-- Nav Item - User Information -->
+    <% if (logged && tk) { %>
     <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <% if (logged && tk) { %>
+            
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Xin chào: <span style="color: red;"><%= tk %></span></span>                
-            <% } else { %>
+            
 
-            <% } %> 
+            
             
             <img class="img-profile rounded-circle"
                 src="AdminQL/HomeAdminQL/img/undraw_profile.svg">
@@ -178,5 +179,10 @@
             </a>
         </div>
     </li>
+    <% } else { %>
+        <li class="nav-item ">
+            <a class="nav-link" style="color: navy;" href="/login-admin">Đi tới đăng nhập Admin</a>
+        </li>
+    <% } %> 
 
 </ul>

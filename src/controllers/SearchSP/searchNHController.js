@@ -64,9 +64,15 @@ module.exports = {
 
         // convert tiền từ số thành dạng có cả chữ. ví dụ: 1000 -> 1M
         function convertPriceRange(range) {
-            const ranges = range.split('-');
-            const minPrice = parseFloat(ranges[0]);
-            const maxPrice = parseFloat(ranges[1]);
+            //const ranges = range.split('-');
+            // // const minPrice = parseFloat(ranges[0]);
+            // const minPrice = ranges[0] != '' ? parseFloat(ranges[0]) : 0;
+            // // const maxPrice = parseFloat(ranges[1]);
+            // const maxPrice = ranges[1] != '' ? parseFloat(ranges[1]) : 0;
+
+            // Nếu range không tồn tại hoặc không có giá trị nào được nhập, mặc định cho minPrice và maxPrice là 0
+            let [minPrice = 0, maxPrice = 0] = range ? range.split('-').map(parseFloat) : [0, 0];
+
             
             // Chuyển đổi minPrice và maxPrice thành dạng chuỗi mong muốn
             let formattedMinPrice = minPrice < 1000 ? `${minPrice}k` : `${minPrice / 1000}M`;
@@ -96,7 +102,7 @@ module.exports = {
 
 
         let page = 1
-        const limit = 3
+        const limit = 6
         let tenSPSearch = req.query.search_nuochoa
         let tenloaiNH = req.query.tenloaiNH;
         let giaSP = req.query.giaSP;
@@ -112,35 +118,57 @@ module.exports = {
             page = page < 1 ? page + 1 : page
         }
 
-        let skip = (page - 1) * limit
+        let skip = (page - 1) * limit              
 
         // tìm trên thanh tìm kiếm
-        if(tenSPSearch){
-            const all = await SanPham.find({TenSP: { $regex: new RegExp(tenSPSearch, 'i') }}).populate('IdLoaiSP').populate('IdNam_Nu').exec();
+        if(tenSPSearch){                   
+
+            // const all = await SanPham.find({TenSP: { $regex: new RegExp(tenSPSearch, 'i') }}).populate('IdLoaiSP').populate('IdNam_Nu').exec();
+            // const allSPTangDan = await SanPham.find({TenSP: { $regex: new RegExp(tenSPSearch, 'i') }}).populate('IdLoaiSP').populate('IdNam_Nu').sort({ GiaBan: 1 }).exec();
+            const all = await SanPham.find({TenSP: { $regex: new RegExp(tenSPSearch, 'i') }})
+                .populate('IdLoaiSP')
+                .populate('IdNam_Nu')                
+                .skip(skip)
+                .limit(limit)
+                .exec();
             const loaiSPNamNu = await LoaiSPNamNu.find().exec();
+
+            // // tính toán tổng số trang cần hiển thị bằng cách: CHIA (tổng số sản phẩm) cho (số lượng sản phẩm trên mỗi trang)
+            let numPage = parseInt((await SanPham.find({TenSP: { $regex: new RegExp(tenSPSearch, 'i') }})
+                .populate('IdLoaiSP')
+                .populate('IdNam_Nu')
+                ).length) / limit
+            
+            // // kiểm tra xem phần thập phân của numPage có bằng 0 hay không
+            // // Nếu bằng 0, nghĩa là numPage là một số nguyên, không cần phải thêm một trang nữa
+            // // Ngược lại, nếu có phần thập phân, nó thêm một trang nữa để đảm bảo rằng tất cả các sản phẩm được hiển thị.
+            numPage = numPage - parseInt(numPage) === 0 ? numPage : numPage + 1
+            console.log("tổng số trang cần hiển thị: ", numPage);
     
-            // Lọc kết quả bằng cách sử dụng filter
-            const filteredResults = all.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP !== "Avatar"));
+            // // Lọc kết quả bằng cách sử dụng filter
+            // const filteredResults = all.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP !== "Avatar"));
     
-            // Áp dụng skip và limit sau khi đã lọc
-            const startIndex = skip;
-            const endIndex = startIndex + limit;
-            const slicedResults = filteredResults.slice(startIndex, endIndex);
+            // // Áp dụng skip và limit sau khi đã lọc
+            // const startIndex = skip;
+            // const endIndex = startIndex + limit;
+            // const slicedResults = filteredResults.slice(startIndex, endIndex);
     
-            // Tính toán tổng số trang
-            const totalProducts = filteredResults.length;
-            const numPage = Math.ceil(totalProducts / limit);
+            // // Tính toán tổng số trang
+            // const totalProducts = filteredResults.length;
+            // const numPage = Math.ceil(totalProducts / limit);
     
             res.render("TrangChu/layouts/SearchSP/searchShopNuocHoa.ejs", {
                 hoten, logIn, active,
                 formatCurrency, getRelativeImagePath, rootPath: '/', 
                 soTrang: numPage, 
                 curPage: page, 
-                all: slicedResults,
+                // all: slicedResults, 
+                all,
                 searchSPSession: req.session.tenSPSearch || '',
                 tenloaiNHSession: '',
                 giaSPSession: '',
                 loaiSPNamNu,
+                ssSAPXEP: req.session.SapXepTheoGia,
                 convertPriceRange,
                 tongSL, spBanChay,
                 convertHtml

@@ -102,7 +102,7 @@ module.exports = {
         }
     },
 
-    // form thêm loại sản phẩm
+    // form và xử lý nút thêm loại sản phẩm
     themLoaiSP: async (req, res) => {
         let ThemTenLoaiSP = req.body.ThemTenLoaiSP
         console.log("ThemTenLoaiSP: ", ThemTenLoaiSP);
@@ -125,6 +125,4 @@ module.exports = {
             })
         }   
     },
-
-    // nút xử lý thêm mới loại sản phẩm
 }

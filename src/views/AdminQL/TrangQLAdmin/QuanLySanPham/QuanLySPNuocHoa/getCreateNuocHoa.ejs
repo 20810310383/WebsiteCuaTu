@@ -193,6 +193,8 @@
                             >Tạo mới</a>   -->
                             <button type="submit" class="btn btn-success" >Tạo mới</button>
                         </div>
+
+                       
                         </form>    
                     </div>
 
@@ -263,15 +265,32 @@
 
     <script src="assets\js\hamDinhDangTien_VaLinkAnh.js"></script>
     <script src="AdminQL/HomeAdminQL/js/xuLyNutCreateSP.js"></script> 
+
     <script src="ckeditor/ckeditor.js"></script>
+    <!-- <script src="ckeditor5-41.3.1/build/ckeditor.js"></script> -->
     <script>
+        
         CKEDITOR.replace('MoTa', {
             extraPlugins:'filebrowser',
             filebrowserBrowseUrl:'/list',//upload location
             filebrowserUploadMethod:'form',
             filebrowserUploadUrl:'/upload'//route
-        })
+        })        
+        
     </script>
+
+    <!-- <script>
+        ClassicEditor
+            .create( document.querySelector( '#MoTa' ) )
+            .then( MoTa => {
+                window.MoTa = MoTa;
+            } )
+            .catch( error => {
+                console.error( 'There was a problem initializing the MoTa.', error );
+            } );
+    </script> -->
+
+    
     <script src="AdminQL/HomeAdminQL/thuVienToastr/toastr.min.js"></script>
     
 </body>

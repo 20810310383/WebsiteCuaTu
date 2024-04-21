@@ -273,7 +273,88 @@ router.post('/upload', async (req, res) => {
     }
 });
 
+// test upload video
+// const path = require('path');
 
+// // Hàm xử lý tải lên hình ảnh
+// async function uploadImage(file) {
+//     const uploadPath = path.resolve(__dirname, "../public/images/upload/");
+//     const fileName = file.name;
+//     const filePath = `${uploadPath}/${fileName}`;
+//     await fs.writeFile(filePath, file.data);
+    
+//     return {
+//         status: "thanh cong",
+//         path: filePath,
+//         error: null
+//     };
+// }
+
+// // Hàm xử lý tải lên video
+// async function uploadVideo(file) {
+//     const uploadPath = path.resolve(__dirname, "../public/videos/upload/");
+//     const fileName = file.name;
+//     const filePath = `${uploadPath}/${fileName}`;
+//     await fs.writeFile(filePath, file.data);
+    
+//     return {
+//         status: "thanh cong",
+//         path: filePath,
+//         error: null
+//     };
+// }
+
+// router.post('/upload', async (req, res) => {
+//     try {
+//         const file = req.files.upload;
+//         const mimeType = file.mimetype;
+        
+//         // Nếu là hình ảnh
+//         if (mimeType.startsWith('image')) {
+//             const result = await uploadImage(file);
+//             // Xử lý kết quả và trả về
+//             if (result.status === "thanh cong") {
+//                 const fileName = path.basename(result.path);
+//                 const url = `/images/upload/${fileName}`;
+//                 const msg = 'Upload thành công!';
+//                 const funcNum = req.query.CKEditorFuncNum;
+//                 console.log({ url, msg, funcNum });
+//                 res.status(201).send(`<script>window.parent.CKEDITOR.tools.callFunction('${funcNum}','${url}','${msg}');</script>`);
+//             } else {
+//                 console.error("File upload failed:", result.error);
+//                 res.status(500).send('Internal server error');
+//             }
+//         } 
+//         // Nếu là video
+//         else if (mimeType.startsWith('video')) {
+//             const result = await uploadVideo(file);
+//             // Xử lý kết quả và trả về
+//             if (result.status === "thanh cong") {
+//                 const fileName = path.basename(result.path);
+//                 const url = `/videos/upload/${fileName}`;
+//                 const msg = 'Upload thành công!';
+//                 const funcNum = req.query.CKEditorFuncNum;
+//                 console.log({ url, msg, funcNum });
+//                 res.status(201).send(`<script>window.parent.CKEDITOR.tools.callFunction('${funcNum}','${url}','${msg}');</script>`);
+//             } else {
+//                 console.error("File upload failed:", result.error);
+//                 res.status(500).send('Internal server error');
+//             }
+//         }
+//         // Nếu không phải hình ảnh hoặc video
+//         else {
+//             throw new Error('File không hợp lệ');
+//         }
+//     } catch (error) {
+//         console.error("Error uploading file:", error.message);
+//         res.status(500).send('Internal server error');
+//     }
+// });
+// end test upload video
+
+
+
+// -----------------------------------------------------------
 // hiển thị trang quản lý loại sản phẩm
 router.get("/trang-quan-ly-loaisp", trangLoaiSP)
 // xoá loại sản phẩm

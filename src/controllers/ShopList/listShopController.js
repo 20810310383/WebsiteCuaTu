@@ -7,20 +7,22 @@ const cheerio = require('cheerio');
 
 module.exports = {
     getHomeListShop_PhanTrang: (req, res) => { 
+
+        let redirectUrl = '/shop-list-ht1';
+        const queryParams = req.query.SapXepTheoGia ? `?SapXepTheoGia=${req.query.SapXepTheoGia}` : '';
         if (req.query.page) {
-            return res.redirect(`/shop-list-ht1?page=${req.query.page}`)
+            redirectUrl += `${queryParams}&page=${req.query.page}`;
         }
-        res.redirect(`/shop-list-ht1`)
+        res.redirect(redirectUrl);
     },
     getHomeListShop_TheoLoai_PhanTrang: (req, res) => { 
 
         let redirectUrl = '/shop-list-ht1';
+        const queryParams = req.query.SapXepTheoGia ? `?SapXepTheoGia=${req.query.SapXepTheoGia}` : '';
         if (req.query.page) {
-            // const idPL = req.session.idPL || req.query.tenloaiNH;
             const idPL = req.query.idPL;
-            redirectUrl += `?idPL=${idPL}&page=${req.query.page}`;
+            redirectUrl += `${queryParams}&idPL=${idPL}&page=${req.query.page}`;
         }
-
         res.redirect(redirectUrl);
     },
 
@@ -70,25 +72,54 @@ module.exports = {
         // sản phẩm bán chạy (SoLuongBan > 100)
         const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 200 } });
 
+
+        let SapXepTheoGia = 0; // Mặc định là ko sắp xếp 
+        if (req.query.SapXepTheoGia) {
+            SapXepTheoGia = parseInt(req.query.SapXepTheoGia);
+        }
+        req.session.SapXepTheoGia = SapXepTheoGia
+
+            let sortOption = {};
+            if (SapXepTheoGia === 1) {
+                sortOption = { GiaBan: 1 }; // Sắp xếp theo giá tăng dần
+            } else if (SapXepTheoGia === -1) {
+                sortOption = { GiaBan: -1 }; // Sắp xếp theo giá giảm dần
+            } else {
+                sortOption = {  };
+            }
+
         if(!idPL){
 
-            const all = await SanPham.find().populate('IdLoaiSP').exec();
+            const all = await SanPham.find().populate('IdLoaiSP').sort(sortOption).skip(skip).limit(limit).exec();
             const loaiSPNamNu = await LoaiSPNamNu.find().exec();
+            
+            // // tính toán tổng số trang cần hiển thị bằng cách: CHIA (tổng số sản phẩm) cho (số lượng sản phẩm trên mỗi trang)
+            let numPage = parseInt((await SanPham.find({})
+            .populate('IdLoaiSP')
+            .populate('IdNam_Nu')
+            .sort(sortOption)
+            ).length) / limit
 
-            // Lọc kết quả bằng cách sử dụng filter
-            const filteredResults = all.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP !== "Avatar"));
+            // // kiểm tra xem phần thập phân của numPage có bằng 0 hay không
+            // // Nếu bằng 0, nghĩa là numPage là một số nguyên, không cần phải thêm một trang nữa
+            // // Ngược lại, nếu có phần thập phân, nó thêm một trang nữa để đảm bảo rằng tất cả các sản phẩm được hiển thị.
+            numPage = numPage - parseInt(numPage) === 0 ? numPage : numPage + 1
+            console.log("tổng số trang cần hiển thị: ", numPage);
 
-            // Áp dụng skip và limit sau khi đã lọc
-            const startIndex = skip;
-            const endIndex = startIndex + limit;
-            const slicedResults = filteredResults.slice(startIndex, endIndex);
+            // // Lọc kết quả bằng cách sử dụng filter
+            // const filteredResults = all.filter(product => product.IdLoaiSP && (product.IdLoaiSP.TenLoaiSP !== "Avatar"));
 
-            // Tính toán tổng số trang
-            const totalProducts = filteredResults.length;
-            const numPage = Math.ceil(totalProducts / limit);
+            // // Áp dụng skip và limit sau khi đã lọc
+            // const startIndex = skip;
+            // const endIndex = startIndex + limit;
+            // const slicedResults = filteredResults.slice(startIndex, endIndex);
 
-            console.log("Tổng Products: ", totalProducts);
-            console.log("numPage", numPage);
+            // // Tính toán tổng số trang
+            // const totalProducts = filteredResults.length;
+            // const numPage = Math.ceil(totalProducts / limit);
+
+            // console.log("Tổng Products: ", totalProducts);
+            // console.log("numPage", numPage);
 
             res.render("TrangChu/layouts/ShopList/listShopNuocHoa.ejs", {
                 hoten, logIn, active,
@@ -96,30 +127,45 @@ module.exports = {
                 formatCurrency, getRelativeImagePath,
                 soTrang: numPage, 
                 curPage: page, 
-                all: slicedResults,
+                // all: slicedResults,
+                all,
                 loaiSPNamNu, tongSL, 
                 searchSPSession: req.session.idPL,
                 spBanChay,
-                convertHtml
+                convertHtml,
+                ss: req.session.SapXepTheoGia, SapXepTheoGia
             })
         } else {
-            const all = await SanPham.find({IdLoaiSP: idPL}).populate('IdLoaiSP').exec();
+            const all = await SanPham.find({IdLoaiSP: idPL}).populate('IdLoaiSP').sort(sortOption).skip(skip).limit(limit).exec();
             const loaiSPNamNu = await LoaiSPNamNu.find().exec();
 
-            // Lọc kết quả bằng cách sử dụng filter
-            const filteredResults = all.filter(product => product.IdLoaiSP );
+            // // tính toán tổng số trang cần hiển thị bằng cách: CHIA (tổng số sản phẩm) cho (số lượng sản phẩm trên mỗi trang)
+            let numPage = parseInt((await SanPham.find({IdLoaiSP: idPL})
+            .populate('IdLoaiSP')
+            .populate('IdNam_Nu')
+            .sort(sortOption)
+            ).length) / limit
 
-            // Áp dụng skip và limit sau khi đã lọc
-            const startIndex = skip;
-            const endIndex = startIndex + limit;
-            const slicedResults = filteredResults.slice(startIndex, endIndex);
+            // // kiểm tra xem phần thập phân của numPage có bằng 0 hay không
+            // // Nếu bằng 0, nghĩa là numPage là một số nguyên, không cần phải thêm một trang nữa
+            // // Ngược lại, nếu có phần thập phân, nó thêm một trang nữa để đảm bảo rằng tất cả các sản phẩm được hiển thị.
+            numPage = numPage - parseInt(numPage) === 0 ? numPage : numPage + 1
+            console.log("tổng số trang cần hiển thị: ", numPage);
 
-            // Tính toán tổng số trang
-            const totalProducts = filteredResults.length;
-            const numPage = Math.ceil(totalProducts / limit);
+            // // Lọc kết quả bằng cách sử dụng filter
+            // const filteredResults = all.filter(product => product.IdLoaiSP );
 
-            console.log("Tổng Products: ", totalProducts);
-            console.log("numPage", numPage);
+            // // Áp dụng skip và limit sau khi đã lọc
+            // const startIndex = skip;
+            // const endIndex = startIndex + limit;
+            // const slicedResults = filteredResults.slice(startIndex, endIndex);
+
+            // // Tính toán tổng số trang
+            // const totalProducts = filteredResults.length;
+            // const numPage = Math.ceil(totalProducts / limit);
+
+            // console.log("Tổng Products: ", totalProducts);
+            // console.log("numPage", numPage);
 
             res.render("TrangChu/layouts/ShopList/listShopNuocHoa.ejs", {
                 hoten, logIn, active,
@@ -127,11 +173,13 @@ module.exports = {
                 formatCurrency, getRelativeImagePath,
                 soTrang: numPage, 
                 curPage: page, 
-                all: slicedResults,
+                // all: slicedResults,
+                all,
                 loaiSPNamNu, tongSL, 
                 searchSPSession: req.session.idPL,
                 spBanChay,
-                convertHtml
+                convertHtml,
+                ss: req.session.SapXepTheoGia
             })
         }
     },

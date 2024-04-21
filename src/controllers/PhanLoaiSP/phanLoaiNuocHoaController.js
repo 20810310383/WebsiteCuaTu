@@ -85,7 +85,8 @@ module.exports = {
             curPage: page, 
             all: slicedResults,
             loaiSPNamNu, convertHtml,
-            searchSPSession: req.session.idPL, tongSL, spBanChay
+            searchSPSession: req.session.idPL, tongSL, spBanChay,
+            ss: req.session.SapXepTheoGia
         })
     },
 
@@ -171,7 +172,8 @@ module.exports = {
             all: slicedResults,
             loaiSPNamNu, 
             searchSPSession: req.session.idPL, tongSL, spBanChay,
-            convertHtml
+            convertHtml,
+            ss: req.session.SapXepTheoGia
         })
     },
 

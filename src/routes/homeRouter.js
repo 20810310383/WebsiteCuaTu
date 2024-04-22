@@ -44,6 +44,7 @@ const { huyDonHang } = require('../controllers/LichSuMuaHang/huyDonHangControlle
 const { quenMatKhauKH, doiMatKhauKH } = require('../controllers/Login/quenMatKhauKHController');
 const { trangLoaiSP, deleteLoaiSP, suaLoaiSP, themLoaiSP } = require('../controllers/AdminQL/QuanLySanPham/QuanLySPNuocHoa/quanLyLoaiSP');
 
+const passport = require('passport');
 const router = express.Router();
 //  ********************************************************
 
@@ -236,6 +237,7 @@ router.get("/search-qly-nuoc-hoa", getHomeSearchNuocHoaPhanTrang)
 const path = require('path');
 
 
+
 async function uploadSingleFile(file) {
     // Implement the logic to upload the file here
     // Example logic for uploading the file to a specific directory:
@@ -392,6 +394,7 @@ router.get("/update-HoaDon", getEditDH)
 router.put("/update-HoaDon/:id_QLDH", putUpdate_QLDH)
 // Xóa đơn hàng Đã Giao Hàng
 router.delete("/delete-HoaDon/:idXoaDH", DeleteDH)
+// ----------------------------------------------------------------
 
 
 

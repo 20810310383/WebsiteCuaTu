@@ -22,6 +22,14 @@
         <!-- Ví dụ với thư viện sweetalert2 -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <link rel="stylesheet" href="AdminQL/HomeAdminQL/thuVienToastr/toastr.min.css">
+
+        <style>
+            .toast {
+                font-size: 18px;
+            }
+        </style>
     </head>
     <body>
             <!-- Add your site or application content here -->
@@ -185,8 +193,69 @@
                                         </div>                 
                                         <!--color area end--> 
 
-                                       
-                                        
+                                       <!--price slider start-->                                     
+                                       <div class="sidebar_widget price">
+                                            <h2>Price</h2>
+                                            <div class="ca_search_filters">
+                                                <form action="/shop-list-ht1" method="get" id="searchForm">
+                                                    <input type="text" name="price" id="amount" > 
+                                                    <input type="hidden" value="<%= cleanedString %>"> 
+                                                    <div id="slider-range"></div> 
+                                                    <button type="submit" id="submitButton" style="display: none;"></button>
+                                                </form>
+                                            </div>
+                                        </div>                                                       
+                                        <!--price slider end-->
+
+                                        <script>                                           
+                                            // Lắng nghe sự kiện nhấn phím trên trường input
+                                            document.getElementById("amount").addEventListener("keydown", function(event) {
+                                                // Nếu phím nhấn là phím Enter
+                                                if (event.keyCode === 13) {
+                                                    // Ngăn chặn hành động mặc định của phím Enter
+                                                    event.preventDefault();
+                                                    // Kích hoạt sự kiện click trên nút gửi
+                                                    document.getElementById("submitButton").click();
+                                                                                                        
+                                                };
+                                            });
+
+                                            let cleanedString = '';
+                                            // Lưu trạng thái của thông báo vào sessionStorage khi click vào nút gửi
+                                            document.getElementById("submitButton").addEventListener("click", function() {
+                                                // Lấy giá trị của input hidden
+                                                const cleanedString = document.querySelector('input[type="hidden"]').value;
+                                                // Lưu thông báo vào sessionStorage
+                                                sessionStorage.setItem('toastrStatus', 'visible');
+                                            });
+
+                                            // Kiểm tra trạng thái của thông báo trong sessionStorage khi trang được load lại
+                                            window.onload = function() {
+                                                if (sessionStorage.getItem('toastrStatus') === 'visible') {
+                                                    // Hiển thị lại thông báo
+                                                    toastr.options = {
+                                                        "closeButton": true,
+                                                        "debug": false,
+                                                        "newestOnTop": true,
+                                                        "progressBar": true,
+                                                        "positionClass": "toast-top-right",
+                                                        "preventDuplicates": false,
+                                                        "onclick": null,
+                                                        "showDuration": "300",
+                                                        "hideDuration": "1000",
+                                                        "timeOut": "10000",
+                                                        "extendedTimeOut": "1000",
+                                                        "showEasing": "swing",
+                                                        "hideEasing": "linear",
+                                                        "showMethod": "fadeIn",
+                                                        "hideMethod": "fadeOut"
+                                                    };
+                                                    toastr["success"]("Đã tìm thấy sản phẩm", "Thành Công!");
+                                                    // Xóa trạng thái của thông báo sau khi hiển thị
+                                                    sessionStorage.removeItem('toastrStatus');
+                                                }
+                                            }
+                                        </script>
 
                                         <!--popular tags area-->
                                         <div class="sidebar_widget tags  mb-30">
@@ -281,6 +350,8 @@
         <script src="assets\js\main.js"></script>
         <script src="assets\js\hamDinhDangTien_VaLinkAnh.js"></script>
         <script src="assets\js\thongBaoAddToCart_NgoaiHome.js"></script>
+
+        <script src="AdminQL/HomeAdminQL/thuVienToastr/toastr.min.js"></script>
 
     </body>
 </html>

@@ -58,11 +58,20 @@
             selectedValue = "0"; // Đặt mặc định là 0 nếu không có giá trị từ máy chủ
         }
 
-        const idPL = '<%= searchSPSession || "" %>'; // Lấy giá trị của idPL từ server-side rendering
+        const idPL = '<%= searchSPSession || "" %>'; 
+        const price = '<%= price || "" %>'; 
         let url = '/shop-list-ht1';
         
         if (idPL) {
             url += `?idPL=${idPL}`;
+        }
+
+        if (price) {
+            if (url.includes('?')) { 
+                url += `&price=${price}`;
+            } else {
+                url += `?price=${price}`;
+            }
         }
 
         if (url.includes('?')) {    // kiểm tra xem URL đã chứa dấu ? hay chưa

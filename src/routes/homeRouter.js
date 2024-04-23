@@ -74,6 +74,7 @@ router.get("/detailt-sp-ht1", chiTietSPHomeHienThi1_ChiTiet)
 // list shop
 // SHOP Nuoc Hoa
 router.get("/shop-list-ht1", getHomeListShop)
+// router.post("/shop-list-ht1", getHomeListShop)
 // khi bấm vào trang khác thì chuyển hướng sao cho đúng logic ...
 // router.get("/shop-list-ht1", getHomeListShop_PhanTrang)
 router.get("/shop-list-ht1", async (req, res) => {

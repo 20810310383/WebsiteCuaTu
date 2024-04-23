@@ -227,17 +227,33 @@
          /*----------------------------
     	slider-range here
     ------------------------------ */
+    // $( "#slider-range" ).slider({
+    //   range: true,
+    //   min: 50000,
+    //   max: 10000000,
+    //   values: [ 50000, 10000000 ],
+    //   slide: function( event, ui ) {
+    //     $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+    //   }
+    // });
+    // $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+    //   " - $" + $( "#slider-range" ).slider( "values", 1 ) );
     $( "#slider-range" ).slider({
-      range: true,
-      min: 0,
-      max: 500,
-      values: [ 0, 500 ],
-      slide: function( event, ui ) {
-        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-      }
+        range: true,
+        min: 10000,
+        max: 10000000,
+        values: [ 10000, 10000000 ],
+        slide: function( event, ui ) {
+            $( "#amount" ).val( formatCurrency(ui.values[0]) + " - " + formatCurrency(ui.values[1]) );
+        }
     });
-    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+    
+    $( "#amount" ).val( formatCurrency($( "#slider-range" ).slider( "values", 0 )) + " - " + formatCurrency($( "#slider-range" ).slider( "values", 1 )) );
+    
+    function formatCurrency(amount) {
+        return amount.toLocaleString('vi-VN', { minimumFractionDigits: 0 });
+    }
+    
     
     
 	

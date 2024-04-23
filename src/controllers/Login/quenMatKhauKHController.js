@@ -15,8 +15,8 @@ module.exports = {
             return res.status(404).json({ success: false,  message: 'Không tồn tại tài khoản! Vui lòng kiểm tra lại email của bạn.' });
         }
 
-        // tạo ra mật khẩu ngẫu nhiên để ném cho người dùng, slice(-10): nó sẽ lấy 16 kí tự cuối cùng từ toString(36)        
-        const newPassword = Math.random().toString(36).slice(-10);
+        // tạo ra mật khẩu ngẫu nhiên để ném cho người dùng, slice(-8): nó sẽ lấy 8 kí tự cuối cùng từ toString(36)        
+        const newPassword = Math.random().toString(36).slice(-8);
 
         // một chuỗi đã được mã hóa có thể lưu vào cơ sở dữ liệu.
         const hashedPassword = await bcrypt.hash(newPassword, 10);

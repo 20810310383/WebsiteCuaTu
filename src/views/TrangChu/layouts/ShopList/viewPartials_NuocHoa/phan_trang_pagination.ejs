@@ -27,6 +27,7 @@
                 } else {
                     queryParams += `SapXepTheoGia=${ss}`;
                 }
+                queryParams += `&price=${price}`; // Thêm giá trị price vào queryParams
             %>  
             <li class="page-item disabled">
               <a class="page-link" href="/shop-list-ht1?<%=queryParams%>&page=<%=pre%>">&laquo;</a>

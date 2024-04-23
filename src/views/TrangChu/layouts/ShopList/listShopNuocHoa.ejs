@@ -198,7 +198,7 @@
                                             <h2>Price</h2>
                                             <div class="ca_search_filters">
                                                 <form action="/shop-list-ht1" method="get" id="searchForm">
-                                                    <input type="text" name="price" id="amount" > 
+                                                    <input style="font-size: 17px;" type="text" name="price" id="amount" readonly value="<%= cleanedString %>"> 
                                                     <input type="hidden" value="<%= cleanedString %>"> 
                                                     <div id="slider-range"></div> 
                                                     <button type="submit" id="submitButton" style="display: none;"></button>
@@ -220,7 +220,7 @@
                                                 };
                                             });
 
-                                            let cleanedString = '';
+                                            
                                             // Lưu trạng thái của thông báo vào sessionStorage khi click vào nút gửi
                                             document.getElementById("submitButton").addEventListener("click", function() {
                                                 // Lấy giá trị của input hidden

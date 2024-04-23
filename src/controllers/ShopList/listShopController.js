@@ -12,7 +12,7 @@ module.exports = {
         const queryParams = req.query.SapXepTheoGia ? `?SapXepTheoGia=${req.query.SapXepTheoGia}` : '';
         if (req.query.page) {
             // redirectUrl += `${queryParams}&page=${req.query.page}`;
-            const price = req.session.price || req.query.price || "0-10000000"; // Lấy giá từ session hoặc query
+            const price = req.session.price || req.query.price || "0-9999999"; // Lấy giá từ session hoặc query
             redirectUrl += `${queryParams}&page=${req.query.page}`;
             if (!req.query.price && price) {
                 redirectUrl += `&price=${price}`; // Thêm tham số price vào queryParams nếu tồn tại
@@ -26,7 +26,7 @@ module.exports = {
         const queryParams = req.query.SapXepTheoGia ? `?SapXepTheoGia=${req.query.SapXepTheoGia}` : '';
         if (req.query.page) {
             const idPL = req.query.idPL;
-            const price = req.session.price || req.query.price || "0-10000000";
+            const price = req.session.price || req.query.price || "0-9999999";
             redirectUrl += `${queryParams}&idPL=${idPL}&page=${req.query.page}`;
             if (!req.query.price && price) {
                 redirectUrl += `&price=${price}`; // Thêm tham số price vào queryParams nếu tồn tại
@@ -97,7 +97,7 @@ module.exports = {
             sortOption = {  };
         }
         
-        let cleanedString = req.query.price || "0-1000000000";   
+        let cleanedString = req.query.price || "0-9999999";   
         console.log("cleanedString: ", cleanedString);        
 
         let convert_string = cleanedString.replace(/[^\d-]/g, '');

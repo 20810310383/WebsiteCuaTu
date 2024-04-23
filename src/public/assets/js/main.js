@@ -241,14 +241,26 @@
     $( "#slider-range" ).slider({
         range: true,
         min: 10000,
-        max: 10000000,
-        values: [ 10000, 10000000 ],
+        max: 9999999,
+        values: [ 10000, 9999999 ],
         slide: function( event, ui ) {
+
+            // Hiển thị giá trị lên input
             $( "#amount" ).val( formatCurrency(ui.values[0]) + " - " + formatCurrency(ui.values[1]) );
         }
     });
     
-    $( "#amount" ).val( formatCurrency($( "#slider-range" ).slider( "values", 0 )) + " - " + formatCurrency($( "#slider-range" ).slider( "values", 1 )) );
+    // $( "#amount" ).val( formatCurrency($( "#slider-range" ).slider( "values", 0 )) + " - " + formatCurrency($( "#slider-range" ).slider( "values", 1 )) );
+    // Lắng nghe sự kiện keydown trên thanh trượt
+    $("#slider-range").on("keydown", function(event) {
+        // Nếu phím nhấn là phím Enter
+        if (event.keyCode === 13) {
+            // Ngăn chặn hành động mặc định của phím Enter
+            event.preventDefault();
+            // Kích hoạt sự kiện click trên nút gửi
+            document.getElementById("submitButton").click();
+        }
+    });
     
     function formatCurrency(amount) {
         return amount.toLocaleString('vi-VN', { minimumFractionDigits: 0 });

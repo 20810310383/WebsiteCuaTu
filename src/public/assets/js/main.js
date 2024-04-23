@@ -252,14 +252,14 @@
     
     // $( "#amount" ).val( formatCurrency($( "#slider-range" ).slider( "values", 0 )) + " - " + formatCurrency($( "#slider-range" ).slider( "values", 1 )) );
     // Lắng nghe sự kiện keydown trên thanh trượt
-    $("#slider-range").on("keydown", function(event) {
+    $("#slider-range").on("dblclick", function(event) {
         // Nếu phím nhấn là phím Enter
-        if (event.keyCode === 13) {
-            // Ngăn chặn hành động mặc định của phím Enter
-            event.preventDefault();
-            // Kích hoạt sự kiện click trên nút gửi
-            document.getElementById("submitButton").click();
-        }
+        // if (event.keyCode === 13) {
+        //     // Ngăn chặn hành động mặc định của phím Enter
+        //     event.preventDefault();
+        //     // Kích hoạt sự kiện click trên nút gửi
+        // }
+        document.getElementById("submitButton").click();
     });
     
     function formatCurrency(amount) {

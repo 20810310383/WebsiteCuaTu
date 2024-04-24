@@ -33,7 +33,7 @@ module.exports = {
                 MatKhau: passdk,
                 HoTen: hoten
             })        
-            return res.status(201).json({ success: true, message: 'Đăng ký tài khoản thành công' });
+            return res.status(201).json({ success: true, message: 'Đăng ký tài khoản thành công', dangKy });
 
         } catch (error) {
             console.error(error);

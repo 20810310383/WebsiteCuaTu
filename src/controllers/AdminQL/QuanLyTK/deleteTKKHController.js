@@ -10,7 +10,7 @@ module.exports = {
 
         // dùng delete thì db vẫn còn, chỉ là nó có trường deleted: true
         // nếu dùng deleteOne thì db mất luôn
-        let xoaKH = await TaiKhoan_KH.delete({_id: idXoa})
+        let xoaKH = await TaiKhoan_KH.deleteOne({_id: idXoa})
 
         return res.status(200).json({
             message: "Bạn đã xóa tài khoản khách hàng thành công!",

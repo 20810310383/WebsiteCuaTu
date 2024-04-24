@@ -21,7 +21,7 @@ module.exports = {
     
             console.log(" emaildk: ", emaildk, "\n hoten: ",hoten, "\n passdk: ",passdk);
 
-            const kt = await TaiKhoan_KH.findOne({ TenDangNhap: emaildk });
+            const kt = await TaiKhoan_KH.findOne({ TenDangNhap: emaildk, deleted: false });
             if (kt) {
                 // return res.status(400).json({ message: 'Tài Khoản Đã Tồn Tại' });
                 return res.status(400).json({ success: false, message: 'Tài Khoản Đã Tồn Tại! Vui Lòng Chọn Email Khác!' });
@@ -51,7 +51,7 @@ module.exports = {
             req.session.loggedIn = false;
 
             // Check if the user exists
-            const user = await TaiKhoan_KH.findOne({ TenDangNhap: username_email, MatKhau: passLogin });
+            const user = await TaiKhoan_KH.findOne({ TenDangNhap: username_email, MatKhau: passLogin, deleted: false });
             if (!user) {            
                 return res.status(400).json({ success: false, message: 'Sai tài khoản hoặc mật khẩu! Vui lòng kiểm tra lại!' });
             }                      

@@ -141,6 +141,36 @@ module.exports = {
             sortOption = {  };
         }
 
+        // lọc sản phẩm theo giá (kéo dạng trượt)
+        let cleanedString = req.query.price || "0-9999999";   
+        console.log("cleanedString: ", cleanedString);        
+
+        let convert_string = cleanedString.replace(/[^\d-]/g, '');
+        console.log("convert_string: ", convert_string);
+
+        req.session.price = convert_string
+        const price = req.session.price
+        
+        let valuesArray = price.split('-');
+        console.log("valuesArray: ", valuesArray);
+        
+        let giatri1 = parseFloat(valuesArray[0]);
+        let giatri2 = parseFloat(valuesArray[1]);
+        console.log("giatri1: ", giatri1);
+        console.log("giatri2: ", giatri2);
+        
+        function formatNumber(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        function formatRangeString(rangeString) {
+            const parts = rangeString.split('-');
+            const firstPart = formatNumber(parts[0]);
+            const secondPart = formatNumber(parts[1]);
+            return `${firstPart}  -  ${secondPart}`;
+        }
+        let formattedNumber = formatRangeString(cleanedString);
+        console.log(formattedNumber); 
+
         // tìm trên thanh tìm kiếm
         if(tenSPSearch){                   
 
@@ -194,7 +224,7 @@ module.exports = {
                 ssSAPXEP: req.session.SapXepTheoGia,
                 convertPriceRange,
                 tongSL, spBanChay,
-                convertHtml, ss: req.session.SapXepTheoGia,
+                convertHtml, ss: req.session.SapXepTheoGia, price, cleanedString: formattedNumber
             })
             
         } else if(tenloaiNH && giaSP) {
@@ -255,7 +285,7 @@ module.exports = {
                 tenloaiNHSession: req.session.tenloaiNH || '',
                 giaSPSession: req.session.giaSP || '',
                 loaiSPNamNu, tongSL, spBanChay,
-                convertHtml, ss: req.session.SapXepTheoGia,
+                convertHtml, ss: req.session.SapXepTheoGia, price, cleanedString: formattedNumber
             })
         } else {
             // Trường hợp không xác định được tiêu chí tìm kiếm
@@ -300,7 +330,7 @@ module.exports = {
                 tenloaiNHSession: '',
                 giaSPSession: '',
                 loaiSPNamNu, convertPriceRange, tongSL, spBanChay,
-                convertHtml, ss: req.session.SapXepTheoGia,
+                convertHtml, ss: req.session.SapXepTheoGia, price, cleanedString: formattedNumber
             })
         }        
     },

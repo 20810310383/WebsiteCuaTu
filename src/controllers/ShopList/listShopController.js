@@ -60,6 +60,7 @@ module.exports = {
             const $ = cheerio.load(html);
             return $('body').text();
         }
+        
         let page = 1
         const limit = 6
         
@@ -82,6 +83,7 @@ module.exports = {
         const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 200 } });
 
 
+        // sắp xếp sản phẩm theo giá
         let SapXepTheoGia = 0; // Mặc định là ko sắp xếp 
         if (req.query.SapXepTheoGia) {
             SapXepTheoGia = parseInt(req.query.SapXepTheoGia);
@@ -97,6 +99,7 @@ module.exports = {
             sortOption = {  };
         }
         
+        // lọc sản phẩm theo giá (kéo dạng trượt)
         let cleanedString = req.query.price || "0-9999999";   
         console.log("cleanedString: ", cleanedString);        
 
@@ -114,7 +117,17 @@ module.exports = {
         console.log("giatri1: ", giatri1);
         console.log("giatri2: ", giatri2);
         
-        
+        function formatNumber(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        function formatRangeString(rangeString) {
+            const parts = rangeString.split('-');
+            const firstPart = formatNumber(parts[0]);
+            const secondPart = formatNumber(parts[1]);
+            return `${firstPart}  -  ${secondPart}`;
+        }
+        let formattedNumber = formatRangeString(cleanedString);
+        console.log(formattedNumber); 
 
         if(!idPL){            
 
@@ -146,7 +159,7 @@ module.exports = {
                 searchSPSession: req.session.idPL,
                 spBanChay,
                 convertHtml,
-                ss: req.session.SapXepTheoGia, SapXepTheoGia, price, cleanedString
+                ss: req.session.SapXepTheoGia, SapXepTheoGia, price, cleanedString: formattedNumber
             })
         } else {
             // const all = await SanPham.find( {IdLoaiSP: idPL}).populate('IdLoaiSP').sort(sortOption).skip(skip).limit(limit).exec();
@@ -193,7 +206,7 @@ module.exports = {
                 searchSPSession: req.session.idPL,
                 spBanChay,
                 convertHtml,
-                ss: req.session.SapXepTheoGia, price, cleanedString
+                ss: req.session.SapXepTheoGia, price, cleanedString: formattedNumber
             })
         }
     },

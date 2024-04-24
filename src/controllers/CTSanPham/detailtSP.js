@@ -69,6 +69,36 @@ module.exports = {
             // sản phẩm bán chạy (SoLuongBan > 200)
             const spBanChay = await SanPham.find({ SoLuongBan: { $gt: 200 } });
 
+            // lọc sản phẩm theo giá (kéo dạng trượt)
+            let cleanedString = req.query.price || "0-9999999";   
+            console.log("cleanedString: ", cleanedString);        
+
+            let convert_string = cleanedString.replace(/[^\d-]/g, '');
+            console.log("convert_string: ", convert_string);
+
+            req.session.price = convert_string
+            const price = req.session.price
+            
+            let valuesArray = price.split('-');
+            console.log("valuesArray: ", valuesArray);
+            
+            let giatri1 = parseFloat(valuesArray[0]);
+            let giatri2 = parseFloat(valuesArray[1]);
+            console.log("giatri1: ", giatri1);
+            console.log("giatri2: ", giatri2);
+            
+            function formatNumber(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+            function formatRangeString(rangeString) {
+                const parts = rangeString.split('-');
+                const firstPart = formatNumber(parts[0]);
+                const secondPart = formatNumber(parts[1]);
+                return `${firstPart}  -  ${secondPart}`;
+            }
+            let formattedNumber = formatRangeString(cleanedString);
+            console.log(formattedNumber); 
+
             // Hiển thị 1: select tất cả sp KHÔNG PHẢI LÀ Avatar
             const TimSpNoiBat = await SanPham.find({ SpMoi_SpNoiBat: "Nổi Bật" }).populate("IdLoaiSP");
             const spNoiBat = TimSpNoiBat.filter(product => product.IdLoaiSP && product.IdLoaiSP.TenLoaiSP !== "Avatar");       
@@ -83,7 +113,7 @@ module.exports = {
                 formatCurrency, getRelativeImagePath, convertHtml,
                 spNoiBat,   
                 productDetails, active,
-                tongSL, spBanChay
+                tongSL, spBanChay, price, cleanedString: formattedNumber
             })
         } catch (error) {
             console.error('Error fetching product details:', error);
